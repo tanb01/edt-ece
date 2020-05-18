@@ -13,6 +13,7 @@ public class Seance {
     private String date;
     private String debutHeure;
     private String finHeure;
+    private int etatSeance;
     private Cours coursSeance;
     private TypeCours typeCoursSeance;
     private ArrayList<Salle> listeSalles;
@@ -30,7 +31,7 @@ public class Seance {
         this.finHeure = finHeure;
         coursSeance = cours.copy();
         typeCoursSeance = typeCours.copy();
-        
+
         for (Salle salle : salles) {
             listeSalles.add(salle);
         }
@@ -62,6 +63,10 @@ public class Seance {
 
     public String getFinHeure() {
         return finHeure;
+    }
+
+    public int getEtatSeance() {
+        return etatSeance;
     }
 
     public Cours getCoursSeance() {
