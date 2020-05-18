@@ -6,22 +6,22 @@ package modele;
  */
 public class User {
 
-    protected int userID;
+    protected int userId;
     protected String email;
     protected String nom;
     protected String prenom;
     protected int droit;
 
     public User(int id, String email, String nom, String prenom, int droit) {
-        userID = id;
+        userId = id;
         this.email = email;
         this.nom = nom;
         this.prenom = prenom;
         this.droit = droit;
     }
 
-    protected int getUserID() {
-        return userID;
+    protected int getUserId() {
+        return userId;
     }
 
     protected String getEmail() {
