@@ -15,12 +15,18 @@ public class Groupe {
         this.nomGroupe = nomGroupe;
         effectifGroupe = effectif;
     }
+    
+    public Groupe() {
+        groupeId = 0;
+        this.nomGroupe = "null";
+        effectifGroupe = 0;
+    }
 
-    protected int getGroupeId() {
+    public int getGroupeId() {
         return groupeId;
     }
 
-    protected String getNomGroupe() {
+    public String getNomGroupe() {
         return nomGroupe;
     }
 
