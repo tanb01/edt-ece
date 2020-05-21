@@ -25,10 +25,11 @@ public abstract class DataAccessObject<T> {
             System.out.println("Il y a eu un probleme avec le chargement du Driver!");
         }
         try {
-            Connection connect = DriverManager.getConnection(url, user, motDePasse);
+            connect = DriverManager.getConnection(url, user, motDePasse);
         } catch (SQLException e) {
             throw new RuntimeException("Erreur de connection a la base de donnees", e);
         }
+        System.out.println("CONNEXION!!!");
     }
 
     public abstract boolean creer(T objet);

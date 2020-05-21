@@ -39,7 +39,7 @@ public class EtudiantDAO extends DataAccessObject<Etudiant> {
                             + "nom, prenom, droit, numero_etudiant, groupe_id"
                             + " FROM etudiant JOIN user "
                             + "ON etudiant.user_id = user.user_id "
-                            + "AND user.user_id = " + id);
+                            + "WHERE user.user_id = " + id);
             if (result.first()) {
                 etudiant = new Etudiant(
                         id,
@@ -56,7 +56,11 @@ public class EtudiantDAO extends DataAccessObject<Etudiant> {
         return etudiant;
     }
 //test
-    public static void main(String[] args) {
-        EtudiantDAO et = new EtudiantDAO();
-    }
+
+//    public static void main(String[] args) {
+//        EtudiantDAO et = new EtudiantDAO();
+//        Etudiant un = et.chercher(302);
+//        System.out.println("Numero Etudiant: " + un.getNumeroEtudiant());
+//        System.out.println("Prenom Etudiant: " + un.getPrenom());
+//    }
 }
