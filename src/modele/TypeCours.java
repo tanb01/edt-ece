@@ -14,11 +14,16 @@ public class TypeCours {
         nomTypeCours = nom;
     }
 
+    public TypeCours() {
+        typeCoursId = 0;
+        nomTypeCours = "null";
+    }
+
     public int getTypeCoursId() {
         return typeCoursId;
     }
 
-    public String getNomSalle() {
+    public String getNomTypeCours() {
         return nomTypeCours;
     }
 
