@@ -21,6 +21,12 @@ public class Site {
         }
     }
 
+    public Site() {
+        siteId = 0;
+        nomSite = "null";
+        salles = null;
+    }
+
     public int getSiteId() {
         return siteId;
     }
@@ -29,7 +35,7 @@ public class Site {
         return nomSite;
     }
 
-    public ArrayList<Salle> getGroupes() {
+    public ArrayList<Salle> getSalles() {
         ArrayList<Salle> copySalles = new ArrayList<Salle>();
         for (Salle salle : salles) {
             copySalles.add(salle);

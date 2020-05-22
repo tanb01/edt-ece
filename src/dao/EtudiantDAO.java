@@ -57,10 +57,10 @@ public class EtudiantDAO extends DataAccessObject<Etudiant> {
     }
 //test
 
-//    public static void main(String[] args) {
-//        EtudiantDAO et = new EtudiantDAO();
-//        Etudiant un = et.chercher(302);
-//        System.out.println("Numero Etudiant: " + un.getNumeroEtudiant());
-//        System.out.println("Prenom Etudiant: " + un.getPrenom());
-//    }
+    public static void main(String[] args) {
+        EtudiantDAO et = new EtudiantDAO();
+        Etudiant un = et.chercher(213);
+        System.out.println("Numero Etudiant: " + un.getNumeroEtudiant());
+        System.out.println("Prenom Etudiant: " + un.getPrenom());
+    }
 }

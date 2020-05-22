@@ -32,6 +32,10 @@ public class Seance {
         coursSeance = cours.copy();
         typeCoursSeance = typeCours.copy();
 
+        listeSalles = new ArrayList<Salle>();
+        listeEnseignants = new ArrayList<Enseignant>();
+        listeGroupes = new ArrayList<Groupe>();
+
         for (Salle salle : salles) {
             listeSalles.add(salle);
         }
@@ -43,6 +47,19 @@ public class Seance {
         for (Groupe groupe : groupes) {
             listeGroupes.add(groupe);
         }
+    }
+
+    public Seance() {
+        seanceId = 0;
+        numeroSemaine = 0;
+        date = "null";
+        debutHeure = "null";
+        etatSeance = 0;
+        coursSeance = null;
+        typeCoursSeance = null;
+        listeSalles = null;
+        listeEnseignants = null;
+        listeGroupes = null;
     }
 
     public int getSeanceId() {

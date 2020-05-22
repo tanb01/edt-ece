@@ -21,7 +21,7 @@ public class Groupe {
         this.nomGroupe = "null";
         effectifGroupe = 0;
     }
-
+    
     public int getGroupeId() {
         return groupeId;
     }
@@ -30,7 +30,7 @@ public class Groupe {
         return nomGroupe;
     }
 
-    protected int getEffectifGroupe() {
+    public int getEffectifGroupe() {
         return effectifGroupe;
     }
 

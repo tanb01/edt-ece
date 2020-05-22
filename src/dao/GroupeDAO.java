@@ -9,6 +9,7 @@ import modele.Groupe;
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
 public class GroupeDAO extends DataAccessObject<Groupe> {
+
     public GroupeDAO() {
         super();
     }
@@ -48,13 +49,13 @@ public class GroupeDAO extends DataAccessObject<Groupe> {
         }
         return groupe;
     }
-/*test
+//test
 
-    public static void main(String[] args) {
-        GroupeDAO gr = new GroupeDAO();
-        Groupe un = gr.chercher(1);
-        System.out.println("Groupe : " + un.getNomGroupe());
-        System.out.println("Id : " + un.getGroupeId());
-        //System.out.println("Promo : " + un.getNomPromo()); ???
-    }*/
+//    public static void main(String[] args) {
+//        GroupeDAO gr = new GroupeDAO();
+//        Groupe un = gr.chercher(20);
+//        System.out.println("Groupe : " + un.getNomGroupe());
+//        System.out.println("Id : " + un.getGroupeId());
+    //System.out.println("Promo : " + un.getNomPromo()); ???
+//    }
 }

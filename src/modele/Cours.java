@@ -14,6 +14,11 @@ public class Cours {
         this.nomCours = nom;
     }
 
+    public Cours() {
+        coursId = 0;
+        this.nomCours = "null";
+    }
+
     public int getCoursId() {
         return coursId;
     }
