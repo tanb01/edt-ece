@@ -20,23 +20,23 @@ public class User {
         this.droit = droit;
     }
 
-    protected int getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    protected String getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    protected String getNom() {
+    public String getNom() {
         return nom;
     }
 
-    protected String getPrenom() {
+    public String getPrenom() {
         return prenom;
     }
 
-    protected int getDroit() {
+    public int getDroit() {
         return droit;
     }
 }

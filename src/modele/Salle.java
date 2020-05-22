@@ -16,6 +16,12 @@ public class Salle {
         this.capacite = capacite;
     }
 
+    public Salle() {
+        salleId = 0;
+        nomSalle = "null";
+        capacite = 0;
+    }
+
     public int getSalleId() {
         return salleId;
     }

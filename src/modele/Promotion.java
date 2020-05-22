@@ -8,15 +8,26 @@ import java.util.ArrayList;
  */
 public class Promotion {
 
+    private int promoId;
     private String nomPromo;
     private ArrayList<Groupe> groupes;
 
-    public Promotion(String nom, ArrayList<Groupe> groupes) {
+    public Promotion(int id, String nom, ArrayList<Groupe> groupes) {
+        this.promoId = id;
         this.nomPromo = nom;
         this.groupes = new ArrayList<Groupe>();
         for (Groupe groupe : groupes) {
             this.groupes.add(groupe);
         }
+    }
+
+    public Promotion() {
+        this.nomPromo = "null";
+        this.groupes = null;
+    }
+
+    public int getPromoId() {
+        return promoId;
     }
 
     public String getNomPromo() {
