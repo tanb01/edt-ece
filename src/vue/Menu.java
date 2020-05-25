@@ -1,7 +1,5 @@
 package vue;
 
-import vue.Stadistiques;
-import vue.Liste_salles_libres;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,7 +45,6 @@ public class Menu extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(255, 204, 204));
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\diani\\Desktop\\SCHOOL\\ING3\\PROJECT JAVA\\IMAGES\\calendar (1).png")); // NOI18N
         jButton1.setText("Emploi du temps ");
         jButton1.setBorder(new javax.swing.border.MatteBorder(null));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -57,8 +54,9 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jButton2.setBackground(new java.awt.Color(204, 255, 204));
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\diani\\Desktop\\SCHOOL\\ING3\\PROJECT JAVA\\IMAGES\\stadis.png")); // NOI18N
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 36));
+
         jButton2.setText("     Stadistiques");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,7 +66,6 @@ public class Menu extends javax.swing.JFrame {
 
         jButton3.setBackground(new java.awt.Color(204, 204, 255));
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\diani\\Desktop\\SCHOOL\\ING3\\PROJECT JAVA\\IMAGES\\classroom.png")); // NOI18N
         jButton3.setText("    Salles libres");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,7 +144,7 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.jDesktopPane1.removeAll();
         this.jDesktopPane1.repaint();
-        Stadistiques st = new Stadistiques();
+        Statistiques st = new Statistiques();
         this.jDesktopPane1.add(st);
         try {
             st.setMaximum(true);

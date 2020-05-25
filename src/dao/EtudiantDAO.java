@@ -55,8 +55,8 @@ public class EtudiantDAO extends DataAccessObject<Etudiant> {
         }
         return etudiant;
     }
+    
 //test
-
     public static void main(String[] args) {
         EtudiantDAO et = new EtudiantDAO();
         Etudiant un = et.chercher(213);

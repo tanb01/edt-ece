@@ -1,21 +1,23 @@
 package vue;
 
 import vue.Menu;
-import vue.Connectionn;
+import dao.Connector;
 import javax.swing.JFrame;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
-public class conecxion extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
 
     /**
-     * Creates new form conecxion
+     * Creates new form Login
      */
-    public conecxion() {
+    public Login() {
         initComponents();
         //on centralise la feêntre d'affcihage de la connection
         this.setLocationRelativeTo(null);
@@ -46,6 +48,10 @@ public class conecxion extends javax.swing.JFrame {
         jTextField_EM = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
+        setLocation(new java.awt.Point(0, 0));
+        setPreferredSize(new java.awt.Dimension(1920, 1080));
+        setSize(new java.awt.Dimension(1920, 1080));
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -54,8 +60,6 @@ public class conecxion extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("L'AVENIR T'APPARTIENT");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, -1, -1));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\diani\\Desktop\\SCHOOL\\ING3\\PROJECT JAVA\\IMAGES\\calendar.png")); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 500, -1, -1));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -145,27 +149,25 @@ public class conecxion extends javax.swing.JFrame {
         // TODO add your handling code here:
         PreparedStatement ps;
         ResultSet rs;
-        String email= jTextField_EM.getText();
-        String pass= String.valueOf(jPasswordField_MP.getPassword());
-        
+        String email = jTextField_EM.getText();
+        String pass = String.valueOf(jPasswordField_MP.getPassword());
+
         String query = "SELECT *FROM 'user' WHERE 'email' =? AND 'mot_de_passe' =?";
-        try{
-            ps= Connectionn.getConnectionn().prepareStatement(query);
+        try {
+            ps = Connector.getConnection().prepareStatement(query);
             ps.setString(2, email);
             ps.setString(2, pass);
-            rs= ps.executeQuery();
-            
-            if (rs.next())
-            {
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "OUI");
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(null, "NON");
             }
-        } catch (SQLExeption ex)
-            Logger.getLogger(connecxion.getemail()).log(lecel.SEVERE,null,ex);
+        } catch (SQLException ex) {
+            System.out.println("Probleme de connexion ala base de donnees");
     }//GEN-LAST:event_jButton_loginActionPerformed
-
+    }
     private void jButton_loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_loginMouseClicked
         // TODO add your handling code here:
         Menu menu = new Menu();
@@ -193,20 +195,21 @@ public class conecxion extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(conecxion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(conecxion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(conecxion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(conecxion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new conecxion().setVisible(true);
+                new Login().setVisible(true);
             }
         });
     }

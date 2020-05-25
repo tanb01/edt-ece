@@ -4,12 +4,12 @@ package vue;
  *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
-public class Stadistiques extends javax.swing.JInternalFrame {
+public class Statistiques extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form Stadistiques
+     * Creates new form Statistiques
      */
-    public Stadistiques() {
+    public Statistiques() {
         initComponents();
     }
 

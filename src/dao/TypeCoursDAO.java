@@ -40,8 +40,8 @@ public class TypeCoursDAO extends DataAccessObject<TypeCours> {
         }
         return typeCours;
     }
-//test
 
+//test
     public static void main(String[] args) {
         TypeCoursDAO sa = new TypeCoursDAO();
         TypeCours un = sa.chercher(1);

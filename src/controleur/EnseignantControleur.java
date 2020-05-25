@@ -10,7 +10,7 @@ public class EnseignantControleur {
     private Enseignant modele;
     private Enseignant vue;
 
-    public EnseignantControleur(Enseignant modele, EnseignantVue vue) {
+    public EnseignantControleur(Enseignant modele, Enseignant vue) {
         this.modele = modele;
         this.vue = vue;
     }
@@ -28,6 +28,6 @@ public class EnseignantControleur {
     }
     
     public void updateVue() {
-        vue.printDetailsEnseignant(modele.getUserId(), modele.getNom(), modele.getPrenom());
+        //vue.printDetailsEnseignant(modele.getUserId(), modele.getNom(), modele.getPrenom());
     }
 }
