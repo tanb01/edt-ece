@@ -33,6 +33,7 @@ public class UserVue {
         //fenetre.getContentPane().setLayout();
 
         JFrame innerContainer = new JFrame();
+        innerContainer.setLayout(new BoxLayout(innerContainer, BoxLayout.Y_AXIS));
 
         Container container = innerContainer.getContentPane();
         //container.setLayout(new BorderLayout(8, 6));
