@@ -18,12 +18,8 @@ import javax.swing.table.TableModel;
 public class Layout extends JFrame
 {
     private String titrePage = null;
-    private JTable table;
-	private String[] title= {"N° habit", "Image", "Couleur", "Style vestimentaire", "Motif"};
-	private ImageIcon icon = new ImageIcon("sablier.png");	
-	private Object[][] data= {                               
-			{"Habit 1", icon, "Beige", "Bureau", "Carreaux"},
-	};
+     private JTabbedPane onglet;
+    
         
 	private JScrollPane scroll;
 	private DefaultTableModel model;
@@ -87,8 +83,9 @@ public class Layout extends JFrame
         JButton button51 = new JButton("51");
         JButton button52 = new JButton("52");
         JButton button53 = new JButton("Emploi du temps");
+        button53.setPreferredSize(new Dimension(150, 120));
         JButton button54 = new JButton("Salles libres");
-        JButton button55 = new JButton("Stadistiques");
+        JButton button55 = new JButton("Statistiques");
         JButton button56 = new JButton("Recapitulatif de cours");
         JButton button57 = new JButton("Cours annulés");
         JButton button58 = new JButton("Comment utiliser l'apllication?");
@@ -107,6 +104,8 @@ public class Layout extends JFrame
         topPanel.setBackground(new java.awt.Color(150, 233, 200));
         topPanel.setLayout(new FlowLayout(5));
         mainContainer.add(topPanel,BorderLayout.NORTH);
+        
+        
         
         topPanel.add(button1);
         topPanel.add(button2);
@@ -180,7 +179,6 @@ public class Layout extends JFrame
         JLabel label = new JLabel ();
         label.setOpaque(true);
         label.setBorder(new LineBorder(Color.BLACK,3));
-        label.setBackground(new java.awt.Color(150, 233, 200));
         label.setLayout(new FlowLayout(5));
         JLabel label1 = new JLabel();
         mainContainer.add(label1,BorderLayout.CENTER);        
@@ -193,7 +191,7 @@ public class Layout extends JFrame
         label2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         
         label2.setText("MARDI 02");
-        label2.add(button2);
+        
         
         
         
@@ -214,12 +212,54 @@ public class Layout extends JFrame
                 
         
     }
+    public Layout(){
+        this.setLocationRelativeTo(null);
+        this.setTitle("Gérer vos conteneurs");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(400, 200);
+        // Création de plusieurs Panneau    
+        Panneau[] tPan = {
+            new Panneau(Color.RED), new Panneau(Color.GREEN), new Panneau(Color.BLUE)
+        };    
+        // Création de notre conteneur d'onglets
+        onglet = new JTabbedPane();
+        int i = 0;
+        for(Panneau pan : tPan){
+            // Méthode d'ajout d'onglets
+            onglet.add("Onglet n° "+(++i), pan);
+            // Vous pouvez aussi utiliser la méthode addTab
+            onglet.addTab("Onglet n° "+(++i), pan);
+        }
+        // On passe ensuite les onglets au content pane 
+        this.getContentPane().add(onglet);
+        this.setVisible(true);
+        }
+        
+
+   public class Panneau extends JPanel{ 
+       private Color color = Color.white;
+       private int COUNT = 0; 
+       private String message = ""; 
+       public Panneau(){}  
+       public Panneau(Color color){    
+           this.color = color;    
+           this.message = "Contenu du panneau N°" + (++COUNT); 
+       }  
+       @Override
+       public void paintComponent(Graphics g){   
+           g.setColor(this.color);   
+           g.fillRect(0, 0, this.getWidth(), this.getHeight());   
+           g.setColor(Color.white);   
+           g.setFont(new Font("Arial", Font.BOLD, 15));  
+           g.drawString(this.message, 10, 20);  }
+   }
     
     
     public static void main(String[] args)
     {
         Layout mylayout = new Layout("Accueil");
         mylayout.setVisible(true);
+        
         
     }
  
