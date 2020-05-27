@@ -26,6 +26,7 @@ public class SimpleTable1 extends JFrame {
         //se crea la Tabla
         table = new JTable(data, columnNames);
         table.setPreferredScrollableViewportSize(new Dimension(500, 1300));
+        table.setRowHeight(100);
         //Creamos un JscrollPane y le agregamos la JTable
         JScrollPane scrollPane = new JScrollPane(table);
         //Agregamos el JScrollPane al contenedor
