@@ -19,6 +19,14 @@ public class User {
         this.prenom = prenom;
         this.droit = droit;
     }
+    
+    public User() {
+        userId = 0;
+        this.email = null;
+        this.nom = null;
+        this.prenom = null;
+        this.droit = 0;
+    }
 
     public int getUserId() {
         return userId;
