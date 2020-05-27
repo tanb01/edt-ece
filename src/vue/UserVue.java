@@ -13,6 +13,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 public class UserVue {
@@ -37,21 +38,30 @@ public class UserVue {
         //container.setLayout(new BorderLayout(8, 6));
         container.setLayout(new BorderLayout(1, 1));
         container.setBackground(Color.white);
+        container.setSize(111, 111);
+        
+       
+        
 
         JPanel topPanel = new JPanel();
         topPanel.setBorder(new LineBorder(Color.BLACK, 3));
         topPanel.setBackground(Color.yellow);
+        topPanel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 48));
         topPanel.setLayout(new FlowLayout(3));
+        
+           
 
-        JLabel labelVue = new JLabel("Vue ");
+        JLabel labelVue = new JLabel("-  Vue ");
         String[] selectionVue = {"en grille", "en liste"};
+        
+        
         JComboBox listeSelectionVue = new JComboBox(selectionVue);
 
         topPanel.add(labelVue);
         topPanel.add(listeSelectionVue);
 
         JLabel labelFiltre = new JLabel(" - Filtrer par ");
-        String[] selectionFiltre = {"nom enseignant(e)", "matiere", "groupe"};
+        String[] selectionFiltre = {"  nom enseignant(e)", "matiere", "groupe"};
         JComboBox listeSelectionFiltre = new JComboBox(selectionFiltre);
 
         topPanel.add(labelFiltre);
@@ -72,8 +82,8 @@ public class UserVue {
         cadreEDT.setBackground(Color.red);
         cadreEDT.setLayout(new FlowLayout(3));
 
-        GridsCanvas grilleEDT = new GridsCanvas(200, 200, 6, 7);
-        cadreEDT.setLayout(new FlowLayout(1));  
+         GridsCanvas grilleEDT = new GridsCanvas(200, 200, 6, 7);
+        cadreEDT.setLayout(new FlowLayout(1));
 
         //frame.add(xyz);
         //frame.pack();
