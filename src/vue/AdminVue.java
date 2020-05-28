@@ -18,7 +18,7 @@ import java.awt.event.*;
 import javax.swing.table.TableColumn;
 
 
-public class ADMIN extends JFrame
+public class AdminVue extends JFrame
 {
     private String titrePage = null;
      private JTabbedPane onglet;
@@ -29,7 +29,7 @@ public class ADMIN extends JFrame
 	private JScrollPane scroll;
 	private DefaultTableModel model;
     
-    public ADMIN(String title){
+    public AdminVue(String title){
         
         super(title);
         this.setSize(2750,1600);
@@ -401,7 +401,7 @@ this.getContentPane().add(bottomPanel,BorderLayout.SOUTH);
 }  
     public static void main(String[] args)
     {
-        ADMIN mylayout = new ADMIN("Accueil");
+        AdminVue mylayout = new AdminVue("Accueil");
         mylayout.setVisible(true);
         
        
