@@ -8,6 +8,8 @@ import java.awt.event.*;
 
 public class SimpleTable1 extends JFrame {
 
+    static PopupMenu java;
+
     private JTable table = null;
 
     public SimpleTable1() {
@@ -26,7 +28,7 @@ public class SimpleTable1 extends JFrame {
         //se crea la Tabla
         table = new JTable(data, columnNames);
         table.setPreferredScrollableViewportSize(new Dimension(500, 1300));
-        table.setRowHeight(100);
+        table.setRowHeight(90);
         //Creamos un JscrollPane y le agregamos la JTable
         JScrollPane scrollPane = new JScrollPane(table);
         //Agregamos el JScrollPane al contenedor
