@@ -373,6 +373,21 @@ public class AdminVue extends JFrame
         Component Component = panNouveauPanel.add(label15); /*add*/
         label15.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         label15.setText("Voici l'emploie du temps de cette Semaine ");
+        
+                this.setLayout(new BorderLayout());
+    JPanel panNouveaPanel = new JPanel(); 
+    panNouveaPanel.setOpaque(true);
+    panNouveaPanel.setBorder(new LineBorder(Color.BLACK,3));
+    panNouveaPanel.setLayout(new FlowLayout(5));
+    panNouveaPanel .setBackground(Color.blue);
+    center.add(panNouveaPanel, BorderLayout.CENTER);
+        
+                JLabel label16 = new JLabel();
+
+                Component C = 
+                        .add(label16); /*add*/
+        label16.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        label16.setText("Voici l'emploie du temps cette Semaine ");
  
  
     button54.addActionListener(new ActionListener(){
@@ -382,9 +397,22 @@ public class AdminVue extends JFrame
             center.add(panNouveauPanel);
             center.revalidate(); 
             center.repaint();
+            center.setVisible(true);
         }
  
     });
+    button53.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent e) {
+            center.removeAll();
+            center.add(panNouveaPanel);
+            center.revalidate(); 
+            center.repaint();
+            center.setVisible(true);
+            
+        }
+ 
+    });
+    
     //On ajoute les 4 panels au content pane de la JFrame
 //Au centre
 this.getContentPane().add(center,BorderLayout.CENTER);
