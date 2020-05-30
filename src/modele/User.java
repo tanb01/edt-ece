@@ -19,7 +19,7 @@ public class User {
         this.prenom = prenom;
         this.droit = droit;
     }
-    
+
     public User() {
         userId = 0;
         this.email = null;
@@ -46,5 +46,37 @@ public class User {
 
     public int getDroit() {
         return droit;
+    }
+
+    public boolean isAdmin() {
+        boolean verifyUser = false;
+        if (this.droit == 1) {
+            verifyUser = true;
+        }
+        return verifyUser;
+    }
+
+    public boolean isReferentPedagogique() {
+        boolean verifyUser = false;
+        if (this.droit == 2) {
+            verifyUser = true;
+        }
+        return verifyUser;
+    }
+
+    public boolean isEnseignant() {
+        boolean verifyUser = false;
+        if (this.droit == 3) {
+            verifyUser = true;
+        }
+        return verifyUser;
+    }
+
+    public boolean isEtudiant() {
+        boolean verifyUser = false;
+        if (this.droit == 4) {
+            verifyUser = true;
+        }
+        return verifyUser;
     }
 }

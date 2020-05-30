@@ -18,7 +18,7 @@ import java.awt.event.*;
 import javax.swing.table.TableColumn;
 
 
-public class AdminVue extends JFrame
+public class EtudiantVue extends JFrame
 {
     private String titrePage = null;
      private JTabbedPane onglet;
@@ -29,7 +29,7 @@ public class AdminVue extends JFrame
 	private JScrollPane scroll;
 	private DefaultTableModel model;
     
-    public AdminVue(String title){
+    public EtudiantVue(String title){
         
         super(title);
         this.setSize(2750,1600);
@@ -425,10 +425,15 @@ this.getContentPane().add(bottomPanel,BorderLayout.SOUTH);
     
      
     
-}  
+}
+    
+    public void updateVue(TableModel m) {
+       jTable1.setModel(m);
+    }
+    
     public static void main(String[] args)
     {
-        AdminVue mylayout = new AdminVue("Accueil");
+        EtudiantVue mylayout = new EtudiantVue("Accueil");
         mylayout.setVisible(true);
         
        
