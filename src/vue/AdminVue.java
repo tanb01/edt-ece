@@ -7,12 +7,8 @@ package vue;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
-import static javafx.scene.paint.Color.color;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import java.awt.event.*;
 import javax.swing.table.TableColumn;
@@ -382,10 +378,9 @@ public class AdminVue extends JFrame
     panNouveaPanel .setBackground(Color.blue);
     center.add(panNouveaPanel, BorderLayout.CENTER);
         
-                JLabel label16 = new JLabel();
-
-                Component C = 
-                        .add(label16); /*add*/
+        JLabel label16 = new JLabel();
+        mainContainer.add(label16,BorderLayout.CENTER);
+        Component Componenté = panNouveauPanel.add(label16); /*add*/
         label16.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         label16.setText("Voici l'emploie du temps cette Semaine ");
  
