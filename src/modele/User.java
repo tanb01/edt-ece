@@ -78,7 +78,8 @@ public class User {
             verifyUser = true;
         }
         return verifyUser;
-    
+    }
+
     @Override
     public String toString() {
         return "Id : " + this.userId
@@ -87,7 +88,7 @@ public class User {
                 + "\nPrénom : " + this.prenom
                 + "\nDroit : " + this.droit;
     }
-    
+
     public void afficher() {
         System.out.println("Voici les informations de l'utilisateur : ");
         System.out.println(toString());
