@@ -4,7 +4,14 @@ import dao.EtudiantDAO;
 import dao.SeanceDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
+import java.util.Locale;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import modele.Etudiant;
 import modele.Seance;
@@ -28,9 +35,6 @@ public class EDTControleur implements ActionListener {
 
     DefaultTableModel dtm;
 
-    //private UserVue edtVue = null;
-    private ActionListener actionListener;
-
     public EDTControleur(User m, EtudiantVue v) {
         ve = new EtudiantVue("Etudiant vue");
         ve = v;
@@ -44,42 +48,55 @@ public class EDTControleur implements ActionListener {
         listSeances = seance.chercherSeancesParGroupeId(e.getGroupeId());
         listSeances.toString();
 
-        //Object edt = new Object[2];
-        String[][] data = new String[12][8];
-
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 1; j++) {
-                data[i][j] = "De " + listSeances.get(i).getDebutHeure() + " a " + listSeances.get(i).getFinHeure();
+        String[][] data = new String[84][7];
+        int g = 0;
+        int colinc = 1;
+        int rowinc = 0;
+        String jour = "null";
+        jour = getJourDeLaSemaine(listSeances.get(0).getDate());
+        
+        //VUE EN GRILLE
+        
+        while (g < listSeances.size()) {
+            System.out.println("id: " + g);
+            if (jour == getJourDeLaSemaine(listSeances.get(g).getDate())) {
+//              //System.out.println("Jour: " + jour);
+                data[rowinc][colinc] = listSeances.get(g).stringify();
+                rowinc++;
+                g++;
+            } else {
+                colinc++;
+                rowinc = 0;
+                jour = getJourDeLaSemaine(listSeances.get(g).getDate());
             }
         }
-
+        
         for (int i = 0; i < 7; i++) {
-            for (int j = 1; j < 8; j++) {
-                data[i][j] = Integer.toString(listSeances.get(i).getSeanceId());
-                System.out.println(data[i][j] + "\n");
-            }
+            data[i][0] = "De " + listSeances.get(i).getDebutHeure() + " a " + listSeances.get(i).getFinHeure();
         }
-//        for (int i = 0; i < data.length; i++) {
-//            for (int j = 0; j < 8; j++) {
-//                System.out.println(data[i][j] + "\n");
-//            }
-//        }
-
+        
         DefaultTableModel dtm = new DefaultTableModel(
                 data,
-                //                new Object[][]{
-                //                    {"8h30-10h00", "fdsfd", null, null, null, null, null, null},
-                //                    {"10h15-11h45", null, null, null, null, null, null, null},
-                //                    {"12h00-13h30", null, null, "fdu", null, null, null, null},
-                //                    {"13h45-15h00", null, null, null, null, null, null, null},
-                //                    {"15h15-16h45", null, null, null, null, null, null, null},
-                //                    {"17h00-18h45", null, null, null, null, null, null, null},
-                //                    {"19h00-20h30", null, null, null, null, null, null, null}
-                //                },
                 new String[]{
                     " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
                 }
         );
+
+        //VUE EN LISTE
+
+//        String[][] data2 = new String[listSeances.size()][1];
+//        for (int i = 0; i < listSeances.size(); i++) {
+//            data2[i][0] = getJourDeLaSemaine(listSeances.get(i).getDate())+"     "+listSeances.get(i).stringify();
+//        }
+//
+//        DefaultTableModel dtm = new DefaultTableModel(
+//                data2,
+//                new String[]{
+//                    " "
+//                }
+//        );
+        
+        
         ve.updateVue(dtm);
         ve.setVisible(true);
     }
@@ -89,9 +106,53 @@ public class EDTControleur implements ActionListener {
         ve.setVisible(true);
     }
 
+    public String getJourDeLaSemaine(String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        DayOfWeek day = localDate.getDayOfWeek();
+        String jour = "null";
+        switch (day.toString()) {
+            case "MONDAY":
+                jour = "Lundi";
+                break;
+            case "TUESDAY":
+                jour = "Mardi";
+                break;
+            case "WEDNESDAY":
+                jour = "Mercredi";
+                break;
+            case "THURSDAY":
+                jour = "Jeudi";
+                break;
+            case "FRIDAY":
+                jour = "Vendredi";
+                break;
+            case "SATURDAY":
+                jour = "Samedi";
+                break;
+            case "SUNDAY":
+                jour = "Dimanche";
+                break;
+        }
+        return jour;
+    }
+
     @Override
     public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == ve.getJComboBoxSelectionVue()) {
+            JComboBox cb = (JComboBox) ae.getSource();
+            String msg = (String) cb.getSelectedItem();
+            if (msg == "en grille") {
 
+            } else {
+
+            }
+        }
+
+    }
+
+    public void control() {
+        ve.getJComboBoxSelectionVue().addActionListener(this);
+        System.out.println("Control");
     }
 
     public static void main(String[] args) {
@@ -101,7 +162,8 @@ public class EDTControleur implements ActionListener {
         m = dao.chercher(525);
         EtudiantVue v = new EtudiantVue("Etudiant Vue");
         EDTControleur controler = new EDTControleur(m, v);
-        v.setVisible(true);
+        controler.control();
+        //v.setVisible(true);
         //controler.afficherEDT();
 //        SeanceDAO et = new SeanceDAO();
         //        ArrayList<Seance> un = et.chercherSeancesParGroupeId(31);

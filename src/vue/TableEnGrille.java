@@ -6,13 +6,13 @@ import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.event.*;
 
-public class SimpleTable1 extends JFrame {
+public class TableEnGrille extends JFrame {
 
     static PopupMenu java;
 
     private JTable table = null;
 
-    public SimpleTable1() {
+    public TableEnGrille() {
         super("Ejemplo 1");
         //array bidimencional de objetos con los datos de la tabla
         Object[][] data = {
@@ -43,7 +43,7 @@ public class SimpleTable1 extends JFrame {
     }
 
     public static void main(String[] args) {
-        SimpleTable1 frame = new SimpleTable1();
+        TableEnGrille frame = new TableEnGrille();
         frame.pack();
         frame.setVisible(true);
     }
