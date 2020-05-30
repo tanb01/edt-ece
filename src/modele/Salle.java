@@ -38,4 +38,16 @@ public class Salle {
         Salle copySalle = new Salle(salleId, nomSalle, capacite);
         return copySalle;
     }
+    
+    @Override
+    public String toString() {
+        return "Id : " + this.salleId
+                + "\nNom de la salle : " + this.nomSalle
+                + "\nCapacité : " + this.capacite;
+    }
+    
+    public void afficher() {
+        System.out.println("Voici les informations de la salle : ");
+        System.out.println(toString());
+    }
 }

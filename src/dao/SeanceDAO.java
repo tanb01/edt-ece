@@ -132,18 +132,6 @@ public class SeanceDAO extends DataAccessObject<Seance> {
 //    public static void main(String[] args) {
 //        SeanceDAO et = new SeanceDAO();
 //        Seance un = et.chercher(1);
-//        System.out.println("Numero Seance: " + un.getDebutHeure());
-//        System.out.println("Prenom Seance: " + un.getFinHeure());
-//        System.out.println("Numero Seance: " + un.getNumeroSemaine());
-//        System.out.println("Prenom Seance: " + un.getCoursSeance().getNomCours());
-//    }
-    
-//test 2
-//    public static void main(String[] args) {
-//        SeanceDAO et = new SeanceDAO();
-//        ArrayList<Seance> un = et.chercherSeancesParGroupeId(31);
-//        for (Seance s : un) {
-//            System.out.println("Seance: " + s.getDebutHeure() + "\n");
-//        }
+//        un.afficher();
 //    }
 }

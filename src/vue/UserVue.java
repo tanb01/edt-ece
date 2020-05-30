@@ -40,22 +40,16 @@ public class UserVue {
         container.setLayout(new BorderLayout(1, 1));
         container.setBackground(Color.white);
         container.setSize(111, 111);
-        
-       
-        
 
         JPanel topPanel = new JPanel();
         topPanel.setBorder(new LineBorder(Color.BLACK, 3));
         topPanel.setBackground(Color.yellow);
         topPanel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 48));
         topPanel.setLayout(new FlowLayout(3));
-        
-           
 
         JLabel labelVue = new JLabel("-  Vue ");
         String[] selectionVue = {"en grille", "en liste"};
-        
-        
+
         JComboBox listeSelectionVue = new JComboBox(selectionVue);
 
         topPanel.add(labelVue);
@@ -83,7 +77,7 @@ public class UserVue {
         cadreEDT.setBackground(Color.red);
         cadreEDT.setLayout(new FlowLayout(3));
 
-         GridsCanvas grilleEDT = new GridsCanvas(200, 200, 6, 7);
+        GridsCanvas grilleEDT = new GridsCanvas(200, 200, 6, 7);
         cadreEDT.setLayout(new FlowLayout(1));
 
         //frame.add(xyz);
@@ -91,7 +85,7 @@ public class UserVue {
         //frame.setVisible(true);
         //topPanel.add(semaineEDT);
         //cadreEDT.add(grilleEDT);
-//        topPanel.setLayout(new GridLayout(3, 4, 5, 10));
+        //topPanel.setLayout(new GridLayout(3, 4, 5, 10));
         //JComboBox selectVue();
         //topPanel.add(new JListe(20));
         //int[] selection= {1, 2, 4};
@@ -125,8 +119,6 @@ public class UserVue {
             public void run() {
                 UserVue vue = new UserVue();
             }
-
         });
     }
-
 }

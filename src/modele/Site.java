@@ -42,4 +42,16 @@ public class Site {
         }
         return copySalles;
     }
+    
+    @Override
+    public String toString() {
+        return "Id : " + this.siteId
+                + "\nNom du site : " + this.nomSite
+                + "\nSalles : " + this.salles;
+    }
+    
+    public void afficher() {
+        System.out.println("Voici les informations du site : ");
+        System.out.println(toString());
+    }
 }

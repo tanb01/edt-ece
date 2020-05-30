@@ -1,5 +1,6 @@
 package modele;
 
+import dao.SeanceDAO;
 import java.util.ArrayList;
 
 /**
@@ -117,4 +118,59 @@ public class Seance {
         }
         return copyGroupes;
     }
+
+    @Override
+    public String toString() {
+        return "Id : " + this.seanceId
+                + "\nNuméro semaine : " + this.numeroSemaine
+                + "\nDate : " + this.date
+                + "\nDébut heure : " + this.debutHeure
+                + "\nFin heure : " + this.finHeure
+                + "\nÉtat : " + this.etatSeance
+                + "\nCours : " + this.coursSeance
+                + "\nType cours : " + this.typeCoursSeance
+                + "\nSalle(s) : " + this.listeSalles
+                + "\nEnseignant(s) : " + this.listeEnseignants
+                + "\nGroupe(s) : " + this.listeGroupes;
+    }
+
+    public String stringify() {
+        String salles = new String();
+        for (Salle s : listeSalles) {
+            salles = salles.concat(s.getNomSalle());
+        }
+
+        String enseignants = new String();
+        for (Enseignant s : listeEnseignants) {
+            enseignants = enseignants.concat(s.getNom());
+        }
+
+        String groupes = new String();
+        for (Groupe s : listeGroupes) {
+            groupes = groupes.concat(s.getNomGroupe());
+        }
+        return "Id : " + this.seanceId
+                + " Numéro semaine : " + this.numeroSemaine
+                + " Date : " + this.date
+                + " Début heure : " + this.debutHeure
+                + " Fin heure : " + this.finHeure
+                + " État : " + this.etatSeance
+                + " Cours : " + this.coursSeance.getNomCours()
+                + " Salle(s) : " + salles.toString()
+                + " Enseignant(s) : " + enseignants.toString()
+                + " Groupe(s) : " + groupes.toString()
+                + " Type cours : " + this.typeCoursSeance.getNomTypeCours();
+    }
+
+    public void afficher() {
+        System.out.println("Voici les informations de la séance : ");
+        System.out.println(toString());
+    }
+
+//        public static void main(String[] args) {
+//        SeanceDAO et = new SeanceDAO();
+//        Seance un = new Seance();
+//        un = et.chercher(1);
+//       System.out.println(un.toString());
+//    }
 }

@@ -6,13 +6,17 @@ package vue;
  */
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
+import static javafx.scene.paint.Color.color;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import java.awt.event.*;
 import javax.swing.table.TableColumn;
 
-public class AdminVue extends JFrame {
+public class ReferentPedagogiqueVue extends JFrame {
 
     private String titrePage = null;
     private JTabbedPane onglet;
@@ -22,7 +26,7 @@ public class AdminVue extends JFrame {
     private JScrollPane scroll;
     private DefaultTableModel model;
 
-    public AdminVue(String title) {
+    public ReferentPedagogiqueVue(String title) {
 
         super(title);
         this.setSize(2750, 1600);
@@ -84,10 +88,6 @@ public class AdminVue extends JFrame {
         button53.setPreferredSize(new Dimension(150, 120));
 
         JButton button54 = new JButton("Salles libres");
-        JButton button55 = new JButton("Modifier un Cours");
-        JButton button56 = new JButton("Modifier une Seance");
-        JButton button57 = new JButton("Modifier un Groupe");
-        JButton button58 = new JButton("Modifier un Enseignant");
         JButton button59 = new JButton("Comment utiliser l'application ?");
 
         button54.addActionListener(new ActionListener() {
@@ -162,9 +162,6 @@ public class AdminVue extends JFrame {
 
         gridPanel.add(button53);
         gridPanel.add(button54);
-        gridPanel.add(button55);
-        gridPanel.add(button56);
-        gridPanel.add(button57);
 
         rightPanel.add(gridPanel);
         mainContainer.add(rightPanel, BorderLayout.WEST);
@@ -316,7 +313,6 @@ public class AdminVue extends JFrame {
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout());
-        bottomPanel.add(button58);
         bottomPanel.setBackground(new java.awt.Color(200, 100, 200));
         bottomPanel.setBorder(new LineBorder(Color.BLACK, 3));
         mainContainer.add(bottomPanel, BorderLayout.SOUTH);
@@ -381,7 +377,7 @@ public class AdminVue extends JFrame {
     }
 
     public static void main(String[] args) {
-        AdminVue mylayout = new AdminVue("Accueil");
+        ReferentPedagogiqueVue mylayout = new ReferentPedagogiqueVue("Accueil");
         mylayout.setVisible(true);
     }
 

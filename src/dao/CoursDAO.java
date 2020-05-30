@@ -45,7 +45,6 @@ public class CoursDAO extends DataAccessObject<Cours> {
 //    public static void main(String[] args) {
 //        CoursDAO sa = new CoursDAO();
 //        Cours un = sa.chercher(3);
-//        System.out.println("Cours : " + un.getNomCours());
-//        System.out.println("Id : " + un.getCoursId());
+//        un.afficher();
 //    }
 }
