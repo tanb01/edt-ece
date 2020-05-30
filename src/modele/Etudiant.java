@@ -28,4 +28,21 @@ public class Etudiant extends User {
     public int getGroupeId() {
         return groupeId;
     }
+    
+    @Override
+    public String toString() {
+        return "Id : " + this.userId
+                + "\nEmail : " + this.email
+                + "\nNom : " + this.nom
+                + "\nPrénom : " + this.prenom
+                + "\nDroit : " + this.droit
+                + "\nNuméro étudiant : " + this.numeroEtudiant
+                + "\nGroupe Id : " + this.groupeId;
+    }
+    
+    @Override
+    public void afficher() {
+        System.out.println("Voici les informations de l'étudiant : ");
+        System.out.println(toString());
+    }
 }

@@ -41,4 +41,16 @@ public class Promotion {
         }
         return copyGroupes;
     }
+    
+    @Override
+    public String toString() {
+        return "Id : " + this.promoId
+                + "\nNom de la promo : " + this.nomPromo
+                + "\nGroupes : " + this.groupes;
+    }
+    
+    public void afficher() {
+        System.out.println("Voici les informations de la promo : ");
+        System.out.println(toString());
+    }
 }

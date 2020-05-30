@@ -45,7 +45,6 @@ public class EnseignantDAO extends DataAccessObject<Enseignant> {
 //    public static void main(String[] args) {
 //        EnseignantDAO sa = new EnseignantDAO();
 //        Enseignant un = sa.chercher(43);
-//        System.out.println("Enseignant Nom: " + un.getNom());
-//        System.out.println("Enseignant Prenom : " + un.getPrenom());
+//        un.afficher();
 //    }
 }

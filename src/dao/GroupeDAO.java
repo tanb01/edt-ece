@@ -54,8 +54,6 @@ public class GroupeDAO extends DataAccessObject<Groupe> {
 //    public static void main(String[] args) {
 //        GroupeDAO gr = new GroupeDAO();
 //        Groupe un = gr.chercher(20);
-//        System.out.println("Groupe : " + un.getNomGroupe());
-//        System.out.println("Id : " + un.getGroupeId());
-    //System.out.println("Promo : " + un.getNomPromo()); ???
+//        un.afficher();
 //    }
 }

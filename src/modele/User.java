@@ -47,4 +47,18 @@ public class User {
     public int getDroit() {
         return droit;
     }
+    
+    @Override
+    public String toString() {
+        return "Id : " + this.userId
+                + "\nEmail : " + this.email
+                + "\nNom : " + this.nom
+                + "\nPrénom : " + this.prenom
+                + "\nDroit : " + this.droit;
+    }
+    
+    public void afficher() {
+        System.out.println("Voici les informations de l'utilisateur : ");
+        System.out.println(toString());
+    }
 }
