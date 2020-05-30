@@ -31,4 +31,15 @@ public class Cours {
         Cours copyCours = new Cours(coursId, nomCours);
         return copyCours;
     }
+    
+    @Override
+    public String toString() {
+        return "Id : " + this.coursId
+                + "\nNom du cours : " + this.nomCours;
+    }
+ 
+    public void afficher() {
+        System.out.println("Voici les informations du cours : ");
+        System.out.println(toString());
+    }
 }

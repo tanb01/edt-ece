@@ -63,10 +63,6 @@ public class PromotionDAO extends DataAccessObject<Promotion> {
 //    public static void main(String[] args) {
 //        PromotionDAO et = new PromotionDAO();
 //        Promotion un = et.chercher(2);
-//        System.out.println("Nom Promo: " + un.getNomPromo());
-//        for (Groupe g : un.getGroupes()) {
-//            System.out.println("Groupe Id: " + g.getGroupeId());
-//            System.out.println("Groupe Nom: " + g.getNomGroupe());
-//        }
+//        un.afficher();
 //    }
 }

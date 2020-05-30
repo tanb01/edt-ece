@@ -31,4 +31,15 @@ public class TypeCours {
         TypeCours copyTypeCours = new TypeCours(typeCoursId, nomTypeCours);
         return copyTypeCours;
     }
+
+    @Override
+    public String toString() {
+        return "Id : " + this.typeCoursId
+                + "\nType de cours : " + this.nomTypeCours;
+    }
+
+    public void afficher() {
+        System.out.println("Voici les informations du type de cours : ");
+        System.out.println(toString());
+    }
 }

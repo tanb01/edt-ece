@@ -46,8 +46,6 @@ public class SalleDAO extends DataAccessObject<Salle> {
 //    public static void main(String[] args) {
 //        SalleDAO sa = new SalleDAO();
 //        Salle un = sa.chercher(3);
-//        System.out.println("Groupe : " + un.getNomSalle());
-//        System.out.println("Id : " + un.getSalleId());
-//        System.out.println("Capacite : " + un.getCapacite());
+//        un.afficher();
 //    }
 }

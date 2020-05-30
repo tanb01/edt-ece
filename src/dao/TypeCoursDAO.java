@@ -42,10 +42,9 @@ public class TypeCoursDAO extends DataAccessObject<TypeCours> {
     }
 
 //test
-    public static void main(String[] args) {
-        TypeCoursDAO sa = new TypeCoursDAO();
-        TypeCours un = sa.chercher(1);
-        System.out.println("TypeCours : " + un.getNomTypeCours());
-        System.out.println("Id : " + un.getTypeCoursId());
-    }
+//    public static void main(String[] args) {
+//        TypeCoursDAO sa = new TypeCoursDAO();
+//        TypeCours un = sa.chercher(1);
+//        un.afficher();
+//    }
 }

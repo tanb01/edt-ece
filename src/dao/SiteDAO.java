@@ -49,7 +49,8 @@ public class SiteDAO extends DataAccessObject<Site> {
     }
 //test
 
-//    public static void main(String[] args) {
+    public static void main(String[] args) {
+
 //        SiteDAO sa = new SiteDAO();
 //        Site un = sa.chercher(3);
 //        System.out.println("00 Site : " + un.getNomSite());
@@ -58,5 +59,10 @@ public class SiteDAO extends DataAccessObject<Site> {
 //            System.out.println("Salle Id: " + g.getSalleId());
 //            System.out.println("Salle Nom: " + g.getNomSalle() + "\n");
 //        }
-//    }
+
+            // Fonctionnel
+//        SiteDAO sa = new SiteDAO();
+//        Site un = sa.chercher(3);
+//        un.afficher();
+    }
 }

@@ -117,4 +117,24 @@ public class Seance {
         }
         return copyGroupes;
     }
+    
+    @Override
+    public String toString() {
+        return "Id : " + this.seanceId
+                + "\nNuméro semaine : " + this.numeroSemaine
+                + "\nDate : " + this.date
+                + "\nDébut heure : " + this.debutHeure
+                + "\nFin heure : " + this.finHeure
+                + "\nÉtat : " + this.etatSeance
+                + "\nCours : " + this.coursSeance
+                + "\nType cours : " + this.typeCoursSeance
+                + "\nSalle(s) : " + this.listeSalles
+                + "\nEnseignant(s) : " + this.listeEnseignants
+                + "\nGroupe(s) : " + this.listeGroupes;
+    }
+
+    public void afficher() {
+        System.out.println("Voici les informations de la séance : ");
+        System.out.println(toString());
+    }
 }

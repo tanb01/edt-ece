@@ -38,4 +38,16 @@ public class Groupe {
         Groupe copyGroupe = new Groupe(groupeId, nomGroupe, effectifGroupe);
         return copyGroupe;
     }
+    
+    @Override
+    public String toString() {
+        return "Id : " + this.groupeId
+                + "\nNom du groupe : " + this.nomGroupe
+                + "\nEffectif : " + this.effectifGroupe;
+    }
+    
+    public void afficher() {
+        System.out.println("Voici les informations du groupe : ");
+        System.out.println(toString());
+    }
 }
