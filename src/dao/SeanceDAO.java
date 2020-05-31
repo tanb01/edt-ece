@@ -56,7 +56,9 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 String date = result.getString("date_seance");
                 String debutHeure = result.getString("heure_debut");
                 String finHeure = result.getString("heure_fin");
-
+                String Newligne = System.getProperty("line.separator");
+                String resultat;
+                resultat = Newligne + date + debutHeure + finHeure;
                 CoursDAO c = new CoursDAO();
                 Cours cours = c.chercher(result.getInt("cours_id"));
 

@@ -47,4 +47,19 @@ public class EnseignantDAO extends DataAccessObject<Enseignant> {
 //        Enseignant un = sa.chercher(43);
 //        un.afficher();
 //    }
+    
+    public Enseignant Afficher_nom(int id) {
+        Enseignant enseignant = new Enseignant();
+        try {
+            ResultSet result = this.connect.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT user_id, nom,  prenom FROM user WHERE droit = 3 AND user_id = " + id);
+            if (result.first()) {
+                enseignant = new Enseignant(id, result.getString("email"), result.getString("nom"), result.getString("prenom"), 3);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return enseignant;
+    }
 }

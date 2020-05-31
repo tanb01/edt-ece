@@ -6,29 +6,28 @@ package vue;
  */
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
-import static javafx.scene.paint.Color.color;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableModel;
 import java.awt.event.*;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
-public class EtudiantVue extends JFrame {
+public class GESTION extends JFrame {
 
     private String titrePage = null;
-    private JTabbedPane onglet;
-    private JScrollPane jScrollPane1;
-    private JTable jTable1;
-    private JTable jTable2;
+    private JTabbedPane onglet;  
+    
+      
     private JComboBox listeSelectionVue = null;
+    private final JLabel tab1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
 
     private JScrollPane scroll;
     private DefaultTableModel model;
+    private final java.awt.List listeDeProfs,listeDeSalles,listeDeCours;
 
-    public EtudiantVue(String title) {
+    public GESTION(String title) {
 
         super(title);
         this.setSize(2750, 1600);
@@ -221,8 +220,8 @@ public class EtudiantVue extends JFrame {
         rightPanel.add(gridPanel);
         mainContainer.add(rightPanel, BorderLayout.WEST);
 //-----------------------------------------------------------------------------
-                     
-        
+                
+                
         
         
 //-----------------------------------------------------------------------------
@@ -245,7 +244,12 @@ public class EtudiantVue extends JFrame {
         
         
  //----------------------------------------       
-               
+        JPanel topIPanel = new JPanel();
+        topIPanel.setBorder(new LineBorder(Color.BLACK, 3));
+        topIPanel.setBackground(Color.yellow);
+        topIPanel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 48));
+        topIPanel.setLayout(new FlowLayout(3));
+        
         
         
 //-----------------------------------------------------------
@@ -329,179 +333,130 @@ public class EtudiantVue extends JFrame {
         MyPanel1.add(button52);
 
         
-        //innerContainer.add(semaineEDT, BorderLayout.WEST);
+        
+ //------------------------------
+        tab1 = new JLabel("GESTION D'EMPLOIE DU TEMPS ", JLabel.CENTER);
+       
+        
+        
+  //------------------------------
+ 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
-        jScrollPane1 = new JScrollPane();
-//        jTable1 = new JTable();
-//
-//        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-//
-//        jTable1.setModel(new DefaultTableModel(
-//                new Object[][]{
-//                    {"8h30-10h00", null, null, null, null, null, null, null},
-//                    {"10h15-11h45", null, null, null, null, null, null, null},
-//                    {"12h00-13h30", null, null, null, null, null, null, null},
-//                    {"13h45-15h00", null, null, null, null, null, null, null},
-//                    {"15h15-16h45", null, null, null, null, null, null, null},
-//                    {"17h00-18h45", null, null, null, null, null, null, null},
-//                    {"19h00-20h30", null, null, null, null, null, null, null}
-//                },
-//                new String[]{
-//                    " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
-//                }
-//        ));
-//        jScrollPane1.setViewportView(jTable1);
-//        jTable1.setPreferredScrollableViewportSize(new Dimension(2500, 1460));
-//        jTable1.setRowHeight(210);
-//        TableColumn col = jTable1.getColumnModel().getColumn(0);
-//        col.setPreferredWidth(100);
-//        col = jTable1.getColumnModel().getColumn(1);
-//        col.setPreferredWidth(300);
-//        col = jTable1.getColumnModel().getColumn(2);
-//        col.setPreferredWidth(300);
-//        col = jTable1.getColumnModel().getColumn(3);
-//        col.setPreferredWidth(300);
-//        col = jTable1.getColumnModel().getColumn(4);
-//        col.setPreferredWidth(300);
-//        col = jTable1.getColumnModel().getColumn(5);
-//        col.setPreferredWidth(300);
-//        col = jTable1.getColumnModel().getColumn(6);
-//        col.setPreferredWidth(300);
-//        col = jTable1.getColumnModel().getColumn(7);
-//        col.setPreferredWidth(300);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        ///JTABLE2 VUE EN LISTE
-        jTable2 = new JTable();
-
-        jTable2.setModel(new DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
-                    {"8h30-10h00", null, null, null, null, null, null},
-                    {"10h15-11h45", null, null, null, null, null, null},
-                    {"12h00-13h30", null, null, null, null, null, null},
-                    {"13h45-15h00", null, null, null, null, null, null},
-                    {"15h15-16h45", null, null, null, null, null, null},
-                    {"17h00-18h45", null, null, null, null, null, null},
-                    {"19h00-20h30", null, null, null, null, null, null}
+                    {"8h30-10h00", null, null, null, null, null, null, null},
+                    {"10h15-11h45", null, null, null, null, null, null, null},
+                    {"12h00-13h30", null, null, null, null, null, null, null},
+                    {"13h45-15h00", null, null, null, null, null, null, null},
+                    {"15h15-16h45", null, null, null, null, null, null, null},
+                    {"17h00-18h45", null, null, null, null, null, null, null},
+                    {"19h00-20h30", null, null, null, null, null, null, null}
                 },
                 new String[]{
-                    " "
+                    " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
                 }
         ));
-        jScrollPane1.setViewportView(jTable2);
-        jTable2.setPreferredScrollableViewportSize(new Dimension(2860, 1450));
-        jTable2.setRowHeight(100);
-        Font j = new Font("Times New Roman", Font.BOLD, 30);
-        UIManager.put("JTable.font", j);
+        jScrollPane1.setViewportView(jTable1);
+        jTable1.setPreferredScrollableViewportSize(new Dimension(2500, 1460));
+        jTable1.setRowHeight(120);
+        TableColumn col = jTable1.getColumnModel().getColumn(0);
+        col.setPreferredWidth(100);
+        col = jTable1.getColumnModel().getColumn(1);
+        col.setPreferredWidth(300);
+        col = jTable1.getColumnModel().getColumn(2);
+        col.setPreferredWidth(300);
+        col = jTable1.getColumnModel().getColumn(3);
+        col.setPreferredWidth(300);
+        col = jTable1.getColumnModel().getColumn(4);
+        col.setPreferredWidth(300);
+        col = jTable1.getColumnModel().getColumn(5);
+        col.setPreferredWidth(300);
+        col = jTable1.getColumnModel().getColumn(6);
+        col.setPreferredWidth(300);
+        col = jTable1.getColumnModel().getColumn(7);
+        col.setPreferredWidth(300);
+
+        center.add(jScrollPane1, BorderLayout.SOUTH);       
         
-        TableColumn col2 = jTable2.getColumnModel().getColumn(0);
-        col2.setPreferredWidth(100);
-//        col2 = jTable2.getColumnModel().getColumn(1);
-//        col2.setPreferredWidth(300);
-//        col2 = jTable2.getColumnModel().getColumn(2);
-//        col2.setPreferredWidth(300);
-//        col2 = jTable2.getColumnModel().getColumn(3);
-//        col2.setPreferredWidth(300);
-//        col2 = jTable2.getColumnModel().getColumn(4);
-//        col2.setPreferredWidth(300);
-//        col2 = jTable2.getColumnModel().getColumn(5);
-//        col2.setPreferredWidth(300);
-//        col2 = jTable2.getColumnModel().getColumn(6);
-//        col2.setPreferredWidth(300);
-//        col2 = jTable2.getColumnModel().getColumn(7);
-//        col2.setPreferredWidth(300);
-
-        ////PANEL
-        center.add(jScrollPane1, BorderLayout.SOUTH);
-
+        
+        
+        
+        JPanel gridPanel4 = new JPanel();
+        gridPanel4.setLayout(new GridLayout(1, 2, 1, 1));
+        gridPanel4.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        
+        center.add(jTable1);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//------------------------------------------------------------------------------       
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout());        
-        bottomPanel.setBackground(new java.awt.Color(200, 100, 200));
+        bottomPanel.setBackground(new java.awt.Color(249, 207, 192));
         bottomPanel.setBorder(new LineBorder(Color.BLACK, 3));
         mainContainer.add(bottomPanel, BorderLayout.SOUTH);
+        
+        JPanel gridPanel2 = new JPanel();
+        gridPanel2.setLayout(new GridLayout(1, 3, 950, 5));
+        gridPanel2.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel2.setBackground(new java.awt.Color(249, 207, 192));
+        
+        JLabel P1 = new JLabel("Tableau des enseignants");
+        JLabel P2 = new JLabel("Tableau des seances");
+        JLabel P3 = new JLabel("Tableau des Cours");
+        
+        Font r = new Font("Times New Roman", Font.BOLD, 24);
+        UIManager.put("JMenuItem.font", r);
+        P1.setFont(r);
+        P2.setFont(r);
+        P3.setFont(r);
+                      
+        gridPanel2.add(P1, BorderLayout.PAGE_END);
+        gridPanel2.add(P2, BorderLayout.PAGE_END);
+        gridPanel2.add(P3, BorderLayout.PAGE_END);
+        
+        bottomPanel.add(gridPanel2, BorderLayout.SOUTH);
+         
+ //------------------------------ 
+        JPanel gridPanel6 = new JPanel();
+        gridPanel6.setLayout(new GridLayout(1, 3, 1050, 5));
+        gridPanel6.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel6.setBackground(new java.awt.Color(249, 242, 155));
+        
+        listeDeProfs = new java.awt.List(40, false);
+        listeDeSalles = new java.awt.List(40, false);
+        listeDeCours = new java.awt.List(40, false);
+        
+        gridPanel6.add(listeDeProfs);
+        gridPanel6.add(listeDeSalles);
+        gridPanel6.add(listeDeCours);
+        
+        bottomPanel.add(gridPanel6, BorderLayout.SOUTH);
+        
+        
+        
+        JPanel bottomPane2 = new JPanel();
+               
+        bottomPane2.setBackground(new java.awt.Color(200, 100, 200));
+        bottomPane2.setBorder(new LineBorder(Color.BLACK, 3));     
+        
+        
 
-        this.setLayout(new BorderLayout());
-        JPanel panNouveauPanel = new JPanel();
-        panNouveauPanel.setOpaque(true);
-        panNouveauPanel.setBorder(new LineBorder(Color.BLACK, 3));
-        panNouveauPanel.setLayout(new FlowLayout(5));
-        panNouveauPanel.setBackground(Color.blue);
-        center.add(panNouveauPanel, BorderLayout.CENTER);
-
-        JLabel label15 = new JLabel();
-        mainContainer.add(label15, BorderLayout.CENTER);
-        Component Component = panNouveauPanel.add(label15);
-        /*add*/
-        label15.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        label15.setText("Voici l'emploie du temps de cette Semaine ");
-
-        this.setLayout(new BorderLayout());
-        JPanel panNouveaPanel = new JPanel();
-        panNouveaPanel.setOpaque(true);
-        panNouveaPanel.setBorder(new LineBorder(Color.BLACK, 3));
-        panNouveaPanel.setLayout(new FlowLayout(5));
-        panNouveaPanel.setBackground(Color.blue);
-        center.add(panNouveaPanel, BorderLayout.CENTER);
-
-        JLabel label16 = new JLabel();
-
-        Component C = panNouveaPanel.add(label16);
-        /*add*/
-        label16.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        label16.setText("Voici l'emploie du temps cette Semaine ");
-
-        button54.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                center.removeAll();
-                center.add(panNouveauPanel);
-                center.revalidate();
-                center.repaint();
-                center.setVisible(true);
-            }
-
-        });
-        button53.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                center.removeAll();
-                center.add(panNouveaPanel);
-                center.revalidate();
-                center.repaint();
-                center.setVisible(true);
-            }
-
-        });
-
-        //On ajoute les 4 panels au content pane de la JFrame
-//Au centre
-        this.getContentPane().add(center, BorderLayout.CENTER);
-//en haut
-        this.getContentPane().add(topPanel, BorderLayout.NORTH);
-//à gauche
-        this.getContentPane().add(rightPanel, BorderLayout.WEST);
-//en bas
-        this.getContentPane().add(bottomPanel, BorderLayout.SOUTH);
-
-    }
-
-    public void updateVue(TableModel m) {
-        //jTable1.setModel(m);
-        jTable2.setModel(m);
-    }
-
-    public JComboBox getJComboBoxSelectionVue() {
-        return listeSelectionVue;
-    }
-
-    public void setJComboBoxSelectionVue(int j) {
-        listeSelectionVue.setSelectedIndex(j);
-    }
-
-    public JTable getJTable() {
-        return jTable1;
     }
 
     public static void main(String[] args) {
-        EtudiantVue mylayout = new EtudiantVue("Accueil");
+        GESTION mylayout = new GESTION("Accueil");
         mylayout.setVisible(true);
 
     }

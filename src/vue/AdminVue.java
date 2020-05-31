@@ -81,29 +81,51 @@ public class AdminVue extends JFrame {
         JButton button51 = new JButton("51");
         JButton button52 = new JButton("52");
         JButton button53 = new JButton("Emploi du temps");
-        button53.setPreferredSize(new Dimension(150, 120));
+        button53.setPreferredSize(new Dimension(265, 120));
 
-        JButton button54 = new JButton("Salles libres");
-        JButton button55 = new JButton("Modifier un Cours");
-        JButton button56 = new JButton("Modifier une Seance");
-        JButton button57 = new JButton("Modifier un Groupe");
-        JButton button58 = new JButton("Modifier un Enseignant");
-        JButton button59 = new JButton("Comment utiliser l'application ?");
+        JButton button54 = new JButton("<html> Salles <br>" +
+                                            " libres <br> </html>");
+        JButton button55 = new JButton("<html> Modifier un<br>" +
+                                            " Cours<br> </html>");
+        JButton button56 = new JButton("<html> Modifier une<br>" +
+                                            " seance<br> </html>");
+        JButton button57 = new JButton("<html> Modifier un<br>" +
+                                            " groupe<br> </html>");
+        JButton button58 = new JButton("<html> Modifier un<br>" +
+                                            " enseignant<br> </html>");
+        JButton button59 = new JButton("Comment utiliser l'apllication?");
 
-        button54.addActionListener(new ActionListener() {
+        Font f = new Font("Times New Roman", Font.BOLD, 30);
+        UIManager.put("JButton.font", f);
+        
+        button53.setBackground(new java.awt.Color(147, 212, 250));
+        button53.setFont(f);
+        button54.setBackground(new java.awt.Color(252, 222, 1));
+        button54.setFont(f);
+        button55.setBackground(new java.awt.Color(252, 108, 1));
+        button55.setFont(f);
+        button56.setBackground(new java.awt.Color(52, 108, 180));
+        button56.setFont(f);
+        button57.setBackground(new java.awt.Color(250, 0, 28));
+        button57.setFont(f);
+        button58.setBackground(new java.awt.Color(250, 0, 28)); 
+        button58.setFont(f);
+        
+         button54.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //ensemble des action
+
             }
         });
-
+//------------------------------------------------------------------------------
         Container mainContainer = this.getContentPane();
         mainContainer.setLayout(new BorderLayout(8, 6));
         mainContainer.setBackground(Color.yellow);
         this.getRootPane().setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.GREEN));
-
+//------------------------------------------------------------------------------
         JPanel topPanel = new JPanel();
         topPanel.setBorder(new LineBorder(Color.BLACK, 5));
-        topPanel.setBackground(new java.awt.Color(150, 233, 200));
+        topPanel.setBackground(new java.awt.Color(147, 212, 250));
         topPanel.setLayout(new FlowLayout(5));
         mainContainer.add(topPanel, BorderLayout.NORTH);
 
@@ -113,6 +135,14 @@ public class AdminVue extends JFrame {
         JMenu menu2 = new JMenu("PROMOTIONS");
         JMenu menu3 = new JMenu("ENSEIGNANTS");
         JMenu menu4 = new JMenu("SALLES");
+        
+        Font g = new Font("Times New Roman", Font.BOLD, 18);
+        UIManager.put("JMenu.font", g);
+        menu.setFont(g);
+        menu1.setFont(g);
+        menu2.setFont(g);
+        menu3.setFont(g);
+        menu4.setFont(g);
 
         JMenuItem m = new JMenuItem("Regarder par promo");
         JMenuItem m1 = new JMenuItem("Regarder par groupe");
@@ -127,6 +157,20 @@ public class AdminVue extends JFrame {
         JMenuItem ms2 = new JMenuItem("Récapitulatifs des cours");
         JMenuItem ms3 = new JMenuItem("Cours annulés");
         JMenuItem ms4 = new JMenuItem("Liste et trombinoscope");
+        
+        Font h = new Font("Times New Roman", Font.BOLD, 14);
+        UIManager.put("JMenuItem.font", h);
+        m.setFont(h);
+        m1.setFont(h);
+        m2.setFont(h);
+        mi1.setFont(h);
+        mi2.setFont(h);
+        mi3.setFont(h);
+        mi4.setFont(h);
+        ms1.setFont(h);
+        ms2.setFont(h);
+        ms3.setFont(h);
+        ms4.setFont(h);
 
         menu.add(m);
         menu.add(m1);
@@ -149,73 +193,77 @@ public class AdminVue extends JFrame {
         menuBar.add(menu4);
 
         topPanel.add(menuBar);
-
+//------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------
         JPanel rightPanel = new JPanel();
         rightPanel.setBorder(new LineBorder(Color.BLACK, 5));
-        rightPanel.setBackground(new java.awt.Color(200, 233, 200));
+        rightPanel.setBackground(new java.awt.Color(211, 212, 250));
         rightPanel.setLayout(new FlowLayout(5));
 
         JPanel gridPanel = new JPanel();
-        gridPanel.setLayout(new GridLayout(5, 1, 5, 5));
+        gridPanel.setLayout(new GridLayout(6, 1, 5, 5));
         gridPanel.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanel.setBackground(new java.awt.Color(200, 100, 200));
+        gridPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         gridPanel.add(button53);
         gridPanel.add(button54);
         gridPanel.add(button55);
         gridPanel.add(button56);
         gridPanel.add(button57);
+        gridPanel.add(button58);
 
         rightPanel.add(gridPanel);
         mainContainer.add(rightPanel, BorderLayout.WEST);
-
+//------------------------------------------------------------------------------
         JPanel center = new JPanel();
-        center.setOpaque(true);
+        center.setOpaque(true);        
         center.setBorder(new LineBorder(Color.BLACK, 3));
         center.setLayout(new FlowLayout(5));
+        center.setBackground(new java.awt.Color(211, 212, 250));
         mainContainer.add(center, BorderLayout.CENTER);
 
-        JPanel MyPanel1 = new JPanel();
-        JLabel t = new JLabel();
-        t.setText("              SEMAINE    ");
-        t.setFont(new java.awt.Font("Perpetua Titling MT", 0, 28));
-        MyPanel1.add(t);
+        JPanel MyPanel1 = new JPanel(); 
+        
+        JPanel gridPanel3 = new JPanel();
+        gridPanel3.setLayout(new GridLayout(1, 2, 5, 5));
+        gridPanel3.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel3.setBackground(new java.awt.Color(145, 200, 100));
 
-        JPanel gridPanel2 = new JPanel();
-        gridPanel2.setLayout(new GridLayout(1, 2, 5, 5));
-        gridPanel2.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanel2.setBackground(new java.awt.Color(145, 200, 100));
-
-        gridPanel2.add(MyPanel1);
-        center.add(gridPanel2, BorderLayout.NORTH);
-
+        gridPanel3.add(MyPanel1);
+        center.add(gridPanel3, BorderLayout.NORTH);
+        
+        
+ //----------------------------------------       
         JPanel topIPanel = new JPanel();
         topIPanel.setBorder(new LineBorder(Color.BLACK, 3));
         topIPanel.setBackground(Color.yellow);
         topIPanel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 48));
         topIPanel.setLayout(new FlowLayout(3));
+        
+        
+        
+//-----------------------------------------------------------
+        JPanel gridPanel5 = new JPanel();
+        gridPanel5.setLayout(new GridLayout(1, 1, 5, 5));
+        gridPanel5.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel5.setBackground(new java.awt.Color(145, 200, 100));
 
-        center.add(topIPanel, BorderLayout.NORTH);
-
-        JLabel labelVue = new JLabel("-  Vue ");
-        String[] selectionVue = {"en grille", "en liste"};
+        JLabel labelVue = new JLabel("-  GROUPE ");
+        String[] selectionVue = {"Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
 
         JComboBox listeSelectionVue = new JComboBox(selectionVue);
 
-        topIPanel.add(labelVue);
-        topIPanel.add(listeSelectionVue);
+        gridPanel5.add(labelVue);
+        gridPanel5.add(listeSelectionVue);
 
-        JLabel labelFiltre = new JLabel(" - Filtrer par ");
-        String[] selectionFiltre = {"  Nom enseignant(e)", "Matière", "Groupe"};
+        JLabel labelFiltre = new JLabel(" - PROMO ");
+        String[] selectionFiltre = {" Prepac", "Ing1", "Ing2", "Ing3", "Ing4", "Ing5"};
         JComboBox listeSelectionFiltre = new JComboBox(selectionFiltre);
 
-        topIPanel.add(labelFiltre);
-        topIPanel.add(listeSelectionFiltre);
-
-        String[] selectionChamp = {"Segado", "Daachi"};
-        JComboBox listeSelectionChamp = new JComboBox(selectionChamp);
-
-        topIPanel.add(listeSelectionChamp);
+        gridPanel5.add(labelFiltre);
+        gridPanel5.add(listeSelectionFiltre);
+ 
+        center.add(gridPanel5, BorderLayout.NORTH);
 
         MyPanel1.add(button1);
         MyPanel1.add(button2);
@@ -270,7 +318,7 @@ public class AdminVue extends JFrame {
         MyPanel1.add(button51);
         MyPanel1.add(button52);
 
-        center.add(topIPanel, BorderLayout.NORTH);
+        
         //innerContainer.add(semaineEDT, BorderLayout.WEST);
 
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -293,8 +341,8 @@ public class AdminVue extends JFrame {
                 }
         ));
         jScrollPane1.setViewportView(jTable1);
-        jTable1.setPreferredScrollableViewportSize(new Dimension(2500, 1460));
-        jTable1.setRowHeight(210);
+        jTable1.setPreferredScrollableViewportSize(new Dimension(2500, 1000));
+        jTable1.setRowHeight(143);
         TableColumn col = jTable1.getColumnModel().getColumn(0);
         col.setPreferredWidth(100);
         col = jTable1.getColumnModel().getColumn(1);
@@ -312,74 +360,54 @@ public class AdminVue extends JFrame {
         col = jTable1.getColumnModel().getColumn(7);
         col.setPreferredWidth(300);
 
-        center.add(jScrollPane1, BorderLayout.SOUTH);
-
+        center.add(jScrollPane1, BorderLayout.CENTER);
+//----------------------------------------------------------------------
+        //------------------------------------------------------------------------------       
         JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FlowLayout());
-        bottomPanel.add(button58);
-        bottomPanel.setBackground(new java.awt.Color(200, 100, 200));
+        bottomPanel.setLayout(new FlowLayout());        
+        bottomPanel.setBackground(new java.awt.Color(249, 207, 192));
         bottomPanel.setBorder(new LineBorder(Color.BLACK, 3));
         mainContainer.add(bottomPanel, BorderLayout.SOUTH);
-
-        this.setLayout(new BorderLayout());
-        JPanel panNouveauPanel = new JPanel();
-        panNouveauPanel.setOpaque(true);
-        panNouveauPanel.setBorder(new LineBorder(Color.BLACK, 3));
-        panNouveauPanel.setLayout(new FlowLayout(5));
-        panNouveauPanel.setBackground(Color.blue);
-        center.add(panNouveauPanel, BorderLayout.CENTER);
-
-        JLabel label15 = new JLabel();
-        mainContainer.add(label15, BorderLayout.CENTER);
-        Component Component = panNouveauPanel.add(label15); // add
-        label15.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        label15.setText("Voici l'emploi du temps de cette semaine ");
-
-        this.setLayout(new BorderLayout());
-        JPanel panNouveaPanel = new JPanel();
-        panNouveaPanel.setOpaque(true);
-        panNouveaPanel.setBorder(new LineBorder(Color.BLACK, 3));
-        panNouveaPanel.setLayout(new FlowLayout(5));
-        panNouveaPanel.setBackground(Color.blue);
-        center.add(panNouveaPanel, BorderLayout.CENTER);
-
-        JLabel label16 = new JLabel();
-
-        Component C = panNouveaPanel.add(label16); // add
-        label16.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        label16.setText("Voici l'emploi du temps cette semaine ");
-
-        button54.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                center.removeAll();
-                center.add(panNouveauPanel);
-                center.revalidate();
-                center.repaint();
-                center.setVisible(true);
-            }
-        });
-        button53.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                center.removeAll();
-                center.add(panNouveaPanel);
-                center.revalidate();
-                center.repaint();
-                center.setVisible(true);
-            }
-        });
-
-        //On ajoute les 4 panels au content pane de la JFrame
-            //Au centre
-        this.getContentPane().add(center, BorderLayout.CENTER);
-            //en haut
-        this.getContentPane().add(topPanel, BorderLayout.NORTH);
-            //à gauche
-        this.getContentPane().add(rightPanel, BorderLayout.WEST);
-            //en bas
-        this.getContentPane().add(bottomPanel, BorderLayout.SOUTH);
+        
+        JPanel gridPanel2 = new JPanel();
+        gridPanel2.setLayout(new GridLayout(1, 3, 950, 5));
+        gridPanel2.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel2.setBackground(new java.awt.Color(249, 207, 192));
+        
+        JLabel P1 = new JLabel("Tableau des enseignants");
+        JLabel P2 = new JLabel("Tableau des seances");
+        JLabel P3 = new JLabel("Tableau des Cours");
+        
+        Font r = new Font("Times New Roman", Font.BOLD, 24);
+        UIManager.put("JMenuItem.font", r);
+        P1.setFont(r);
+        P2.setFont(r);
+        P3.setFont(r);
+                      
+        gridPanel2.add(P1, BorderLayout.PAGE_END);
+        gridPanel2.add(P2, BorderLayout.PAGE_END);
+        gridPanel2.add(P3, BorderLayout.PAGE_END);
+        
+        bottomPanel.add(gridPanel2, BorderLayout.SOUTH);
+         
+ //------------------------------ 
+        JPanel gridPanel6 = new JPanel();
+        gridPanel6.setLayout(new GridLayout(1, 3, 1050, 5));
+        gridPanel6.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel6.setBackground(new java.awt.Color(249, 242, 155));
+        
+        List listeDeProfs = new java.awt.List(30, false);
+        List listeDeSalles = new java.awt.List(30, false);
+        List listeDeCours = new java.awt.List(30, false);
+        
+        gridPanel6.add(listeDeProfs);
+        gridPanel6.add(listeDeSalles);
+        gridPanel6.add(listeDeCours);
+        
+        bottomPanel.add(gridPanel6, BorderLayout.CENTER);
     }
-
+//------------------------------------------------------------------
+        
     public static void main(String[] args) {
         AdminVue mylayout = new AdminVue("Accueil");
         mylayout.setVisible(true);
