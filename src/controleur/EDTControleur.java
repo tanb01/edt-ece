@@ -4,6 +4,8 @@ import dao.EtudiantDAO;
 import dao.SeanceDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
@@ -23,7 +25,7 @@ import vue.UserVue;
  *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
-public class EDTControleur implements ActionListener {
+public class EDTControleur implements ActionListener, ItemListener {
 
     private EtudiantDAO etuddao = null;
     private Etudiant e = null;
@@ -36,13 +38,13 @@ public class EDTControleur implements ActionListener {
     DefaultTableModel dtm;
 
     /**
-     * 
+     *
      * @param m
-     * @param v 
+     * @param v
      */
     public EDTControleur(User m, EtudiantVue v) {
         ve = new EtudiantVue("Etudiant vue");
-        ve = v;
+        //ve = v;
 
         etuddao = new EtudiantDAO();
         e = new Etudiant();
@@ -59,7 +61,7 @@ public class EDTControleur implements ActionListener {
         int rowinc = 0;
         String jour = "null";
         jour = getJourDeLaSemaine(listSeances.get(0).getDate());
-        
+
         // Vue en grille
         while (g < listSeances.size()) {
             System.out.println("id: " + g);
@@ -74,20 +76,20 @@ public class EDTControleur implements ActionListener {
                 jour = getJourDeLaSemaine(listSeances.get(g).getDate());
             }
         }
-        
+
         for (int i = 0; i < 7; i++) {
             data[i][0] = "De " + listSeances.get(i).getDebutHeure() + " a " + listSeances.get(i).getFinHeure();
         }
-        
+
         DefaultTableModel dtm = new DefaultTableModel(
                 data,
                 new String[]{
                     " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
                 }
         );
+        this.dtm = dtm;
 
-        // Vue en liste
-
+//         Vue en liste
 //        String[][] data2 = new String[listSeances.size()][1];
 //        for (int i = 0; i < listSeances.size(); i++) {
 //            data2[i][0] = getJourDeLaSemaine(listSeances.get(i).getDate())+"     "+listSeances.get(i).stringify();
@@ -99,24 +101,21 @@ public class EDTControleur implements ActionListener {
 //                    " "
 //                }
 //        );
-        
-        
-        ve.updateVue(dtm);
-        ve.setVisible(true);
     }
 
     /**
      * Affiche l'emploi du temps
      */
-    public void afficherEDT() {
-        ve.updateVue(dtm);
-        ve.setVisible(true);
-    }
+//    public void afficherEDT() {
+//        ve.updateVue(dtm);
+//        ve.setVisible(true);
+//    }
 
     /**
      * Change les jours de la semaine de Anglais à Francais.
+     *
      * @param date
-     * @return 
+     * @return
      */
     public String getJourDeLaSemaine(String date) {
         LocalDate localDate = LocalDate.parse(date);
@@ -151,27 +150,28 @@ public class EDTControleur implements ActionListener {
     /**
      * Choix de la vue en Grille ou en Liste.
      *
-     * @param ae 
+     * @param ae
      */
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == ve.getJComboBoxSelectionVue()) {
-            JComboBox cb = (JComboBox) ae.getSource();
-            String msg = (String) cb.getSelectedItem();
-            if (msg == "en grille") {
-
-            } else {
-
-            }
-        }
-
-    }
-
+//    @Override
+//    public void actionPerformed(ActionEvent ae) {
+//        if (ae.getSource() == ve.getJComboBoxSelectionVue()) {
+//            JComboBox cb = (JComboBox) ae.getSource();
+//            String msg = (String) cb.getSelectedItem();
+//            if (msg == "en grille") {
+//
+//            } else {
+//
+//            }
+//        }
+//
+//    }
     /**
-     * 
+     *
      */
     public void control() {
-        ve.getJComboBoxSelectionVue().addActionListener(this);
+        ve.getJComboBoxSelectionVue().addItemListener(this);
+        ve.updateVue(dtm);
+        ve.setVisible(true);
         System.out.println("Control");
     }
 
@@ -182,6 +182,7 @@ public class EDTControleur implements ActionListener {
         m = dao.chercher(525);
         EtudiantVue v = new EtudiantVue("Etudiant Vue");
         EDTControleur controler = new EDTControleur(m, v);
+//        /v.getJComboBoxSelectionVue().addActionListener(controler);
         controler.control();
         //v.setVisible(true);
         //controler.afficherEDT();
@@ -190,5 +191,71 @@ public class EDTControleur implements ActionListener {
         //        for (Seance s : un) {
         //            System.out.println("Seance: " + s.getDebutHeure() + "\n");
         //        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent ie) {
+        if (ie.getStateChange() == ItemEvent.SELECTED) {
+            switch (ve.getJComboBoxSelectionVue().getSelectedItem().toString()) {
+                case "en grille":
+                    System.out.println("grille");
+
+                    String[][] data = new String[84][7];
+                    int g = 0;
+                    int colinc = 1;
+                    int rowinc = 0;
+                    String jour = "null";
+                    jour = getJourDeLaSemaine(listSeances.get(0).getDate());
+                    while (g < listSeances.size()) {
+                        System.out.println("id: " + g);
+                        if (jour == getJourDeLaSemaine(listSeances.get(g).getDate())) {
+                            //System.out.println("Jour: " + jour);
+                            data[rowinc][colinc] = listSeances.get(g).stringify();
+                            rowinc++;
+                            g++;
+                        } else {
+                            colinc++;
+                            rowinc = 0;
+                            jour = getJourDeLaSemaine(listSeances.get(g).getDate());
+                        }
+                    }
+
+                    for (int i = 0; i < 7; i++) {
+                        data[i][0] = "De " + listSeances.get(i).getDebutHeure() + " a " + listSeances.get(i).getFinHeure();
+                    }
+
+                    DefaultTableModel dtm = new DefaultTableModel(
+                            data,
+                            new String[]{
+                                " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
+                            }
+                    );
+                    ve.changeAVueEnGrille(dtm);
+                    ve.setVisible(true);
+                    break;
+                case "en liste":
+                    System.out.println("liste");
+
+                    String[][] data2 = new String[listSeances.size()][1];
+                    for (int i = 0; i < listSeances.size(); i++) {
+                        data2[i][0] = getJourDeLaSemaine(listSeances.get(i).getDate()) + "     " + listSeances.get(i).stringify();
+                    }
+
+                    DefaultTableModel dtm2 = new DefaultTableModel(
+                            data2,
+                            new String[]{
+                                " "
+                            }
+                    );
+                    ve.changeAVueEnListe(dtm2);
+                    ve.setVisible(true);
+                    break;
+            }
+        }
     }
 }

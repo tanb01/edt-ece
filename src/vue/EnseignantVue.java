@@ -19,7 +19,7 @@ import javax.swing.table.TableModel;
 import java.awt.event.*;
 import javax.swing.table.TableColumn;
 
-public class EtudiantVue extends JFrame {
+public class EnseignantVue extends JFrame {
 
     private String titrePage = null;
     private JTabbedPane onglet;
@@ -35,7 +35,7 @@ public class EtudiantVue extends JFrame {
      *
      * @param title
      */
-    public EtudiantVue(String title) {
+    public EnseignantVue(String title) {
 
         // Affiche le titre en haut de la fenêtre
         super(title);
@@ -271,13 +271,13 @@ public class EtudiantVue extends JFrame {
         JLabel labelVue = new JLabel("-  Vue ");
         String[] selectionVue = {"en grille", "en liste"};
 
-        listeSelectionVue = new JComboBox(selectionVue);
+        JComboBox listeSelectionVue = new JComboBox(selectionVue);
 
         gridPanel5.add(labelVue);
         gridPanel5.add(listeSelectionVue);
 
         JLabel labelFiltre = new JLabel(" - Filtrer par ");
-        String[] selectionFiltre = {"Nom enseignant(e)", "Matière"};
+        String[] selectionFiltre = {"Matière", "Groupe"};
         JComboBox listeSelectionFiltre = new JComboBox(selectionFiltre);
 
         gridPanel5.add(labelFiltre);
@@ -344,44 +344,84 @@ public class EtudiantVue extends JFrame {
 
         //innerContainer.add(semaineEDT, BorderLayout.WEST);
         jScrollPane1 = new JScrollPane();
-        jTable1 = new JTable();
+//        jTable1 = new JTable();
+//
+//        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+//
+//        // Ajout de la grille de l'emploi du temps
+//        jTable1.setModel(new DefaultTableModel(
+//                new Object[][]{
+//                    {"8h30-10h00", null, null, null, null, null, null, null},
+//                    {"10h15-11h45", null, null, null, null, null, null, null},
+//                    {"12h00-13h30", null, null, null, null, null, null, null},
+//                    {"13h45-15h00", null, null, null, null, null, null, null},
+//                    {"15h15-16h45", null, null, null, null, null, null, null},
+//                    {"17h00-18h45", null, null, null, null, null, null, null},
+//                    {"19h00-20h30", null, null, null, null, null, null, null}
+//                },
+//                new String[]{
+//                    " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
+//                }
+//        ));
+//        jScrollPane1.setViewportView(jTable1);
+//        jTable1.setPreferredScrollableViewportSize(new Dimension(2500, 1460));
+//        jTable1.setRowHeight(210);
+//        TableColumn col = jTable1.getColumnModel().getColumn(0);
+//        col.setPreferredWidth(100);
+//        col = jTable1.getColumnModel().getColumn(1);
+//        col.setPreferredWidth(300);
+//        col = jTable1.getColumnModel().getColumn(2);
+//        col.setPreferredWidth(300);
+//        col = jTable1.getColumnModel().getColumn(3);
+//        col.setPreferredWidth(300);
+//        col = jTable1.getColumnModel().getColumn(4);
+//        col.setPreferredWidth(300);
+//        col = jTable1.getColumnModel().getColumn(5);
+//        col.setPreferredWidth(300);
+//        col = jTable1.getColumnModel().getColumn(6);
+//        col.setPreferredWidth(300);
+//        col = jTable1.getColumnModel().getColumn(7);
+//        col.setPreferredWidth(300);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        /// jTable2 : Vue en liste
+        jTable2 = new JTable();
 
-        // Ajout de la grille de l'emploi du temps
-        jTable1.setModel(new DefaultTableModel(
+        jTable2.setModel(new DefaultTableModel(
                 new Object[][]{
-                    {"8h30-10h00", null, null, null, null, null, null, null},
-                    {"10h15-11h45", null, null, null, null, null, null, null},
-                    {"12h00-13h30", null, null, null, null, null, null, null},
-                    {"13h45-15h00", null, null, null, null, null, null, null},
-                    {"15h15-16h45", null, null, null, null, null, null, null},
-                    {"17h00-18h45", null, null, null, null, null, null, null},
-                    {"19h00-20h30", null, null, null, null, null, null, null}
+                    {"8h30-10h00", null, null, null, null, null, null},
+                    {"10h15-11h45", null, null, null, null, null, null},
+                    {"12h00-13h30", null, null, null, null, null, null},
+                    {"13h45-15h00", null, null, null, null, null, null},
+                    {"15h15-16h45", null, null, null, null, null, null},
+                    {"17h00-18h45", null, null, null, null, null, null},
+                    {"19h00-20h30", null, null, null, null, null, null}
                 },
                 new String[]{
-                    " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
+                    " "
                 }
         ));
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.setPreferredScrollableViewportSize(new Dimension(2500, 1460));
-        jTable1.setRowHeight(210);
-        TableColumn col = jTable1.getColumnModel().getColumn(0);
-        col.setPreferredWidth(100);
-        col = jTable1.getColumnModel().getColumn(1);
-        col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(2);
-        col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(3);
-        col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(4);
-        col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(5);
-        col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(6);
-        col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(7);
-        col.setPreferredWidth(300);
+        jScrollPane1.setViewportView(jTable2);
+        jTable2.setPreferredScrollableViewportSize(new Dimension(1590, 720));//2860,1450
+        jTable2.setRowHeight(100);
+        Font j = new Font("Times New Roman", Font.BOLD, 30);
+        UIManager.put("JTable.font", j);
+
+        TableColumn col2 = jTable2.getColumnModel().getColumn(0);
+        col2.setPreferredWidth(100);
+//        col2 = jTable2.getColumnModel().getColumn(1);
+//        col2.setPreferredWidth(300);
+//        col2 = jTable2.getColumnModel().getColumn(2);
+//        col2.setPreferredWidth(300);
+//        col2 = jTable2.getColumnModel().getColumn(3);
+//        col2.setPreferredWidth(300);
+//        col2 = jTable2.getColumnModel().getColumn(4);
+//        col2.setPreferredWidth(300);
+//        col2 = jTable2.getColumnModel().getColumn(5);
+//        col2.setPreferredWidth(300);
+//        col2 = jTable2.getColumnModel().getColumn(6);
+//        col2.setPreferredWidth(300);
+//        col2 = jTable2.getColumnModel().getColumn(7);
+//        col2.setPreferredWidth(300);
 
         // Panel
         center.add(jScrollPane1, BorderLayout.SOUTH);
@@ -460,50 +500,7 @@ public class EtudiantVue extends JFrame {
      * @param m
      */
     public void updateVue(TableModel m) {
-        jTable1.setModel(m);
-        //jTable2.setModel(m);
-    }
-
-    public void updateVue2(TableModel m) {
         //jTable1.setModel(m);
-        jTable2.setModel(m);
-    }
-
-    public void changeAVueEnGrille(TableModel m) {
-        jTable1.setModel(m);
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.setPreferredScrollableViewportSize(new Dimension(1590, 720));//2860,1450
-        jTable1.setRowHeight(100);
-        Font j = new Font("Times New Roman", Font.BOLD, 30);
-        UIManager.put("JTable.font", j);
-    }
-
-    public void changeAVueEnListe(TableModel m) {
-        /// jTable2 : Vue en liste
-        jTable2 = new JTable();
-
-        jTable2.setModel(new DefaultTableModel(
-                new Object[][]{
-                    {"8h30-10h00", null, null, null, null, null, null},
-                    {"10h15-11h45", null, null, null, null, null, null},
-                    {"12h00-13h30", null, null, null, null, null, null},
-                    {"13h45-15h00", null, null, null, null, null, null},
-                    {"15h15-16h45", null, null, null, null, null, null},
-                    {"17h00-18h45", null, null, null, null, null, null},
-                    {"19h00-20h30", null, null, null, null, null, null}
-                },
-                new String[]{
-                    " "
-                }
-        ));
-        jScrollPane1.setViewportView(jTable2);
-        jTable2.setPreferredScrollableViewportSize(new Dimension(1590, 720));//2860,1450
-        jTable2.setRowHeight(100);
-        Font j = new Font("Times New Roman", Font.BOLD, 30);
-        UIManager.put("JTable.font", j);
-
-        TableColumn col2 = jTable2.getColumnModel().getColumn(0);
-        col2.setPreferredWidth(100);
         jTable2.setModel(m);
     }
 
@@ -536,7 +533,7 @@ public class EtudiantVue extends JFrame {
      * @param args
      */
     public static void main(String[] args) {
-        EtudiantVue mylayout = new EtudiantVue("Accueil");
+        EnseignantVue mylayout = new EnseignantVue("Accueil");
         mylayout.setVisible(true);
 
     }
