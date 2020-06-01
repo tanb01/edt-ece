@@ -14,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-
 /**
  * A simple JPanel with a border and a title
  *
@@ -23,10 +22,11 @@ import javax.swing.border.Border;
  * @version $LastChangedDate: 2006-04-28 13:50:52 +0200 (Fr, 28 Apr 2006) $
  */
 public class JTitlePanel extends JPanel {
-  private static final long serialVersionUID = 9104873267039717087L;
-  protected JPanel northPanel;
+
+    private static final long serialVersionUID = 9104873267039717087L;
+    protected JPanel northPanel;
     protected JLabel label;
-    
+
     /**
      * Constructs a titled panel.
      *
@@ -44,15 +44,15 @@ public class JTitlePanel extends JPanel {
         titlePanel.setLayout(new BorderLayout());
         titlePanel.add(label, BorderLayout.WEST);
         int borderOffset = 2;
-        if(icon == null) {
-          borderOffset += 1;
+        if (icon == null) {
+            borderOffset += 1;
         }
         titlePanel.setBorder(BorderFactory.createEmptyBorder(borderOffset, 4, borderOffset, 1));
         add(titlePanel, BorderLayout.NORTH);
-        
+
         JPanel northPanel = new JPanel();
         northPanel.setLayout(new BorderLayout());
-        northPanel.add(content,BorderLayout.NORTH);
+        northPanel.add(content, BorderLayout.NORTH);
         northPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
         add(northPanel, BorderLayout.CENTER);
 
@@ -63,16 +63,17 @@ public class JTitlePanel extends JPanel {
                     BorderFactory.createLineBorder(Color.GRAY)));
         }
     }
-  
-    public void setTitle(String label, Icon icon) {
-      this.label.setText(label);
-      this.label.setIcon(icon);
-    }
-    
-    private static class GradientPanel extends JPanel {
-    private static final long serialVersionUID = -6385751027379193053L;
 
-    private GradientPanel(Color background) {
+    public void setTitle(String label, Icon icon) {
+        this.label.setText(label);
+        this.label.setIcon(icon);
+    }
+
+    private static class GradientPanel extends JPanel {
+
+        private static final long serialVersionUID = -6385751027379193053L;
+
+        private GradientPanel(Color background) {
             setBackground(background);
         }
 
@@ -95,8 +96,9 @@ public class JTitlePanel extends JPanel {
             }
         }
     }
+
     public static void main(String[] args) {
         JTitlePanel mylayout = new JTitlePanel("Accueil");
         mylayout.setVisible(true);
-}
+    }
 }
