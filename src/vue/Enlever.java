@@ -22,8 +22,10 @@ public class Enlever extends JFrame {
 
     private JScrollPane scroll;
     private DefaultTableModel model;
-    List slist = new List(8,false);
+    List slist = new List(10,false);
     List thelist = new List(10,false);
+    List dlist = new List(10,false);
+    List mlist = new List(10,false);
     private JPanel center;
 
     public Enlever(String title) {
@@ -356,7 +358,10 @@ public class Enlever extends JFrame {
         center.add(gridPanel6, BorderLayout.CENTER);
         
 //------------------------------------------------------------------
-        
+        JPanel gridPanels = new JPanel();
+        gridPanels.setLayout(new GridLayout(3, 1, 4, 5));
+        gridPanels.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanels.setBackground(new java.awt.Color(249, 242, 155));
 
 
         gridPanel6.add(thelist);
@@ -364,11 +369,20 @@ public class Enlever extends JFrame {
         UIManager.put("thelist.font", n);
         thelist.setFont(n);
         slist.setFont(n);
-        gridPanel6.add(new Button(">>>>"));
+        center.add(new Button(">>>>"));
+        JButton jButton1 = new JButton("1");
+        jButton1.setBounds(new Rectangle(218, 21, 129, 33));
+        jButton1.setBackground(new java.awt.Color(211, 212, 250));
+        jButton1.setIcon(new ImageIcon("img/add.png"));
+        jButton1.setBorderPainted(false);
         
-        gridPanel6.add(slist);
-        gridPanel6.add(new Button("Clear"));
-        gridPanel6.add(new Label("Select an item"));
+        gridPanels.add(slist);
+        gridPanels.add(dlist);
+        gridPanels.add(mlist);
+        center.add(gridPanels);
+        center.add(jButton1);
+        center.add(new Button("Clear"));
+        center.add(new Label("Select an item"));
 
 //------------------------------------------------------------------
     }  
@@ -402,7 +416,7 @@ if(!(evt.target instanceof Button))
 return false;
 } 
 String buttonLabel = (String) whatAction;
-if (buttonLabel == ">>>>")
+if (buttonLabel == "1")
 {
 slist.addItem(thelist.getSelectedItem());
 thelist.delItem(thelist.getSelectedIndex());
