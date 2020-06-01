@@ -10,22 +10,49 @@ import modele.Salle;
  */
 public class SalleDAO extends DataAccessObject<Salle> {
 
+    /**
+     * Constructeur
+     */
     public SalleDAO() {
         super();
     }
 
+    /**
+     * Fonction pour créer.
+     *
+     * @param objet
+     * @return
+     */
     public boolean creer(Salle objet) {
         return false;
     }
 
+    /**
+     * Fonction pour effacer.
+     *
+     * @param objet
+     * @return
+     */
     public boolean effacer(Salle objet) {
         return false;
     }
 
+    /**
+     * Fonction de mise à jour.
+     *
+     * @param objet
+     * @return
+     */
     public boolean mettreAJour(Salle objet) {
         return false;
     }
 
+    /**
+     * Fonction qui permet de chercher une salle dans la BDD grâce à son Id.
+     *
+     * @param id
+     * @return
+     */
     public Salle chercher(int id) {
         Salle salle = new Salle();
         try {

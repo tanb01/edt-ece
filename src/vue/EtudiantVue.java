@@ -1,6 +1,9 @@
 package vue;
 
 /**
+ * Classe EtudiantVue qui permet d'afficher la vue d'un étudiant qui a le droit
+ * uniquement de voir son emploi du temps. Il peut filtrer selon ses cours,
+ * selon ses types de cours, ses professeurs, etc...
  *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
@@ -28,12 +31,21 @@ public class EtudiantVue extends JFrame {
     private JScrollPane scroll;
     private DefaultTableModel model;
 
+    /**
+     *
+     * @param title
+     */
     public EtudiantVue(String title) {
 
+        // Affiche le titre en haut de la fenêtre
         super(title);
+        // Taille de la fenêtre
         this.setSize(2750, 1600);
+        // Localisation de la fenêtre
         this.setLocation(100, 100);
+        // Fermeture et arrêt du programme dès qu'on ferme la fenêtre
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Déclaration de tous les boutons grâce à JButton
         JButton button1 = new JButton("1");
         JButton button2 = new JButton("2");
         JButton button3 = new JButton("3");
@@ -89,21 +101,23 @@ public class EtudiantVue extends JFrame {
         JButton button53 = new JButton("Emploi du temps");
         button53.setPreferredSize(new Dimension(265, 120));
 
-        JButton button54 = new JButton("<html> Salles <br>" +
-                                            " libres <br> </html>");
-        JButton button55 = new JButton("<html> Modifier un<br>" +
-                                            " Cours<br> </html>");
-        JButton button56 = new JButton("<html> Modifier une<br>" +
-                                            " seance<br> </html>");
-        JButton button57 = new JButton("<html> Modifier un<br>" +
-                                            " groupe<br> </html>");
-        JButton button58 = new JButton("<html> Modifier un<br>" +
-                                            " enseignant<br> </html>");
+        JButton button54 = new JButton("<html> Salles <br>"
+                + " libres <br> </html>");
+        JButton button55 = new JButton("<html> Modifier un<br>"
+                + " Cours<br> </html>");
+        JButton button56 = new JButton("<html> Modifier une<br>"
+                + " seance<br> </html>");
+        JButton button57 = new JButton("<html> Modifier un<br>"
+                + " groupe<br> </html>");
+        JButton button58 = new JButton("<html> Modifier un<br>"
+                + " enseignant<br> </html>");
         JButton button59 = new JButton("Comment utiliser l'apllication?");
-        
+
+        // Police Times New Roman
         Font f = new Font("Times New Roman", Font.BOLD, 30);
         UIManager.put("JButton.font", f);
-        
+
+        // Couleur et polices
         button53.setBackground(new java.awt.Color(147, 212, 250));
         button53.setFont(f);
         button54.setBackground(new java.awt.Color(252, 222, 1));
@@ -114,35 +128,38 @@ public class EtudiantVue extends JFrame {
         button56.setFont(f);
         button57.setBackground(new java.awt.Color(250, 0, 28));
         button57.setFont(f);
-        button58.setBackground(new java.awt.Color(250, 0, 28)); 
+        button58.setBackground(new java.awt.Color(250, 0, 28));
         button58.setFont(f);
-        
 
         button54.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //ensemble des action
+                // Ensemble des actions
 
             }
         });
-//------------------------------------------------------------------------------
+
+        // Conteneur principal
         Container mainContainer = this.getContentPane();
         mainContainer.setLayout(new BorderLayout(8, 6));
         mainContainer.setBackground(Color.yellow);
         this.getRootPane().setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.GREEN));
-//------------------------------------------------------------------------------
+
+        // Panel du haut
         JPanel topPanel = new JPanel();
         topPanel.setBorder(new LineBorder(Color.BLACK, 5));
         topPanel.setBackground(new java.awt.Color(147, 212, 250));
         topPanel.setLayout(new FlowLayout(5));
         mainContainer.add(topPanel, BorderLayout.NORTH);
 
+        // Barre de menu
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("COURS");
         JMenu menu1 = new JMenu("ETUDIANTS");
         JMenu menu2 = new JMenu("PROMOTIONS");
         JMenu menu3 = new JMenu("ENSEIGNANTS");
         JMenu menu4 = new JMenu("SALLES");
-        
+
+        // Nouvelle police (autre taille de police)
         Font g = new Font("Times New Roman", Font.BOLD, 18);
         UIManager.put("JMenu.font", g);
         menu.setFont(g);
@@ -151,6 +168,7 @@ public class EtudiantVue extends JFrame {
         menu3.setFont(g);
         menu4.setFont(g);
 
+        // Déclaration des items du menu
         JMenuItem m = new JMenuItem("Regarder par promo");
         JMenuItem m1 = new JMenuItem("Regarder par groupe");
         JMenuItem m2 = new JMenuItem("Regarder par enseignant");
@@ -164,7 +182,8 @@ public class EtudiantVue extends JFrame {
         JMenuItem ms2 = new JMenuItem("Récapitulatifs des cours");
         JMenuItem ms3 = new JMenuItem("Cours annulés");
         JMenuItem ms4 = new JMenuItem("Liste et trombinoscope");
-        
+
+        // Nouvelle police (autre taille de police)
         Font h = new Font("Times New Roman", Font.BOLD, 14);
         UIManager.put("JMenuItem.font", h);
         m.setFont(h);
@@ -179,6 +198,7 @@ public class EtudiantVue extends JFrame {
         ms3.setFont(h);
         ms4.setFont(h);
 
+        // Ajout des items du menu sur la fenêtre déclarés ci-dessus
         menu.add(m);
         menu.add(m1);
         menu.add(m2);
@@ -199,13 +219,16 @@ public class EtudiantVue extends JFrame {
         menuBar.add(menu3);
         menuBar.add(menu4);
 
+        // Ajout de la barre de menu
         topPanel.add(menuBar);
-//------------------------------------------------------------------------------
+
+        // Panel de droite
         JPanel rightPanel = new JPanel();
         rightPanel.setBorder(new LineBorder(Color.BLACK, 5));
         rightPanel.setBackground(new java.awt.Color(211, 212, 250));
         rightPanel.setLayout(new FlowLayout(5));
 
+        // Grille
         JPanel gridPanel = new JPanel();
         gridPanel.setLayout(new GridLayout(6, 1, 5, 5));
         gridPanel.setBorder(new LineBorder(Color.BLACK, 3));
@@ -220,21 +243,18 @@ public class EtudiantVue extends JFrame {
 
         rightPanel.add(gridPanel);
         mainContainer.add(rightPanel, BorderLayout.WEST);
-//-----------------------------------------------------------------------------
-                     
-        
-        
-        
-//-----------------------------------------------------------------------------
+
+        // Panel du centre
         JPanel center = new JPanel();
-        center.setOpaque(true);        
+        center.setOpaque(true);
         center.setBorder(new LineBorder(Color.BLACK, 3));
         center.setLayout(new FlowLayout(5));
         center.setBackground(new java.awt.Color(211, 212, 250));
         mainContainer.add(center, BorderLayout.CENTER);
 
-        JPanel MyPanel1 = new JPanel(); 
-        
+        JPanel MyPanel1 = new JPanel();
+
+        // Grille
         JPanel gridPanel3 = new JPanel();
         gridPanel3.setLayout(new GridLayout(1, 2, 5, 5));
         gridPanel3.setBorder(new LineBorder(Color.BLACK, 3));
@@ -242,13 +262,7 @@ public class EtudiantVue extends JFrame {
 
         gridPanel3.add(MyPanel1);
         center.add(gridPanel3, BorderLayout.NORTH);
-        
-        
- //----------------------------------------       
-               
-        
-        
-//-----------------------------------------------------------
+
         JPanel gridPanel5 = new JPanel();
         gridPanel5.setLayout(new GridLayout(1, 1, 5, 5));
         gridPanel5.setBorder(new LineBorder(Color.BLACK, 3));
@@ -328,14 +342,13 @@ public class EtudiantVue extends JFrame {
         MyPanel1.add(button51);
         MyPanel1.add(button52);
 
-        
         //innerContainer.add(semaineEDT, BorderLayout.WEST);
-
         jScrollPane1 = new JScrollPane();
 //        jTable1 = new JTable();
 //
 //        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 //
+//        // Ajout de la grille de l'emploi du temps
 //        jTable1.setModel(new DefaultTableModel(
 //                new Object[][]{
 //                    {"8h30-10h00", null, null, null, null, null, null, null},
@@ -370,7 +383,7 @@ public class EtudiantVue extends JFrame {
 //        col = jTable1.getColumnModel().getColumn(7);
 //        col.setPreferredWidth(300);
 
-        ///JTABLE2 VUE EN LISTE
+        /// jTable2 : Vue en liste
         jTable2 = new JTable();
 
         jTable2.setModel(new DefaultTableModel(
@@ -392,7 +405,7 @@ public class EtudiantVue extends JFrame {
         jTable2.setRowHeight(100);
         Font j = new Font("Times New Roman", Font.BOLD, 30);
         UIManager.put("JTable.font", j);
-        
+
         TableColumn col2 = jTable2.getColumnModel().getColumn(0);
         col2.setPreferredWidth(100);
 //        col2 = jTable2.getColumnModel().getColumn(1);
@@ -410,11 +423,11 @@ public class EtudiantVue extends JFrame {
 //        col2 = jTable2.getColumnModel().getColumn(7);
 //        col2.setPreferredWidth(300);
 
-        ////PANEL
+        // Panel
         center.add(jScrollPane1, BorderLayout.SOUTH);
 
         JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FlowLayout());        
+        bottomPanel.setLayout(new FlowLayout());
         bottomPanel.setBackground(new java.awt.Color(200, 100, 200));
         bottomPanel.setBorder(new LineBorder(Color.BLACK, 3));
         mainContainer.add(bottomPanel, BorderLayout.SOUTH);
@@ -430,8 +443,7 @@ public class EtudiantVue extends JFrame {
         JLabel label15 = new JLabel();
         mainContainer.add(label15, BorderLayout.CENTER);
         Component Component = panNouveauPanel.add(label15);
-        /*add*/
-        label15.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        label15.setFont(new java.awt.Font("Tahoma", 0, 36));
         label15.setText("Voici l'emploie du temps de cette Semaine ");
 
         this.setLayout(new BorderLayout());
@@ -445,8 +457,7 @@ public class EtudiantVue extends JFrame {
         JLabel label16 = new JLabel();
 
         Component C = panNouveaPanel.add(label16);
-        /*add*/
-        label16.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        label16.setFont(new java.awt.Font("Tahoma", 0, 36));
         label16.setText("Voici l'emploie du temps cette Semaine ");
 
         button54.addActionListener(new ActionListener() {
@@ -471,35 +482,56 @@ public class EtudiantVue extends JFrame {
 
         });
 
-        //On ajoute les 4 panels au content pane de la JFrame
-//Au centre
+        // On ajoute les 4 panels au content pane de la JFrame
+        // Au centre
         this.getContentPane().add(center, BorderLayout.CENTER);
-//en haut
+        // En haut
         this.getContentPane().add(topPanel, BorderLayout.NORTH);
-//à gauche
+        // À droite
         this.getContentPane().add(rightPanel, BorderLayout.WEST);
-//en bas
+        // En bas
         this.getContentPane().add(bottomPanel, BorderLayout.SOUTH);
 
     }
 
+    /**
+     * Mise à jour de la vue (en Liste ou en Grille)
+     *
+     * @param m
+     */
     public void updateVue(TableModel m) {
         //jTable1.setModel(m);
         jTable2.setModel(m);
     }
 
+    /**
+     *
+     * @return
+     */
     public JComboBox getJComboBoxSelectionVue() {
         return listeSelectionVue;
     }
 
+    /**
+     *
+     * @param j
+     */
     public void setJComboBoxSelectionVue(int j) {
         listeSelectionVue.setSelectedIndex(j);
     }
 
+    /**
+     *
+     * @return
+     */
     public JTable getJTable() {
         return jTable1;
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         EtudiantVue mylayout = new EtudiantVue("Accueil");
         mylayout.setVisible(true);

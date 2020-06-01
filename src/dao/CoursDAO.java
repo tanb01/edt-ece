@@ -10,22 +10,49 @@ import modele.Cours;
  */
 public class CoursDAO extends DataAccessObject<Cours> {
 
+    /**
+     * Constructeur
+     */
     public CoursDAO() {
         super();
     }
 
+    /**
+     * Fonction pour créer.
+     *
+     * @param objet
+     * @return
+     */
     public boolean creer(Cours objet) {
         return false;
     }
 
+    /**
+     * Fonction pour effacer.
+     *
+     * @param objet
+     * @return
+     */
     public boolean effacer(Cours objet) {
         return false;
     }
 
+    /**
+     * Fonction de mise à jour.
+     *
+     * @param objet
+     * @return
+     */
     public boolean mettreAJour(Cours objet) {
         return false;
     }
 
+    /**
+     * Fonction qui permet de chercher un cours dans la BDD grâce à son Id.
+     *
+     * @param id
+     * @return
+     */
     public Cours chercher(int id) {
         Cours Cours = new Cours();
         try {

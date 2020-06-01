@@ -16,25 +16,52 @@ import modele.TypeCours;
  */
 public class SeanceDAO extends DataAccessObject<Seance> {
 
+    /**
+     * Constructeur
+     */
     public SeanceDAO() {
         super();
     }
 
+    /**
+     * Fonction pour créer.
+     *
+     * @param objet
+     * @return
+     */
     @Override
     public boolean creer(Seance objet) {
         return false;
     }
 
+    /**
+     * Fonction pour effacer.
+     *
+     * @param objet
+     * @return
+     */
     @Override
     public boolean effacer(Seance objet) {
         return false;
     }
 
+    /**
+     * Fonction de mise à jour.
+     *
+     * @param objet
+     * @return
+     */
     @Override
     public boolean mettreAJour(Seance objet) {
         return false;
     }
 
+    /**
+     * Fonction qui permet de chercher une séance dans la BDD grâce à son Id.
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Seance chercher(int id) {
         Seance seance = new Seance();
@@ -86,6 +113,11 @@ public class SeanceDAO extends DataAccessObject<Seance> {
         return seance;
     }
 
+    /**
+     * Fonction qui permet de rechercher les séances d'un groupe grâce à l'id de ce groupe.
+     * @param groupeId
+     * @return 
+     */
     public ArrayList<Seance> chercherSeancesParGroupeId(int groupeId) {
         ArrayList<Seance> seances = new ArrayList<Seance>();
         Seance seance = new Seance();

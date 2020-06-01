@@ -10,22 +10,49 @@ import modele.TypeCours;
  */
 public class TypeCoursDAO extends DataAccessObject<TypeCours> {
 
+    /**
+     * Constructeur
+     */
     public TypeCoursDAO() {
         super();
     }
 
+    /**
+     * Fonction pour créer.
+     *
+     * @param objet
+     * @return
+     */
     public boolean creer(TypeCours objet) {
         return false;
     }
 
+    /**
+     * Fonction pour effacer.
+     *
+     * @param objet
+     * @return
+     */
     public boolean effacer(TypeCours objet) {
         return false;
     }
 
+    /**
+     * Fonction de mise à jour.
+     *
+     * @param objet
+     * @return
+     */
     public boolean mettreAJour(TypeCours objet) {
         return false;
     }
 
+    /**
+     * Fonction qui permet de chercher un Type de cours dans la BDD grâce à son Id.
+     *
+     * @param id
+     * @return
+     */
     public TypeCours chercher(int id) {
         TypeCours typeCours = new TypeCours();
         try {

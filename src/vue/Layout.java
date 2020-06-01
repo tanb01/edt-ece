@@ -4,7 +4,6 @@ package vue;
  *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
@@ -15,21 +14,25 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
-public class Layout extends JFrame
-{
+public class Layout extends JFrame {
+
     private String titrePage = null;
-     private JTabbedPane onglet;
-    
-        
-	private JScrollPane scroll;
-	private DefaultTableModel model;
-    
-    public Layout(String title){
-        
+    private JTabbedPane onglet;
+
+    private JScrollPane scroll;
+    private DefaultTableModel model;
+
+    public Layout(String title) {
+
+        // Affiche le titre en haut de la fenêtre
         super(title);
-        this.setSize(2750,1600);
-        this.setLocation(100,100);
+        // Taille de la fenêtre
+        this.setSize(2750, 1600);
+        // Localisation de la fenêtre
+        this.setLocation(100, 100);
+        // Fermeture et arrêt du programme dès qu'on ferme la fenêtre
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Déclaration de tous les boutons grâce à JButton
         JButton button1 = new JButton("1");
         JButton button2 = new JButton("2");
         JButton button3 = new JButton("3");
@@ -40,7 +43,7 @@ public class Layout extends JFrame
         JButton button8 = new JButton("8");
         JButton button9 = new JButton("9");
         JButton button10 = new JButton("10");
-        JButton button11= new JButton("11");
+        JButton button11 = new JButton("11");
         JButton button12 = new JButton("12");
         JButton button13 = new JButton("13");
         JButton button14 = new JButton("14");
@@ -75,7 +78,7 @@ public class Layout extends JFrame
         JButton button43 = new JButton("43");
         JButton button44 = new JButton("44");
         JButton button45 = new JButton("45");
-        JButton button46= new JButton("46");
+        JButton button46 = new JButton("46");
         JButton button47 = new JButton("47");
         JButton button48 = new JButton("48");
         JButton button49 = new JButton("49");
@@ -86,27 +89,22 @@ public class Layout extends JFrame
         button53.setPreferredSize(new Dimension(150, 120));
         JButton button54 = new JButton("Salles libres");
         JButton button55 = new JButton("Statistiques");
-        JButton button56 = new JButton("Recapitulatif de cours");
+        JButton button56 = new JButton("Récapitulatif des cours");
         JButton button57 = new JButton("Cours annulés");
-        JButton button58 = new JButton("Comment utiliser l'apllication?");
+        JButton button58 = new JButton("Comment utiliser l'application?");
         JButton button59 = new JButton("");
-        
-        
-        
-        
+
         Container mainContainer = this.getContentPane();
-        mainContainer.setLayout(new BorderLayout(8,6));
+        mainContainer.setLayout(new BorderLayout(8, 6));
         mainContainer.setBackground(Color.yellow);
-        this.getRootPane().setBorder(BorderFactory.createMatteBorder(4,4,4,4, Color.GREEN));
-        
+        this.getRootPane().setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.GREEN));
+
         JPanel topPanel = new JPanel();
-        topPanel.setBorder(new LineBorder(Color.BLACK,5));
+        topPanel.setBorder(new LineBorder(Color.BLACK, 5));
         topPanel.setBackground(new java.awt.Color(150, 233, 200));
         topPanel.setLayout(new FlowLayout(5));
-        mainContainer.add(topPanel,BorderLayout.NORTH);
-        
-        
-        
+        mainContainer.add(topPanel, BorderLayout.NORTH);
+
         topPanel.add(button1);
         topPanel.add(button2);
         topPanel.add(button3);
@@ -159,109 +157,119 @@ public class Layout extends JFrame
         topPanel.add(button50);
         topPanel.add(button51);
         topPanel.add(button52);
-        
+
         JPanel rightPanel = new JPanel();
-        rightPanel.setBorder(new LineBorder(Color.BLACK,5));
+        rightPanel.setBorder(new LineBorder(Color.BLACK, 5));
         rightPanel.setBackground(new java.awt.Color(200, 233, 200));
         rightPanel.setLayout(new FlowLayout(5));
-        
+
         JPanel gridPanel = new JPanel();
-        gridPanel.setLayout(new GridLayout(5,1,5,5));
-        gridPanel.setBorder(new LineBorder(Color.BLACK,3));
+        gridPanel.setLayout(new GridLayout(5, 1, 5, 5));
+        gridPanel.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel.setBackground(new java.awt.Color(200, 100, 200));
-        
+
         gridPanel.add(button53);
         gridPanel.add(button54);
         gridPanel.add(button55);
         gridPanel.add(button56);
         gridPanel.add(button57);
-        
-        JLabel label = new JLabel ();
+
+        JLabel label = new JLabel();
         label.setOpaque(true);
-        label.setBorder(new LineBorder(Color.BLACK,3));
+        label.setBorder(new LineBorder(Color.BLACK, 3));
         label.setLayout(new FlowLayout(5));
         JLabel label1 = new JLabel();
-        mainContainer.add(label1,BorderLayout.CENTER);        
-        Component Component = label.add(label1); /*add*/
-        label1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        label1.setText("Voici l'emploie du temps de cette Semaine ");
+        mainContainer.add(label1, BorderLayout.CENTER);
+        Component Component = label.add(label1);
+        label1.setFont(new java.awt.Font("Tahoma", 0, 36));
+        label1.setText("Voici l'emploi du temps de cette semaine ");
         JLabel label2 = new JLabel();
-        mainContainer.add(label2,BorderLayout.CENTER);        
-        Component ComponentS = label.add(label2); /*add*/
-        label2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        
+        mainContainer.add(label2, BorderLayout.CENTER);
+        Component ComponentS = label.add(label2);
+        label2.setFont(new java.awt.Font("Tahoma", 0, 36));
+
         label2.setText("MARDI 02");
-        
-        
-        
-        
-                
+
         rightPanel.add(gridPanel);
         mainContainer.add(label);
         mainContainer.add(rightPanel, BorderLayout.WEST);
-        
-        
+
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout());
         bottomPanel.add(button58);
         bottomPanel.setBackground(new java.awt.Color(200, 100, 200));
-        bottomPanel.setBorder(new LineBorder(Color.BLACK,3));
+        bottomPanel.setBorder(new LineBorder(Color.BLACK, 3));
         mainContainer.add(bottomPanel, BorderLayout.SOUTH);
-        
-        
-                
-        
+
     }
-    public Layout(){
+
+    public Layout() {
         this.setLocationRelativeTo(null);
         this.setTitle("Gérer vos conteneurs");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(400, 200);
-        // Création de plusieurs Panneau    
+        // Création de plusieurs panneaux   
         Panneau[] tPan = {
             new Panneau(Color.RED), new Panneau(Color.GREEN), new Panneau(Color.BLUE)
-        };    
+        };
         // Création de notre conteneur d'onglets
         onglet = new JTabbedPane();
         int i = 0;
-        for(Panneau pan : tPan){
+        for (Panneau pan : tPan) {
             // Méthode d'ajout d'onglets
-            onglet.add("Onglet n° "+(++i), pan);
+            onglet.add("Onglet n° " + (++i), pan);
             // Vous pouvez aussi utiliser la méthode addTab
-            onglet.addTab("Onglet n° "+(++i), pan);
+            onglet.addTab("Onglet n° " + (++i), pan);
         }
         // On passe ensuite les onglets au content pane 
         this.getContentPane().add(onglet);
         this.setVisible(true);
-        }
-        
+    }
 
-   public class Panneau extends JPanel{ 
-       private Color color = Color.white;
-       private int COUNT = 0; 
-       private String message = ""; 
-       public Panneau(){}  
-       public Panneau(Color color){    
-           this.color = color;    
-           this.message = "Contenu du panneau N°" + (++COUNT); 
-       }  
-       @Override
-       public void paintComponent(Graphics g){   
-           g.setColor(this.color);   
-           g.fillRect(0, 0, this.getWidth(), this.getHeight());   
-           g.setColor(Color.white);   
-           g.setFont(new Font("Arial", Font.BOLD, 15));  
-           g.drawString(this.message, 10, 20);  }
-   }
-    
-    
-    public static void main(String[] args)
-    {
+    /**
+     * 
+     */
+    public class Panneau extends JPanel {
+
+        private Color color = Color.white;
+        private int COUNT = 0;
+        private String message = "";
+
+        
+        public Panneau() {
+        }
+
+        /**
+         * 
+         * @param color 
+         */
+        public Panneau(Color color) {
+            this.color = color;
+            this.message = "Contenu du panneau N°" + (++COUNT);
+        }
+
+        /**
+         * 
+         * @param g 
+         */
+        @Override
+        public void paintComponent(Graphics g) {
+            g.setColor(this.color);
+            g.fillRect(0, 0, this.getWidth(), this.getHeight());
+            g.setColor(Color.white);
+            g.setFont(new Font("Arial", Font.BOLD, 15));
+            g.drawString(this.message, 10, 20);
+        }
+    }
+
+    /**
+     * 
+     * @param args 
+     */
+    public static void main(String[] args) {
         Layout mylayout = new Layout("Accueil");
         mylayout.setVisible(true);
-        
-        
+
     }
- 
-    }
-           
+
+}

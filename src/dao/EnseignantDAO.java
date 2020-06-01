@@ -10,22 +10,49 @@ import modele.Enseignant;
  */
 public class EnseignantDAO extends DataAccessObject<Enseignant> {
 
+    /**
+     * Constructeur
+     */
     public EnseignantDAO() {
         super();
     }
 
+    /**
+     * Fonction pour créer.
+     * 
+     * @param objet
+     * @return
+     */
     public boolean creer(Enseignant objet) {
         return false;
     }
 
+    /**
+     * Fonction pour effacer.
+     * 
+     * @param objet
+     * @return
+     */
     public boolean effacer(Enseignant objet) {
         return false;
     }
 
+    /**
+     * Fonction de mise à jour.
+     * 
+     * @param objet
+     * @return
+     */
     public boolean mettreAJour(Enseignant objet) {
         return false;
     }
 
+    /**
+     * Fonction qui permet de chercher un enseignant dans la BDD grâce à son Id.
+     * 
+     * @param id
+     * @return
+     */
     public Enseignant chercher(int id) {
         Enseignant enseignant = new Enseignant();
         try {
@@ -48,6 +75,11 @@ public class EnseignantDAO extends DataAccessObject<Enseignant> {
 //        un.afficher();
 //    }
     
+    /**
+     * Fonction qui permet l'affichage du nom d'un enseignant.
+     * @param id
+     * @return 
+     */
     public Enseignant Afficher_nom(int id) {
         Enseignant enseignant = new Enseignant();
         try {

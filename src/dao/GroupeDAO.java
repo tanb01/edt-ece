@@ -10,25 +10,52 @@ import modele.Groupe;
  */
 public class GroupeDAO extends DataAccessObject<Groupe> {
 
+    /**
+     * Constructeur
+     */
     public GroupeDAO() {
         super();
     }
 
+    /**
+     * Fonction pour créer.
+     *
+     * @param objet
+     * @return
+     */
     @Override
     public boolean creer(Groupe objet) {
         return false;
     }
 
+    /**
+     * Fonction pour effacer.
+     *
+     * @param objet
+     * @return
+     */
     @Override
     public boolean effacer(Groupe objet) {
         return false;
     }
 
+    /**
+     * Fonction de mise à jour.
+     *
+     * @param objet
+     * @return
+     */
     @Override
     public boolean mettreAJour(Groupe objet) {
         return false;
     }
 
+    /**
+     * Fonction qui permet de chercher un groupe dans la BDD grâce à son Id.
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Groupe chercher(int id) {
         Groupe groupe = new Groupe();

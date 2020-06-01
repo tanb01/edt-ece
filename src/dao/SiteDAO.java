@@ -12,22 +12,49 @@ import modele.Site;
  */
 public class SiteDAO extends DataAccessObject<Site> {
 
+    /**
+     * Constructeur
+     */
     public SiteDAO() {
         super();
     }
 
+    /**
+     * Fonction pour créer.
+     *
+     * @param objet
+     * @return
+     */
     public boolean creer(Site objet) {
         return false;
     }
 
+    /**
+     * Fonction pour effacer.
+     *
+     * @param objet
+     * @return
+     */
     public boolean effacer(Site objet) {
         return false;
     }
 
+    /**
+     * Fonction de mise à jour.
+     *
+     * @param objet
+     * @return
+     */
     public boolean mettreAJour(Site objet) {
         return false;
     }
 
+    /**
+     * Fonction qui permet de chercher un site dans la BDD grâce à son Id.
+     *
+     * @param id
+     * @return
+     */
     public Site chercher(int id) {
         Site site = new Site();
         try {

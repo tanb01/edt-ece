@@ -28,10 +28,15 @@ public class ReferentPedagogiqueVue extends JFrame {
 
     public ReferentPedagogiqueVue(String title) {
 
+        // Affiche le titre en haut de la fenêtre
         super(title);
+        // Taille de la fenêtre
         this.setSize(2750, 1600);
+        // Localisation de la fenêtre
         this.setLocation(100, 100);
+        // Fermeture et arrêt du programme dès qu'on ferme la fenêtre
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Déclaration de tous les boutons grâce à JButton
         JButton button1 = new JButton("1");
         JButton button2 = new JButton("2");
         JButton button3 = new JButton("3");
@@ -92,7 +97,7 @@ public class ReferentPedagogiqueVue extends JFrame {
 
         button54.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //ensemble des action
+                // Ensemble des actions
             }
         });
 
@@ -327,8 +332,8 @@ public class ReferentPedagogiqueVue extends JFrame {
 
         JLabel label15 = new JLabel();
         mainContainer.add(label15, BorderLayout.CENTER);
-        Component Component = panNouveauPanel.add(label15); // add
-        label15.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        Component Component = panNouveauPanel.add(label15);
+        label15.setFont(new java.awt.Font("Tahoma", 0, 36));
         label15.setText("Voici l'emploi du temps de cette semaine ");
 
         this.setLayout(new BorderLayout());
@@ -341,8 +346,8 @@ public class ReferentPedagogiqueVue extends JFrame {
 
         JLabel label16 = new JLabel();
 
-        Component C = panNouveaPanel.add(label16); // add
-        label16.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        Component C = panNouveaPanel.add(label16);
+        label16.setFont(new java.awt.Font("Tahoma", 0, 36));
         label16.setText("Voici l'emploi du temps cette semaine ");
 
         button54.addActionListener(new ActionListener() {
@@ -366,16 +371,20 @@ public class ReferentPedagogiqueVue extends JFrame {
         });
 
         //On ajoute les 4 panels au content pane de la JFrame
-            //Au centre
+        // Au centre
         this.getContentPane().add(center, BorderLayout.CENTER);
-            //en haut
+        // En haut
         this.getContentPane().add(topPanel, BorderLayout.NORTH);
-            //à gauche
+        // À droite
         this.getContentPane().add(rightPanel, BorderLayout.WEST);
-            //en bas
+        // En bas
         this.getContentPane().add(bottomPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * 
+     * @param args 
+     */
     public static void main(String[] args) {
         ReferentPedagogiqueVue mylayout = new ReferentPedagogiqueVue("Accueil");
         mylayout.setVisible(true);

@@ -35,6 +35,11 @@ public class EDTControleur implements ActionListener {
 
     DefaultTableModel dtm;
 
+    /**
+     * 
+     * @param m
+     * @param v 
+     */
     public EDTControleur(User m, EtudiantVue v) {
         ve = new EtudiantVue("Etudiant vue");
         ve = v;
@@ -55,12 +60,11 @@ public class EDTControleur implements ActionListener {
         String jour = "null";
         jour = getJourDeLaSemaine(listSeances.get(0).getDate());
         
-        //VUE EN GRILLE
-        
+        // Vue en grille
         while (g < listSeances.size()) {
             System.out.println("id: " + g);
             if (jour == getJourDeLaSemaine(listSeances.get(g).getDate())) {
-//              //System.out.println("Jour: " + jour);
+                //System.out.println("Jour: " + jour);
                 data[rowinc][colinc] = listSeances.get(g).stringify();
                 rowinc++;
                 g++;
@@ -82,7 +86,7 @@ public class EDTControleur implements ActionListener {
                 }
         );
 
-        //VUE EN LISTE
+        // Vue en liste
 
 //        String[][] data2 = new String[listSeances.size()][1];
 //        for (int i = 0; i < listSeances.size(); i++) {
@@ -101,11 +105,19 @@ public class EDTControleur implements ActionListener {
         ve.setVisible(true);
     }
 
+    /**
+     * Affiche l'emploi du temps
+     */
     public void afficherEDT() {
         ve.updateVue(dtm);
         ve.setVisible(true);
     }
 
+    /**
+     * Change les jours de la semaine de Anglais à Francais.
+     * @param date
+     * @return 
+     */
     public String getJourDeLaSemaine(String date) {
         LocalDate localDate = LocalDate.parse(date);
         DayOfWeek day = localDate.getDayOfWeek();
@@ -136,6 +148,11 @@ public class EDTControleur implements ActionListener {
         return jour;
     }
 
+    /**
+     * Choix de la vue en Grille ou en Liste.
+     *
+     * @param ae 
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == ve.getJComboBoxSelectionVue()) {
@@ -150,6 +167,9 @@ public class EDTControleur implements ActionListener {
 
     }
 
+    /**
+     * 
+     */
     public void control() {
         ve.getJComboBoxSelectionVue().addActionListener(this);
         System.out.println("Control");

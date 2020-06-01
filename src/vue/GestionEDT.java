@@ -22,7 +22,6 @@ public class GestionEDT extends JPanel {
     private JButton ajouterSeance = null;
     private JButton supprimerSeance = null;
     private JButton modifierSeance = null;
-    
 
     public GestionEDT() {
         titrePage = "Gestion de l'emploi du temps";
@@ -30,18 +29,16 @@ public class GestionEDT extends JPanel {
         ajouterSeance = new JButton("Ajouter");
         supprimerSeance = new JButton("Supprimer");
         modifierSeance = new JButton("Modifier");
-        
+
         modifierSeance.setBackground(new java.awt.Color(255, 204, 204));
-        modifierSeance.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        modifierSeance.setFont(new java.awt.Font("Tahoma", 0, 36));
         modifierSeance.setText("Modifier ");
         modifierSeance.setBorder(new javax.swing.border.MatteBorder(null));
-        
+
         supprimerSeance.setBackground(new java.awt.Color(150, 233, 200));
-        supprimerSeance.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        supprimerSeance.setFont(new java.awt.Font("Tahoma", 0, 36));
         supprimerSeance.setText("Supprimer ");
         supprimerSeance.setBorder(new javax.swing.border.MatteBorder(null));
-        
-        
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize(screenSize.width, screenSize.height);
@@ -85,15 +82,15 @@ public class GestionEDT extends JPanel {
         leftPanel.add(ajouterSeance);
         leftPanel.add(supprimerSeance);
         leftPanel.add(modifierSeance);
-        
-        
-    }
-    
 
+    }
+
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
 
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
 
             public void run() {

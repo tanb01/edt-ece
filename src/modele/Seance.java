@@ -9,6 +9,7 @@ import java.util.ArrayList;
  */
 public class Seance {
 
+    // Variables locales de Séance
     private int seanceId;
     private int numeroSemaine;
     private String date;
@@ -21,6 +22,20 @@ public class Seance {
     private ArrayList<Enseignant> listeEnseignants;
     private ArrayList<Groupe> listeGroupes;
 
+    /**
+     * Constructeur
+     * 
+     * @param id
+     * @param numeroSemaine
+     * @param date
+     * @param debutHeure
+     * @param finHeure
+     * @param cours
+     * @param typeCours
+     * @param salles
+     * @param enseignants
+     * @param groupes 
+     */
     public Seance(int id, int numeroSemaine, String date, String debutHeure,
             String finHeure, Cours cours, TypeCours typeCours,
             ArrayList<Salle> salles, ArrayList<Enseignant> enseignants,
@@ -50,6 +65,9 @@ public class Seance {
         }
     }
 
+    /**
+     * Constructeur
+     */
     public Seance() {
         seanceId = 0;
         numeroSemaine = 0;
@@ -63,38 +81,84 @@ public class Seance {
         listeGroupes = null;
     }
 
+    /**
+     * Getters
+     * Pour l'Id de la séance.
+     * 
+     * @return 
+     */
     public int getSeanceId() {
         return seanceId;
     }
 
+    /**
+     * Pour le numéro de la semaine.
+     * 
+     * @return 
+     */
     public int getNumeroSemaine() {
         return numeroSemaine;
     }
 
+    /**
+     * Pour la date de la séance.
+     * 
+     * @return 
+     */
     public String getDate() {
         return date;
     }
 
+    /**
+     * Pour l'heure de début de la séance.
+     * 
+     * @return 
+     */
     public String getDebutHeure() {
         return debutHeure;
     }
 
+    /**
+     * Pour l'heure de fin de la séance.
+     * 
+     * @return 
+     */
     public String getFinHeure() {
         return finHeure;
     }
 
+    /**
+     * Pour l'état de la séance (Validée - Annulée).
+     * 
+     * @return 
+     */
     public int getEtatSeance() {
         return etatSeance;
     }
 
+    /**
+     * Pour le cours de la séance.
+     * 
+     * @return 
+     */
     public Cours getCoursSeance() {
         return coursSeance;
     }
 
+    /**
+     * Pour le type de cours de la séance (CI-CM-TD-TP).
+     * 
+     * @return 
+     */
     public TypeCours getTypeCours() {
         return typeCoursSeance;
     }
 
+    /**
+     * Pour la liste des salles de la séance.
+     * 
+     * @return 
+     */
     public ArrayList<Salle> getListeSalles() {
         ArrayList<Salle> copySalles = new ArrayList<Salle>();
         for (Salle salle : listeSalles) {
@@ -103,6 +167,11 @@ public class Seance {
         return copySalles;
     }
 
+    /**
+     * Pour la liste des enseignants de la séance.
+     * 
+     * @return 
+     */
     public ArrayList<Enseignant> getListeEnseignants() {
         ArrayList<Enseignant> copyEnseignants = new ArrayList<Enseignant>();
         for (Enseignant enseignant : listeEnseignants) {
@@ -111,6 +180,11 @@ public class Seance {
         return copyEnseignants;
     }
 
+    /**
+     * Pour la liste des groupes de la séance.
+     * 
+     * @return 
+     */
     public ArrayList<Groupe> getListeGroupes() {
         ArrayList<Groupe> copyGroupes = new ArrayList<Groupe>();
         for (Groupe groupe : listeGroupes) {
@@ -119,6 +193,11 @@ public class Seance {
         return copyGroupes;
     }
 
+    /**
+     * Override de toString pour afficher les infos de la séance.
+     * 
+     * @return 
+     */
     @Override
     public String toString() {
         return "Id : " + this.seanceId
@@ -134,6 +213,12 @@ public class Seance {
                 + "\nGroupe(s) : " + this.listeGroupes;
     }
 
+    
+    /**
+     * Pour afficher les infos de la séance.
+     * 
+     * @return 
+     */
     public String stringify() {
         String salles = new String();
         for (Salle s : listeSalles) {
@@ -162,6 +247,9 @@ public class Seance {
                 + " Type cours : " + this.typeCoursSeance.getNomTypeCours();
     }
 
+    /**
+     * Affiche les informations de la séance.
+     */
     public void afficher() {
         System.out.println("Voici les informations de la séance : ");
         System.out.println(toString());

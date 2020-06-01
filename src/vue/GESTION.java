@@ -29,10 +29,15 @@ public class GESTION extends JFrame {
 
     public GESTION(String title) {
 
+        // Affiche le titre en haut de la fenêtre
         super(title);
+        // Taille de la fenêtre
         this.setSize(2750, 1600);
+        // Localisation de la fenêtre
         this.setLocation(100, 100);
+        // Fermeture et arrêt du programme dès qu'on ferme la fenêtre
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Déclaration de tous les boutons grâce à JButton
         JButton button1 = new JButton("1");
         JButton button2 = new JButton("2");
         JButton button3 = new JButton("3");
@@ -91,15 +96,16 @@ public class GESTION extends JFrame {
         JButton button54 = new JButton("<html> Salles <br>" +
                                             " libres <br> </html>");
         JButton button55 = new JButton("<html> Modifier un<br>" +
-                                            " Cours<br> </html>");
+                                            " cours<br> </html>");
         JButton button56 = new JButton("<html> Modifier une<br>" +
-                                            " seance<br> </html>");
+                                            " séance<br> </html>");
         JButton button57 = new JButton("<html> Modifier un<br>" +
                                             " groupe<br> </html>");
         JButton button58 = new JButton("<html> Modifier un<br>" +
                                             " enseignant<br> </html>");
-        JButton button59 = new JButton("Comment utiliser l'apllication?");
+        JButton button59 = new JButton("Comment utiliser l'application?");
         
+        // Police Times New Roman
         Font f = new Font("Times New Roman", Font.BOLD, 30);
         UIManager.put("JButton.font", f);
         

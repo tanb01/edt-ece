@@ -12,25 +12,52 @@ import modele.Promotion;
  */
 public class PromotionDAO extends DataAccessObject<Promotion> {
 
+    /**
+     * Constructeur
+     */
     public PromotionDAO() {
         super();
     }
 
+    /**
+     * Fonction pour créer.
+     *
+     * @param objet
+     * @return
+     */
     @Override
     public boolean creer(Promotion objet) {
         return false;
     }
 
+    /**
+     * Fonction pour effacer.
+     *
+     * @param objet
+     * @return
+     */
     @Override
     public boolean effacer(Promotion objet) {
         return false;
     }
 
+    /**
+     * Fonction de mise à jour.
+     *
+     * @param objet
+     * @return
+     */
     @Override
     public boolean mettreAJour(Promotion objet) {
         return false;
     }
 
+    /**
+     * Fonction qui permet de chercher une promotion dans la BDD grâce à son Id.
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Promotion chercher(int id) {
         Promotion promotion = new Promotion();

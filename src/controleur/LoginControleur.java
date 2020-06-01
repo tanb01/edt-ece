@@ -13,33 +13,62 @@ import vue.UserVue;
  */
 public class LoginControleur implements ActionListener {
 
+    // Variables locales de LoginControleur
     private UserDAO udao = new UserDAO();
     private LoginVue vue = new LoginVue();
     private boolean isConnected;
     private boolean alreadyLoggedIn;
 
+    /**
+     * Constructeur
+     * Personne de connecté
+     */
     public LoginControleur() {
         isConnected = false;
         alreadyLoggedIn = false;
     }
 
+    /**
+     * 
+     */
     public void control() {
         vue.getBoutonConnexion().addActionListener(this);
         System.out.println("Control");
     }
 
+    /**
+     * Vérifie si l'utilisateur est connecté
+     * 
+     * @return 
+     */
     public boolean getIsConnected() {
         return isConnected;
     }
 
+    /**
+     * Connexion de l'utilisateur
+     * 
+     * @param connection 
+     */
     public void setIsConnected(boolean connection) {
         isConnected = connection;
     }
 
+    /**
+     * Déconnexion
+     */
     public void logOut() {
         isConnected = false;
     }
-
+    
+    /**
+     * Fonction qui vérifie :
+     * - Si l'utilisateur est déjà connecté
+     * - Si l'email ou le mot de passe de l'utilisateur est incorrect
+     * Si l'utilisateur n'est pas connecté + son email et son mot de passe sont corrects
+     * Alors il se connecte.
+     * @param ae 
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (isConnected == true && alreadyLoggedIn == true) {

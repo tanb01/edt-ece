@@ -56,7 +56,7 @@ public class UserVue {
         topPanel.add(listeSelectionVue);
 
         JLabel labelFiltre = new JLabel(" - Filtrer par ");
-        String[] selectionFiltre = {"  nom enseignant(e)", "matiere", "groupe"};
+        String[] selectionFiltre = {"  nom enseignant(e)", "matière", "groupe"};
         JComboBox listeSelectionFiltre = new JComboBox(selectionFiltre);
 
         topPanel.add(labelFiltre);
@@ -100,7 +100,7 @@ public class UserVue {
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
         tabbedPane.addTab("Emploi du temps", container);
-        tabbedPane.addTab("Recapitulatif des cours", new JLabel("hola"));
+        tabbedPane.addTab("Récapitulatif des cours", new JLabel("hola"));
 
         fenetre.getContentPane().add(tabbedPane);
     }

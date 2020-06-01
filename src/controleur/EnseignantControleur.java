@@ -19,23 +19,48 @@ public class EnseignantControleur {
     private Enseignant modele;
     private Enseignant vue;
 
+    /**
+     * Constructeur
+     * 
+     * @param modele
+     * @param vue 
+     */
     public EnseignantControleur(Enseignant modele, Enseignant vue) {
         this.modele = modele;
         this.vue = vue;
     }
     
+    /** 
+     * Getters
+     * Pour l'id de l'enseignant
+     * 
+     * @return 
+     */
     public int getEnseignantId() {
         return modele.getUserId();
     }
     
+    /**
+     * Pour le nom de l'enseignant
+     * 
+     * @return 
+     */
     public String getEnseignantNom() {
         return modele.getNom();
     }
 
+    /**
+     * Pour le prénom de l'enseignant
+     * 
+     * @return 
+     */
     public String getEnseignantPrenom() {
         return modele.getPrenom();
     }
     
+    /**
+     * Mise à jour de la vue
+     */
     public void updateVue() {
         //vue.printDetailsEnseignant(modele.getUserId(), modele.getNom(), modele.getPrenom());
     }
