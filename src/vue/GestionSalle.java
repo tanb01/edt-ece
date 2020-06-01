@@ -1,19 +1,45 @@
 package vue;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.List;
+import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
+
+ *
+ * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
-import javax.swing.*;
-import java.awt.*;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.event.*;
 import javax.swing.table.TableColumn;
 
-public class Affecterenseignant extends JFrame {
+public class GestionSalle extends JFrame {
 
     private String titrePage = null;
     private JTabbedPane onglet;
@@ -23,7 +49,7 @@ public class Affecterenseignant extends JFrame {
     private JScrollPane scroll;
     private DefaultTableModel model;
 
-    public Affecterenseignant(String title) {
+    public GestionSalle(String title) {
 
         super(title);
         this.setSize(2750, 1600);
@@ -178,7 +204,7 @@ public class Affecterenseignant extends JFrame {
         gridPanel3.setBackground(new java.awt.Color(145, 200, 100));
         
         
-        JLabel titra = new JLabel("  AFFECTER UN ENSEIGNANT  ");
+        JLabel titra = new JLabel("  GESTION DE SEANCES  ");
         gridPanel3.add(titra);
         Font t = new Font("Times New Roman", Font.BOLD, 24);
         UIManager.put("JLabel.font", t);
@@ -255,8 +281,7 @@ public class Affecterenseignant extends JFrame {
         gridPanel8.add(listeSelectionFiltre2);
  
         center.add(gridPanel8, BorderLayout.NORTH);
- //------------------------       
-        
+//------------------------------------------------------------------
         JPanel gridPanel9 = new JPanel();
         gridPanel9.setLayout(new GridLayout(2,1, 1, 5));
         gridPanel9.setBorder(new LineBorder(Color.BLACK, 3));
@@ -275,69 +300,11 @@ public class Affecterenseignant extends JFrame {
  
         center.add(gridPanel9, BorderLayout.NORTH);
 
-//--------------------------------------------------------------------
-         JPanel gridPanela = new JPanel();
-        gridPanela.setLayout(new GridLayout(1,2, 10, 5));
-        gridPanela.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanela.setBackground(new java.awt.Color(145, 200, 100));
 
-        JButton Montrer = new JButton("Montrer les résults possibles");
-        Montrer.setFont(f);
+//------------------------------------------------------
+      
 
-        JButton Montrer2 = new JButton("Valider l'affectation");
-        Montrer2.setFont(f);
         
-        gridPanela.add(Montrer);  
-        gridPanela.add(Montrer2); 
- 
-        center.add(gridPanela, BorderLayout.NORTH);
-        
-        
-        
-        
-//------------------------------------------------------------------
-        //innerContainer.add(semaineEDT, BorderLayout.WEST);
-
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                    {"8h30-10h00", null, null, null, null, null, null, null},
-                    {"10h15-11h45", null, null, null, null, null, null, null},
-                    {"12h00-13h30", null, null, null, null, null, null, null},
-                    {"13h45-15h00", null, null, null, null, null, null, null},
-                    {"15h15-16h45", null, null, null, null, null, null, null},
-                    {"17h00-18h45", null, null, null, null, null, null, null},
-                    {"19h00-20h30", null, null, null, null, null, null, null}
-                },
-                new String[]{
-                    " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
-                }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.setPreferredScrollableViewportSize(new Dimension(2500, 950));
-        jTable1.setRowHeight(130);
-        TableColumn col = jTable1.getColumnModel().getColumn(0);
-        col.setPreferredWidth(100);
-        col = jTable1.getColumnModel().getColumn(1);
-        col.setPreferredWidth(200);
-        col = jTable1.getColumnModel().getColumn(2);
-        col.setPreferredWidth(200);
-        col = jTable1.getColumnModel().getColumn(3);
-        col.setPreferredWidth(200);
-        col = jTable1.getColumnModel().getColumn(4);
-        col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(5);
-        col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(6);
-        col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(7);
-        col.setPreferredWidth(300);
-
-        center.add(jScrollPane1, BorderLayout.CENTER);
 //----------------------------------------------------------------------
         //------------------------------------------------------------------------------       
         JPanel bottomPanel = new JPanel();
@@ -386,7 +353,7 @@ public class Affecterenseignant extends JFrame {
 //------------------------------------------------------------------
         
     public static void main(String[] args) {
-        Affecterenseignant mylayout = new Affecterenseignant("Accueil");
+        GestionSalle mylayout = new GestionSalle("Accueil");
         mylayout.setVisible(true);
     }
 
