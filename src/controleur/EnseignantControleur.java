@@ -2,6 +2,10 @@ package controleur;
 
 import dao.EtudiantDAO;
 import dao.SeanceDAO;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import modele.Admin;
 import modele.Enseignant;
@@ -18,6 +22,9 @@ import vue.EtudiantVue;
 public class EnseignantControleur {
     private Enseignant modele;
     private Enseignant vue;
+    private ResultSet rset;
+    private final Statement stmt;
+    private ResultSetMetaData rsetMeta;
 
     public EnseignantControleur(Enseignant modele, Enseignant vue) {
         this.modele = modele;
@@ -40,16 +47,33 @@ public class EnseignantControleur {
         //vue.printDetailsEnseignant(modele.getUserId(), modele.getNom(), modele.getPrenom());
     }
     
-    public EnseignantControleur(Admin modele, AdminVue v) {
-        AdminVue ve = new AdminVue("Admin vue");
-        ve = v;
+    public ArrayList EnseignantControleur (String table) throws SQLException{
+    
+        // récupération de l'ordre de la requete
+        rset = stmt.executeQuery("nom,  prenom FROM user WHERE droit = 3 AND user_id = " + table);
 
-        EtudiantDAO etuddao = new EtudiantDAO();
-        e = new Etudiant();
-        seance = new SeanceDAO();
+        // récupération du résultat de l'ordre
+        rsetMeta = rset.getMetaData();
 
-        e = etuddao.chercher(m.getUserId());
-        listSeances = new ArrayList<Seance>();
-        listSeances = seance.chercherSeancesParGroupeId(e.getGroupeId());
-        listSeances.toString();
+        // calcul du nombre de colonnes du resultat
+        int nbColonne = rsetMeta.getColumnCount();
+
+        // creation d'une ArrayList de String
+        ArrayList<String> liste;
+        liste = new ArrayList<>();
+        String champs = "";
+        // Ajouter tous les champs du resultat dans l'ArrayList
+        for (int i = 0; i < nbColonne; i++) {
+            champs = champs + " " + rsetMeta.getColumnLabel(i + 1);
+        }
+
+        // ajouter un "\n" à la ligne des champs
+        champs = champs + "\n";
+
+        // ajouter les champs de la ligne dans l'ArrayList
+        liste.add(champs);
+
+        // Retourner l'ArrayList
+        return liste;
+    }
 }
