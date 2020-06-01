@@ -22,6 +22,9 @@ public class Enlever extends JFrame {
 
     private JScrollPane scroll;
     private DefaultTableModel model;
+    List slist = new List(8,false);
+    List thelist = new List(10,false);
+    private JPanel center;
 
     public Enlever(String title) {
 
@@ -178,7 +181,7 @@ public class Enlever extends JFrame {
         gridPanel3.setBackground(new java.awt.Color(145, 200, 100));
         
         
-        JLabel titra = new JLabel("  AFFECTER UN ENSEIGNANT  ");
+        JLabel titra = new JLabel("  TRAITEMENTS SUR UNE SEANCE  ");
         gridPanel3.add(titra);
         Font t = new Font("Times New Roman", Font.BOLD, 24);
         UIManager.put("JLabel.font", t);
@@ -203,21 +206,7 @@ public class Enlever extends JFrame {
        
         center.add(gridPanel3, BorderLayout.NORTH);
         center.add(gridPanel7, BorderLayout.WEST);
-        
-        
-        
- //----------------------------------------       
-        JPanel topIPanel = new JPanel();
-        topIPanel.setBorder(new LineBorder(Color.BLACK, 3));
-        topIPanel.setBackground(Color.yellow);
-        topIPanel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 48));
-        topIPanel.setLayout(new FlowLayout(3));
-        
-        
-        
-        
-        
-        
+       
 //-----------------------------------------------------------
         JPanel gridPanel5 = new JPanel();
         gridPanel5.setLayout(new GridLayout(2,1, 1, 5));
@@ -236,6 +225,25 @@ public class Enlever extends JFrame {
         gridPanel5.add(listeSelectionFiltre);
  
         center.add(gridPanel5, BorderLayout.NORTH);
+
+//-----------------------------------------------------------
+        JPanel gridPaneld = new JPanel();
+        gridPaneld.setLayout(new GridLayout(2,1, 1, 5));
+        gridPaneld.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPaneld.setBackground(new java.awt.Color(145, 200, 100));
+
+        
+
+        JLabel labelFiltre1 = new JLabel(" Groupe    ");
+        labelFiltre1.setFont(t);
+        String[] selectionFiltre1 = {"Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
+        JComboBox listeSelectionFiltre1 = new JComboBox(selectionFiltre1);
+        listeSelectionFiltre1.setFont(y);
+
+        gridPaneld.add(labelFiltre1);
+        gridPaneld.add(listeSelectionFiltre1);
+ 
+        center.add(gridPaneld, BorderLayout.NORTH);
 
 //------------------------------------------------------------------
         JPanel gridPanel8 = new JPanel();
@@ -274,117 +282,140 @@ public class Enlever extends JFrame {
         gridPanel9.add(listeSelectionFiltre3);
  
         center.add(gridPanel9, BorderLayout.NORTH);
+//---------------------------------------------------------------------------
+        JPanel gridPanele = new JPanel();
+        gridPanele.setLayout(new GridLayout(2, 1, 1, 5));
+        gridPanele.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanele.setBackground(new java.awt.Color(145, 200, 100));
+        
+        TextField cap = new java.awt.TextField();
+        cap.setText("Capacité suffisante");
+                
+        JLabel ense1 = new JLabel(" Capacité suffisante");
+        ense1.setFont(t);
+        cap.setFont(y);
+        
+        gridPanele.add(ense1);
+        gridPanele.add(cap);             
+       
+        
+        center.add(gridPanele, BorderLayout.WEST);
+  
+//---------------------------------------------------------------------------
+        JPanel gridPanelf = new JPanel();
+        gridPanelf.setLayout(new GridLayout(2, 1, 1, 5));
+        gridPanelf.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanelf.setBackground(new java.awt.Color(145, 200, 100));
+        
+        JLabel etat = new JLabel(" Etat");
+        etat.setFont(y);
+                
+        String[] selectionFiltre4 = {" 8h30 à 10h00", "10h15 à 11h45", "12h00 à 13h30", "13h45 à 15h15", "15h30 à 17h00", "17h15 à 18h45", "19h00 à 20h30" };
+        JComboBox listeSelectionFiltre4 = new JComboBox(selectionFiltre4);
+        listeSelectionFiltre4.setFont(y);
 
+        gridPanelf.add(etat);  
+        gridPanelf.add(listeSelectionFiltre4);
+        etat.setFont(y);
+        
+        center.add(gridPanelf, BorderLayout.WEST);        
+        
+        
 //--------------------------------------------------------------------
          JPanel gridPanela = new JPanel();
-        gridPanela.setLayout(new GridLayout(1,2, 10, 5));
+        gridPanela.setLayout(new GridLayout(1,9, 10, 5));
         gridPanela.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanela.setBackground(new java.awt.Color(145, 200, 100));
 
         JButton Montrer = new JButton("Montrer les résults possibles");
-        Montrer.setFont(f);
-
-        JButton Montrer2 = new JButton("Valider l'affectation");
-        Montrer2.setFont(f);
+        Montrer.setFont(f);       
         
-        gridPanela.add(Montrer);  
-        gridPanela.add(Montrer2); 
+        gridPanela.add(Montrer);          
  
         center.add(gridPanela, BorderLayout.NORTH);
         
         
         
         
-//------------------------------------------------------------------
-        //innerContainer.add(semaineEDT, BorderLayout.WEST);
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                    {"8h30-10h00", null, null, null, null, null, null, null},
-                    {"10h15-11h45", null, null, null, null, null, null, null},
-                    {"12h00-13h30", null, null, null, null, null, null, null},
-                    {"13h45-15h00", null, null, null, null, null, null, null},
-                    {"15h15-16h45", null, null, null, null, null, null, null},
-                    {"17h00-18h45", null, null, null, null, null, null, null},
-                    {"19h00-20h30", null, null, null, null, null, null, null}
-                },
-                new String[]{
-                    " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
-                }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.setPreferredScrollableViewportSize(new Dimension(2500, 950));
-        jTable1.setRowHeight(130);
-        TableColumn col = jTable1.getColumnModel().getColumn(0);
-        col.setPreferredWidth(100);
-        col = jTable1.getColumnModel().getColumn(1);
-        col.setPreferredWidth(200);
-        col = jTable1.getColumnModel().getColumn(2);
-        col.setPreferredWidth(200);
-        col = jTable1.getColumnModel().getColumn(3);
-        col.setPreferredWidth(200);
-        col = jTable1.getColumnModel().getColumn(4);
-        col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(5);
-        col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(6);
-        col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(7);
-        col.setPreferredWidth(300);
-
-        center.add(jScrollPane1, BorderLayout.CENTER);
 //----------------------------------------------------------------------
-        //------------------------------------------------------------------------------       
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FlowLayout());        
-        bottomPanel.setBackground(new java.awt.Color(249, 207, 192));
-        bottomPanel.setBorder(new LineBorder(Color.BLACK, 3));
-        mainContainer.add(bottomPanel, BorderLayout.SOUTH);
-        
-        JPanel gridPanel2 = new JPanel();
-        gridPanel2.setLayout(new GridLayout(1, 3, 950, 5));
-        gridPanel2.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanel2.setBackground(new java.awt.Color(249, 207, 192));
-        
-        JLabel P1 = new JLabel("Tableau des enseignants");
-        JLabel P2 = new JLabel("Tableau des seances");
-        JLabel P3 = new JLabel("Tableau des Cours");
-        
-        Font r = new Font("Times New Roman", Font.BOLD, 24);
-        UIManager.put("JMenuItem.font", r);
-        P1.setFont(r);
-        P2.setFont(r);
-        P3.setFont(r);
-                      
-        gridPanel2.add(P1, BorderLayout.PAGE_END);
-        gridPanel2.add(P2, BorderLayout.PAGE_END);
-        gridPanel2.add(P3, BorderLayout.PAGE_END);
-        
-        bottomPanel.add(gridPanel2, BorderLayout.SOUTH);
-         
- //------------------------------ 
+
         JPanel gridPanel6 = new JPanel();
-        gridPanel6.setLayout(new GridLayout(1, 3, 1050, 5));
+        gridPanel6.setLayout(new GridLayout(1, 5, 10, 5));
         gridPanel6.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel6.setBackground(new java.awt.Color(249, 242, 155));
+//        
+//        List listeDeProfs = new java.awt.List(30, false);
+//        List listeDeSalles = new java.awt.List(30, false);
+//        List listeDeCours = new java.awt.List(30, false);
         
-        List listeDeProfs = new java.awt.List(30, false);
-        List listeDeSalles = new java.awt.List(30, false);
-        List listeDeCours = new java.awt.List(30, false);
+//        gridPanel6.add(listeDeProfs);
+//        gridPanel6.add(listeDeSalles);
+//        gridPanel6.add(listeDeCours);
         
-        gridPanel6.add(listeDeProfs);
-        gridPanel6.add(listeDeSalles);
-        gridPanel6.add(listeDeCours);
+        center.add(gridPanel6, BorderLayout.CENTER);
         
-        bottomPanel.add(gridPanel6, BorderLayout.CENTER);
-    }
 //------------------------------------------------------------------
         
+
+
+        gridPanel6.add(thelist);
+        Font n = new Font("Times New Roman", Font.BOLD, 32);
+        UIManager.put("thelist.font", n);
+        thelist.setFont(n);
+        slist.setFont(n);
+        gridPanel6.add(new Button(">>>>"));
+        
+        gridPanel6.add(slist);
+        gridPanel6.add(new Button("Clear"));
+        gridPanel6.add(new Label("Select an item"));
+
+//------------------------------------------------------------------
+    }  
+    public void init()
+{
+fillthelist();
+
+}
+public void fillthelist()
+{
+thelist.addItem("Coffee");
+thelist.addItem("Bananas");
+thelist.addItem("Oranges");
+thelist.addItem("Pears");
+thelist.addItem("Peaches");
+thelist.addItem("Tuna");
+thelist.addItem("Bread");
+thelist.addItem("Milk");
+thelist.addItem("Eggs");
+thelist.addItem("Butter");
+thelist.addItem("Sugar");
+thelist.addItem("Cereal");
+thelist.addItem("Java Manual");
+}
+
+public boolean action(Event evt, 
+Object whatAction)
+{
+if(!(evt.target instanceof Button))
+{
+return false;
+} 
+String buttonLabel = (String) whatAction;
+if (buttonLabel == ">>>>")
+{
+slist.addItem(thelist.getSelectedItem());
+thelist.delItem(thelist.getSelectedIndex());
+return true;
+}
+else
+{
+slist.clear();
+thelist.clear();
+fillthelist();
+return true;
+}
+}
     public static void main(String[] args) {
         Enlever mylayout = new Enlever("Accueil");
         mylayout.setVisible(true);
