@@ -5,6 +5,7 @@ import dao.SalleDAO;
 import dao.SiteDAO;
 import java.util.ArrayList;
 import modele.Salle;
+import modele.Site;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -23,9 +24,9 @@ public class PieChart extends JFrame {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
+     *
      * @param applicationTitle
-     * @param chartTitle 
+     * @param chartTitle
      */
     public PieChart(String applicationTitle, String chartTitle) {
         super(applicationTitle);
@@ -46,61 +47,23 @@ public class PieChart extends JFrame {
      */
     private PieDataset creationPieDataset() {
         DefaultPieDataset result = new DefaultPieDataset();
-//        SiteDAO si = new SiteDAO();
-//        ArrayList<Salle> listeSalles = new ArrayList<Salle>();
-//        listeSalles = si.chercher(WIDTH)
-        SalleDAO sa = new SalleDAO();
-        Salle un = sa.chercher(1);
-        Salle deux = sa.chercher(2);
-        Salle trois = sa.chercher(3);
-        Salle quatre = sa.chercher(4);
-        Salle cinq = sa.chercher(5);
-        Salle six = sa.chercher(6);
-        Salle sept = sa.chercher(7);
-        Salle huit = sa.chercher(8);
-        Salle neuf = sa.chercher(9);
-        Salle dix = sa.chercher(10);
-        Salle onze = sa.chercher(11);
-        Salle douze = sa.chercher(12);
-        Salle treize = sa.chercher(13);
-        Salle quatorze = sa.chercher(14);
-        Salle quinze = sa.chercher(15);
-        Salle seize = sa.chercher(16);
-        Salle dixsept = sa.chercher(17);
-        Salle dixhuit = sa.chercher(18);
-        Salle dixneuf = sa.chercher(19);
-        Salle vingt = sa.chercher(20);
 
-        result.setValue(un.getNomSalle(), un.getCapacite());
-        result.setValue(deux.getNomSalle(), deux.getCapacite());
-        result.setValue(trois.getNomSalle(), trois.getCapacite());
-        result.setValue(quatre.getNomSalle(), quatre.getCapacite());
-        result.setValue(cinq.getNomSalle(), cinq.getCapacite());
-        result.setValue(six.getNomSalle(), six.getCapacite());
-        result.setValue(sept.getNomSalle(), sept.getCapacite());
-        result.setValue(huit.getNomSalle(), huit.getCapacite());
-        result.setValue(neuf.getNomSalle(), neuf.getCapacite());
-        result.setValue(dix.getNomSalle(), dix.getCapacite());
-        result.setValue(onze.getNomSalle(), onze.getCapacite());
-        result.setValue(douze.getNomSalle(), douze.getCapacite());
-        result.setValue(treize.getNomSalle(), treize.getCapacite());
-        result.setValue(quatorze.getNomSalle(), quatorze.getCapacite());
-        result.setValue(quinze.getNomSalle(), quinze.getCapacite());
-        result.setValue(seize.getNomSalle(), seize.getCapacite());
-        result.setValue(dixsept.getNomSalle(), dixsept.getCapacite());
-        result.setValue(dixhuit.getNomSalle(), dixhuit.getCapacite());
-        result.setValue(dixneuf.getNomSalle(), dixneuf.getCapacite());
-        result.setValue(vingt.getNomSalle(), vingt.getCapacite());
-        
+        SiteDAO si = new SiteDAO();
+        ArrayList<Site> sites = new ArrayList<Site>();
+        sites = si.chercherTousLesSites();
+
+        for (Salle salle : sites.get(1).getSalles()) {
+            result.setValue(salle.getNomSalle(), salle.getCapacite());
+        }
         return result;
     }
 
     /**
      * Crée le diagramme 3D
-     * 
+     *
      * @param dataset
      * @param title
-     * @return 
+     * @return
      */
     private JFreeChart creationDiag3D(PieDataset dataset, String title) {
 
@@ -118,13 +81,13 @@ public class PieChart extends JFrame {
         plot.setForegroundAlpha(0.5f);
         return pieChart3D;
     }
-    
+
     /**
      * Crée le diagramme 2D
-     * 
+     *
      * @param dataset
      * @param title
-     * @return 
+     * @return
      */
     private JFreeChart creationDiag(PieDataset dataset, String title) {
         JFreeChart pieChart = ChartFactory.createPieChart(
@@ -135,5 +98,11 @@ public class PieChart extends JFrame {
                 false
         );
         return pieChart;
+    }
+
+    public static void main(String[] args) {
+        PieChart demo = new PieChart("Capacité des salles", "Site : ");
+        demo.pack();
+        demo.setVisible(true);
     }
 }

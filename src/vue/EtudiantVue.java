@@ -263,15 +263,9 @@ public class EtudiantVue extends JFrame {
 
         semainesPanel = new JPanel();
         semainesPanel.setLayout(new GridLayout(2, 1, 5, 5));
+        semainesPanel.setBorder(new LineBorder(Color.BLACK, 3));
 
-        // Grille
-        JPanel gridPanel3 = new JPanel();
-        gridPanel3.setLayout(new GridLayout(1, 2, 5, 5));
-        gridPanel3.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanel3.setBackground(new java.awt.Color(145, 200, 100));
-
-        gridPanel3.add(semainesPanel);
-        center.add(gridPanel3, BorderLayout.NORTH);
+        center.add(semainesPanel);
 
         filtrePanel = new JPanel();
         filtrePanel.setLayout(new GridLayout(1, 1, 5, 5));
@@ -439,6 +433,7 @@ public class EtudiantVue extends JFrame {
         this.getContentPane().add(rightPanel, BorderLayout.WEST);
         // En bas
         this.getContentPane().add(bottomPanel, BorderLayout.SOUTH);
+        showEmploiDuTemps();
 
     }
 
@@ -461,10 +456,10 @@ public class EtudiantVue extends JFrame {
 
     public void showEmploiDuTemps() {
         center.removeAll();
-        center.add(filtrePanel);
-        filtrePanel.setVisible(true);
         center.add(semainesPanel);
         semainesPanel.setVisible(true);
+        center.add(filtrePanel);
+        filtrePanel.setVisible(true);
         center.add(jscrollPanel);
         center.revalidate();
         center.repaint();

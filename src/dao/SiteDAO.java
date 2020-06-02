@@ -74,6 +74,23 @@ public class SiteDAO extends DataAccessObject<Site> {
         }
         return site;
     }
+
+    public ArrayList<Site> chercherTousLesSites() {
+        ArrayList<Site> sites = new ArrayList<Site>();
+        Site site = new Site();
+        try {
+            ResultSet result = this.connect.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT site_id FROM site;");
+            while (result.next()) {
+                site = chercher(result.getInt("site_id"));
+                sites.add(site);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sites;
+    }
 //test
 
     public static void main(String[] args) {
@@ -86,8 +103,7 @@ public class SiteDAO extends DataAccessObject<Site> {
 //            System.out.println("Salle Id: " + g.getSalleId());
 //            System.out.println("Salle Nom: " + g.getNomSalle() + "\n");
 //        }
-
-            // Fonctionnel
+        // Fonctionnel
 //        SiteDAO sa = new SiteDAO();
 //        Site un = sa.chercher(3);
 //        un.afficher();
