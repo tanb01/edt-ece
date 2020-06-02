@@ -23,6 +23,17 @@ public class Salle {
         nomSalle = nom;
         this.capacite = capacite;
     }
+    
+    /**
+     * Constructeur
+     * 
+     * @param id
+     * @param capacite 
+     */
+    public Salle(int id, int capacite) {
+        this.salleId = id;
+        this.capacite = capacite;
+    }
 
     /**
      * Constructeur
