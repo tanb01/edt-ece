@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
 import java.util.Locale;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import modele.Etudiant;
@@ -44,7 +45,7 @@ public class EDTControleur implements ActionListener, ItemListener {
      */
     public EDTControleur(User m, EtudiantVue v) {
         ve = new EtudiantVue("Etudiant vue");
-        //ve = v;
+        ve = v;
 
         etuddao = new EtudiantDAO();
         e = new Etudiant();
@@ -88,19 +89,6 @@ public class EDTControleur implements ActionListener, ItemListener {
                 }
         );
         this.dtm = dtm;
-
-//         Vue en liste
-//        String[][] data2 = new String[listSeances.size()][1];
-//        for (int i = 0; i < listSeances.size(); i++) {
-//            data2[i][0] = getJourDeLaSemaine(listSeances.get(i).getDate())+"     "+listSeances.get(i).stringify();
-//        }
-//
-//        DefaultTableModel dtm = new DefaultTableModel(
-//                data2,
-//                new String[]{
-//                    " "
-//                }
-//        );
     }
 
     /**
@@ -110,7 +98,6 @@ public class EDTControleur implements ActionListener, ItemListener {
 //        ve.updateVue(dtm);
 //        ve.setVisible(true);
 //    }
-
     /**
      * Change les jours de la semaine de Anglais à Francais.
      *
@@ -147,55 +134,27 @@ public class EDTControleur implements ActionListener, ItemListener {
         return jour;
     }
 
-    /**
-     * Choix de la vue en Grille ou en Liste.
-     *
-     * @param ae
-     */
-//    @Override
-//    public void actionPerformed(ActionEvent ae) {
-//        if (ae.getSource() == ve.getJComboBoxSelectionVue()) {
-//            JComboBox cb = (JComboBox) ae.getSource();
-//            String msg = (String) cb.getSelectedItem();
-//            if (msg == "en grille") {
-//
-//            } else {
-//
-//            }
-//        }
-//
-//    }
-    /**
-     *
-     */
     public void control() {
+        ve.getBoutonEmploiDuTemps().addActionListener(this);
+        ve.getBoutonSallesLibres().addActionListener(this);
+        ve.getBoutonReporting().addActionListener(this);
         ve.getJComboBoxSelectionVue().addItemListener(this);
-        ve.updateVue(dtm);
+        ve.setTableEnGrille(dtm);
         ve.setVisible(true);
         System.out.println("Control");
     }
 
-    public static void main(String[] args) {
-
-        EtudiantDAO dao = new EtudiantDAO();
-        Etudiant m = new Etudiant();
-        m = dao.chercher(525);
-        EtudiantVue v = new EtudiantVue("Etudiant Vue");
-        EDTControleur controler = new EDTControleur(m, v);
-//        /v.getJComboBoxSelectionVue().addActionListener(controler);
-        controler.control();
-        //v.setVisible(true);
-        //controler.afficherEDT();
-//        SeanceDAO et = new SeanceDAO();
-        //        ArrayList<Seance> un = et.chercherSeancesParGroupeId(31);
-        //        for (Seance s : un) {
-        //            System.out.println("Seance: " + s.getDebutHeure() + "\n");
-        //        }
-    }
-
     @Override
     public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (ae.getSource() == ve.getBoutonEmploiDuTemps()) {
+            ve.showEmploiDuTemps();
+        }
+        if (ae.getSource() == ve.getBoutonSallesLibres()) {
+            ve.showSallesLibres();
+        }
+        if (ae.getSource() == ve.getBoutonReporting()) {
+            ve.showReporting();
+        }
     }
 
     @Override
@@ -203,59 +162,74 @@ public class EDTControleur implements ActionListener, ItemListener {
         if (ie.getStateChange() == ItemEvent.SELECTED) {
             switch (ve.getJComboBoxSelectionVue().getSelectedItem().toString()) {
                 case "en grille":
-                    System.out.println("grille");
-
-                    String[][] data = new String[84][7];
-                    int g = 0;
-                    int colinc = 1;
-                    int rowinc = 0;
-                    String jour = "null";
-                    jour = getJourDeLaSemaine(listSeances.get(0).getDate());
-                    while (g < listSeances.size()) {
-                        System.out.println("id: " + g);
-                        if (jour == getJourDeLaSemaine(listSeances.get(g).getDate())) {
-                            //System.out.println("Jour: " + jour);
-                            data[rowinc][colinc] = listSeances.get(g).stringify();
-                            rowinc++;
-                            g++;
-                        } else {
-                            colinc++;
-                            rowinc = 0;
-                            jour = getJourDeLaSemaine(listSeances.get(g).getDate());
-                        }
-                    }
-
-                    for (int i = 0; i < 7; i++) {
-                        data[i][0] = "De " + listSeances.get(i).getDebutHeure() + " a " + listSeances.get(i).getFinHeure();
-                    }
-
-                    DefaultTableModel dtm = new DefaultTableModel(
-                            data,
-                            new String[]{
-                                " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
-                            }
-                    );
-                    ve.changeAVueEnGrille(dtm);
-                    ve.setVisible(true);
+                    montrerVueEnGrille();
                     break;
                 case "en liste":
                     System.out.println("liste");
-
-                    String[][] data2 = new String[listSeances.size()][1];
-                    for (int i = 0; i < listSeances.size(); i++) {
-                        data2[i][0] = getJourDeLaSemaine(listSeances.get(i).getDate()) + "     " + listSeances.get(i).stringify();
-                    }
-
-                    DefaultTableModel dtm2 = new DefaultTableModel(
-                            data2,
-                            new String[]{
-                                " "
-                            }
-                    );
-                    ve.changeAVueEnListe(dtm2);
-                    ve.setVisible(true);
+                    montrerVueEnListe();
                     break;
             }
         }
+    }
+
+    public void montrerVueEnGrille() {
+        System.out.println("grille");
+        String[][] data = new String[84][7];
+        int g = 0;
+        int colinc = 1;
+        int rowinc = 0;
+        String jour = "null";
+        jour = getJourDeLaSemaine(listSeances.get(0).getDate());
+        while (g < listSeances.size()) {
+            System.out.println("id: " + g);
+            if (jour == getJourDeLaSemaine(listSeances.get(g).getDate())) {
+                //System.out.println("Jour: " + jour);
+                data[rowinc][colinc] = listSeances.get(g).stringify();
+                rowinc++;
+                g++;
+            } else {
+                colinc++;
+                rowinc = 0;
+                jour = getJourDeLaSemaine(listSeances.get(g).getDate());
+            }
+        }
+
+        for (int i = 0; i < 7; i++) {
+            data[i][0] = "De " + listSeances.get(i).getDebutHeure() + " a " + listSeances.get(i).getFinHeure();
+        }
+
+        DefaultTableModel dtm = new DefaultTableModel(
+                data,
+                new String[]{
+                    " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
+                }
+        );
+        ve.changeAVueEnGrille(dtm);
+        ve.setVisible(true);
+    }
+
+    public void montrerVueEnListe() {
+        String[][] data2 = new String[listSeances.size()][1];
+        for (int i = 0; i < listSeances.size(); i++) {
+            data2[i][0] = getJourDeLaSemaine(listSeances.get(i).getDate()) + "     " + listSeances.get(i).stringify();
+        }
+
+        DefaultTableModel dtm2 = new DefaultTableModel(
+                data2,
+                new String[]{
+                    " "
+                }
+        );
+        ve.changeAVueEnListe(dtm2);
+        ve.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        EtudiantDAO dao = new EtudiantDAO();
+        Etudiant m = new Etudiant();
+        m = dao.chercher(525);
+        EtudiantVue v = new EtudiantVue("Etudiant Vue");
+        EDTControleur controler = new EDTControleur(m, v);
+        controler.control();
     }
 }
