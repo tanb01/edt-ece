@@ -56,17 +56,19 @@ public class EDTControleur implements ActionListener, ItemListener {
         listSeances = seance.chercherSeancesParGroupeId(e.getGroupeId());
         listSeances.toString();
 
-        String[][] data = new String[84][7];
+        String[][] data = new String[7][7];
         int g = 0;
         int colinc = 1;
         int rowinc = 0;
         String jour = "null";
         jour = getJourDeLaSemaine(listSeances.get(0).getDate());
+       
 
         // Vue en grille
         while (g < listSeances.size()) {
             System.out.println("id: " + g);
             if (jour == getJourDeLaSemaine(listSeances.get(g).getDate())) {
+               
                 //System.out.println("Jour: " + jour);
                 data[rowinc][colinc] = listSeances.get(g).stringify();
                 rowinc++;
@@ -76,10 +78,22 @@ public class EDTControleur implements ActionListener, ItemListener {
                 rowinc = 0;
                 jour = getJourDeLaSemaine(listSeances.get(g).getDate());
             }
+            
         }
 
         for (int i = 0; i < 7; i++) {
-            data[i][0] = "De " + listSeances.get(i).getDebutHeure() + " a " + listSeances.get(i).getFinHeure();
+            
+            data[0][0] = "08h30-10h00";
+            data[1][0] = "10h15-11h45";
+            data[2][0] = "12h00-13h30";
+            data[3][0] = "13h45-15h15";      
+            data[4][0] = "15h30-17h00";
+            data[5][0] = "17h15-18h45";
+            data[6][0] = "19h00-20h30";
+            
+           
+            
+           
         }
 
         DefaultTableModel dtm = new DefaultTableModel(
@@ -133,6 +147,8 @@ public class EDTControleur implements ActionListener, ItemListener {
         }
         return jour;
     }
+    
+   
 
     public void control() {
         ve.getBoutonEmploiDuTemps().addActionListener(this);
