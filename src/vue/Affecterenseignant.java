@@ -299,7 +299,12 @@ public class Affecterenseignant extends JFrame {
         //innerContainer.add(semaineEDT, BorderLayout.WEST);
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable(){
+            @Override
+            public boolean isCellEditable(int d, int c){
+                return false;
+            }
+        };
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -427,6 +432,12 @@ public class Affecterenseignant extends JFrame {
     public static void main(String[] args) {
         Affecterenseignant mylayout = new Affecterenseignant("Accueil");
         mylayout.setVisible(true);
+    }
+
+    private static class booolean {
+
+        public booolean() {
+        }
     }
 
 }          
