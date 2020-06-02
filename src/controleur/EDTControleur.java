@@ -56,7 +56,7 @@ public class EDTControleur implements ActionListener, ItemListener {
         listSeances = seance.chercherSeancesParGroupeId(e.getGroupeId());
         listSeances.toString();
 
-        String[][] data = new String[84][7];
+        String[][] data = new String[7][7];
         int g = 0;
         int colinc = 1;
         int rowinc = 0;
