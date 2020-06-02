@@ -24,7 +24,7 @@ public class Seance {
 
     /**
      * Constructeur
-     * 
+     *
      * @param id
      * @param numeroSemaine
      * @param date
@@ -34,7 +34,7 @@ public class Seance {
      * @param typeCours
      * @param salles
      * @param enseignants
-     * @param groupes 
+     * @param groupes
      */
     public Seance(int id, int numeroSemaine, String date, String debutHeure,
             String finHeure, Cours cours, TypeCours typeCours,
@@ -43,8 +43,8 @@ public class Seance {
         seanceId = id;
         this.numeroSemaine = numeroSemaine;
         this.date = date;
-        this.debutHeure = debutHeure;
-        this.finHeure = finHeure;
+        this.debutHeure = debutHeure.substring(0, debutHeure.length() - 3);
+        this.finHeure = finHeure.substring(0, finHeure.length() - 3);;
         coursSeance = cours.copy();
         typeCoursSeance = typeCours.copy();
 
@@ -82,10 +82,9 @@ public class Seance {
     }
 
     /**
-     * Getters
-     * Pour l'Id de la séance.
-     * 
-     * @return 
+     * Getters Pour l'Id de la séance.
+     *
+     * @return
      */
     public int getSeanceId() {
         return seanceId;
@@ -93,8 +92,8 @@ public class Seance {
 
     /**
      * Pour le numéro de la semaine.
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getNumeroSemaine() {
         return numeroSemaine;
@@ -102,8 +101,8 @@ public class Seance {
 
     /**
      * Pour la date de la séance.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getDate() {
         return date;
@@ -111,8 +110,8 @@ public class Seance {
 
     /**
      * Pour l'heure de début de la séance.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getDebutHeure() {
         return debutHeure;
@@ -120,8 +119,8 @@ public class Seance {
 
     /**
      * Pour l'heure de fin de la séance.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getFinHeure() {
         return finHeure;
@@ -129,8 +128,8 @@ public class Seance {
 
     /**
      * Pour l'état de la séance (Validée - Annulée).
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getEtatSeance() {
         return etatSeance;
@@ -138,8 +137,8 @@ public class Seance {
 
     /**
      * Pour le cours de la séance.
-     * 
-     * @return 
+     *
+     * @return
      */
     public Cours getCoursSeance() {
         return coursSeance;
@@ -147,8 +146,8 @@ public class Seance {
 
     /**
      * Pour le type de cours de la séance (CI-CM-TD-TP).
-     * 
-     * @return 
+     *
+     * @return
      */
     public TypeCours getTypeCours() {
         return typeCoursSeance;
@@ -156,8 +155,8 @@ public class Seance {
 
     /**
      * Pour la liste des salles de la séance.
-     * 
-     * @return 
+     *
+     * @return
      */
     public ArrayList<Salle> getListeSalles() {
         ArrayList<Salle> copySalles = new ArrayList<Salle>();
@@ -169,8 +168,8 @@ public class Seance {
 
     /**
      * Pour la liste des enseignants de la séance.
-     * 
-     * @return 
+     *
+     * @return
      */
     public ArrayList<Enseignant> getListeEnseignants() {
         ArrayList<Enseignant> copyEnseignants = new ArrayList<Enseignant>();
@@ -182,8 +181,8 @@ public class Seance {
 
     /**
      * Pour la liste des groupes de la séance.
-     * 
-     * @return 
+     *
+     * @return
      */
     public ArrayList<Groupe> getListeGroupes() {
         ArrayList<Groupe> copyGroupes = new ArrayList<Groupe>();
@@ -195,8 +194,8 @@ public class Seance {
 
     /**
      * Override de toString pour afficher les infos de la séance.
-     * 
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString() {
@@ -213,11 +212,10 @@ public class Seance {
                 + "\nGroupe(s) : " + this.listeGroupes;
     }
 
-    
     /**
      * Pour afficher les infos de la séance.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String stringify() {
         String salles = new String();
