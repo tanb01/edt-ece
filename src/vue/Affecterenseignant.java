@@ -226,16 +226,35 @@ public class Affecterenseignant extends JFrame {
 
         
 
-        JLabel labelFiltre = new JLabel(" Type de cours   ");
+        JLabel labelFiltre = new JLabel(" cours   ");
         labelFiltre.setFont(t);
-        String[] selectionFiltre = {" TP", "TD", "Projet", "Soutien", "Magistral", "Interactif"};
+        String[] selectionFiltre = {" Anglais", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique","Reseaux","Traitement du signal","Analyse de Fourier","Analyse Financiere","Japonais","Geopolitique","Electronique fondamentale","Anthropologie","Droit du travail"};
         JComboBox listeSelectionFiltre = new JComboBox(selectionFiltre);
         listeSelectionFiltre.setFont(y);
 
         gridPanel5.add(labelFiltre);
         gridPanel5.add(listeSelectionFiltre);
- 
+
         center.add(gridPanel5, BorderLayout.NORTH);
+        
+//----------------------------------------------------------------------------         
+         JPanel gridPanelp = new JPanel();
+        gridPanelp.setLayout(new GridLayout(2,1, 1, 5));
+        gridPanelp.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanelp.setBackground(new java.awt.Color(145, 200, 100));
+
+        
+
+        JLabel labelFiltrer = new JLabel(" Promo");
+        labelFiltrer.setFont(t);
+        String[] selectionFiltrer = {"Prepac", "Ing1", "Ing2", "Ing3", "Ing4", "Ing5"};
+        JComboBox listeSelectionFiltrer = new JComboBox(selectionFiltrer);
+        listeSelectionFiltrer.setFont(y);
+
+        gridPanelp.add(labelFiltrer);
+        gridPanelp.add(listeSelectionFiltrer);
+ 
+        center.add(gridPanelp, BorderLayout.NORTH);
 
 //------------------------------------------------------------------
         JPanel gridPanel8 = new JPanel();

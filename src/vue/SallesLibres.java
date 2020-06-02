@@ -377,5 +377,12 @@ public class SallesLibres extends JFrame {
         SallesLibres mylayout = new SallesLibres("Accueil");
         mylayout.setVisible(true);
     }
+    
+    
+    private static class booolean {
+
+        public booolean() {
+        }
+    }
 
 }          
