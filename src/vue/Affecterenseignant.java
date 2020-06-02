@@ -284,7 +284,7 @@ public class Affecterenseignant extends JFrame {
         JButton Montrer = new JButton("Montrer les résults possibles");
         Montrer.setFont(f);
 
-        JButton Montrer2 = new JButton("Valider l'affectation");
+        JButton Montrer2 = new JButton("Rechercher un enseignant pour le remplacer");
         Montrer2.setFont(f);
         
         gridPanela.add(Montrer);  
@@ -351,10 +351,10 @@ public class Affecterenseignant extends JFrame {
         gridPanel2.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel2.setBackground(new java.awt.Color(249, 207, 192));
         
-        JLabel P1 = new JLabel("Seance choisit");
+        JLabel P1 = new JLabel("            Seance choisit");
         JLabel P2 = new JLabel("Enseignants disponibles pour la séance choisit");        
-        JLabel P3 = new JLabel("Seance mise à jour ");
-        JLabel P4 = new JLabel("Commandes");
+        JLabel P3 = new JLabel("                       Seance mise à jour ");
+        JLabel P4 = new JLabel("                       Commandes");
         
         Font r = new Font("Times New Roman", Font.BOLD, 24);
         UIManager.put("JMenuItem.font", r);
