@@ -32,22 +32,22 @@ public class HeureSeances {
      * @param applicationTitle
      * @param chartTitle
      */
-    public PieChart(String applicationTitle, String chartTitle) {
-        super(applicationTitle);
-        // On crée la dataset
-        //   PieDataset dataset = creationPieDataset();
-        DefaultCategoryDataset dataset = creationHistoDataset();
-        // On crée la chart grâce à la dataset
-        //  JFreeChart chart = creationDiag2D(dataset, chartTitle);
-        //  JFreeChart chart = creationDiag3D(dataset, chartTitle);
-        JFreeChart chart = creationHisto(dataset, chartTitle);
-        // On met la chart dans un panel
-        ChartPanel chartPanel = new ChartPanel(chart);
-        // Taille par défaut
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-        // On ajoute à l'application
-        setContentPane(chartPanel);
-    }
+//    public PieChart(String applicationTitle, String chartTitle) {
+//        super(applicationTitle);
+//        // On crée la dataset
+//        //   PieDataset dataset = creationPieDataset();
+//        DefaultCategoryDataset dataset = creationHistoDataset();
+//        // On crée la chart grâce à la dataset
+//        //  JFreeChart chart = creationDiag2D(dataset, chartTitle);
+//        //  JFreeChart chart = creationDiag3D(dataset, chartTitle);
+//        JFreeChart chart = creationHisto(dataset, chartTitle);
+//        // On met la chart dans un panel
+//        ChartPanel chartPanel = new ChartPanel(chart);
+//        // Taille par défaut
+//        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+//        // On ajoute à l'application
+//        setContentPane(chartPanel);
+//    }
 
     /**
      * Créer un exemple de dataset
@@ -59,9 +59,9 @@ public class HeureSeances {
         ArrayList<Seance> seances = new ArrayList<Seance>();
         seances = si.chercherToutesLesSeances();
 
-        for (Seance seance : seances.get(2).getSeanceId()) {
-            result.setValue(seance.getCoursSeance(), seance.getDebutHeure());
-        }
+//        for (Seance seance : seances.get(2).getSeanceId()) {
+//            result.setValue(seance.getCoursSeance(), seance.getDebutHeure());
+//        }
         return result;
     }
     
