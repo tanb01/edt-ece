@@ -2,9 +2,11 @@ package emploidutempsece;
 
 import javax.swing.JFrame;
 import dao.SalleDAO;
+import dao.SeanceDAO;
 import dao.SiteDAO;
 import java.util.ArrayList;
 import modele.Salle;
+import modele.Seance;
 import modele.Site;
 
 import org.jfree.chart.ChartFactory;
@@ -22,8 +24,7 @@ import org.jfree.util.Rotation;
  *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
-public class PieChart extends JFrame {
-
+public class HeureSeances {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -34,12 +35,12 @@ public class PieChart extends JFrame {
     public PieChart(String applicationTitle, String chartTitle) {
         super(applicationTitle);
         // On crée la dataset
-        //   PieDataset dataset = creationPieDataset(); // Pour diagramme
-        DefaultCategoryDataset dataset = creationHistoDataset(); // Pour histogramme
+        //   PieDataset dataset = creationPieDataset();
+        DefaultCategoryDataset dataset = creationHistoDataset();
         // On crée la chart grâce à la dataset
-        //  JFreeChart chart = creationDiag2D(dataset, chartTitle); // Pour un diagramme 2D
-        //  JFreeChart chart = creationDiag3D(dataset, chartTitle); // Pour un diagramme 3D
-        JFreeChart chart = creationHisto(dataset, chartTitle); // Pour un histogramme
+        //  JFreeChart chart = creationDiag2D(dataset, chartTitle);
+        //  JFreeChart chart = creationDiag3D(dataset, chartTitle);
+        JFreeChart chart = creationHisto(dataset, chartTitle);
         // On met la chart dans un panel
         ChartPanel chartPanel = new ChartPanel(chart);
         // Taille par défaut
@@ -49,28 +50,21 @@ public class PieChart extends JFrame {
     }
 
     /**
-     * Dataset du diagramme 2D et 3D
-     * 
-     * @return 
+     * Créer un exemple de dataset
      */
     private PieDataset creationPieDataset() {
         DefaultPieDataset result = new DefaultPieDataset();
 
-        SiteDAO si = new SiteDAO();
-        ArrayList<Site> sites = new ArrayList<Site>();
-        sites = si.chercherTousLesSites();
+        SeanceDAO si = new SeanceDAO();
+        ArrayList<Seance> seances = new ArrayList<Seance>();
+        seances = si.chercherToutesLesSeances();
 
-        for (Salle salle : sites.get(2).getSalles()) {
-            result.setValue(salle.getNomSalle(), salle.getCapacite());
+        for (Seance seance : seances.get(2).getSeanceId()) {
+            result.setValue(seance.getCoursSeance(), seance.getDebutHeure());
         }
         return result;
     }
     
-    /**
-     * Dataset de l'histogramme
-     * 
-     * @return 
-     */
     private DefaultCategoryDataset creationHistoDataset() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         SiteDAO si = new SiteDAO();
@@ -87,7 +81,7 @@ public class PieChart extends JFrame {
     }
 
     /**
-     * Création du diagramme 3D
+     * Crée le diagramme 3D
      *
      * @param dataset
      * @param title
@@ -111,7 +105,7 @@ public class PieChart extends JFrame {
     }
 
     /**
-     * Création de diagramme 2D
+     * Crée le diagramme 2D
      *
      * @param dataset
      * @param title
@@ -128,16 +122,9 @@ public class PieChart extends JFrame {
         return pieChart;
     }
     
-    /**
-     * Création de l'histogramme
-     * 
-     * @param dataset
-     * @param title
-     * @return 
-     */
     private JFreeChart creationHisto(DefaultCategoryDataset dataset, String title) {
         
-        final JFreeChart barChart = ChartFactory.createBarChart(title, "Salles", "Capacité",
+        final JFreeChart barChart = ChartFactory.createBarChart(title, "Cours", "Heure",
                 dataset, PlotOrientation.VERTICAL, true, true, false);
 
         final ChartPanel cPanel = new ChartPanel(barChart);
@@ -149,7 +136,7 @@ public class PieChart extends JFrame {
      * @param args 
      */
     public static void main(String[] args) {
-        PieChart demo = new PieChart("Capacité des salles", "Salles :");
+        PieChart demo = new PieChart("Nombres de séances par cours", "Heures");
         demo.pack();
         demo.setVisible(true);
     }

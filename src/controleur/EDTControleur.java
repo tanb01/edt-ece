@@ -66,6 +66,7 @@ public class EDTControleur implements ActionListener, ItemListener {
         int colinc = 1;
         String jour = "null";
         jour = getJourDeLaSemaine(listSeances.get(0).getDate());
+       
 
         // Vue en grille
         while (g < listSeances.size()) {
@@ -82,6 +83,7 @@ public class EDTControleur implements ActionListener, ItemListener {
                 colinc++;
                 jour = getJourDeLaSemaine(listSeances.get(g).getDate());
             }
+            
         }
 
         DefaultTableModel dtm = new DefaultTableModel(
@@ -135,6 +137,8 @@ public class EDTControleur implements ActionListener, ItemListener {
         }
         return jour;
     }
+    
+   
 
     public void control() {
         ve.getBoutonEmploiDuTemps().addActionListener(this);

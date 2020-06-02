@@ -161,6 +161,24 @@ public class SeanceDAO extends DataAccessObject<Seance> {
         }
         return seances;
     }
+    
+    public ArrayList<Seance> chercherToutesLesSeances() {
+        ArrayList<Seance> seances = new ArrayList<Seance>();
+        Seance seance = new Seance();
+        try {
+            ResultSet result = this.connect.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT seance_id FROM seance;");
+            while (result.next()) {
+                seance = chercher(result.getInt("seance_id"));
+                seances.add(seance);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return seances;
+    }
+    
 //test
 
 //    public static void main(String[] args) {
