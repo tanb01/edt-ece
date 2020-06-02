@@ -347,20 +347,23 @@ public class Affecterenseignant extends JFrame {
         mainContainer.add(bottomPanel, BorderLayout.SOUTH);
         
         JPanel gridPanel2 = new JPanel();
-        gridPanel2.setLayout(new GridLayout(1, 3, 950, 5));
+        gridPanel2.setLayout(new GridLayout(1, 3,300, 5));
         gridPanel2.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel2.setBackground(new java.awt.Color(249, 207, 192));
         
-        JLabel P1 = new JLabel("Tableau des enseignants");
-        JLabel P2 = new JLabel("Tableau des seances");
-        JLabel P3 = new JLabel("Tableau des Cours");
+        JLabel P1 = new JLabel("Seance choisit");
+        JLabel P2 = new JLabel("Enseignants disponibles pour la séance choisit");        
+        JLabel P3 = new JLabel("Seance mise à jour ");
+        JLabel P4 = new JLabel("Commandes");
         
         Font r = new Font("Times New Roman", Font.BOLD, 24);
         UIManager.put("JMenuItem.font", r);
         P1.setFont(r);
         P2.setFont(r);
         P3.setFont(r);
+        P4.setFont(r);
                       
+        gridPanel2.add(P4, BorderLayout.PAGE_END);
         gridPanel2.add(P1, BorderLayout.PAGE_END);
         gridPanel2.add(P2, BorderLayout.PAGE_END);
         gridPanel2.add(P3, BorderLayout.PAGE_END);
@@ -369,17 +372,53 @@ public class Affecterenseignant extends JFrame {
          
  //------------------------------ 
         JPanel gridPanel6 = new JPanel();
-        gridPanel6.setLayout(new GridLayout(1, 3, 1050, 5));
+        gridPanel6.setLayout(new GridLayout(1, 3, 520, 5));
         gridPanel6.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel6.setBackground(new java.awt.Color(249, 242, 155));
         
-        List listeDeProfs = new java.awt.List(30, false);
-        List listeDeSalles = new java.awt.List(30, false);
-        List listeDeCours = new java.awt.List(30, false);
+        List listeSeance = new java.awt.List(10, false);
+        List listeDeProfs = new java.awt.List(10, false);
+        List listeSeancemodif = new java.awt.List(10, false);
         
+        JButton jButton1 = new JButton("Changer l'enseignant");
+        jButton1.setBounds(new Rectangle(218, 21, 129, 33));
+        jButton1.setBackground(new java.awt.Color(211, 212, 250));
+        jButton1.setIcon(new ImageIcon("img/add.png"));
+        jButton1.setBorderPainted(false);
+        
+        JButton jButton2 = new JButton("Enlever l'enseigant");
+        jButton2.setBounds(new Rectangle(218, 21, 129, 33));
+        jButton2.setBackground(new java.awt.Color(211, 212, 250));
+        jButton2.setIcon(new ImageIcon("img/trash.png"));
+        jButton2.setBorderPainted(false);
+        
+        JButton jButton3 = new JButton("Valider le changement");
+        jButton3.setBounds(new Rectangle(218, 21, 129, 33));
+        jButton3.setBackground(new java.awt.Color(211, 212, 250));
+        jButton3.setIcon(new ImageIcon("img/tick.png"));
+        jButton3.setBorderPainted(false);
+        
+        Font n = new Font("Times New Roman", Font.BOLD, 32);
+        UIManager.put("thelist.font", n);
+        listeSeance.setFont(n);
+        listeDeProfs.setFont(n);
+        listeSeancemodif.setFont(n);
+        
+        
+        JPanel gridPanels = new JPanel();
+        gridPanels.setLayout(new GridLayout(3,1, 1050, 5));
+        gridPanels.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanels.setBackground(new java.awt.Color(249, 242, 155));
+        
+        gridPanels.add(jButton2);
+        gridPanels.add(jButton1);
+        gridPanels.add(jButton3);
+        
+        gridPanel6.add(gridPanels);
+        
+        gridPanel6.add(listeSeance);
         gridPanel6.add(listeDeProfs);
-        gridPanel6.add(listeDeSalles);
-        gridPanel6.add(listeDeCours);
+        gridPanel6.add(listeSeancemodif);
         
         bottomPanel.add(gridPanel6, BorderLayout.CENTER);
     }

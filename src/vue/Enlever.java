@@ -185,7 +185,7 @@ public class Enlever extends JFrame {
         
         JLabel titra = new JLabel("  TRAITEMENTS SUR UNE SEANCE  ");
         gridPanel3.add(titra);
-        Font t = new Font("Times New Roman", Font.BOLD, 24);
+        Font t = new Font("Times New Roman", Font.BOLD, 28);
         UIManager.put("JLabel.font", t);
         titra.setFont(t);
         
@@ -199,7 +199,7 @@ public class Enlever extends JFrame {
         Font y = new Font("Times New Roman", Font.BOLD, 20);
         UIManager.put("JLabel.font", y);
         
-        JLabel ense = new JLabel("Enseignant");
+        JLabel ense = new JLabel("  Enseignant  ");
         ense.setFont(t);
         enseignant.setFont(y);
         
@@ -217,7 +217,7 @@ public class Enlever extends JFrame {
 
         
 
-        JLabel labelFiltre = new JLabel(" Type de cours   ");
+        JLabel labelFiltre = new JLabel("   Type de cours     ");
         labelFiltre.setFont(t);
         String[] selectionFiltre = {" TP", "TD", "Projet", "Soutien", "Magistral", "Interactif"};
         JComboBox listeSelectionFiltre = new JComboBox(selectionFiltre);
@@ -236,7 +236,7 @@ public class Enlever extends JFrame {
 
         
 
-        JLabel labelFiltre1 = new JLabel(" Groupe    ");
+        JLabel labelFiltre1 = new JLabel("    Groupe    ");
         labelFiltre1.setFont(t);
         String[] selectionFiltre1 = {"Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
         JComboBox listeSelectionFiltre1 = new JComboBox(selectionFiltre1);
@@ -255,7 +255,7 @@ public class Enlever extends JFrame {
 
         
 
-        JLabel labelFiltre2 = new JLabel(" Jour de la semaine  ");
+        JLabel labelFiltre2 = new JLabel("   Jour de la semaine    ");
         labelFiltre2.setFont(t);
         String[] selectionFiltre2 = {" Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
         JComboBox listeSelectionFiltre2 = new JComboBox(selectionFiltre2);
@@ -274,7 +274,7 @@ public class Enlever extends JFrame {
 
         
 
-        JLabel labelFiltre3 = new JLabel(" Creneau d'affectation ");
+        JLabel labelFiltre3 = new JLabel("   Creneau d'affectation   ");
         labelFiltre3.setFont(t);
         String[] selectionFiltre3 = {" 8h30 à 10h00", "10h15 à 11h45", "12h00 à 13h30", "13h45 à 15h15", "15h30 à 17h00", "17h15 à 18h45", "19h00 à 20h30" };
         JComboBox listeSelectionFiltre3 = new JComboBox(selectionFiltre3);
@@ -293,7 +293,7 @@ public class Enlever extends JFrame {
         TextField cap = new java.awt.TextField();
         cap.setText("Capacité suffisante");
                 
-        JLabel ense1 = new JLabel(" Capacité suffisante");
+        JLabel ense1 = new JLabel("   Capacité suffisante  ");
         ense1.setFont(t);
         cap.setFont(y);
         
@@ -318,7 +318,7 @@ public class Enlever extends JFrame {
 
         gridPanelf.add(etat);  
         gridPanelf.add(listeSelectionFiltre4);
-        etat.setFont(y);
+        etat.setFont(t);
         
         center.add(gridPanelf, BorderLayout.WEST);        
         
