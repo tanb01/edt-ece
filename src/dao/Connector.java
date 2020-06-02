@@ -14,7 +14,7 @@ public class Connector {
     // Pour MAC OS, URL : "jdbc:mysql://localhost:3306/edt_ece?serverTimezone=UTC"
     public static final String endPointSSL = "?autoReconnect=true&useSSL=false";
 
-    public static final String url = "jdbc:mysql://localhost:3306/" + nomBaseDeDonnees + endPointSSL;
+    public static final String url = "jdbc:mysql://localhost:3308/" + nomBaseDeDonnees + endPointSSL;
 
     public static final String user = "root";
     // Mot de passe : root pour MAC OS
