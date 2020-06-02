@@ -2,6 +2,7 @@ package controleur;
 
 import dao.EtudiantDAO;
 import dao.SeanceDAO;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -33,7 +34,8 @@ public class EDTControleur implements ActionListener, ItemListener {
 
     private SeanceDAO seance = null;
     private ArrayList<Seance> listSeances = null;
-
+    private ArrayList<Seance> listSeancesSelectionnees = null;
+    
     private EtudiantVue ve = null;
 
     DefaultTableModel dtm;
@@ -54,8 +56,9 @@ public class EDTControleur implements ActionListener, ItemListener {
         e = etuddao.chercher(m.getUserId());
         listSeances = new ArrayList<Seance>();
         listSeances = seance.chercherSeancesParGroupeId(e.getGroupeId());
+        listSeancesSelectionnees = seance.chercherSeancesParGroupeIdETNumeroSemaine(e.getGroupeId(), 1);
 
-        String[][] data = new String[84][7];
+        String[][] data = new String[84][100];
 
         String[] horairesPossibles = new String[]{"08:30-10:00", "10:15-11:45", "12:00-13:30", "13:45-15:15", "15:30-17:00", "17:15-18:45", "19:00-20:30"};
         for (int i = 0; i < 7; i++) {
@@ -66,7 +69,6 @@ public class EDTControleur implements ActionListener, ItemListener {
         int colinc = 1;
         String jour = "null";
         jour = getJourDeLaSemaine(listSeances.get(0).getDate());
-       
 
         // Vue en grille
         while (g < listSeances.size()) {
@@ -79,11 +81,9 @@ public class EDTControleur implements ActionListener, ItemListener {
                 }
                 g++;
             } else {
-                System.out.println("nooo");
                 colinc++;
                 jour = getJourDeLaSemaine(listSeances.get(g).getDate());
             }
-            
         }
 
         DefaultTableModel dtm = new DefaultTableModel(
@@ -137,11 +137,12 @@ public class EDTControleur implements ActionListener, ItemListener {
         }
         return jour;
     }
-    
-   
 
     public void control() {
         ve.getBoutonEmploiDuTemps().addActionListener(this);
+        for (JButton bouton : ve.getBoutonsSemaine()) {
+            bouton.addActionListener(this);
+        }
         ve.getBoutonSallesLibres().addActionListener(this);
         ve.getBoutonReporting().addActionListener(this);
         ve.getJComboBoxSelectionVue().addItemListener(this);
@@ -160,6 +161,12 @@ public class EDTControleur implements ActionListener, ItemListener {
         }
         if (ae.getSource() == ve.getBoutonReporting()) {
             ve.showReporting();
+        }
+        for (JButton bouton : ve.getBoutonsSemaine()) {
+            if (ae.getSource() == bouton) {
+                int index = ve.getBoutonsSemaine().indexOf(bouton);
+                ve.selectSemaine(index);
+            }
         }
     }
 
@@ -180,28 +187,31 @@ public class EDTControleur implements ActionListener, ItemListener {
 
     public void montrerVueEnGrille() {
         System.out.println("grille");
-        String[][] data = new String[84][7];
+        String[][] data = new String[84][100];
+        String[] horairesPossibles = new String[]{"08:30-10:00", "10:15-11:45", "12:00-13:30", "13:45-15:15", "15:30-17:00", "17:15-18:45", "19:00-20:30"};
+        for (int i = 0; i < 7; i++) {
+            data[i][0] = horairesPossibles[i];
+        }
+
         int g = 0;
         int colinc = 1;
-        int rowinc = 0;
         String jour = "null";
         jour = getJourDeLaSemaine(listSeances.get(0).getDate());
+
+        // Vue en grille
         while (g < listSeances.size()) {
-            System.out.println("id: " + g);
+            //System.out.println("id: " + g);
             if (jour == getJourDeLaSemaine(listSeances.get(g).getDate())) {
-                //System.out.println("Jour: " + jour);
-                data[rowinc][colinc] = listSeances.get(g).stringify();
-                rowinc++;
+                for (int i = 0; i < 7; i++) {
+                    if ((listSeances.get(g).getDebutHeure() + "-" + listSeances.get(g).getFinHeure()).equals(data[i][0])) {
+                        data[i][colinc] = listSeances.get(g).stringify();
+                    }
+                }
                 g++;
             } else {
                 colinc++;
-                rowinc = 0;
                 jour = getJourDeLaSemaine(listSeances.get(g).getDate());
             }
-        }
-
-        for (int i = 0; i < 7; i++) {
-            data[i][0] = "De " + listSeances.get(i).getDebutHeure() + " a " + listSeances.get(i).getFinHeure();
         }
 
         DefaultTableModel dtm = new DefaultTableModel(
