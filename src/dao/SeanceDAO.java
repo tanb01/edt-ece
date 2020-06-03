@@ -128,7 +128,7 @@ public class SeanceDAO extends DataAccessObject<Seance> {
             ResultSet result = this.connect.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT seance.seance_id, numero_semaine, date_seance, heure_debut, heure_fin, etat_seance, cours_id, type_cours_id, enseignant_id, groupe_id, salle_id FROM seance INNER JOIN seance_enseignants\n"
-                            + "ON seance.seance_id=seance_enseignants.seance_id INNER JOIN seance_groupes ON seance.seance_id=seance_groupes.seance_id INNER JOIN seance_salles ON seance.seance_id=seance_salles.seance_id WHERE groupe_id=" + groupeId);
+                            + "ON seance.seance_id=seance_enseignants.seance_id INNER JOIN seance_groupes ON seance.seance_id=seance_groupes.seance_id INNER JOIN seance_salles ON seance.seance_id=seance_salles.seance_id WHERE groupe_id=" + groupeId + " ORDER BY numero_semaine, date_seance, heure_debut");
             while (result.next()) {
                 int seanceId = result.getInt("seance.seance_id");
                 int numeroSemaine = result.getInt("numero_semaine");
@@ -170,7 +170,7 @@ public class SeanceDAO extends DataAccessObject<Seance> {
         try {
             ResultSet result = this.connect.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT seance_id FROM seance;");
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT seance_id FROM seance ORDER BY numero_semaine, date_seance, heure_debut");
             while (result.next()) {
                 seance = chercher(result.getInt("seance_id"));
                 seances.add(seance);
@@ -181,7 +181,7 @@ public class SeanceDAO extends DataAccessObject<Seance> {
         return seances;
     }
 
-    public ArrayList<Seance> chercherSeancesParGroupeIdETNumeroSemaine(int groupeId, int numeroSemaine) {
+    public ArrayList<Seance> chercherSeancesParGroupeIdEtNumeroSemaine(int groupeId, int numeroSemaine) {
         ArrayList<Seance> seances = new ArrayList<Seance>();
         Seance seance = new Seance();
 
@@ -189,7 +189,7 @@ public class SeanceDAO extends DataAccessObject<Seance> {
             ResultSet result = this.connect.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT seance.seance_id, date_seance, heure_debut, heure_fin, etat_seance, cours_id, type_cours_id, enseignant_id, groupe_id, salle_id FROM seance INNER JOIN seance_enseignants\n"
-                            + "ON seance.seance_id=seance_enseignants.seance_id INNER JOIN seance_groupes ON seance.seance_id=seance_groupes.seance_id INNER JOIN seance_salles ON seance.seance_id=seance_salles.seance_id WHERE groupe_id=" + groupeId + " AND seance.numero_semaine=" + numeroSemaine);
+                            + "ON seance.seance_id=seance_enseignants.seance_id INNER JOIN seance_groupes ON seance.seance_id=seance_groupes.seance_id INNER JOIN seance_salles ON seance.seance_id=seance_salles.seance_id WHERE groupe_id=" + groupeId + " AND seance.numero_semaine=" + numeroSemaine + " ORDER BY numero_semaine, date_seance, heure_debut");
             while (result.next()) {
                 int seanceId = result.getInt("seance.seance_id");
                 String date = result.getString("date_seance");

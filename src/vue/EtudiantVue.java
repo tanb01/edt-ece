@@ -23,18 +23,28 @@ import javax.swing.table.TableColumn;
 public class EtudiantVue extends JFrame {
 
     private String titrePage = null;
+
     private JScrollPane jscrollPanel;
+
     private JTable tableEnGrille;
     private JTable tableEnListe;
+
     private JComboBox listeSelectionVue = null;
+    private JComboBox listeSelectionFiltre = null;
+    private JComboBox listeSelectionChamp = null;
+
+//    private JComboBox filtreSelectionVue = null;
+//    private JComboBox itemsDeFiltre = null;
     private JButton button53 = null;
     private JButton button54 = null;
     private JButton button60 = null;
+
     private JPanel center = null;
     private JPanel sallesLibresPanel = null;
     private JPanel reportingPanel = null;
     private JPanel filtrePanel = null;
     private JPanel semainesPanel = null;
+
     private ArrayList<JButton> boutons = null;
 
     /**
@@ -104,69 +114,67 @@ public class EtudiantVue extends JFrame {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("COURS");
         JMenu menu1 = new JMenu("ETUDIANTS");
-        JMenu menu2 = new JMenu("PROMOTIONS");
-        JMenu menu3 = new JMenu("ENSEIGNANTS");
-        JMenu menu4 = new JMenu("SALLES");
+        //JMenu menu2 = new JMenu("PROMOTIONS");
+        //JMenu menu3 = new JMenu("ENSEIGNANTS");
+        //JMenu menu4 = new JMenu("SALLES");
 
         // Nouvelle police (autre taille de police)
         Font g = new Font("Times New Roman", Font.BOLD, 18);
         UIManager.put("JMenu.font", g);
         menu.setFont(g);
         menu1.setFont(g);
-        menu2.setFont(g);
-        menu3.setFont(g);
-        menu4.setFont(g);
+//        menu2.setFont(g);
+//        menu3.setFont(g);
+//        menu4.setFont(g);
 
         // Déclaration des items du menu
-        JMenuItem m = new JMenuItem("Regarder par promo");
+        //JMenuItem m = new JMenuItem("Regarder par promo");
         JMenuItem m1 = new JMenuItem("Regarder par groupe");
         JMenuItem m2 = new JMenuItem("Regarder par enseignant");
 
-        JMenuItem mi1 = new JMenuItem("Emploi du temps");
+        //JMenuItem mi1 = new JMenuItem("Emploi du temps");
         JMenuItem mi2 = new JMenuItem("Récapitulatifs des cours");
         JMenuItem mi3 = new JMenuItem("Cours annulés");
-        JMenuItem mi4 = new JMenuItem("Liste et trombinoscope");
+        //JMenuItem mi4 = new JMenuItem("Liste et trombinoscope");
 
-        JMenuItem ms1 = new JMenuItem("Emploi du temps");
-        JMenuItem ms2 = new JMenuItem("Récapitulatifs des cours");
-        JMenuItem ms3 = new JMenuItem("Cours annulés");
-        JMenuItem ms4 = new JMenuItem("Liste et trombinoscope");
-
+//        JMenuItem ms1 = new JMenuItem("Emploi du temps");
+//        JMenuItem ms2 = new JMenuItem("Récapitulatifs des cours");
+//        JMenuItem ms3 = new JMenuItem("Cours annulés");
+//        JMenuItem ms4 = new JMenuItem("Liste et trombinoscope");
         // Nouvelle police (autre taille de police)
         Font h = new Font("Times New Roman", Font.BOLD, 14);
         UIManager.put("JMenuItem.font", h);
-        m.setFont(h);
+//        m.setFont(h);
         m1.setFont(h);
         m2.setFont(h);
-        mi1.setFont(h);
+//        mi1.setFont(h);
         mi2.setFont(h);
         mi3.setFont(h);
-        mi4.setFont(h);
-        ms1.setFont(h);
-        ms2.setFont(h);
-        ms3.setFont(h);
-        ms4.setFont(h);
+//        mi4.setFont(h);
+//        ms1.setFont(h);
+//        ms2.setFont(h);
+//        ms3.setFont(h);
+//        ms4.setFont(h);
 
         // Ajout des items du menu sur la fenêtre déclarés ci-dessus
-        menu.add(m);
+//        menu.add(m);
         menu.add(m1);
         menu.add(m2);
 
-        menu1.add(mi1);
+//        menu1.add(mi1);
         menu1.add(mi2);
         menu1.add(mi3);
-        menu1.add(mi4);
+//        menu1.add(mi4);
 
-        menu3.add(ms1);
-        menu3.add(ms2);
-        menu3.add(ms3);
-        menu3.add(ms4);
-
+//        menu3.add(ms1);
+//        menu3.add(ms2);
+//        menu3.add(ms3);
+//        menu3.add(ms4);
         menuBar.add(menu);
         menuBar.add(menu1);
-        menuBar.add(menu2);
-        menuBar.add(menu3);
-        menuBar.add(menu4);
+//        menuBar.add(menu2);
+//        menuBar.add(menu3);
+//        menuBar.add(menu4);
 
         // Ajout de la barre de menu
         topPanel.add(menuBar);
@@ -222,14 +230,15 @@ public class EtudiantVue extends JFrame {
         filtrePanel.add(listeSelectionVue);
 
         JLabel labelFiltre = new JLabel(" - Filtrer par ");
-        String[] selectionFiltre = {"Nom enseignant(e)", "Matière"};
-        JComboBox listeSelectionFiltre = new JComboBox(selectionFiltre);
+        String[] selectionFiltre = {" ", "Nom enseignant(e)", "Matière"};
+
+        listeSelectionFiltre = new JComboBox(selectionFiltre);
 
         filtrePanel.add(labelFiltre);
         filtrePanel.add(listeSelectionFiltre);
 
-        String[] selectionChamp = {"Segado", "Daachi"};
-        JComboBox listeSelectionChamp = new JComboBox(selectionChamp);
+        String[] selectionChamp = {" ", "Segado", "Daachi"};
+        listeSelectionChamp = new JComboBox(selectionChamp);
 
         filtrePanel.add(listeSelectionChamp);
         center.add(filtrePanel, BorderLayout.NORTH);
@@ -334,7 +343,7 @@ public class EtudiantVue extends JFrame {
      * @param m
      */
     public void selectSemaine(int index) {
-        boutons.get(index).setText("X");
+        //boutons.get(index).setText("X");
         center.revalidate();
         center.repaint();
     }
@@ -452,12 +461,36 @@ public class EtudiantVue extends JFrame {
         return listeSelectionVue;
     }
 
+    public JComboBox getJComboBoxFilterSelection() {
+        return listeSelectionFiltre;
+    }
+
+    public JComboBox getJComboBoxFilterSelectionEx() {
+        return listeSelectionChamp;
+    }
+
     /**
      *
      * @param j
      */
     public void setJComboBoxSelectionVue(int j) {
         listeSelectionVue.setSelectedIndex(j);
+    }
+
+    public void setJComboBoxFilterSelection(int j) {
+        listeSelectionFiltre.setSelectedIndex(j);
+    }
+
+    public void setJComboBoxFilterSelectionEx(int j) {
+        listeSelectionChamp.setSelectedIndex(j);
+    }
+
+    public void setJComboBoxFilterSelectionText(String[] j) {
+        listeSelectionChamp = new JComboBox(j);
+        listeSelectionChamp.revalidate();
+        filtrePanel.revalidate();
+        filtrePanel.repaint();
+        filtrePanel.setVisible(true);
     }
 
     /**
