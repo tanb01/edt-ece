@@ -203,21 +203,7 @@ public class SallesLibres extends JFrame {
        
         center.add(gridPanel3, BorderLayout.NORTH);
         center.add(gridPanel7, BorderLayout.WEST);
-        
-        
-        
- //----------------------------------------       
-        JPanel topIPanel = new JPanel();
-        topIPanel.setBorder(new LineBorder(Color.BLACK, 3));
-        topIPanel.setBackground(Color.yellow);
-        topIPanel.setFont(new java.awt.Font("Perpetua Titling MT", 0, 48));
-        topIPanel.setLayout(new FlowLayout(3));
-        
-        
-        
-        
-        
-        
+       
 //-----------------------------------------------------------
         JPanel gridPanel5 = new JPanel();
         gridPanel5.setLayout(new GridLayout(1,2, 1, 5));
@@ -255,8 +241,6 @@ public class SallesLibres extends JFrame {
         gridPanel8.add(listeSelectionFiltre2);
  
         center.add(gridPanel8, BorderLayout.NORTH);
-//------------------------------------------------------------------
- 
 //------------------------------------------------------------------
         JPanel gridPanel9 = new JPanel();
         gridPanel9.setLayout(new GridLayout(1,1, 1, 5));
@@ -349,7 +333,7 @@ public class SallesLibres extends JFrame {
         
         JLabel P1 = new JLabel("Liste de Salles disponibles");        
         
-        Font r = new Font("Times New Roman", Font.BOLD, 24);
+        Font r = new Font("Times New Roman", Font.BOLD, 32);
         UIManager.put("JMenuItem.font", r);
         P1.setFont(r);
         
