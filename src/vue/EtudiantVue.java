@@ -9,14 +9,9 @@ package vue;
  */
 import javax.swing.*;
 import java.awt.*;
-import java.util.Random;
-import static javafx.scene.paint.Color.color;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
-import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.table.TableColumn;
 
@@ -33,8 +28,6 @@ public class EtudiantVue extends JFrame {
     private JComboBox listeSelectionFiltre = null;
     private JComboBox listeSelectionChamp = null;
 
-//    private JComboBox filtreSelectionVue = null;
-//    private JComboBox itemsDeFiltre = null;
     private JButton button53 = null;
     private JButton button54 = null;
     private JButton button60 = null;
@@ -67,10 +60,10 @@ public class EtudiantVue extends JFrame {
         // Déclaration de tous les boutons grâce à JButton
         boutons = new ArrayList<JButton>();
         for (int i = 1; i < 53; i++) {
-            boutons.add(new JButton(String.valueOf(i)));          
-            
+            boutons.add(new JButton(String.valueOf(i)));
+
         }
-        
+
         button53 = new JButton("<html>Emploi du<br> temps<html>");
         button53.setPreferredSize(new Dimension(265, 120));
         button53.setIcon(new ImageIcon("img/school.png"));
@@ -79,11 +72,6 @@ public class EtudiantVue extends JFrame {
         button54.setIcon(new ImageIcon("img/salles.png"));
         button60 = new JButton("<html> Reporting <br> </html>");
         button60.setIcon(new ImageIcon("img/result.png"));
-//        JButton button55 = new JButton("<html> Modifier un cours<br> </html>");
-//        JButton button56 = new JButton("<html> Modifier une seance<br> </html>");
-//        JButton button57 = new JButton("<html> Modifier un groupe<br> </html>");
-//        JButton button58 = new JButton("<html> Modifier un enseignant<br> </html>");
-//        JButton button59 = new JButton("Comment utiliser l'apllication?");
 
         // Police Times New Roman
         Font f = new Font("Times New Roman", Font.BOLD, 24);
@@ -96,14 +84,6 @@ public class EtudiantVue extends JFrame {
         button54.setFont(f);
         button60.setBackground(new java.awt.Color(254, 138, 56));
         button60.setFont(f);
-//        button55.setBackground(new java.awt.Color(252, 108, 1));
-//        button55.setFont(f);
-//        button56.setBackground(new java.awt.Color(52, 108, 180));
-//        button56.setFont(f);
-//        button57.setBackground(new java.awt.Color(250, 0, 28));
-//        button57.setFont(f);
-//        button58.setBackground(new java.awt.Color(250, 0, 28));
-//        button58.setFont(f);
 
         // Conteneur principal
         Container mainContainer = this.getContentPane();
@@ -122,67 +102,38 @@ public class EtudiantVue extends JFrame {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("COURS");
         JMenu menu1 = new JMenu("ETUDIANTS");
-        //JMenu menu2 = new JMenu("PROMOTIONS");
-        //JMenu menu3 = new JMenu("ENSEIGNANTS");
-        //JMenu menu4 = new JMenu("SALLES");
 
         // Nouvelle police (autre taille de police)
         Font g = new Font("Times New Roman", Font.BOLD, 14);
         UIManager.put("JMenu.font", g);
         menu.setFont(g);
         menu1.setFont(g);
-//        menu2.setFont(g);
-//        menu3.setFont(g);
-//        menu4.setFont(g);
 
         // Déclaration des items du menu
         //JMenuItem m = new JMenuItem("Regarder par promo");
         JMenuItem m1 = new JMenuItem("Regarder par groupe");
         JMenuItem m2 = new JMenuItem("Regarder par enseignant");
 
-        //JMenuItem mi1 = new JMenuItem("Emploi du temps");
         JMenuItem mi2 = new JMenuItem("Récapitulatifs des cours");
         JMenuItem mi3 = new JMenuItem("Cours annulés");
-        //JMenuItem mi4 = new JMenuItem("Liste et trombinoscope");
 
-//        JMenuItem ms1 = new JMenuItem("Emploi du temps");
-//        JMenuItem ms2 = new JMenuItem("Récapitulatifs des cours");
-//        JMenuItem ms3 = new JMenuItem("Cours annulés");
-//        JMenuItem ms4 = new JMenuItem("Liste et trombinoscope");
         // Nouvelle police (autre taille de police)
         Font h = new Font("Times New Roman", Font.BOLD, 14);
         UIManager.put("JMenuItem.font", h);
-//        m.setFont(h);
         m1.setFont(h);
         m2.setFont(h);
-//        mi1.setFont(h);
         mi2.setFont(h);
         mi3.setFont(h);
-//        mi4.setFont(h);
-//        ms1.setFont(h);
-//        ms2.setFont(h);
-//        ms3.setFont(h);
-//        ms4.setFont(h);
 
         // Ajout des items du menu sur la fenêtre déclarés ci-dessus
-//        menu.add(m);
         menu.add(m1);
         menu.add(m2);
 
-//        menu1.add(mi1);
         menu1.add(mi2);
         menu1.add(mi3);
-//        menu1.add(mi4);
 
-//        menu3.add(ms1);
-//        menu3.add(ms2);
-//        menu3.add(ms3);
-//        menu3.add(ms4);
         menuBar.add(menu);
         menuBar.add(menu1);
-//        menuBar.add(menu2);
-//        menuBar.add(menu3);
-//        menuBar.add(menu4);
 
         // Ajout de la barre de menu
         topPanel.add(menuBar);
@@ -202,10 +153,6 @@ public class EtudiantVue extends JFrame {
         gridPanel.add(button53);
         gridPanel.add(button54);
         gridPanel.add(button60);
-//        gridPanel.add(button55);
-//        gridPanel.add(button56);
-//        gridPanel.add(button57);
-//        gridPanel.add(button58);
 
         rightPanel.add(gridPanel);
         mainContainer.add(rightPanel, BorderLayout.WEST);
@@ -252,7 +199,6 @@ public class EtudiantVue extends JFrame {
         searchFilterField = new JTextField();
         filtrePanel.add(searchFilterField);
         filtrePanel.add(searchFiltre);
-//        filtrePanel.add(listeSelectionChamp);
         center.add(filtrePanel, BorderLayout.NORTH);
 
         for (JButton bouton : boutons) {
@@ -303,7 +249,6 @@ public class EtudiantVue extends JFrame {
         // Panel
         center.add(jscrollPanel, BorderLayout.SOUTH);
 
-       
 //------------------------------------------------------------------------------
         this.setLayout(new BorderLayout());
         sallesLibresPanel = new JPanel();
@@ -311,14 +256,14 @@ public class EtudiantVue extends JFrame {
         sallesLibresPanel.setBorder(new LineBorder(Color.BLACK, 3));
         sallesLibresPanel.setLayout(new FlowLayout(5));
         sallesLibresPanel.setBackground(Color.blue);
-        center.add(sallesLibresPanel, BorderLayout.CENTER);
+        ajoutDuPanelSallesLibres();
+//        center.add(sallesLibresPanel, BorderLayout.CENTER);
 
-        JLabel label15 = new JLabel();
-        mainContainer.add(label15, BorderLayout.CENTER);
-        sallesLibresPanel.add(label15);
-        label15.setFont(new java.awt.Font("Tahoma", 0, 36));
-        label15.setText("Salles Libres");
-
+//        JLabel label15 = new JLabel();
+//        mainContainer.add(label15, BorderLayout.CENTER);
+//        sallesLibresPanel.add(label15);
+//        label15.setFont(new java.awt.Font("Tahoma", 0, 36));
+//        label15.setText("Salles Libres");
         this.setLayout(new BorderLayout());
 
         reportingPanel = new JPanel();
@@ -326,7 +271,7 @@ public class EtudiantVue extends JFrame {
         reportingPanel.setBorder(new LineBorder(Color.BLACK, 3));
         reportingPanel.setLayout(new FlowLayout(5));
         reportingPanel.setBackground(Color.blue);
-        center.add(reportingPanel, BorderLayout.CENTER);
+//        center.add(reportingPanel, BorderLayout.CENTER);
 
         JLabel label16 = new JLabel();
         reportingPanel.add(label16);
@@ -341,7 +286,7 @@ public class EtudiantVue extends JFrame {
         // À droite
         this.getContentPane().add(rightPanel, BorderLayout.WEST);
         // En bas
-        
+
     }
 
     /**
@@ -407,6 +352,8 @@ public class EtudiantVue extends JFrame {
     public void showSallesLibres() {
         center.removeAll();
         center.add(sallesLibresPanel);
+        cleanTableEnGrille();
+        center.add(jscrollPanel);
         center.revalidate();
         center.repaint();
     }
@@ -416,6 +363,23 @@ public class EtudiantVue extends JFrame {
         center.add(reportingPanel);
         center.revalidate();
         center.repaint();
+    }
+
+    public void cleanTableEnGrille() {
+        tableEnGrille.setModel(new DefaultTableModel(
+                new Object[][]{
+                    {"8h30-10h00", null, null, null, null, null, null, null},
+                    {"10h15-11h45", null, null, null, null, null, null, null},
+                    {"12h00-13h30", null, null, null, null, null, null, null},
+                    {"13h45-15h00", null, null, null, null, null, null, null},
+                    {"15h15-16h45", null, null, null, null, null, null, null},
+                    {"17h00-18h45", null, null, null, null, null, null, null},
+                    {"19h00-20h30", null, null, null, null, null, null, null}
+                },
+                new String[]{
+                    " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
+                }
+        ));
     }
 
     public void setTableEnGrille(TableModel m) {
@@ -526,6 +490,99 @@ public class EtudiantVue extends JFrame {
      */
     public JTable getJTable() {
         return tableEnGrille;
+    }
+
+    public void ajoutDuPanelSallesLibres() {
+        Font f = new Font("Times New Roman", Font.BOLD, 30);
+        //UIManager.put("JButton.font", f);
+
+        JPanel gridPanel3 = new JPanel();
+        gridPanel3.setLayout(new GridLayout(1, 1, 1, 5));
+        gridPanel3.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel3.setBackground(new java.awt.Color(145, 200, 100));
+
+        JLabel titra = new JLabel("  Salles libres    ");
+        gridPanel3.add(titra);
+        Font t = new Font("Times New Roman", Font.BOLD, 24);
+        UIManager.put("JLabel.font", t);
+        titra.setFont(t);
+
+        JPanel gridPanel7 = new JPanel();
+        gridPanel7.setLayout(new GridLayout(1, 2, 1, 5));
+        gridPanel7.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel7.setBackground(new java.awt.Color(145, 200, 100));
+
+        TextField enseignant = new java.awt.TextField();
+        enseignant.setText("");
+        Font y = new Font("Times New Roman", Font.BOLD, 20);
+        UIManager.put("JLabel.font", y);
+
+        JLabel ense = new JLabel(" Capacité maximal  ");
+        ense.setFont(t);
+        enseignant.setFont(y);
+
+        gridPanel7.add(ense);
+        gridPanel7.add(enseignant);
+
+        //////////////////////////////////////////////////////////
+        JPanel gridPanel5 = new JPanel();
+        gridPanel5.setLayout(new GridLayout(1, 2, 1, 5));
+        gridPanel5.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel5.setBackground(new java.awt.Color(145, 200, 100));
+
+        JLabel labelFiltre = new JLabel("   Durée   ");
+        labelFiltre.setFont(t);
+        String[] selectionFiltre = {"15mn ", "30mn", "45mn", "1h00", "1h15", "1h30", "1h45", "2h00", "2h15", "2h30", "2h45", "3h00", "3h15", "3h30", "3h45", "3h00", "3h15", "3h30", "3h45", "4h00", "4h15", "4h30", "4h45", "5h00", "5h15", "5h30", "5h45", "6h00", "6h15", "6h30", "6h45", "7h00", "7h15", "7h30", "7h45", "6h00"};
+        JComboBox listeSelectionDuree = new JComboBox(selectionFiltre);
+        listeSelectionDuree.setFont(y);
+
+        gridPanel5.add(labelFiltre);
+        gridPanel5.add(listeSelectionDuree);
+
+        //////////////////////////////////////////////////////////////
+        JPanel gridPanel8 = new JPanel();
+        gridPanel8.setLayout(new GridLayout(1, 2, 1, 5));
+        gridPanel8.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel8.setBackground(new java.awt.Color(145, 200, 100));
+
+        JLabel labelFiltre2 = new JLabel(" Site  ");
+        labelFiltre2.setFont(t);
+        String[] selectionFiltre2 = {" Eiffel 1", "Eiffel 2", "Eiffel 3", "Eiffel 4", "Eiffel 5", "Cnam"};
+        JComboBox listeSelectionFiltre2 = new JComboBox(selectionFiltre2);
+        listeSelectionFiltre2.setFont(y);
+
+        gridPanel8.add(labelFiltre2);
+        gridPanel8.add(listeSelectionFiltre2);
+
+        //////////////////////////////////////////////////////////////
+        JPanel gridPanel9 = new JPanel();
+        gridPanel9.setLayout(new GridLayout(1, 1, 1, 5));
+        gridPanel9.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel9.setBackground(new java.awt.Color(145, 200, 100));
+
+        JCheckBox cb1 = new JCheckBox("Ignorer les salles ayant des demandes de réservation en cours");
+        Font w = new Font("Times New Roman", Font.BOLD, 20);
+        UIManager.put("JCheckBox.font", w);
+        cb1.setFont(w);
+
+        JPanel gridPanela = new JPanel();
+        gridPanela.setLayout(new GridLayout(1, 2, 10, 5));
+        gridPanela.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanela.setBackground(new java.awt.Color(145, 200, 100));
+
+        JButton Montrer2 = new JButton("Valider l'affectation");
+        Montrer2.setFont(f);
+
+        gridPanela.add(Montrer2);
+        gridPanel9.add(cb1);
+
+        sallesLibresPanel.add(gridPanel3);
+        sallesLibresPanel.add(gridPanel7);
+        sallesLibresPanel.add(enseignant);
+        sallesLibresPanel.add(gridPanel5);
+        sallesLibresPanel.add(gridPanel8);
+        sallesLibresPanel.add(gridPanel9);
+        sallesLibresPanel.add(gridPanela);
     }
 
     /**

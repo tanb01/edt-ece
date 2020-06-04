@@ -30,7 +30,6 @@ import modele.Seance;
 import modele.User;
 import vue.EnseignantVue;
 import vue.EtudiantVue;
-import vue.UserVue;
 
 /**
  *
@@ -52,7 +51,7 @@ public class EDTControleur implements ActionListener, ItemListener {
 
     private EnseignantVue ev = null;
     private EnseignantDAO enddao = null;
-    private Enseignant en =null;
+    private Enseignant en = null;
 
     /**
      *
@@ -163,7 +162,6 @@ public class EDTControleur implements ActionListener, ItemListener {
 //        this.dtm = dtm;
 //
 //    }
-
     /**
      * Change les jours de la semaine de Anglais à Francais.
      *
@@ -310,7 +308,6 @@ public class EDTControleur implements ActionListener, ItemListener {
         int colinc = 1;
         String jour = "null";
         jour = "Lundi";
-
 
         // Vue en grille
         while (g < listSeancesSelectionnees.size()) {

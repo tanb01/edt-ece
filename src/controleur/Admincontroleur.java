@@ -27,7 +27,6 @@ import modele.Etudiant;
 import modele.Seance;
 import modele.User;
 import vue.AdminVue;
-import vue.UserVue;
 import controleur.EDTControleur;
 
 public class Admincontroleur {

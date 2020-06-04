@@ -22,14 +22,14 @@ public class AdminVue extends JFrame {
     private javax.swing.JTable jTable1;
     private JScrollPane scroll;
     private DefaultTableModel model;
-    private JButton button53,button54,button55,button56,button57;
+    private JButton button53, button54, button55, button56, button57;
     private JPanel center = null;
     private JPanel centersalleslibres = null;
-    private  JPanel MyPanel1;
-    
+    private JPanel MyPanel1;
+
     /**
-     * 
-     * @param title 
+     *
+     * @param title
      */
     public AdminVue(String title) {
 
@@ -95,7 +95,7 @@ public class AdminVue extends JFrame {
         JButton button51 = new JButton("51");
         JButton button52 = new JButton("52");
         JButton button53 = new JButton("<html> Emploi du <br> temps<html> ");
-        
+
         button53.setPreferredSize(new Dimension(265, 120));
         button53.setIcon(new ImageIcon("img/school.png"));
 
@@ -106,7 +106,6 @@ public class AdminVue extends JFrame {
         button55.setIcon(new ImageIcon("img/modification.png"));
         JButton button56 = new JButton("<html> Reporting </html>");
         button56.setIcon(new ImageIcon("img/result.png"));
-        
 
         // Police Times New Roman
         Font f = new Font("Times New Roman", Font.BOLD, 30);
@@ -121,8 +120,6 @@ public class AdminVue extends JFrame {
         button55.setFont(f);
         button56.setBackground(new java.awt.Color(243, 151, 150));
         button56.setFont(f);
-       
-        
 
         button54.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -149,7 +146,7 @@ public class AdminVue extends JFrame {
         JMenu menu = new JMenu("COURS");
         JMenu menu1 = new JMenu("ETUDIANTS");
         JMenu menu2 = new JMenu("PROMOTIONS");
-        JMenu menu3 = new JMenu("ENSEIGNANTS");        
+        JMenu menu3 = new JMenu("ENSEIGNANTS");
 
         // Nouvelle police (autre taille de police)
         Font g = new Font("Times New Roman", Font.BOLD, 18);
@@ -157,7 +154,7 @@ public class AdminVue extends JFrame {
         menu.setFont(g);
         menu1.setFont(g);
         menu2.setFont(g);
-        menu3.setFont(g);       
+        menu3.setFont(g);
 
         // Déclaration des items du menu
         JMenuItem m = new JMenuItem("Regarder par promo");
@@ -208,7 +205,6 @@ public class AdminVue extends JFrame {
         menuBar.add(menu1);
         menuBar.add(menu2);
         menuBar.add(menu3);
-        
 
         // Ajout de la barre de menu
         topPanel.add(menuBar);
@@ -229,8 +225,6 @@ public class AdminVue extends JFrame {
         gridPanel.add(button54);
         gridPanel.add(button55);
         gridPanel.add(button56);
-        
-       
 
         rightPanel.add(gridPanel);
         mainContainer.add(rightPanel, BorderLayout.WEST);
@@ -276,7 +270,7 @@ public class AdminVue extends JFrame {
         JLabel labelFiltre = new JLabel("  PROMO ");
         String[] selectionFiltre = {" Prepac", "Ing1", "Ing2", "Ing3", "Ing4", "Ing5"};
         JComboBox listeSelectionFiltre = new JComboBox(selectionFiltre);
-        
+
         JLabel labelFiltre2 = new JLabel(" - PROMO ");
         String[] selectionFiltre2 = {" "};
         JComboBox listeSelectionFiltre2 = new JComboBox(selectionFiltre);
@@ -423,79 +417,70 @@ public class AdminVue extends JFrame {
         gridPanel6.add(listeDeCours);
 
         bottomPanel.add(gridPanel6, BorderLayout.CENTER);
-    
-    
+
 //------------------------------------------------------------------------------
 //                           PANEL DE SALLES LIBRES
 //------------------------------------------------------------------------------    
-   
-    
         JPanel centersalleslibres = new JPanel();
-        centersalleslibres.setOpaque(true);        
+        centersalleslibres.setOpaque(true);
         centersalleslibres.setBorder(new LineBorder(Color.BLACK, 3));
         centersalleslibres.setLayout(new FlowLayout(5));
         centersalleslibres.setBackground(new java.awt.Color(211, 212, 250));
-       // mainContainer.add(centersalleslibres, BorderLayout.CENTER);
+        // mainContainer.add(centersalleslibres, BorderLayout.CENTER);
 
-                
         JPanel gridPanel3salles = new JPanel();
         gridPanel3salles.setLayout(new GridLayout(1, 1, 1, 5));
         gridPanel3salles.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel3salles.setBackground(new java.awt.Color(145, 200, 100));
-        
-        
+
         JLabel titrasalles = new JLabel("  Salles libres    ");
         gridPanel3salles.add(titrasalles);
         Font tsalles = new Font("Times New Roman", Font.BOLD, 24);
         UIManager.put("JLabel.font", tsalles);
         titrasalles.setFont(tsalles);
-        
+
         JPanel gridPanel7salles = new JPanel();
-        gridPanel7salles.setLayout(new GridLayout(1,2 , 1, 5));
+        gridPanel7salles.setLayout(new GridLayout(1, 2, 1, 5));
         gridPanel7salles.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel7salles.setBackground(new java.awt.Color(145, 200, 100));
-        
+
         TextField enseignantsalles = new java.awt.TextField();
         enseignantsalles.setText("                 ");
         Font ysalles = new Font("Times New Roman", Font.BOLD, 20);
         UIManager.put("JLabel.font", ysalles);
-        
+
         JLabel ensesalles = new JLabel(" Capacité maximal  ");
         ensesalles.setFont(tsalles);
         enseignantsalles.setFont(ysalles);
-        
+
         gridPanel7salles.add(ensesalles);
-        gridPanel7salles.add(enseignantsalles);             
-       
+        gridPanel7salles.add(enseignantsalles);
+
         centersalleslibres.add(gridPanel3salles, BorderLayout.NORTH);
         centersalleslibres.add(gridPanel7salles, BorderLayout.WEST);
-       
+
 //-----------------------------------------------------------
         JPanel gridPanel5salles = new JPanel();
-        gridPanel5salles.setLayout(new GridLayout(1,2, 1, 5));
+        gridPanel5salles.setLayout(new GridLayout(1, 2, 1, 5));
         gridPanel5salles.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel5salles.setBackground(new java.awt.Color(145, 200, 100));
 
-        
-
         JLabel labelFiltresalles = new JLabel("   Durée   ");
         labelFiltresalles.setFont(tsalles);
-        String[] selectionFiltresalles = {"15mn ", "30mn", "45mn", "1h00", "1h15", "1h30","1h45","2h00", "2h15", "2h30","2h45","3h00", "3h15", "3h30","3h45","3h00", "3h15", "3h30","3h45","4h00", "4h15", "4h30","4h45","5h00", "5h15", "5h30","5h45","6h00", "6h15", "6h30","6h45","7h00", "7h15", "7h30","7h45","6h00"};
+        String[] selectionFiltresalles = {"15mn ", "30mn", "45mn", "1h00", "1h15", "1h30", "1h45", "2h00", "2h15", "2h30", "2h45", "3h00", "3h15", "3h30", "3h45", "3h00", "3h15", "3h30", "3h45", "4h00", "4h15", "4h30", "4h45", "5h00", "5h15", "5h30", "5h45", "6h00", "6h15", "6h30", "6h45", "7h00", "7h15", "7h30", "7h45", "6h00"};
         JComboBox listeSelectionFiltresalles = new JComboBox(selectionFiltresalles);
         listeSelectionFiltresalles.setFont(ysalles);
 
         gridPanel5salles.add(labelFiltresalles);
         gridPanel5salles.add(listeSelectionFiltresalles);
- 
-       centersalleslibres.add(gridPanel5, BorderLayout.NORTH);
+
+        centersalleslibres.add(gridPanel5, BorderLayout.NORTH);
 
 //------------------------------------------------------------------
         JPanel gridPanel8salles = new JPanel();
-        gridPanel8salles.setLayout(new GridLayout(1,2, 1, 5));
+        gridPanel8salles.setLayout(new GridLayout(1, 2, 1, 5));
         gridPanel8salles.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel8salles.setBackground(new java.awt.Color(145, 200, 100));
-
-        
 
         JLabel labelFiltre2salles = new JLabel(" Site  ");
         labelFiltre2salles.setFont(tsalles);
@@ -505,45 +490,41 @@ public class AdminVue extends JFrame {
 
         gridPanel8salles.add(labelFiltre2salles);
         gridPanel8salles.add(listeSelectionFiltre2salles);
- 
+
         centersalleslibres.add(gridPanel8salles, BorderLayout.NORTH);
 //------------------------------------------------------------------
         JPanel gridPanel9salles = new JPanel();
-        gridPanel9salles.setLayout(new GridLayout(1,1, 1, 5));
+        gridPanel9salles.setLayout(new GridLayout(1, 1, 1, 5));
         gridPanel9salles.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel9salles.setBackground(new java.awt.Color(145, 200, 100));
 
-        JCheckBox cb1salles = new JCheckBox("Ignorer les salles ayant des demandes de réservation en cours");  
+        JCheckBox cb1salles = new JCheckBox("Ignorer les salles ayant des demandes de réservation en cours");
         Font wsalles = new Font("Times New Roman", Font.BOLD, 20);
         UIManager.put("JCheckBox.font", wsalles);
         cb1salles.setFont(wsalles);
-       
+
         JPanel gridPanelasalles = new JPanel();
-        gridPanelasalles.setLayout(new GridLayout(1,2, 10, 5));
+        gridPanelasalles.setLayout(new GridLayout(1, 2, 10, 5));
         gridPanelasalles.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanelasalles.setBackground(new java.awt.Color(145, 200, 100));
 
         JButton Montrer2salles = new JButton("Valider l'affectation");
-        Montrer2salles.setFont(f);        
-         
-        gridPanelasalles.add(Montrer2salles); 
-        gridPanel9salles.add(cb1salles);
-             
-        
-        
-        centersalleslibres.add(gridPanel9salles, BorderLayout.NORTH);
-    
-      
+        Montrer2salles.setFont(f);
 
-   
+        gridPanelasalles.add(Montrer2salles);
+        gridPanel9salles.add(cb1salles);
+
+        centersalleslibres.add(gridPanel9salles, BorderLayout.NORTH);
+
 //------------------------------------------------------------------------------
 //                         FIN DU PANEL SALLES LIBRES    
 //------------------------------------------------------------------------------    
 ////////////////////////////////////////////////////////////////////////////
-                // On ajoute les 4 panels au content pane de la JFrame
+        // On ajoute les 4 panels au content pane de la JFrame
         // Au centre
-      
 ////////////////////////////////////////////////////////////////////////////   
+    }
+
     public static void main(String[] args) {
         AdminVue mylayout = new AdminVue("Accueil");
         mylayout.setVisible(true);
