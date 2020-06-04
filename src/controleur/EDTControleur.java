@@ -13,15 +13,21 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import modele.Cours;
 import modele.Enseignant;
 import modele.Etudiant;
 import modele.Seance;
 import modele.User;
+import vue.EnseignantVue;
 import vue.EtudiantVue;
 import vue.UserVue;
 
@@ -38,11 +44,12 @@ public class EDTControleur implements ActionListener, ItemListener {
     private ArrayList<Seance> listSeances = null;
     private ArrayList<Seance> listSeancesSelectionnees = null;
     private int numeroSemaineSelected = 1;
-    private int numeroVueEDT = 0;
 
     private EtudiantVue ve = null;
 
-    DefaultTableModel dtm;
+    private DefaultTableModel dtm;
+
+    private EnseignantVue ev = null;
 
     /**
      *
@@ -98,6 +105,59 @@ public class EDTControleur implements ActionListener, ItemListener {
                 }
         );
         this.dtm = dtm;
+
+    }
+
+    public EDTControleur(User m, EnseignantVue v) {
+        ev = new EnseignantVue("Enseignant vue");
+        ev = v;
+
+        etuddao = new EtudiantDAO();
+        e = new Etudiant();
+        seance = new SeanceDAO();
+
+        e = etuddao.chercher(m.getUserId());
+        listSeances = new ArrayList<Seance>();
+        listSeances = seance.chercherSeancesParGroupeId(e.getGroupeId());
+        listSeancesSelectionnees = new ArrayList<Seance>();
+        listSeancesSelectionnees = seance.chercherSeancesParGroupeIdEtNumeroSemaine(e.getGroupeId(), numeroSemaineSelected);
+
+        String[][] data = new String[84][100];
+
+        String[] horairesPossibles = new String[]{"08:30-10:00", "10:15-11:45", "12:00-13:30", "13:45-15:15", "15:30-17:00", "17:15-18:45", "19:00-20:30"};
+        for (int i = 0; i < 7; i++) {
+            data[i][0] = horairesPossibles[i];
+        }
+
+        int g = 0;
+        int colinc = 1;
+        String jour = "null";
+        jour = getJourDeLaSemaine(listSeancesSelectionnees.get(0).getDate());
+
+        // Vue en grille
+        while (g < listSeancesSelectionnees.size()) {
+            //System.out.println("id: " + g);
+            if (jour == getJourDeLaSemaine(listSeancesSelectionnees.get(g).getDate())) {
+                for (int i = 0; i < 7; i++) {
+                    if ((listSeancesSelectionnees.get(g).getDebutHeure() + "-" + listSeancesSelectionnees.get(g).getFinHeure()).equals(data[i][0])) {
+                        data[i][colinc] = listSeancesSelectionnees.get(g).stringify();
+                    }
+                }
+                g++;
+            } else {
+                colinc++;
+                jour = getJourDeLaSemaine(listSeancesSelectionnees.get(g).getDate());
+            }
+        }
+
+        DefaultTableModel dtm = new DefaultTableModel(
+                data,
+                new String[]{
+                    " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
+                }
+        );
+        this.dtm = dtm;
+
     }
 
     /**
@@ -147,7 +207,8 @@ public class EDTControleur implements ActionListener, ItemListener {
 
         ve.getJComboBoxFilterSelection().addItemListener(this);
 
-        ve.getJComboBoxFilterSelectionEx().addItemListener(this);
+//        ve.getJComboBoxFilterSelectionEx().addItemListener(this);
+        ve.getButtonSearchFiltre().addActionListener(this);
 
         ve.setTableEnGrille(dtm);
         ve.setVisible(true);
@@ -173,6 +234,27 @@ public class EDTControleur implements ActionListener, ItemListener {
                 montrerEDT();
             }
         }
+        if (ae.getSource() == ve.getButtonSearchFiltre()) {
+            System.out.println("yummy");
+
+            if (ve.getJComboBoxFilterSelection().getSelectedItem().toString().equals("Nom enseignant(e)")) {
+                System.out.println("yf");
+
+                ve.selectSemaine(numeroSemaineSelected);
+                affecterSeancesDeSemaine();
+                String nomEnseignant = ve.getFiltreField();
+                listSeancesSelectionnees = filtrerParEnseignant(nomEnseignant);
+                montrerEDT();
+            }
+            if (ve.getJComboBoxFilterSelection().getSelectedItem().toString().equals("Matière")) {
+
+                ve.selectSemaine(numeroSemaineSelected);
+                affecterSeancesDeSemaine();
+                String nomCours = ve.getFiltreField();
+                listSeancesSelectionnees = filtrerParMatiere(nomCours);
+                montrerEDT();
+            }
+        }
     }
 
     @Override
@@ -192,27 +274,6 @@ public class EDTControleur implements ActionListener, ItemListener {
                     ve.getJComboBoxFilterSelectionEx().setSelectedIndex(0);
                     ve.selectSemaine(numeroSemaineSelected);
                     affecterSeancesDeSemaine();
-                    montrerEDT();
-                    break;
-                case "Nom enseignant(e)":
-                    ArrayList<String> names = new ArrayList();
-                    getListeEnseignants().forEach(enseignant -> names.add(enseignant.getNom()));
-                    getListeEnseignants().forEach(enseignant -> System.out.println("f: " + enseignant.getNom()));
-
-                    String[] n = new String[names.size()];
-                    n[0] = " ";
-                    for (int i = 1; i < names.size(); i++) {
-                        n[i] = names.get(i - 1);
-                    }
-
-                    ve.setJComboBoxFilterSelectionText(n);
-                    String nomEnseignant = ve.getJComboBoxFilterSelectionEx().getSelectedItem().toString();
-                    listSeancesSelectionnees = filtrerParEnseignant(nomEnseignant);
-                    montrerEDT();
-                    break;
-                case "Matière":
-                    String nomMatiere = ve.getJComboBoxFilterSelectionEx().getSelectedItem().toString();
-                    listSeancesSelectionnees = filtrerParMatiere(nomMatiere);
                     montrerEDT();
                     break;
             }
@@ -300,12 +361,12 @@ public class EDTControleur implements ActionListener, ItemListener {
 
     public ArrayList<Seance> filtrerParEnseignant(String nomEnseignant) {
         ArrayList<Seance> tempArray = new ArrayList<Seance>();
-        listSeancesSelectionnees = new ArrayList<Seance>();
-        for (int i = 0; i < listSeances.size(); i++) {
-            for (int j = 0; j < listSeances.get(i).getListeEnseignants().size(); j++) {
-                for (Enseignant e : listSeances.get(i).getListeEnseignants()) {
+        //listSeancesSelectionnees = new ArrayList<Seance>();
+        for (int i = 0; i < listSeancesSelectionnees.size(); i++) {
+            for (int j = 0; j < listSeancesSelectionnees.get(i).getListeEnseignants().size(); j++) {
+                for (Enseignant e : listSeancesSelectionnees.get(i).getListeEnseignants()) {
                     if (e.getNom().equals(nomEnseignant)) {
-                        tempArray.add(listSeances.get(i));
+                        tempArray.add(listSeancesSelectionnees.get(i));
                     }
                 }
             }
@@ -318,9 +379,9 @@ public class EDTControleur implements ActionListener, ItemListener {
 
     public ArrayList<Seance> filtrerParMatiere(String nomMatiere) {
         ArrayList<Seance> tempArray = new ArrayList<Seance>();
-        for (int i = 0; i < listSeances.size(); i++) {
-            if (listSeances.get(i).getCoursSeance().getNomCours().equals(nomMatiere)) {
-                tempArray.add(listSeances.get(i));
+        for (int i = 0; i < listSeancesSelectionnees.size(); i++) {
+            if (listSeancesSelectionnees.get(i).getCoursSeance().getNomCours().equals(nomMatiere)) {
+                tempArray.add(listSeancesSelectionnees.get(i));
             }
         }
         return tempArray;
@@ -336,6 +397,32 @@ public class EDTControleur implements ActionListener, ItemListener {
             }
         }
         return tempArray;
+    }
+
+    public ArrayList<Cours> getListeCours() {
+        ArrayList<Cours> tempArray = new ArrayList<Cours>();
+        for (Seance e : listSeances) {
+            tempArray.add(e.getCoursSeance());
+        }
+        return tempArray;
+    }
+
+    public ArrayList<String> getNomEnseignants() {
+        ArrayList<String> tempArray = new ArrayList<String>();
+        getListeEnseignants().forEach(enseignant -> tempArray.add(enseignant.getNom()));
+        List<String> tempArray2 = tempArray.stream().distinct().collect(Collectors.toList());
+        ArrayList<String> tempArray3 = new ArrayList<String>();
+        tempArray2.forEach(s -> tempArray3.add(s));
+        return tempArray3;
+    }
+
+    public ArrayList<String> getNomCours() {
+        ArrayList<String> tempArray = new ArrayList<String>();
+        getListeCours().forEach(cours -> tempArray.add(cours.getNomCours()));
+        List<String> tempArray2 = tempArray.stream().distinct().collect(Collectors.toList());
+        ArrayList<String> tempArray3 = new ArrayList<String>();
+        tempArray2.forEach(s -> tempArray3.add(s));
+        return tempArray3;
     }
 
     public static void main(String[] args) {

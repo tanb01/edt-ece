@@ -38,6 +38,9 @@ public class EtudiantVue extends JFrame {
     private JButton button53 = null;
     private JButton button54 = null;
     private JButton button60 = null;
+    private JButton searchFiltre = null;
+
+    private JTextField searchFilterField = null;
 
     private JPanel center = null;
     private JPanel sallesLibresPanel = null;
@@ -240,7 +243,11 @@ public class EtudiantVue extends JFrame {
         String[] selectionChamp = {" ", "Segado", "Daachi"};
         listeSelectionChamp = new JComboBox(selectionChamp);
 
-        filtrePanel.add(listeSelectionChamp);
+        searchFiltre = new JButton("Search");
+        searchFilterField = new JTextField();
+        filtrePanel.add(searchFilterField);
+        filtrePanel.add(searchFiltre);
+//        filtrePanel.add(listeSelectionChamp);
         center.add(filtrePanel, BorderLayout.NORTH);
 
         for (JButton bouton : boutons) {
@@ -346,6 +353,18 @@ public class EtudiantVue extends JFrame {
         //boutons.get(index).setText("X");
         center.revalidate();
         center.repaint();
+    }
+
+    public JButton getButtonSearchFiltre() {
+        return searchFiltre;
+    }
+
+    public String getFiltreField() {
+        return searchFilterField.getText();
+    }
+
+    public JTextField getFiltre() {
+        return searchFilterField;
     }
 
     public ArrayList<JButton> getBoutonsSemaine() {
@@ -486,11 +505,19 @@ public class EtudiantVue extends JFrame {
     }
 
     public void setJComboBoxFilterSelectionText(String[] j) {
+        listeSelectionChamp.removeAllItems();
+        filtrePanel.remove(listeSelectionChamp);
         listeSelectionChamp = new JComboBox(j);
+        filtrePanel.add(listeSelectionChamp);
+//        DefaultComboBoxModel model = new DefaultComboBoxModel(j);
+//        listeSelectionChamp.setModel(model);
+        listeSelectionChamp.setSelectedIndex(1);
         listeSelectionChamp.revalidate();
+        listeSelectionChamp.repaint();
         filtrePanel.revalidate();
         filtrePanel.repaint();
-        filtrePanel.setVisible(true);
+        center.revalidate();
+        center.repaint();
     }
 
     /**
