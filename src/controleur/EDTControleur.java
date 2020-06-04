@@ -275,7 +275,7 @@ public class EDTControleur implements ActionListener, ItemListener {
             }
             switch (ve.getJComboBoxFilterSelection().getSelectedItem().toString()) {
                 case " ":
-                    ve.getJComboBoxFilterSelectionEx().setSelectedIndex(0);
+                    ve.getFiltre().setText(" ");
                     ve.selectSemaine(numeroSemaineSelected);
                     affecterSeancesDeSemaine();
                     montrerEDT();
@@ -309,14 +309,13 @@ public class EDTControleur implements ActionListener, ItemListener {
         int g = 0;
         int colinc = 1;
         String jour = "null";
-        if (!listSeancesSelectionnees.isEmpty()) {
-            jour = getJourDeLaSemaine(listSeancesSelectionnees.get(0).getDate());
-        }
+        jour = "Lundi";
+
 
         // Vue en grille
         while (g < listSeancesSelectionnees.size()) {
             //System.out.println("id: " + g);
-            if (jour == getJourDeLaSemaine(listSeancesSelectionnees.get(g).getDate())) {
+            if (jour.equals(getJourDeLaSemaine(listSeancesSelectionnees.get(g).getDate()))) {
                 for (int i = 0; i < 7; i++) {
                     if ((listSeancesSelectionnees.get(g).getDebutHeure() + "-" + listSeancesSelectionnees.get(g).getFinHeure()).equals(data[i][0])) {
                         data[i][colinc] = listSeancesSelectionnees.get(g).stringify();
@@ -369,7 +368,7 @@ public class EDTControleur implements ActionListener, ItemListener {
         for (int i = 0; i < listSeancesSelectionnees.size(); i++) {
             for (int j = 0; j < listSeancesSelectionnees.get(i).getListeEnseignants().size(); j++) {
                 for (Enseignant e : listSeancesSelectionnees.get(i).getListeEnseignants()) {
-                    if (e.getNom().equals(nomEnseignant)) {
+                    if (e.getNom().equalsIgnoreCase(nomEnseignant)) {
                         tempArray.add(listSeancesSelectionnees.get(i));
                     }
                 }
@@ -384,7 +383,7 @@ public class EDTControleur implements ActionListener, ItemListener {
     public ArrayList<Seance> filtrerParMatiere(String nomMatiere) {
         ArrayList<Seance> tempArray = new ArrayList<Seance>();
         for (int i = 0; i < listSeancesSelectionnees.size(); i++) {
-            if (listSeancesSelectionnees.get(i).getCoursSeance().getNomCours().equals(nomMatiere)) {
+            if (listSeancesSelectionnees.get(i).getCoursSeance().getNomCours().equalsIgnoreCase(nomMatiere)) {
                 tempArray.add(listSeancesSelectionnees.get(i));
             }
         }
