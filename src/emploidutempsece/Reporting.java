@@ -3,6 +3,8 @@ package emploidutempsece;
 import javax.swing.JFrame;
 import dao.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import modele.*;
 
 import org.jfree.chart.ChartFactory;
@@ -25,29 +27,69 @@ public class Reporting extends JFrame {
     private static final long serialVersionUID = 1L;
 
     /**
-     *
+     * Module Reporting pour l'effectif des groupes
+     * 
      * @param applicationTitle
      * @param chartTitle
      */
     public Reporting(String applicationTitle, String chartTitle) {
         super(applicationTitle);
-        // On crée la dataset pour la SALLE
-        //   PieDataset dataset = creationSallesReportingDataset(); // Pour diagramme
-                   PieDataset dataset = creationHeuresReportingDataset(); // Pour diagramme
-
-//        DefaultCategoryDataset dataset = creationSallesReportingHistoDataset(); // Pour histogramme
+        // On crée la dataset pour l'effectif
+        PieDataset dataset = creationEffectifReportingDataset(); // Pour diagramme
         // On crée la chart grâce à la dataset
-        //  JFreeChart chart = creationDiag2D(dataset, chartTitle); // Pour un diagramme 2D
-          JFreeChart chart = creationDiag3D(dataset, chartTitle); // Pour un diagramme 3D
-//        JFreeChart chart = creationHisto(dataset, chartTitle); // Pour un histogramme
+        JFreeChart chart = creationDiag3D(dataset, chartTitle); // Pour un diagramme 3D
         // On met la chart dans un panel
         ChartPanel chartPanel = new ChartPanel(chart);
         // Taille par défaut
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
         // On ajoute à l'application
         setContentPane(chartPanel);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }
+    
+//    /**
+//     * Module Reporting pour les heures de cours
+//     * 
+//     * @param applicationTitle
+//     * @param chartTitle
+//     */
+//    public Reporting(String applicationTitle, String chartTitle) {
+//        super(applicationTitle);
+//        // On crée la dataset pour les heures de cours
+//        PieDataset dataset = creationHeuresReportingDataset(); // Pour diagramme
+//        // On crée la chart grâce à la dataset
+//        JFreeChart chart = creationDiag3D(dataset, chartTitle); // Pour un diagramme 3D
+//        // On met la chart dans un panel
+//        ChartPanel chartPanel = new ChartPanel(chart);
+//        // Taille par défaut
+//        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+//        // On ajoute à l'application
+//        setContentPane(chartPanel);
+//        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+//    }
 
+//    /**
+//     * Module Reporting pour la capacité des salles par sites
+//     * 
+//     * @param applicationTitle
+//     * @param chartTitle 
+//     */
+//    public Reporting(String applicationTitle, String chartTitle) {
+//        super(applicationTitle);
+//        // On crée la dataset pour la SALLE
+//        DefaultCategoryDataset dataset = creationSallesReportingHistoDataset(); // Pour histogramme
+//        // On crée la chart grâce à la dataset
+//        JFreeChart chart = creationHisto(dataset, chartTitle); // Pour un histogramme
+//        // On met la chart dans un panel
+//        ChartPanel chartPanel = new ChartPanel(chart);
+//        // Taille par défaut
+//        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+//        // On ajoute à l'application
+//        setContentPane(chartPanel);
+//          setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+//
+//    }
+    
     /**
      * Dataset du diagramme 2D et 3D pour les SALLES
      *
@@ -87,7 +129,7 @@ public class Reporting extends JFrame {
     }
 
     /**
-     * Dataset du diagramme 2D et 3D pour les SALLES
+     * Dataset du diagramme 2D et 3D pour les Heures
      *
      * @return
      */
@@ -97,23 +139,50 @@ public class Reporting extends JFrame {
         SeanceDAO se = new SeanceDAO();
         ArrayList<Seance> seances = new ArrayList<Seance>();
         seances = se.chercherSeancesParGroupeId(31);
+
+        ArrayList<String> tempArray = new ArrayList<String>();
+        seances.forEach(seance -> tempArray.add(seance.getCoursSeance().getNomCours()));
+        List<String> tempArray2 = tempArray.stream().distinct().collect(Collectors.toList());
+        ArrayList<String> tempArray3 = new ArrayList<String>();
+        tempArray2.forEach(s -> tempArray3.add(s));
+
+        int timeCounter = 0;
         int nombresSeances = seances.size();
         int nombresMinTotal = (90 * nombresSeances);
         int nombresHeuresSeancesTotal = nombresMinTotal / 60;
         nombresMinTotal %= 60;
-        
-//        ArrayList<Cours> cours = new ArrayList<Cours>();
-//        for (Seance seance : seances) {
-//            
-//            result.setValue(salle.getNomSalle(), salle.getCapacite());
-//            
-//        }
-//        result.setValue("Nombres d'heures du groupe 31", );
-
-
-        System.out.printf("%d:%02d", nombresHeuresSeancesTotal, nombresMinTotal);
-
+        for (int i = 0; i < tempArray3.size(); i++) {
+            timeCounter = 0;
+            for (int j = 0; j < seances.size(); j++) {
+                if (tempArray3.get(i).equals(seances.get(j).getCoursSeance().getNomCours())) {
+                    timeCounter++;
+                }
+            }
+            nombresMinTotal = (90 * timeCounter);
+            nombresHeuresSeancesTotal = nombresMinTotal / 60;
+            nombresMinTotal %= 60;
+            result.setValue(tempArray3.get(i), nombresHeuresSeancesTotal);
+        }
         return result;
+    }
+    
+    /**
+     * Dataset du diagramme 2D et 3D pour les Heures
+     *
+     * @return
+     */
+    private PieDataset creationEffectifReportingDataset() {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+
+        PromotionDAO pr = new PromotionDAO();
+        ArrayList<Promotion> promos = new ArrayList<Promotion>();
+        promos = pr.chercherToutesLesPromos();
+
+        for (Groupe groupe : promos.get(2).getGroupes()) {
+            dataset.setValue(groupe.getNomGroupe(), groupe.getEffectifGroupe());
+        }
+        
+        return dataset;
     }
 
     /**
@@ -179,7 +248,18 @@ public class Reporting extends JFrame {
      * @param args
      */
     public static void main(String[] args) {
-        Reporting demo = new Reporting("Capacité des salles", "Salles :");
+//        // Main pour la capacité des salles par sites
+//        Reporting demo = new Reporting("Capacité des salles", "Salles :");
+//        demo.pack();
+//        demo.setVisible(true);
+
+//        // Main pour les heures de cours
+//        Reporting demo = new Reporting("Heures de cours", "Nombres d'heures par cours :");
+//        demo.pack();
+//        demo.setVisible(true);
+
+        // Main pour les effectifs des groupes
+        Reporting demo = new Reporting("Effectif des groupes", "Nombres d'élèves par groupes");
         demo.pack();
         demo.setVisible(true);
     }
