@@ -543,7 +543,8 @@ public class AdminVue extends JFrame {
                 // On ajoute les 4 panels au content pane de la JFrame
         // Au centre
       
-////////////////////////////////////////////////////////////////////////////   
+////////////////////////////////////////////////////////////////////////////  
+    }
     public static void main(String[] args) {
         AdminVue mylayout = new AdminVue("Accueil");
         mylayout.setVisible(true);
