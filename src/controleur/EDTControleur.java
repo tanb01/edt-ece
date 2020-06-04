@@ -72,7 +72,7 @@ public class EDTControleur implements ActionListener, ItemListener {
         listSeancesSelectionnees = new ArrayList<Seance>();
         listSeancesSelectionnees = seance.chercherSeancesParGroupeIdEtNumeroSemaine(e.getGroupeId(), numeroSemaineSelected);
 
-        String[][] data = new String[84][100];
+        String[][] data = new String[7][100];
 
         String[] horairesPossibles = new String[]{"08:30-10:00", "10:15-11:45", "12:00-13:30", "13:45-15:15", "15:30-17:00", "17:15-18:45", "19:00-20:30"};
         for (int i = 0; i < 7; i++) {
@@ -316,6 +316,7 @@ public class EDTControleur implements ActionListener, ItemListener {
                 for (int i = 0; i < 7; i++) {
                     if ((listSeancesSelectionnees.get(g).getDebutHeure() + "-" + listSeancesSelectionnees.get(g).getFinHeure()).equals(data[i][0])) {
                         data[i][colinc] = listSeancesSelectionnees.get(g).stringify();
+                        
                     }
                 }
                 g++;
