@@ -9,10 +9,12 @@ package vue;
  */
 import javax.swing.*;
 import java.awt.*;
+import java.text.DateFormat;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.table.TableColumn;
 
 
@@ -30,7 +32,7 @@ public class EtudiantVue extends JFrame {
     private JComboBox listeSelectionChamp = null;
     private JButton button53 = null;
     private JButton button54 = null;
-    private JButton button60 = null;
+    private JButton button60 = null;  
     private JButton searchFiltre = null;
     private JTextField searchFilterField = null;
     private JPanel center = null;
@@ -522,21 +524,21 @@ public class EtudiantVue extends JFrame {
         JPanel gridPanel3 = new JPanel();
         gridPanel3.setLayout(new GridLayout(1, 1, 1, 5));
         gridPanel3.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanel3.setBackground(new java.awt.Color(145, 200, 100));
+        gridPanel3.setBackground(new java.awt.Color(236, 251, 134));
 
-        JLabel titra = new JLabel("  Salles libres    ");
-        gridPanel3.add(titra);
+        
         Font t = new Font("Times New Roman", Font.BOLD, 18);
         UIManager.put("JLabel.font", t);
-        titra.setFont(t);
+        
 
         JPanel gridPanel7 = new JPanel();
         gridPanel7.setLayout(new GridLayout(1, 2, 1, 5));
         gridPanel7.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanel7.setBackground(new java.awt.Color(145, 200, 100));
+        gridPanel7.setBackground(new java.awt.Color(236, 251, 134));
 
         TextField enseignant = new java.awt.TextField();
         enseignant.setText(" ");
+        enseignant.setBackground(new java.awt.Color(255, 172, 220));
         Font y = new Font("Times New Roman", Font.BOLD, 16);
         UIManager.put("JLabel.font", y);
 
@@ -551,28 +553,52 @@ public class EtudiantVue extends JFrame {
         JPanel gridPanel5 = new JPanel();
         gridPanel5.setLayout(new GridLayout(1, 2, 1, 5));
         gridPanel5.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanel5.setBackground(new java.awt.Color(145, 200, 100));
+        gridPanel5.setBackground(new java.awt.Color(236, 251, 134));
 
-        JLabel labelFiltre = new JLabel("   Durée   ");
+        JLabel labelFiltre = new JLabel("   Heure ");
         labelFiltre.setFont(t);
-        String[] selectionFiltre = {"15mn ", "30mn", "45mn", "1h00", "1h15", "1h30", "1h45", "2h00", "2h15", "2h30", "2h45", "3h00", "3h15", "3h30", "3h45", "3h00", "3h15", "3h30", "3h45", "4h00", "4h15", "4h30", "4h45", "5h00", "5h15", "5h30", "5h45", "6h00", "6h15", "6h30", "6h45", "7h00", "7h15", "7h30", "7h45", "6h00"};
+        String[] selectionFiltre = {"8h30-10h00","10h15-11h45","12h00-13h30","13h45-15h15","15h30-17h00","17h15-18h45","19h00-20h30"};
         JComboBox listeSelectionDuree = new JComboBox(selectionFiltre);
         listeSelectionDuree.setFont(y);
+        listeSelectionDuree.setBackground(new java.awt.Color(255, 172, 220));
 
         gridPanel5.add(labelFiltre);
         gridPanel5.add(listeSelectionDuree);
-
+        
+        JPanel gridPanel5f = new JPanel();
+        gridPanel5f.setLayout(new GridLayout(1, 2, 1, 5));
+        gridPanel5f.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel5f.setBackground(new java.awt.Color(236, 251, 134));
+        
+        JLabel fecha = new JLabel();
+        fecha.setText(" Date ");
+        Font ygg = new Font("Times New Roman", Font.BOLD, 16);
+        UIManager.put("JLabel.font", ygg);
+        fecha.setFont(ygg);
+        
+        DateFormat dateFormat = DateFormat.getInstance();
+        JFormattedTextField field = new JFormattedTextField(dateFormat);
+        field.setValue(new Date());
+        Font yg = new Font("Times New Roman", Font.BOLD, 16);
+        UIManager.put("JFormattedTextField.font", yg);
+        field.setFont(yg);
+        field.setBackground(new java.awt.Color(255, 172, 220));
+        field.setFocusLostBehavior(JFormattedTextField.REVERT);
+        gridPanel5f.add(fecha);
+        gridPanel5f.add(field);
+        
         //////////////////////////////////////////////////////////////
         JPanel gridPanel8 = new JPanel();
         gridPanel8.setLayout(new GridLayout(1, 2, 1, 5));
         gridPanel8.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanel8.setBackground(new java.awt.Color(145, 200, 100));
+        gridPanel8.setBackground(new java.awt.Color(236, 251, 134));
 
         JLabel labelFiltre2 = new JLabel(" Site  ");
         labelFiltre2.setFont(t);
         String[] selectionFiltre2 = {" Eiffel 1", "Eiffel 2", "Eiffel 3", "Eiffel 4", "Eiffel 5", "Cnam"};
         JComboBox listeSelectionFiltre2 = new JComboBox(selectionFiltre2);
         listeSelectionFiltre2.setFont(y);
+        listeSelectionFiltre2.setBackground(new java.awt.Color(255, 172, 220));
 
         gridPanel8.add(labelFiltre2);
         gridPanel8.add(listeSelectionFiltre2);
@@ -596,6 +622,7 @@ public class EtudiantVue extends JFrame {
         JButton Montrer2 = new JButton("Valider l'affectation");
         Montrer2.setFont(f);
         Montrer2.setIcon(new ImageIcon("img/check.png"));
+        Montrer2.setBackground(new java.awt.Color(251, 231, 188));
 
        
         gridPanel9.add(cb1);
@@ -604,10 +631,12 @@ public class EtudiantVue extends JFrame {
         sallesLibresPanel.add(gridPanel7);
         sallesLibresPanel.add(enseignant);
         sallesLibresPanel.add(gridPanel5);
+         sallesLibresPanel.add(gridPanel5f);
         sallesLibresPanel.add(gridPanel8);
         sallesLibresPanel.add(gridPanel9);
         sallesLibresPanel.add(Montrer2);
     }
+    
 ///////////////////////////////////////////////////////////////////////////////
     public void ajoutDuPanelReporting() { 
                 
@@ -631,34 +660,53 @@ public class EtudiantVue extends JFrame {
         Montrer2.setBackground(new java.awt.Color(163, 255, 0));
         Montrer2.setFont(f);
         gridPanelb.add(Montrer2);
+        Montrer2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Montrer2MouseClicked(evt);
+            }
+        });
+        
         
         JButton Montrer3 = new JButton("<html>Taux d'occupation <br> dessalles sur une <br> période donnée</html>");
         Montrer3.setFont(f);
         Montrer3.setIcon(new ImageIcon("img/a2.png"));
         Montrer3.setBackground(new java.awt.Color(163, 150, 253));
-        Montrer3.setFont(f);
-        
+        Montrer3.setFont(f);        
         gridPanelb.add(Montrer3);
+        Montrer3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Montrer3MouseClicked(evt);
+            }
+        });
         
         JButton Montrer4 = new JButton("<html>Nombre d'heures de <br> séance par an</html>");
         Montrer4.setFont(f);
         Montrer4.setIcon(new ImageIcon("img/a3.png"));
         Montrer4.setBackground(new java.awt.Color(255, 153, 5));
-        Montrer4.setFont(f);
-        
+        Montrer4.setFont(f);        
         gridPanelb.add(Montrer4);
+        Montrer4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Montrer4MouseClicked(evt);
+            }
+        });
         
         JButton Montrer5 = new JButton("<html>Nombre d'heures de <br>séance par TD</html>");
         Montrer5.setFont(f);
         Montrer5.setIcon(new ImageIcon("img/a1.png"));
         Montrer5.setBackground(new java.awt.Color(255,255,0));
         Montrer5.setFont(f);
+        Montrer5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Montrer5MouseClicked(evt);
+            }
+        });
         
-        Montrer2.setPreferredSize(new Dimension(900, 485));
-        Montrer3.setPreferredSize(new Dimension(900, 485));
-        Montrer4.setPreferredSize(new Dimension(900, 485));
-        Montrer5.setPreferredSize(new Dimension(900, 485));
         
+        Montrer2.setPreferredSize(new Dimension(870, 485));
+        Montrer3.setPreferredSize(new Dimension(870, 485));
+        Montrer4.setPreferredSize(new Dimension(870, 485));
+        Montrer5.setPreferredSize(new Dimension(870, 485));        
         gridPanelb.add(Montrer5);
         
         
@@ -674,6 +722,26 @@ public class EtudiantVue extends JFrame {
         
         
     }
+    private void Montrer2MouseClicked(java.awt.event.MouseEvent evt) {                                      
+        SallesReporting g=new  SallesReporting("Effectif des groupes", "Nombres d'élèves par groupes");
+        g.setVisible(true);
+        
+    } 
+    private void Montrer3MouseClicked(java.awt.event.MouseEvent evt) {                                      
+         EffectifGroupeReporting demo = new EffectifGroupeReporting("Effectif des groupes", "Nombres d'élèves par groupes");
+         demo.setVisible(true);
+        
+    } 
+    private void Montrer4MouseClicked(java.awt.event.MouseEvent evt) {                                      
+        SallesReporting g=new  SallesReporting("Effectif des groupes", "Nombres d'élèves par groupes");
+        g.setVisible(true);
+        
+    } 
+    private void Montrer5MouseClicked(java.awt.event.MouseEvent evt) {                                      
+        HeuresReporting demo = new HeuresReporting("Heures de cours", "Nombres d'heures par cours :");
+        demo.setVisible(true);
+        
+    } 
     /**
      *
      * @param args
@@ -682,5 +750,7 @@ public class EtudiantVue extends JFrame {
         EtudiantVue mylayout = new EtudiantVue("Accueil");
         mylayout.setVisible(true);
     }
+
+    
 
 }

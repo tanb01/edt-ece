@@ -1,4 +1,4 @@
-package emploidutempsece;
+package vue;
 
 import javax.swing.JFrame;
 import dao.*;
@@ -22,25 +22,28 @@ import org.jfree.util.Rotation;
  *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
-public class SallesReporting extends JFrame {
-
+public class EffectifGroupeReporting extends JFrame {
+    
     private static final long serialVersionUID = 1L;
 
     /**
-     * Module SallesReporting pour la capacité des salles par sites
+     * Module Reporting pour l'effectif des groupes
      * 
      * @param applicationTitle
-     * @param chartTitle 
+     * @param chartTitle
      */
-    public SallesReporting(String applicationTitle, String chartTitle) {
+    public EffectifGroupeReporting(String applicationTitle, String chartTitle) {
         super(applicationTitle);
-        // On crée la dataset pour la SALLE
-        // PieDataset dataset = creationSallesReportingDataset(); // Pour diagramme
-        DefaultCategoryDataset dataset = creationHSallesReportingDataset(); // Pour histogramme
+        this.setSize(1000, 900);
+        // Localisation de la fenêtre
+        this.setLocation(100, 100);
+        // On crée la dataset pour l'effectif
+        PieDataset dataset = creationEffectifReportingDataset(); // Pour diagramme
+        //DefaultCategoryDataset dataset = creationHEffectifReportingDataset(); // Pour histogramme
         // On crée la chart grâce à la dataset
-        // JFreeChart chart = creationDiag3D(dataset, chartTitle); // Pour un diagramme 3D
+        JFreeChart chart = creationDiag3D(dataset, chartTitle); // Pour un diagramme 3D
         // JFreeChart chart = creationDiag2D(dataset, chartTitle); // Pour un diagramme 2D
-        JFreeChart chart = creationHisto(dataset, chartTitle); // Pour un histogramme
+        //JFreeChart chart = creationHisto(dataset, chartTitle); // Pour un histogramme
         // On met la chart dans un panel
         ChartPanel chartPanel = new ChartPanel(chart);
         // Taille par défaut
@@ -48,44 +51,43 @@ public class SallesReporting extends JFrame {
         // On ajoute à l'application
         setContentPane(chartPanel);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
     }
     
     /**
-     * Dataset du diagramme 2D et 3D pour les SALLES
+     * Dataset du diagramme 2D et 3D pour l'effectif des groupes
      *
      * @return
      */
-    private PieDataset creationSallesReportingDataset() {
-        DefaultPieDataset result = new DefaultPieDataset();
+    private PieDataset creationEffectifReportingDataset() {
+        DefaultPieDataset dataset = new DefaultPieDataset();
 
-        SiteDAO si = new SiteDAO();
-        ArrayList<Site> sites = new ArrayList<Site>();
-        sites = si.chercherTousLesSites();
+        PromotionDAO pr = new PromotionDAO();
+        ArrayList<Promotion> promos = new ArrayList<Promotion>();
+        promos = pr.chercherToutesLesPromos();
 
-        for (Salle salle : sites.get(2).getSalles()) {
-            result.setValue(salle.getNomSalle(), salle.getCapacite());
+        for (Groupe groupe : promos.get(2).getGroupes()) {
+            dataset.setValue(groupe.getNomGroupe(), groupe.getEffectifGroupe());
         }
-        return result;
+        
+        return dataset;
     }
-
+    
     /**
-     * Dataset de l'histogramme pour les SALLES
+     * Dataset de l'histogramme pour l'effectif des groupes
      *
      * @return
      */
-    private DefaultCategoryDataset creationHSallesReportingDataset() {
+    private DefaultCategoryDataset creationHEffectifReportingDataset() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        SiteDAO si = new SiteDAO();
-        ArrayList<Site> sites = new ArrayList<Site>();
-        sites = si.chercherTousLesSites();
 
-        for (Salle salle : sites.get(2).getSalles()) {
-            dataset.addValue(salle.getCapacite(), sites.get(2).getNomSite(), salle.getNomSalle());
+        PromotionDAO pr = new PromotionDAO();
+        ArrayList<Promotion> promos = new ArrayList<Promotion>();
+        promos = pr.chercherToutesLesPromos();
+
+        for (Groupe groupe : promos.get(2).getGroupes()) {
+            dataset.addValue(groupe.getEffectifGroupe(), promos.get(2).getNomPromo(), groupe.getNomGroupe());
         }
-        for (Salle salle : sites.get(3).getSalles()) {
-            dataset.addValue(salle.getCapacite(), sites.get(3).getNomSite(), salle.getNomSalle());
-        }
+        
         return dataset;
     }
 
@@ -146,24 +148,14 @@ public class SallesReporting extends JFrame {
         final ChartPanel cPanel = new ChartPanel(barChart);
         return barChart;
     }
-
+    
     /**
      *
      * @param args
      */
     public static void main(String[] args) {
-//        // Main pour la capacité des salles par sites
-//        SallesReporting demo = new SallesReporting("Capacité des salles", "Salles :");
-//        demo.pack();
-//        demo.setVisible(true);
 
-//        // Main pour les heures de cours
-//        SallesReporting demo = new SallesReporting("Heures de cours", "Nombres d'heures par cours :");
-//        demo.pack();
-//        demo.setVisible(true);
-
-        // Main pour les effectifs des groupes
-        SallesReporting demo = new SallesReporting("Effectif des groupes", "Nombres d'élèves par groupes");
+        EffectifGroupeReporting demo = new EffectifGroupeReporting("Effectif des groupes", "Nombres d'élèves par groupes");
         demo.pack();
         demo.setVisible(true);
     }

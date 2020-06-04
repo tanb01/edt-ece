@@ -1,4 +1,4 @@
-package emploidutempsece;
+package vue;
 
 import javax.swing.JFrame;
 import dao.*;
@@ -33,6 +33,9 @@ public class HeuresReporting extends JFrame {
      */
     public HeuresReporting(String applicationTitle, String chartTitle) {
         super(applicationTitle);
+         this.setSize(1000, 900);
+        // Localisation de la fenêtre
+        this.setLocation(100, 100);
         // On crée la dataset pour les heures de cours
         PieDataset dataset = creationHeuresReportingDataset(); // Pour diagramme
         // On crée la chart grâce à la dataset
