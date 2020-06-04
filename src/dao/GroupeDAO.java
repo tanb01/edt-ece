@@ -62,7 +62,7 @@ public class GroupeDAO extends DataAccessObject<Groupe> {
         try {
             ResultSet result = this.connect.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT nom_groupe, promo_id "
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT nom_groupe "
                             + "FROM groupe "
                             + "WHERE groupe_id= " + id);
             ResultSet result2 = this.connect.createStatement(
@@ -85,9 +85,9 @@ public class GroupeDAO extends DataAccessObject<Groupe> {
     }
 //test
 
-//    public static void main(String[] args) {
-//        GroupeDAO gr = new GroupeDAO();
-//        Groupe un = gr.chercher(31);
-//        un.afficher();
-//    }
+    public static void main(String[] args) {
+        GroupeDAO gr = new GroupeDAO();
+        Groupe un = gr.chercher(31);
+        un.afficher();
+    }
 }

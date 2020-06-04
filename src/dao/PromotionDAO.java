@@ -60,6 +60,7 @@ public class PromotionDAO extends DataAccessObject<Promotion> {
      */
     @Override
     public Promotion chercher(int id) {
+        GroupeDAO daoGroupe = new GroupeDAO();
         Promotion promotion = new Promotion();
         try {
             ResultSet result = this.connect.createStatement(
@@ -72,7 +73,8 @@ public class PromotionDAO extends DataAccessObject<Promotion> {
             ArrayList<Groupe> groupes = new ArrayList<Groupe>();
             String nom = "null";
             while (result.next()) {
-                Groupe groupe = new Groupe(result.getInt("groupe_id"), result.getString("nom_groupe"), 0);
+                Groupe groupe = new Groupe();
+                groupe = daoGroupe.chercher(result.getInt("groupe_id"));
                 groupes.add(groupe);
                 nom = result.getString("nom_promo");
             }
@@ -85,11 +87,33 @@ public class PromotionDAO extends DataAccessObject<Promotion> {
         }
         return promotion;
     }
+    
+    public ArrayList<Promotion> chercherToutesLesPromos() {
+        ArrayList<Promotion> promos = new ArrayList<Promotion>();
+        Promotion promo = new Promotion();
+        try {
+            ResultSet result = this.connect.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT promo_id FROM promotion;");
+            while (result.next()) {
+                promo = chercher(result.getInt("promo_id"));
+                promos.add(promo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return promos;
+    }
+    
 //test
-
-//    public static void main(String[] args) {
+    public static void main(String[] args) {
 //        PromotionDAO et = new PromotionDAO();
 //        Promotion un = et.chercher(2);
 //        un.afficher();
-//    }
+    //
+    // Test ARRAYLIST toutes les promos
+        PromotionDAO et = new PromotionDAO();
+        ArrayList<Promotion> un = et.chercherToutesLesPromos();
+        un.get(2).afficher();
+    }
 }

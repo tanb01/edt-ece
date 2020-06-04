@@ -27,15 +27,15 @@ public class Reporting extends JFrame {
     private static final long serialVersionUID = 1L;
 
     /**
-     *
+     * Module Reporting pour l'effectif des groupes
+     * 
      * @param applicationTitle
      * @param chartTitle
      */
-    //heures de cours
     public Reporting(String applicationTitle, String chartTitle) {
         super(applicationTitle);
-        // On crée la dataset pour la SALLE
-        PieDataset dataset = creationHeuresReportingDataset(); // Pour diagramme
+        // On crée la dataset pour l'effectif
+        PieDataset dataset = creationEffectifReportingDataset(); // Pour diagramme
         // On crée la chart grâce à la dataset
         JFreeChart chart = creationDiag3D(dataset, chartTitle); // Pour un diagramme 3D
         // On met la chart dans un panel
@@ -46,8 +46,35 @@ public class Reporting extends JFrame {
         setContentPane(chartPanel);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }
-//capacite salle
-//        public Reporting(String applicationTitle, String chartTitle) {
+    
+//    /**
+//     * Module Reporting pour les heures de cours
+//     * 
+//     * @param applicationTitle
+//     * @param chartTitle
+//     */
+//    public Reporting(String applicationTitle, String chartTitle) {
+//        super(applicationTitle);
+//        // On crée la dataset pour les heures de cours
+//        PieDataset dataset = creationHeuresReportingDataset(); // Pour diagramme
+//        // On crée la chart grâce à la dataset
+//        JFreeChart chart = creationDiag3D(dataset, chartTitle); // Pour un diagramme 3D
+//        // On met la chart dans un panel
+//        ChartPanel chartPanel = new ChartPanel(chart);
+//        // Taille par défaut
+//        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+//        // On ajoute à l'application
+//        setContentPane(chartPanel);
+//        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+//    }
+
+//    /**
+//     * Module Reporting pour la capacité des salles par sites
+//     * 
+//     * @param applicationTitle
+//     * @param chartTitle 
+//     */
+//    public Reporting(String applicationTitle, String chartTitle) {
 //        super(applicationTitle);
 //        // On crée la dataset pour la SALLE
 //        DefaultCategoryDataset dataset = creationSallesReportingHistoDataset(); // Pour histogramme
@@ -60,8 +87,9 @@ public class Reporting extends JFrame {
 //        // On ajoute à l'application
 //        setContentPane(chartPanel);
 //          setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
+//
 //    }
+    
     /**
      * Dataset du diagramme 2D et 3D pour les SALLES
      *
@@ -101,7 +129,7 @@ public class Reporting extends JFrame {
     }
 
     /**
-     * Dataset du diagramme 2D et 3D pour les SALLES
+     * Dataset du diagramme 2D et 3D pour les Heures
      *
      * @return
      */
@@ -136,6 +164,25 @@ public class Reporting extends JFrame {
             result.setValue(tempArray3.get(i), nombresHeuresSeancesTotal);
         }
         return result;
+    }
+    
+    /**
+     * Dataset du diagramme 2D et 3D pour les Heures
+     *
+     * @return
+     */
+    private PieDataset creationEffectifReportingDataset() {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+
+        PromotionDAO pr = new PromotionDAO();
+        ArrayList<Promotion> promos = new ArrayList<Promotion>();
+        promos = pr.chercherToutesLesPromos();
+
+        for (Groupe groupe : promos.get(2).getGroupes()) {
+            dataset.setValue(groupe.getNomGroupe(), groupe.getEffectifGroupe());
+        }
+        
+        return dataset;
     }
 
     /**
@@ -201,7 +248,18 @@ public class Reporting extends JFrame {
      * @param args
      */
     public static void main(String[] args) {
-        Reporting demo = new Reporting("Capacité des salles", "Salles :");
+//        // Main pour la capacité des salles par sites
+//        Reporting demo = new Reporting("Capacité des salles", "Salles :");
+//        demo.pack();
+//        demo.setVisible(true);
+
+//        // Main pour les heures de cours
+//        Reporting demo = new Reporting("Heures de cours", "Nombres d'heures par cours :");
+//        demo.pack();
+//        demo.setVisible(true);
+
+        // Main pour les effectifs des groupes
+        Reporting demo = new Reporting("Effectif des groupes", "Nombres d'élèves par groupes");
         demo.pack();
         demo.setVisible(true);
     }
