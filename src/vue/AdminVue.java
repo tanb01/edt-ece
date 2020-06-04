@@ -96,7 +96,7 @@ public class AdminVue extends JFrame {
         JButton button52 = new JButton("52");
         JButton button53 = new JButton("<html> Emploi du <br> temps<html> ");
 
-        button53.setPreferredSize(new Dimension(265, 120));
+        button53.setPreferredSize(new Dimension(250, 120));
         button53.setIcon(new ImageIcon("img/school.png"));
 
         JButton button54 = new JButton("<html> Salles <br>"
