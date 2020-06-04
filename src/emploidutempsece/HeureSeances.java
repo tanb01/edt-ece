@@ -32,7 +32,7 @@ public class HeureSeances {
      * @param applicationTitle
      * @param chartTitle
      */
-//    public PieChart(String applicationTitle, String chartTitle) {
+//    public HeureSeances(String applicationTitle, String chartTitle) {
 //        super(applicationTitle);
 //        // On crée la dataset
 //        //   PieDataset dataset = creationPieDataset();
@@ -135,9 +135,9 @@ public class HeureSeances {
      * 
      * @param args 
      */
-    public static void main(String[] args) {
-        PieChart demo = new PieChart("Nombres de séances par cours", "Heures");
-        demo.pack();
-        demo.setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        HeureSeances demo = new HeureSeances("Nombres de séances par cours", "Heures");
+//        demo.pack();
+//        demo.setVisible(true);
+//    }
 }

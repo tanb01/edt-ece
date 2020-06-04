@@ -1,11 +1,9 @@
 package emploidutempsece;
 
 import javax.swing.JFrame;
-import dao.SalleDAO;
-import dao.SiteDAO;
+import dao.*;
 import java.util.ArrayList;
-import modele.Salle;
-import modele.Site;
+import modele.*;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -22,7 +20,7 @@ import org.jfree.util.Rotation;
  *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
-public class PieChart extends JFrame {
+public class Reporting extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,11 +29,11 @@ public class PieChart extends JFrame {
      * @param applicationTitle
      * @param chartTitle
      */
-    public PieChart(String applicationTitle, String chartTitle) {
+    public Reporting(String applicationTitle, String chartTitle) {
         super(applicationTitle);
-        // On crée la dataset
-        //   PieDataset dataset = creationPieDataset(); // Pour diagramme
-        DefaultCategoryDataset dataset = creationHistoDataset(); // Pour histogramme
+        // On crée la dataset pour la SALLE
+        //   PieDataset dataset = creationSallesReportingDataset(); // Pour diagramme
+        DefaultCategoryDataset dataset = creationSallesReportingHistoDataset(); // Pour histogramme
         // On crée la chart grâce à la dataset
         //  JFreeChart chart = creationDiag2D(dataset, chartTitle); // Pour un diagramme 2D
         //  JFreeChart chart = creationDiag3D(dataset, chartTitle); // Pour un diagramme 3D
@@ -49,11 +47,11 @@ public class PieChart extends JFrame {
     }
 
     /**
-     * Dataset du diagramme 2D et 3D
+     * Dataset du diagramme 2D et 3D pour les SALLES
      * 
      * @return 
      */
-    private PieDataset creationPieDataset() {
+    private PieDataset creationSallesReportingDataset() {
         DefaultPieDataset result = new DefaultPieDataset();
 
         SiteDAO si = new SiteDAO();
@@ -67,11 +65,11 @@ public class PieChart extends JFrame {
     }
     
     /**
-     * Dataset de l'histogramme
+     * Dataset de l'histogramme pour les SALLES
      * 
      * @return 
      */
-    private DefaultCategoryDataset creationHistoDataset() {
+    private DefaultCategoryDataset creationSallesReportingHistoDataset() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         SiteDAO si = new SiteDAO();
         ArrayList<Site> sites = new ArrayList<Site>();
@@ -86,6 +84,24 @@ public class PieChart extends JFrame {
         return dataset;
     }
 
+    /**
+     * Dataset du diagramme 2D et 3D pour les SALLES
+     * 
+     * @return 
+     */
+    private PieDataset creationHeuresReportingDataset() {
+        DefaultPieDataset result = new DefaultPieDataset();
+
+        SeanceDAO se = new SeanceDAO();
+        ArrayList<Seance> seances = new ArrayList<Seance>();
+        seances = se.chercherToutesLesSeances();
+
+        for (Seance seance : sites.get(2).getSalles()) {
+            result.setValue(salle.getNomSalle(), salle.getCapacite());
+        }
+        return result;
+    }
+    
     /**
      * Création du diagramme 3D
      *
@@ -149,7 +165,7 @@ public class PieChart extends JFrame {
      * @param args 
      */
     public static void main(String[] args) {
-        PieChart demo = new PieChart("Capacité des salles", "Salles :");
+        Reporting demo = new Reporting("Capacité des salles", "Salles :");
         demo.pack();
         demo.setVisible(true);
     }
