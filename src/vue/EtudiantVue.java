@@ -15,38 +15,39 @@ import javax.swing.table.TableModel;
 import java.util.ArrayList;
 import javax.swing.table.TableColumn;
 
+
+///////////////////////////////////////////////////////////////////////////////
+//                     PANEL PRINCIPAL VUE ETUDIANT
+///////////////////////////////////////////////////////////////////////////////
 public class EtudiantVue extends JFrame {
 
     private String titrePage = null;
-
     private JScrollPane jscrollPanel;
-
     private JTable tableEnGrille;
     private JTable tableEnListe;
-
     private JComboBox listeSelectionVue = null;
     private JComboBox listeSelectionFiltre = null;
     private JComboBox listeSelectionChamp = null;
-
     private JButton button53 = null;
     private JButton button54 = null;
     private JButton button60 = null;
     private JButton searchFiltre = null;
-
     private JTextField searchFilterField = null;
-
     private JPanel center = null;
     private JPanel sallesLibresPanel = null;
     private JPanel reportingPanel = null;
+     private JPanel gridPanelb;
     private JPanel filtrePanel = null;
     private JPanel semainesPanel = null;
-
     private ArrayList<JButton> boutons = null;
 
     /**
      *
      * @param title
      */
+//-----------------------------------------------------------------------------
+//                          Classe etudiant vue
+//-----------------------------------------------------------------------------    
     public EtudiantVue(String title) {
 
         // Affiche le titre en haut de la fenêtre
@@ -65,7 +66,7 @@ public class EtudiantVue extends JFrame {
         }
 
         button53 = new JButton("<html>Emploi du<br> temps<html>");
-        button53.setPreferredSize(new Dimension(265, 120));
+        button53.setPreferredSize(new Dimension(130, 100));
         button53.setIcon(new ImageIcon("img/school.png"));
 
         button54 = new JButton("<html> Salles <br>libres </html>");
@@ -74,15 +75,15 @@ public class EtudiantVue extends JFrame {
         button60.setIcon(new ImageIcon("img/result.png"));
 
         // Police Times New Roman
-        Font f = new Font("Times New Roman", Font.BOLD, 24);
+        Font f = new Font("Times New Roman", Font.BOLD, 16);
         UIManager.put("JButton.font", f);
 
         // Couleur et polices
-        button53.setBackground(new java.awt.Color(251, 249, 0));
+        button53.setBackground(new java.awt.Color(255, 255, 0));
         button53.setFont(f);
         button54.setBackground(new java.awt.Color(182, 213, 56));
         button54.setFont(f);
-        button60.setBackground(new java.awt.Color(254, 138, 56));
+        button60.setBackground(new java.awt.Color(254, 67, 1));
         button60.setFont(f);
 
         // Conteneur principal
@@ -93,7 +94,7 @@ public class EtudiantVue extends JFrame {
 
         // Panel du haut
         JPanel topPanel = new JPanel();
-        topPanel.setBorder(new LineBorder(Color.BLACK, 3));
+        topPanel.setBorder(new LineBorder(Color.BLACK, 2));
         topPanel.setBackground(new java.awt.Color(147, 212, 250));
         topPanel.setLayout(new FlowLayout(3));
         mainContainer.add(topPanel, BorderLayout.NORTH);
@@ -140,7 +141,7 @@ public class EtudiantVue extends JFrame {
 
         // Panel de droite
         JPanel rightPanel = new JPanel();
-        rightPanel.setBorder(new LineBorder(Color.BLACK, 3));
+        rightPanel.setBorder(new LineBorder(Color.BLACK, 2));
         rightPanel.setBackground(new java.awt.Color(211, 212, 250));
         rightPanel.setLayout(new FlowLayout(2));
 
@@ -160,31 +161,34 @@ public class EtudiantVue extends JFrame {
         // Panel du centre
         center = new JPanel();
         center.setOpaque(true);
-        center.setBorder(new LineBorder(Color.BLACK, 3));
+        center.setBorder(new LineBorder(Color.BLACK, 2));
         center.setLayout(new FlowLayout(5));
         center.setBackground(new java.awt.Color(211, 212, 250));
         mainContainer.add(center, BorderLayout.CENTER);
 
         semainesPanel = new JPanel();
-        semainesPanel.setLayout(new GridLayout(2, 1, 5, 5));
-        semainesPanel.setBorder(new LineBorder(Color.BLACK, 3));
+        semainesPanel.setLayout(new GridLayout(2, 1, 1, 1));
+        semainesPanel.setBorder(new LineBorder(Color.BLACK, 2));
 
         center.add(semainesPanel);
 
         filtrePanel = new JPanel();
-        filtrePanel.setLayout(new GridLayout(1, 1, 5, 5));
-        filtrePanel.setBorder(new LineBorder(Color.BLACK, 3));
+        filtrePanel.setLayout(new GridLayout(1,1, 5, 5));
+        filtrePanel.setBorder(new LineBorder(Color.BLACK, 2));
         filtrePanel.setBackground(new java.awt.Color(145, 200, 100));
 
-        JLabel labelVue = new JLabel("-  Vue ");
+        JLabel labelVue = new JLabel("   Vue ");
         String[] selectionVue = {"en grille", "en liste"};
 
         listeSelectionVue = new JComboBox(selectionVue);
 
         filtrePanel.add(labelVue);
         filtrePanel.add(listeSelectionVue);
+        
+        Font fk = new Font("Times New Roman", Font.BOLD, 18);
+        UIManager.put("JLabel.font", fk);
 
-        JLabel labelFiltre = new JLabel(" - Filtrer par ");
+        JLabel labelFiltre = new JLabel("  Filtrer par ");
         String[] selectionFiltre = {" ", "Nom enseignant(e)", "Matière"};
 
         listeSelectionFiltre = new JComboBox(selectionFiltre);
@@ -195,15 +199,31 @@ public class EtudiantVue extends JFrame {
         String[] selectionChamp = {" ", "Segado", "Daachi"};
         listeSelectionChamp = new JComboBox(selectionChamp);
 
-        searchFiltre = new JButton("Search");
+        searchFiltre = new JButton(" Chercher ");
+        searchFiltre.setIcon(new ImageIcon("img/lo.png"));
+        searchFiltre.setBackground(new java.awt.Color(254, 254, 254));
+        searchFiltre.setFont(fk);
+        
+        labelFiltre.setFont(fk);
+        labelVue.setFont(fk);
+        
         searchFilterField = new JTextField();
         filtrePanel.add(searchFilterField);
         filtrePanel.add(searchFiltre);
         center.add(filtrePanel, BorderLayout.NORTH);
+        
+        Font fG = new Font("Times New Roman", Font.BOLD, 12);
+        UIManager.put("JButton.font", fG);
 
         for (JButton bouton : boutons) {
             semainesPanel.add(bouton);
+            bouton.setPreferredSize(new Dimension(46, 25));
+            bouton.setFont(fG);
+            bouton.setBackground(new java.awt.Color(254, 254, 254));
+            
+                   
         }
+        
 
         //innerContainer.add(semaineEDT, BorderLayout.WEST);
         jscrollPanel = new JScrollPane();
@@ -227,7 +247,7 @@ public class EtudiantVue extends JFrame {
                 }
         ));
         jscrollPanel.setViewportView(tableEnGrille);
-        tableEnGrille.setPreferredScrollableViewportSize(new Dimension(1590, 720));//2500, 1460
+        tableEnGrille.setPreferredScrollableViewportSize(new Dimension(1610, 740));//2500, 1460
         tableEnGrille.setRowHeight(105);
         TableColumn col = tableEnGrille.getColumnModel().getColumn(0);
         col.setPreferredWidth(125);
@@ -249,6 +269,9 @@ public class EtudiantVue extends JFrame {
         // Panel
         center.add(jscrollPanel, BorderLayout.SOUTH);
 
+        
+//------------------------------------------------------------------------------        
+//                      FIN DU PANEAI PRINCIPAL VUE        
 //------------------------------------------------------------------------------
         this.setLayout(new BorderLayout());
         sallesLibresPanel = new JPanel();
@@ -270,13 +293,11 @@ public class EtudiantVue extends JFrame {
         reportingPanel.setOpaque(true);
         reportingPanel.setBorder(new LineBorder(Color.BLACK, 3));
         reportingPanel.setLayout(new FlowLayout(5));
-        reportingPanel.setBackground(Color.blue);
+        reportingPanel.setBackground(new java.awt.Color(254, 254, 254));
+        ajoutDuPanelReporting();
 //        center.add(reportingPanel, BorderLayout.CENTER);
 
-        JLabel label16 = new JLabel();
-        reportingPanel.add(label16);
-        label16.setFont(new java.awt.Font("Tahoma", 0, 36));
-        label16.setText("Reporting");
+        
 
         // On ajoute les 4 panels au content pane de la JFrame
         // Au centre
@@ -294,6 +315,7 @@ public class EtudiantVue extends JFrame {
      *
      * @param m
      */
+////////////////////////////////////////////////////////////////////////////////    
     public void selectSemaine(int index) {
         //boutons.get(index).setText("X");
         center.revalidate();
@@ -491,9 +513,10 @@ public class EtudiantVue extends JFrame {
     public JTable getJTable() {
         return tableEnGrille;
     }
-
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////    
     public void ajoutDuPanelSallesLibres() {
-        Font f = new Font("Times New Roman", Font.BOLD, 30);
+        Font f = new Font("Times New Roman", Font.BOLD, 18);
         //UIManager.put("JButton.font", f);
 
         JPanel gridPanel3 = new JPanel();
@@ -503,7 +526,7 @@ public class EtudiantVue extends JFrame {
 
         JLabel titra = new JLabel("  Salles libres    ");
         gridPanel3.add(titra);
-        Font t = new Font("Times New Roman", Font.BOLD, 24);
+        Font t = new Font("Times New Roman", Font.BOLD, 18);
         UIManager.put("JLabel.font", t);
         titra.setFont(t);
 
@@ -513,8 +536,8 @@ public class EtudiantVue extends JFrame {
         gridPanel7.setBackground(new java.awt.Color(145, 200, 100));
 
         TextField enseignant = new java.awt.TextField();
-        enseignant.setText("");
-        Font y = new Font("Times New Roman", Font.BOLD, 20);
+        enseignant.setText(" ");
+        Font y = new Font("Times New Roman", Font.BOLD, 16);
         UIManager.put("JLabel.font", y);
 
         JLabel ense = new JLabel(" Capacité maximal  ");
@@ -572,8 +595,9 @@ public class EtudiantVue extends JFrame {
 
         JButton Montrer2 = new JButton("Valider l'affectation");
         Montrer2.setFont(f);
+        Montrer2.setIcon(new ImageIcon("img/check.png"));
 
-        gridPanela.add(Montrer2);
+       
         gridPanel9.add(cb1);
 
         sallesLibresPanel.add(gridPanel3);
@@ -582,9 +606,74 @@ public class EtudiantVue extends JFrame {
         sallesLibresPanel.add(gridPanel5);
         sallesLibresPanel.add(gridPanel8);
         sallesLibresPanel.add(gridPanel9);
-        sallesLibresPanel.add(gridPanela);
+        sallesLibresPanel.add(Montrer2);
     }
+///////////////////////////////////////////////////////////////////////////////
+    public void ajoutDuPanelReporting() { 
+                
+        JPanel gridPanela = new JPanel();
+        gridPanela.setLayout(new GridLayout(1, 1, 10, 5));
+        gridPanela.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanela.setBackground(new java.awt.Color(145, 200, 100));
+        
+        JPanel gridPanelb = new JPanel();
+        gridPanelb.setLayout(new GridLayout(2,2, 5, 5));
+        gridPanelb.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanelb.setBackground(new java.awt.Color(145, 200, 100));
+        
+        Font f = new Font("Times New Roman", Font.BOLD, 30);
+        UIManager.put("JButton.font", f);
+        
+        
+        JButton Montrer2 = new JButton("<html>Capacité des salles <br> pour un site</html>");
+        Montrer2.setFont(f);
+        Montrer2.setIcon(new ImageIcon("img/a4.png"));
+        Montrer2.setBackground(new java.awt.Color(163, 255, 0));
+        Montrer2.setFont(f);
+        gridPanelb.add(Montrer2);
+        
+        JButton Montrer3 = new JButton("<html>Taux d'occupation <br> dessalles sur une <br> période donnée</html>");
+        Montrer3.setFont(f);
+        Montrer3.setIcon(new ImageIcon("img/a2.png"));
+        Montrer3.setBackground(new java.awt.Color(163, 150, 253));
+        Montrer3.setFont(f);
+        
+        gridPanelb.add(Montrer3);
+        
+        JButton Montrer4 = new JButton("<html>Nombre d'heures de <br> séance par an</html>");
+        Montrer4.setFont(f);
+        Montrer4.setIcon(new ImageIcon("img/a3.png"));
+        Montrer4.setBackground(new java.awt.Color(255, 153, 5));
+        Montrer4.setFont(f);
+        
+        gridPanelb.add(Montrer4);
+        
+        JButton Montrer5 = new JButton("<html>Nombre d'heures de <br>séance par TD</html>");
+        Montrer5.setFont(f);
+        Montrer5.setIcon(new ImageIcon("img/a1.png"));
+        Montrer5.setBackground(new java.awt.Color(255,255,0));
+        Montrer5.setFont(f);
+        
+        Montrer2.setPreferredSize(new Dimension(900, 485));
+        Montrer3.setPreferredSize(new Dimension(900, 485));
+        Montrer4.setPreferredSize(new Dimension(900, 485));
+        Montrer5.setPreferredSize(new Dimension(900, 485));
+        
+        gridPanelb.add(Montrer5);
+        
+        
+//        center.add(reportingPanel, BorderLayout.CENTER);
 
+        JLabel label16 = new JLabel();
+        reportingPanel.add(label16);
+        label16.setFont(new java.awt.Font("Tahoma", 0, 36));
+        
+        reportingPanel.add(gridPanelb);
+        
+
+        
+        
+    }
     /**
      *
      * @param args
