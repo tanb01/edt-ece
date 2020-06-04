@@ -22,7 +22,10 @@ public class AdminVue extends JFrame {
     private javax.swing.JTable jTable1;
     private JScrollPane scroll;
     private DefaultTableModel model;
-
+    private JButton button53,button54,button55,button56,button57;
+    private JPanel center = null;
+    private JPanel centersalleslibres = null;
+    private  JPanel MyPanel1;
     /**
      * 
      * @param title 
@@ -424,8 +427,210 @@ public class AdminVue extends JFrame {
         gridPanel6.add(listeDeCours);
 
         bottomPanel.add(gridPanel6, BorderLayout.CENTER);
+    
+    
+//------------------------------------------------------------------------------
+//                           PANEL DE SALLES LIBRES
+//------------------------------------------------------------------------------    
+        JPanel centersalleslibres = new JPanel();
+        centersalleslibres.setOpaque(true);        
+        centersalleslibres.setBorder(new LineBorder(Color.BLACK, 3));
+        centersalleslibres.setLayout(new FlowLayout(5));
+        centersalleslibres.setBackground(new java.awt.Color(211, 212, 250));
+        mainContainer.add(centersalleslibres, BorderLayout.CENTER);
+
+                
+        JPanel gridPanel3s = new JPanel();
+        gridPanel3s.setLayout(new GridLayout(1, 1, 1, 5));
+        gridPanel3s.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel3s.setBackground(new java.awt.Color(145, 200, 100));
+        
+        
+        JLabel titra = new JLabel("  Salles libres    ");
+        gridPanel3.add(titra);
+        Font t = new Font("Times New Roman", Font.BOLD, 24);
+        UIManager.put("JLabel.font", t);
+        titra.setFont(t);
+        
+        JPanel gridPanel7 = new JPanel();
+        gridPanel7.setLayout(new GridLayout(1,2 , 1, 5));
+        gridPanel7.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel7.setBackground(new java.awt.Color(145, 200, 100));
+        
+        TextField enseignant = new java.awt.TextField();
+        enseignant.setText("                 ");
+        Font y = new Font("Times New Roman", Font.BOLD, 20);
+        UIManager.put("JLabel.font", y);
+        
+        JLabel ense = new JLabel(" Capacité maximal  ");
+        ense.setFont(t);
+        enseignant.setFont(y);
+        
+        gridPanel7.add(ense);
+        gridPanel7.add(enseignant);             
+       
+        centersalleslibres.add(gridPanel3, BorderLayout.NORTH);
+        centersalleslibres.add(gridPanel7, BorderLayout.WEST);
+       
+//-----------------------------------------------------------
+        JPanel gridPanel5s = new JPanel();
+        gridPanel5s.setLayout(new GridLayout(1,2, 1, 5));
+        gridPanel5s.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel5s.setBackground(new java.awt.Color(145, 200, 100));
+
+        
+
+        JLabel labelFiltres = new JLabel("   Durée   ");
+        labelFiltres.setFont(t);
+        String[] selectionFiltres = {"15mn ", "30mn", "45mn", "1h00", "1h15", "1h30","1h45","2h00", "2h15", "2h30","2h45","3h00", "3h15", "3h30","3h45","3h00", "3h15", "3h30","3h45","4h00", "4h15", "4h30","4h45","5h00", "5h15", "5h30","5h45","6h00", "6h15", "6h30","6h45","7h00", "7h15", "7h30","7h45","6h00"};
+        JComboBox listeSelectionFiltres = new JComboBox(selectionFiltres);
+        listeSelectionFiltres.setFont(y);
+
+        gridPanel5s.add(labelFiltres);
+        gridPanel5s.add(listeSelectionFiltres);
+ 
+        centersalleslibres.add(gridPanel5s, BorderLayout.NORTH);
+
+//------------------------------------------------------------------
+        JPanel gridPanel8 = new JPanel();
+        gridPanel8.setLayout(new GridLayout(1,2, 1, 5));
+        gridPanel8.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel8.setBackground(new java.awt.Color(145, 200, 100));
+
+        
+
+        JLabel labelFiltre2s = new JLabel(" Site  ");
+        labelFiltre2s.setFont(t);
+        String[] selectionFiltre2s = {" Eiffel 1", "Eiffel 2", "Eiffel 3", "Eiffel 4", "Eiffel 5", "Cnam"};
+        JComboBox listeSelectionFiltre2s = new JComboBox(selectionFiltre2s);
+        listeSelectionFiltre2s.setFont(y);
+
+        gridPanel8.add(labelFiltre2s);
+        gridPanel8.add(listeSelectionFiltre2s);
+ 
+        centersalleslibres.add(gridPanel8, BorderLayout.NORTH);
+//------------------------------------------------------------------
+        JPanel gridPanel9 = new JPanel();
+        gridPanel9.setLayout(new GridLayout(1,1, 1, 5));
+        gridPanel9.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel9.setBackground(new java.awt.Color(145, 200, 100));
+
+        JCheckBox cb1 = new JCheckBox("Ignorer les salles ayant des demandes de réservation en cours");  
+        Font w = new Font("Times New Roman", Font.BOLD, 20);
+        UIManager.put("JCheckBox.font", w);
+        cb1.setFont(w);
+       
+        JPanel gridPanela = new JPanel();
+        gridPanela.setLayout(new GridLayout(1,2, 10, 5));
+        gridPanela.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanela.setBackground(new java.awt.Color(145, 200, 100));
+
+        JButton Montrer2 = new JButton("Valider l'affectation");
+        Montrer2.setFont(f);        
+         
+        gridPanela.add(Montrer2); 
+        gridPanel9.add(cb1);
+             
+        
+        
+        centersalleslibres.add(gridPanel9, BorderLayout.NORTH);
+        
+      
+//----------------------------------------------------------------
+
+        centersalleslibres.add(jScrollPane1, BorderLayout.CENTER);
+//----------------------------------------------------------------------
+        //------------------------------------------------------------------------------       
+        JPanel bottomPanels = new JPanel();
+        bottomPanels.setLayout(new FlowLayout());        
+        bottomPanels.setBackground(new java.awt.Color(249, 207, 192));
+        bottomPanels.setBorder(new LineBorder(Color.BLACK, 3));
+        mainContainer.add(bottomPanels, BorderLayout.SOUTH);
+        
+        JPanel gridPanel2s = new JPanel();
+        gridPanel2s.setLayout(new GridLayout(1, 3, 950, 5));
+        gridPanel2s.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel2s.setBackground(new java.awt.Color(249, 207, 192));
+        
+        JLabel P1s = new JLabel("Liste de Salles disponibles");        
+        
+        Font rs = new Font("Times New Roman", Font.BOLD, 32);
+        UIManager.put("JMenuItem.font", rs);
+        P1.setFont(rs);
+        
+                      
+        gridPanel2s.add(P1s, BorderLayout.PAGE_END);    
+        
+        bottomPanels.add(gridPanel2s, BorderLayout.SOUTH);
+         
+ //------------------------------ 
+        JPanel gridPanel6s = new JPanel();
+        gridPanel6s.setLayout(new GridLayout(1, 3, 1050, 5));
+        gridPanel6s.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel6s.setBackground(new java.awt.Color(249, 242, 155));       
+        
+        List listeDeSalless = new java.awt.List(50, false); 
+        
+        
+        gridPanel6s.add(listeDeSalless);      
+        
+        bottomPanels.add(gridPanel6s, BorderLayout.CENTER);
+    
+//------------------------------------------------------------------------------
+//                         FIN DU PANEL SALLES LIBRES    
+//------------------------------------------------------------------------------
+    
+        center.add(centersalleslibres, BorderLayout.CENTER);
+        bottomPanel.add(bottomPanels, BorderLayout.CENTER);
+         
+         // On ajoute les 4 panels au content pane de la JFrame
+        // Au centre
+        this.getContentPane().add(center, BorderLayout.CENTER);
+        // En haut
+        this.getContentPane().add(topPanel, BorderLayout.NORTH);
+        // À droite
+        this.getContentPane().add(rightPanel, BorderLayout.WEST);
+        // En bas
+        this.getContentPane().add(bottomPanel, BorderLayout.SOUTH);
+        showEmploiDuTemps();
+    
+    
+    
+    
+    
+    
+    }
+////////////////////////////////////////////////////////////////////////////
+    
+    public JButton getBoutonEmploiDuTemps() {
+        return button53;
     }
 
+    public JButton getBoutonSallesLibres() {
+        return button54;
+    }
+
+    
+
+    public void showEmploiDuTemps() {
+        center.removeAll();
+        center.add(MyPanel1);
+        MyPanel1.setVisible(true);
+        center.add(filtrePanel);
+        filtrePanel.setVisible(true);
+        center.add(jscrollPanel);
+        center.revalidate();
+        center.repaint();
+    }
+
+    public void showSallesLibres() {
+        center.removeAll();
+        center.add(centersalleslibres);
+        center.revalidate();
+        center.repaint();
+    }
+
+    
     public static void main(String[] args) {
         AdminVue mylayout = new AdminVue("Accueil");
         mylayout.setVisible(true);

@@ -303,7 +303,7 @@ public class EtudiantVue extends JFrame {
         bottomPanel.setBackground(new java.awt.Color(200, 100, 200));
         bottomPanel.setBorder(new LineBorder(Color.BLACK, 3));
         mainContainer.add(bottomPanel, BorderLayout.SOUTH);
-
+//------------------------------------------------------------------------------
         this.setLayout(new BorderLayout());
         sallesLibresPanel = new JPanel();
         sallesLibresPanel.setOpaque(true);
