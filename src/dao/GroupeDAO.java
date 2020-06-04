@@ -65,11 +65,18 @@ public class GroupeDAO extends DataAccessObject<Groupe> {
                     ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT nom_groupe, promo_id "
                             + "FROM groupe "
                             + "WHERE groupe_id= " + id);
+            ResultSet result2 = this.connect.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT COUNT(user_id\n"
+                            + "            ) as effectif FROM etudiant WHERE groupe_id =" + id);
+            if (result2.first()) {
+                result2.getInt("effectif");
+            }
             if (result.first()) {
                 groupe = new Groupe(
                         id,
                         result.getString("nom_groupe"),
-                        result.getInt("promo_id"));
+                        result2.getInt("effectif"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -80,7 +87,7 @@ public class GroupeDAO extends DataAccessObject<Groupe> {
 
 //    public static void main(String[] args) {
 //        GroupeDAO gr = new GroupeDAO();
-//        Groupe un = gr.chercher(20);
+//        Groupe un = gr.chercher(31);
 //        un.afficher();
 //    }
 }

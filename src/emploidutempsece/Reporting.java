@@ -3,6 +3,8 @@ package emploidutempsece;
 import javax.swing.JFrame;
 import dao.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import modele.*;
 
 import org.jfree.chart.ChartFactory;
@@ -29,25 +31,37 @@ public class Reporting extends JFrame {
      * @param applicationTitle
      * @param chartTitle
      */
+    //heures de cours
     public Reporting(String applicationTitle, String chartTitle) {
         super(applicationTitle);
         // On crée la dataset pour la SALLE
-        //   PieDataset dataset = creationSallesReportingDataset(); // Pour diagramme
-                   PieDataset dataset = creationHeuresReportingDataset(); // Pour diagramme
-
-//        DefaultCategoryDataset dataset = creationSallesReportingHistoDataset(); // Pour histogramme
+        PieDataset dataset = creationHeuresReportingDataset(); // Pour diagramme
         // On crée la chart grâce à la dataset
-        //  JFreeChart chart = creationDiag2D(dataset, chartTitle); // Pour un diagramme 2D
-          JFreeChart chart = creationDiag3D(dataset, chartTitle); // Pour un diagramme 3D
-//        JFreeChart chart = creationHisto(dataset, chartTitle); // Pour un histogramme
+        JFreeChart chart = creationDiag3D(dataset, chartTitle); // Pour un diagramme 3D
         // On met la chart dans un panel
         ChartPanel chartPanel = new ChartPanel(chart);
         // Taille par défaut
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
         // On ajoute à l'application
         setContentPane(chartPanel);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }
+//capacite salle
+//        public Reporting(String applicationTitle, String chartTitle) {
+//        super(applicationTitle);
+//        // On crée la dataset pour la SALLE
+//        DefaultCategoryDataset dataset = creationSallesReportingHistoDataset(); // Pour histogramme
+//        // On crée la chart grâce à la dataset
+//        JFreeChart chart = creationHisto(dataset, chartTitle); // Pour un histogramme
+//        // On met la chart dans un panel
+//        ChartPanel chartPanel = new ChartPanel(chart);
+//        // Taille par défaut
+//        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+//        // On ajoute à l'application
+//        setContentPane(chartPanel);
+//          setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+//    }
     /**
      * Dataset du diagramme 2D et 3D pour les SALLES
      *
@@ -97,22 +111,30 @@ public class Reporting extends JFrame {
         SeanceDAO se = new SeanceDAO();
         ArrayList<Seance> seances = new ArrayList<Seance>();
         seances = se.chercherSeancesParGroupeId(31);
+
+        ArrayList<String> tempArray = new ArrayList<String>();
+        seances.forEach(seance -> tempArray.add(seance.getCoursSeance().getNomCours()));
+        List<String> tempArray2 = tempArray.stream().distinct().collect(Collectors.toList());
+        ArrayList<String> tempArray3 = new ArrayList<String>();
+        tempArray2.forEach(s -> tempArray3.add(s));
+
+        int timeCounter = 0;
         int nombresSeances = seances.size();
         int nombresMinTotal = (90 * nombresSeances);
         int nombresHeuresSeancesTotal = nombresMinTotal / 60;
         nombresMinTotal %= 60;
-        
-//        ArrayList<Cours> cours = new ArrayList<Cours>();
-//        for (Seance seance : seances) {
-//            
-//            result.setValue(salle.getNomSalle(), salle.getCapacite());
-//            
-//        }
-//        result.setValue("Nombres d'heures du groupe 31", );
-
-
-        System.out.printf("%d:%02d", nombresHeuresSeancesTotal, nombresMinTotal);
-
+        for (int i = 0; i < tempArray3.size(); i++) {
+            timeCounter = 0;
+            for (int j = 0; j < seances.size(); j++) {
+                if (tempArray3.get(i).equals(seances.get(j).getCoursSeance().getNomCours())) {
+                    timeCounter++;
+                }
+            }
+            nombresMinTotal = (90 * timeCounter);
+            nombresHeuresSeancesTotal = nombresMinTotal / 60;
+            nombresMinTotal %= 60;
+            result.setValue(tempArray3.get(i), nombresHeuresSeancesTotal);
+        }
         return result;
     }
 
