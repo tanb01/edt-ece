@@ -616,9 +616,11 @@ public class AdminVue extends JFrame {
         center.removeAll();
         center.add(MyPanel1);
         MyPanel1.setVisible(true);
+
         //center.add(filtrePanel);
         //filtrePanel.setVisible(true);
         //center.add(jscrollPanel);
+
         center.revalidate();
         center.repaint();
     }

@@ -67,13 +67,18 @@ public class EtudiantVue extends JFrame {
         // Déclaration de tous les boutons grâce à JButton
         boutons = new ArrayList<JButton>();
         for (int i = 1; i < 53; i++) {
-            boutons.add(new JButton(String.valueOf(i)));
+            boutons.add(new JButton(String.valueOf(i)));          
+            
         }
-        button53 = new JButton("Emploi du temps");
+        
+        button53 = new JButton("<html>Emploi du<br> temps<html>");
         button53.setPreferredSize(new Dimension(265, 120));
+        button53.setIcon(new ImageIcon("img/school.png"));
 
-        button54 = new JButton("<html> Salles libres <br> </html>");
+        button54 = new JButton("<html> Salles <br>libres </html>");
+        button54.setIcon(new ImageIcon("img/salles.png"));
         button60 = new JButton("<html> Reporting <br> </html>");
+        button60.setIcon(new ImageIcon("img/result.png"));
 //        JButton button55 = new JButton("<html> Modifier un cours<br> </html>");
 //        JButton button56 = new JButton("<html> Modifier une seance<br> </html>");
 //        JButton button57 = new JButton("<html> Modifier un groupe<br> </html>");
@@ -81,15 +86,15 @@ public class EtudiantVue extends JFrame {
 //        JButton button59 = new JButton("Comment utiliser l'apllication?");
 
         // Police Times New Roman
-        Font f = new Font("Times New Roman", Font.BOLD, 30);
+        Font f = new Font("Times New Roman", Font.BOLD, 24);
         UIManager.put("JButton.font", f);
 
         // Couleur et polices
-        button53.setBackground(new java.awt.Color(147, 212, 250));
+        button53.setBackground(new java.awt.Color(251, 249, 0));
         button53.setFont(f);
-        button54.setBackground(new java.awt.Color(252, 222, 1));
+        button54.setBackground(new java.awt.Color(182, 213, 56));
         button54.setFont(f);
-        button60.setBackground(new java.awt.Color(252, 222, 1));
+        button60.setBackground(new java.awt.Color(254, 138, 56));
         button60.setFont(f);
 //        button55.setBackground(new java.awt.Color(252, 108, 1));
 //        button55.setFont(f);
@@ -108,9 +113,9 @@ public class EtudiantVue extends JFrame {
 
         // Panel du haut
         JPanel topPanel = new JPanel();
-        topPanel.setBorder(new LineBorder(Color.BLACK, 5));
+        topPanel.setBorder(new LineBorder(Color.BLACK, 3));
         topPanel.setBackground(new java.awt.Color(147, 212, 250));
-        topPanel.setLayout(new FlowLayout(5));
+        topPanel.setLayout(new FlowLayout(3));
         mainContainer.add(topPanel, BorderLayout.NORTH);
 
         // Barre de menu
@@ -122,7 +127,7 @@ public class EtudiantVue extends JFrame {
         //JMenu menu4 = new JMenu("SALLES");
 
         // Nouvelle police (autre taille de police)
-        Font g = new Font("Times New Roman", Font.BOLD, 18);
+        Font g = new Font("Times New Roman", Font.BOLD, 14);
         UIManager.put("JMenu.font", g);
         menu.setFont(g);
         menu1.setFont(g);
@@ -184,14 +189,14 @@ public class EtudiantVue extends JFrame {
 
         // Panel de droite
         JPanel rightPanel = new JPanel();
-        rightPanel.setBorder(new LineBorder(Color.BLACK, 5));
+        rightPanel.setBorder(new LineBorder(Color.BLACK, 3));
         rightPanel.setBackground(new java.awt.Color(211, 212, 250));
-        rightPanel.setLayout(new FlowLayout(5));
+        rightPanel.setLayout(new FlowLayout(2));
 
         // Grille
         JPanel gridPanel = new JPanel();
-        gridPanel.setLayout(new GridLayout(6, 1, 5, 5));
-        gridPanel.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel.setLayout(new GridLayout(3, 1, 4, 1));
+        gridPanel.setBorder(new LineBorder(Color.BLACK, 2));
         gridPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         gridPanel.add(button53);
@@ -298,11 +303,7 @@ public class EtudiantVue extends JFrame {
         // Panel
         center.add(jscrollPanel, BorderLayout.SOUTH);
 
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FlowLayout());
-        bottomPanel.setBackground(new java.awt.Color(200, 100, 200));
-        bottomPanel.setBorder(new LineBorder(Color.BLACK, 3));
-        mainContainer.add(bottomPanel, BorderLayout.SOUTH);
+       
 //------------------------------------------------------------------------------
         this.setLayout(new BorderLayout());
         sallesLibresPanel = new JPanel();
@@ -340,8 +341,7 @@ public class EtudiantVue extends JFrame {
         // À droite
         this.getContentPane().add(rightPanel, BorderLayout.WEST);
         // En bas
-        this.getContentPane().add(bottomPanel, BorderLayout.SOUTH);
-        showEmploiDuTemps();
+        
     }
 
     /**
