@@ -200,9 +200,9 @@ public class EDTControleur implements ActionListener, ItemListener {
 
     public void control() {
         ve.getBoutonEmploiDuTemps().addActionListener(this);
-        for (JButton bouton : ve.getBoutonsSemaine()) {
+        ve.getBoutonsSemaine().forEach((bouton) -> {
             bouton.addActionListener(this);
-        }
+        });
         ve.getBoutonSallesLibres().addActionListener(this);
         ve.getBoutonReporting().addActionListener(this);
         ve.getJComboBoxSelectionVue().addItemListener(this);
