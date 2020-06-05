@@ -32,6 +32,7 @@ import dao.EnseignantDAO;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import modele.Groupe;
 import vue.EnseignantVue;
 import vue.EtudiantVue;
 
@@ -192,32 +193,40 @@ public class Admincontroleur implements ActionListener {
         return jour;
     }
 
-    public void control() {
+     public void control() {
         ve.getBoutonEmploiDuTemps().addActionListener(this);
         ve.getBoutonsSemaine().forEach((bouton) -> {
             bouton.addActionListener(this);
         });
         ve.getBoutonSallesLibres().addActionListener(this);
-//        ve.getBoutonReporting().addActionListener(this);
-        ve.getBoutonModifier().addActionListener((ActionListener) this);
-//        ve.getJComboBoxSelectionVue().addItemListener((ItemListener) this);
-
-//        ve.getJComboBoxFilterSelection().addItemListener((ItemListener) this);
-
-//        ve.getJComboBoxFilterSelectionEx().addItemListener(this);
-//        ve.getButtonSearchFiltre().addActionListener((ActionListener) this);
+        ve.getBoutonReporting().addActionListener(this);        
+//        ve.getButtonSearchFiltre().addActionListener(this);
 
         ve.setTableEnGrille(dtm);
         ve.setVisible(true);
         System.out.println("Control");
     }
 
+    @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == ve.getBoutonEmploiDuTemps()) {
             ve.showEmploiDuTemps();
         }
         if (ae.getSource() == ve.getBoutonSallesLibres()) {
             ve.showSallesLibres();
+//            String[][] data2 = new String[listSeancesSelectionnees.size()][1];
+//            for (int i = 0; i < listSeancesSelectionnees.size(); i++) {
+//                data2[i][0] = getJourDeLaSemaine(listSeancesSelectionnees.get(i).getDate()) + "     " + listSeancesSelectionnees.get(i).stringify();
+//            }
+//
+//            DefaultTableModel dtm2 = new DefaultTableModel(
+//                    data2,
+//                    new String[]{
+//                        " "
+//                    }
+//            );
+//            ve.changeAVueEnListe(dtm2);
+//            ve.setVisible(true);
         }
         if (ae.getSource() == ve.getBoutonReporting()) {
             ve.showReporting();
@@ -253,6 +262,7 @@ public class Admincontroleur implements ActionListener {
         }
     }
 
+    
     public void itemStateChanged(ItemEvent ie) {
         if (ie.getStateChange() == ItemEvent.SELECTED) {
             switch (ve.getJComboBoxSelectionVue().getSelectedItem().toString()) {
@@ -273,6 +283,20 @@ public class Admincontroleur implements ActionListener {
                     break;
             }
         }
+    }
+
+    public ArrayList<Seance> getSeancesParGroupeIdEtNumeroSemaine(int groupeId, int numeroSemaine) {
+        ArrayList<Seance> tempArray = new ArrayList<Seance>();
+        for (Seance s : listSeances) {
+            if (s.getNumeroSemaine() == numeroSemaine) {
+                for (Groupe g : s.getListeGroupes()) {
+                    if (groupeId == g.getGroupeId()) {
+                        tempArray.add(s);
+                    }
+                }
+            }
+        }
+        return tempArray;
     }
 
     public void affecterSeancesDeSemaine() {
@@ -309,7 +333,6 @@ public class Admincontroleur implements ActionListener {
                 for (int i = 0; i < 7; i++) {
                     if ((listSeancesSelectionnees.get(g).getDebutHeure() + "-" + listSeancesSelectionnees.get(g).getFinHeure()).equals(data[i][0])) {
                         data[i][colinc] = listSeancesSelectionnees.get(g).stringify();
-                        
                     }
                 }
                 g++;

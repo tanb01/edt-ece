@@ -6,6 +6,7 @@ package vue;
  *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
+import controleur.Reporting;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.LineBorder;
@@ -24,6 +25,7 @@ public class AdminVue extends JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private JScrollPane scroll;
+    private JTable tableSalles;
     private DefaultTableModel model;
     private JButton button53, button54, button55, button56, button57, button58;
     private final JPanel center = null;
@@ -38,7 +40,7 @@ public class AdminVue extends JFrame {
     private final JComboBox listeSelectionFiltre = null;
     private JComboBox listeSelectionChamp = null;
    
-    private final JButton button60 = null;  
+   
     private final JButton searchFiltre = null;
     private final JTextField searchFilterField = null;
     
@@ -368,7 +370,6 @@ public class AdminVue extends JFrame {
 //------------------------------------------------------------------------------
 //                           PANEL DE SALLES LIBRES
 //------------------------------------------------------------------------------
-
         this.setLayout(new BorderLayout());
         sallesLibresPanel = new JPanel();
         sallesLibresPanel.setOpaque(true);
@@ -390,10 +391,8 @@ public class AdminVue extends JFrame {
         reportingPanel.setBorder(new LineBorder(Color.BLACK, 3));
         reportingPanel.setLayout(new FlowLayout(5));
         reportingPanel.setBackground(new java.awt.Color(254, 254, 254));
-//        ajoutDuPanelReporting();
+        ajoutDuPanelReporting();
 //        center.add(reportingPanel, BorderLayout.CENTER);
-
-        
 
         // On ajoute les 4 panels au content pane de la JFrame
         // Au centre
@@ -409,7 +408,7 @@ public class AdminVue extends JFrame {
     /**
      * Mise à jour de la vue (en Liste ou en Grille)
      *
-     * @param m
+     * @param index
      */
 ////////////////////////////////////////////////////////////////////////////////    
     public void selectSemaine(int index) {
@@ -453,10 +452,11 @@ public class AdminVue extends JFrame {
     }
 
     public JButton getBoutonReporting() {
-        return button60;
+        return button57;
     }
-    public JButton getBoutonModifier() {
-        return button55;
+
+    public JButton getBoutonModifier(){
+             return button55;
     }
 
     public void showEmploiDuTemps() {
@@ -465,15 +465,37 @@ public class AdminVue extends JFrame {
         semainesPanel.setVisible(true);
         center.add(filtrePanel);
         filtrePanel.setVisible(true);
+        if (this.listeSelectionVue.getSelectedIndex() == 0) {
+            jscrollPanel.setViewportView(tableEnGrille);
+        } else {
+            jscrollPanel.setViewportView(tableEnListe);
+        }
         center.add(jscrollPanel);
         center.revalidate();
         center.repaint();
     }
 
-    public void showSallesLibres() {
+        public void showSallesLibres() {
         center.removeAll();
         center.add(sallesLibresPanel);
-        cleanTableEnGrille();
+
+        tableSalles = new JTable();
+
+        tableSalles.setModel(new DefaultTableModel(
+                new Object[][]{
+                },
+                new String[]{
+                    "Salles Libres"
+                }
+        ));
+        tableSalles.setPreferredScrollableViewportSize(new Dimension(1590, 720));//2860,1450
+        tableSalles.setRowHeight(100);
+        Font j = new Font("Times New Roman", Font.BOLD, 30);
+        UIManager.put("JTable.font", j);
+
+        TableColumn col2 = tableSalles.getColumnModel().getColumn(0);
+        col2.setPreferredWidth(100);
+        jscrollPanel.setViewportView(tableSalles);
         center.add(jscrollPanel);
         center.revalidate();
         center.repaint();
@@ -507,16 +529,21 @@ public class AdminVue extends JFrame {
         tableEnGrille.setModel(m);
     }
 
-//    public void updateVue2(TableModel m) {
-//        //jTable1.setModel(m);
-//        jTable2.setModel(m);
-//    }
     public void changeToEDT() {
         center.removeAll();
         //center.add(panNouveaPanel);
         center.revalidate();
         center.repaint();
         center.setVisible(true);
+    }
+
+    public void changeAVueSallesLibres(TableModel m) {
+        tableSalles.setModel(m);
+        jscrollPanel.setViewportView(tableSalles);
+        tableSalles.setPreferredScrollableViewportSize(new Dimension(1590, 720));//2860,1450
+        tableSalles.setRowHeight(100);
+        Font j = new Font("Times New Roman", Font.BOLD, 30);
+        UIManager.put("JTable.font", j);
     }
 
     public void changeAVueEnGrille(TableModel m) {
@@ -604,9 +631,18 @@ public class AdminVue extends JFrame {
         center.revalidate();
         center.repaint();
     }
+
+    /**
+     *
+     * @return
+     */
+    public JTable getJTable() {
+        return tableEnGrille;
+    }
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////    
-    public void ajoutDuPanelSallesLibres() {
+
+    public final void ajoutDuPanelSallesLibres() {
         Font f = new Font("Times New Roman", Font.BOLD, 18);
         //UIManager.put("JButton.font", f);
 
@@ -615,10 +651,8 @@ public class AdminVue extends JFrame {
         gridPanel3.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel3.setBackground(new java.awt.Color(236, 251, 134));
 
-        
         Font t = new Font("Times New Roman", Font.BOLD, 18);
         UIManager.put("JLabel.font", t);
-        
 
         JPanel gridPanel7 = new JPanel();
         gridPanel7.setLayout(new GridLayout(1, 2, 1, 5));
@@ -646,25 +680,25 @@ public class AdminVue extends JFrame {
 
         JLabel labelFiltre = new JLabel("   Heure ");
         labelFiltre.setFont(t);
-        String[] selectionFiltre = {"8h30-10h00","10h15-11h45","12h00-13h30","13h45-15h15","15h30-17h00","17h15-18h45","19h00-20h30"};
+        String[] selectionFiltre = {"8h30-10h00", "10h15-11h45", "12h00-13h30", "13h45-15h15", "15h30-17h00", "17h15-18h45", "19h00-20h30"};
         JComboBox listeSelectionDuree = new JComboBox(selectionFiltre);
         listeSelectionDuree.setFont(y);
         listeSelectionDuree.setBackground(new java.awt.Color(255, 172, 220));
 
         gridPanel5.add(labelFiltre);
         gridPanel5.add(listeSelectionDuree);
-        
+
         JPanel gridPanel5f = new JPanel();
         gridPanel5f.setLayout(new GridLayout(1, 2, 1, 5));
         gridPanel5f.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel5f.setBackground(new java.awt.Color(236, 251, 134));
-        
+
         JLabel fecha = new JLabel();
         fecha.setText(" Date ");
         Font ygg = new Font("Times New Roman", Font.BOLD, 16);
         UIManager.put("JLabel.font", ygg);
         fecha.setFont(ygg);
-        
+
         DateFormat dateFormat = DateFormat.getInstance();
         JFormattedTextField field = new JFormattedTextField(dateFormat);
         field.setValue(new Date());
@@ -675,7 +709,7 @@ public class AdminVue extends JFrame {
         field.setFocusLostBehavior(JFormattedTextField.REVERT);
         gridPanel5f.add(fecha);
         gridPanel5f.add(field);
-        
+
         //////////////////////////////////////////////////////////////
         JPanel gridPanel8 = new JPanel();
         gridPanel8.setLayout(new GridLayout(1, 2, 1, 5));
@@ -684,7 +718,7 @@ public class AdminVue extends JFrame {
 
         JLabel labelFiltre2 = new JLabel(" Site  ");
         labelFiltre2.setFont(t);
-        String[] selectionFiltre2 = {" Eiffel 1", "Eiffel 2", "Eiffel 3", "Eiffel 4", "Eiffel 5", "Cnam"};
+        String[] selectionFiltre2 = {"Eiffel 1", "Eiffel 2", "Eiffel 3", "Eiffel 4", "Eiffel 5", "Cnam"};
         JComboBox listeSelectionFiltre2 = new JComboBox(selectionFiltre2);
         listeSelectionFiltre2.setFont(y);
         listeSelectionFiltre2.setBackground(new java.awt.Color(255, 172, 220));
@@ -713,132 +747,131 @@ public class AdminVue extends JFrame {
         Montrer2.setIcon(new ImageIcon("img/check.png"));
         Montrer2.setBackground(new java.awt.Color(251, 231, 188));
 
-       
         gridPanel9.add(cb1);
 
         sallesLibresPanel.add(gridPanel3);
         sallesLibresPanel.add(gridPanel7);
         sallesLibresPanel.add(enseignant);
         sallesLibresPanel.add(gridPanel5);
-         sallesLibresPanel.add(gridPanel5f);
+        sallesLibresPanel.add(gridPanel5f);
         sallesLibresPanel.add(gridPanel8);
         sallesLibresPanel.add(gridPanel9);
         sallesLibresPanel.add(Montrer2);
     }
-    
+
 ///////////////////////////////////////////////////////////////////////////////
-//    public void ajoutDuPanelReporting() { 
-//                
-//        JPanel gridPanela = new JPanel();
-//        gridPanela.setLayout(new GridLayout(1, 1, 10, 5));
-//        gridPanela.setBorder(new LineBorder(Color.BLACK, 3));
-//        gridPanela.setBackground(new java.awt.Color(145, 200, 100));
-//        
-//        JPanel gridPanelb = new JPanel();
-//        gridPanelb.setLayout(new GridLayout(2,2, 5, 5));
-//        gridPanelb.setBorder(new LineBorder(Color.BLACK, 3));
-//        gridPanelb.setBackground(new java.awt.Color(145, 200, 100));
-//        
-//        Font f = new Font("Times New Roman", Font.BOLD, 30);
-//        UIManager.put("JButton.font", f);
-//        
-//        
-//        JButton Montrer2 = new JButton("<html>Capacité des salles <br> pour un site</html>");
-//        Montrer2.setFont(f);
-//        Montrer2.setIcon(new ImageIcon("img/a4.png"));
-//        Montrer2.setBackground(new java.awt.Color(163, 255, 0));
-//        Montrer2.setFont(f);
-//        gridPanelb.add(Montrer2);
-//        Montrer2.addMouseListener(new java.awt.event.MouseAdapter() {
-//            public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                Montrer2MouseClicked(evt);
-//            }
-//        });
-//        
-//        
-//        JButton Montrer3 = new JButton("<html>Taux d'occupation <br> dessalles sur une <br> période donnée</html>");
-//        Montrer3.setFont(f);
-//        Montrer3.setIcon(new ImageIcon("img/a2.png"));
-//        Montrer3.setBackground(new java.awt.Color(163, 150, 253));
-//        Montrer3.setFont(f);        
-//        gridPanelb.add(Montrer3);
-//        Montrer3.addMouseListener(new java.awt.event.MouseAdapter() {
-//            public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                Montrer3MouseClicked(evt);
-//            }
-//        });
-//        
-//        JButton Montrer4 = new JButton("<html>Nombre d'heures de <br> séance par an</html>");
-//        Montrer4.setFont(f);
-//        Montrer4.setIcon(new ImageIcon("img/a3.png"));
-//        Montrer4.setBackground(new java.awt.Color(255, 153, 5));
-//        Montrer4.setFont(f);        
-//        gridPanelb.add(Montrer4);
-//        Montrer4.addMouseListener(new java.awt.event.MouseAdapter() {
-//            public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                Montrer4MouseClicked(evt);
-//            }
-//        });
-//        
-//        JButton Montrer5 = new JButton("<html>Nombre d'heures de <br>séance par TD</html>");
-//        Montrer5.setFont(f);
-//        Montrer5.setIcon(new ImageIcon("img/a1.png"));
-//        Montrer5.setBackground(new java.awt.Color(255,255,0));
-//        Montrer5.setFont(f);
-//        Montrer5.addMouseListener(new java.awt.event.MouseAdapter() {
-//            public void mouseClicked(java.awt.event.MouseEvent evt) {
-//                Montrer5MouseClicked(evt);
-//            }
-//        });
-//        
-//        
-//        Montrer2.setPreferredSize(new Dimension(870, 485));
-//        Montrer3.setPreferredSize(new Dimension(870, 485));
-//        Montrer4.setPreferredSize(new Dimension(870, 485));
-//        Montrer5.setPreferredSize(new Dimension(870, 485));        
-//        gridPanelb.add(Montrer5);
-//        
-//        
-////        center.add(reportingPanel, BorderLayout.CENTER);
-//
-//        JLabel label16 = new JLabel();
-//        reportingPanel.add(label16);
-//        label16.setFont(new java.awt.Font("Tahoma", 0, 36));
-//        
-//        reportingPanel.add(gridPanelb);
-//        
-//
-//        
-//        
-//    }
-//    private void Montrer2MouseClicked(java.awt.event.MouseEvent evt) {                                      
-//        Reporting g=new  Reporting("Effectif des groupes", "Nombres d'élèves par groupes");
+    public final void ajoutDuPanelReporting() {
+
+        JPanel gridPanela = new JPanel();
+        gridPanela.setLayout(new GridLayout(1, 1, 10, 5));
+        gridPanela.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanela.setBackground(new java.awt.Color(145, 200, 100));
+
+        JPanel gridPanelb = new JPanel();
+        gridPanelb.setLayout(new GridLayout(2, 2, 5, 5));
+        gridPanelb.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanelb.setBackground(new java.awt.Color(145, 200, 100));
+
+        Font f = new Font("Times New Roman", Font.BOLD, 30);
+        UIManager.put("JButton.font", f);
+
+        JButton Montrer2 = new JButton("<html>Capacité des salles <br> par site</html>");
+        Montrer2.setFont(f);
+        Montrer2.setIcon(new ImageIcon("img/a4.png"));
+        Montrer2.setBackground(new java.awt.Color(163, 255, 0));
+        Montrer2.setFont(f);
+        gridPanelb.add(Montrer2);
+        Montrer2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Montrer2MouseClicked(evt);
+            }
+        });
+
+        JButton Montrer3 = new JButton("<html>Taux d'occupation <br> des salles sur une <br> période donnée</html>");
+        Montrer3.setFont(f);
+        Montrer3.setIcon(new ImageIcon("img/a2.png"));
+        Montrer3.setBackground(new java.awt.Color(163, 150, 253));
+        Montrer3.setFont(f);
+        gridPanelb.add(Montrer3);
+        Montrer3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Montrer3MouseClicked(evt);
+            }
+        });
+
+        JButton Montrer4 = new JButton("<html>Nombre d'heures de <br> séances dans l'annee</html>");
+        Montrer4.setFont(f);
+        Montrer4.setIcon(new ImageIcon("img/a3.png"));
+        Montrer4.setBackground(new java.awt.Color(255, 153, 5));
+        Montrer4.setFont(f);
+        gridPanelb.add(Montrer4);
+        Montrer4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Montrer4MouseClicked(evt);
+            }
+        });
+
+        JButton Montrer5 = new JButton("<html>Nombre d'heures de <br>séances par cours</html>");
+        Montrer5.setFont(f);
+        Montrer5.setIcon(new ImageIcon("img/a1.png"));
+        Montrer5.setBackground(new java.awt.Color(255, 255, 0));
+        Montrer5.setFont(f);
+        Montrer5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Montrer5MouseClicked(evt);
+            }
+        });
+
+        Montrer2.setPreferredSize(new Dimension(870, 485));
+        Montrer3.setPreferredSize(new Dimension(870, 485));
+        Montrer4.setPreferredSize(new Dimension(870, 485));
+        Montrer5.setPreferredSize(new Dimension(870, 485));
+        gridPanelb.add(Montrer5);
+
+//        center.add(reportingPanel, BorderLayout.CENTER);
+        JLabel label16 = new JLabel();
+        reportingPanel.add(label16);
+        label16.setFont(new java.awt.Font("Tahoma", 0, 36));
+
+        reportingPanel.add(gridPanelb);
+
+    }
+
+    private void Montrer2MouseClicked(java.awt.event.MouseEvent evt) {
+        Reporting demo = new Reporting("Reporting");
+        demo.reportingCapaciteSallesParSiteHisto();
+        demo.setVisible(true);
+
+    }
+
+    private void Montrer3MouseClicked(java.awt.event.MouseEvent evt) {
+        //taux d'occupation des salles
+        Reporting demo = new Reporting("Reporting");
+        demo.reportingTauxOccupationSallesHisto();
+        demo.setVisible(true);
+
+    }
+
+    private void Montrer4MouseClicked(java.awt.event.MouseEvent evt) {
+        //nombre de seances dans l'annee
+        Reporting demo = new Reporting("Reporting");
+//        Reporting g = new Reporting("Effectif des groupes", "Nombres d'élèves par groupes");
 //        g.setVisible(true);
-//        
-//    } 
-//    private void Montrer3MouseClicked(java.awt.event.MouseEvent evt) {                                      
-//         EffectifGroupeReporting demo = new EffectifGroupeReporting("Effectif des groupes", "Nombres d'élèves par groupes");
-//         demo.setVisible(true);
-//        
-//    } 
-//    private void Montrer4MouseClicked(java.awt.event.MouseEvent evt) {                                      
-//        Reporting g=new  Reporting("Effectif des groupes", "Nombres d'élèves par groupes");
-//        g.setVisible(true);
-//        
-//    } 
-//    private void Montrer5MouseClicked(java.awt.event.MouseEvent evt) {                                      
-//        HeuresReporting demo = new HeuresReporting("Heures de cours", "Nombres d'heures par cours :");
-//        demo.setVisible(true);
-//        
-//    } 
+
+    }
+
+    private void Montrer5MouseClicked(java.awt.event.MouseEvent evt) {
+        Reporting demo = new Reporting("Reporting");
+        demo.reportingHeuresDeSeancesParCours();
+        demo.setVisible(true);
+    }
+
+
     /**
      *
      * @return
      */
-    public JTable getJTable() {
-        return tableEnGrille;
-    }
-
+    
 ////////////////////////////////////////////////////////////////////////////////
 //                MODIFICATION DE L'EMPLOIE DU TEMPS
 ////////////////////////////////////////////////////////////////////////////////    
