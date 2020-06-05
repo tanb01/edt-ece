@@ -1301,6 +1301,11 @@ public class AdminVue extends JFrame {
         validerm.setIcon(new ImageIcon("img/check.png"));
         validerm.setBackground(new java.awt.Color(251, 231, 188));
         
+        JButton valider1m = new JButton("Sélectionner séance");
+        valider1m.setFont(f);
+        valider1m.setIcon(new ImageIcon("img/check.png"));
+        valider1m.setBackground(new java.awt.Color(251, 231, 188));
+        
         
         JButton valider2m = new JButton("Valider la modification");
         valider2m.setFont(f);
@@ -1318,6 +1323,7 @@ public class AdminVue extends JFrame {
         valider4m.setIcon(new ImageIcon("img/check.png"));
         valider4m.setBackground(new java.awt.Color(251, 231, 188));
         
+        gridPanel8.add(valider1m);
         gridPanel8.add(validerm);
         gridPanel8.add(valider2m);
         gridPanel8.add(valider3m);
