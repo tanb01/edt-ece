@@ -453,12 +453,6 @@ public class Affecterenseignant extends JFrame {
         gridPanel8.add(valider2);
         gridPanel8.add(valider3);
         gridPanel8.add(valider4);
-////////////////////////////////////////////////////////////////////////////////
-        
-        
-
-
-
 
 ////////////////////////////////////////////////////////////////////////////////        
         Modifierseance.add(gridPanel3, BorderLayout.NORTH);
