@@ -1183,7 +1183,13 @@ public class AdminVue extends JFrame {
         String[] selectionFiltregroupeaf = {"G01","G02","G03","G04","G05","G06","G07","G08","G09","G10","G11"};
         JComboBox listeSelectionFiltregroupeaf = new JComboBox(selectionFiltregroupeaf);
         listeSelectionFiltregroupeaf.setFont(y);
-//-----------------------------------------------        
+//----------------------------------------------- 
+        JLabel groupe3 = new JLabel("Groupe à remplacer");
+        groupe3.setFont(t);
+        String[] selectionFiltregroupeaf3 = {"G01","G02","G03","G04","G05","G06","G07","G08","G09","G10","G11"};
+        JComboBox listeSelectionFiltregroupeaf3 = new JComboBox(selectionFiltregroupeaf3);
+        listeSelectionFiltregroupeaf3.setFont(y);
+//----------------------------------------------- 
         JLabel cours = new JLabel("Modifier un cours par son nom");
         cours.setFont(t);
         String[] selectioncoursn = {" Anglais", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique","Reseaux","Traitement du signal","Analyse de Fourier","Analyse Financiere","Japonais","Geopolitique","Electronique fondamentale","Anthropologie","Droit du travail"};
@@ -1263,6 +1269,8 @@ public class AdminVue extends JFrame {
         gridPanel7.add(listeSelectionFiltregroupea);
         gridPanel7.add(groupe2);
         gridPanel7.add(listeSelectionFiltregroupeaf);
+        gridPanel7.add(groupe3);
+        gridPanel7.add(listeSelectionFiltregroupeaf3);
         gridPanel7.add(cours);
         gridPanel7.add(listeSelectioncoursn);
         gridPanel7.add(cours1);

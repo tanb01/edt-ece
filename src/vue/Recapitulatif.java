@@ -187,31 +187,7 @@ public class Recapitulatif extends JFrame {
        
         centerReca.add(gridPanel3, BorderLayout.NORTH);
         centerReca.add(gridPanel7, BorderLayout.WEST);
-        
-        
-        
- //----------------------------------------       
-         JPanel rightPanel = new JPanel();
-        rightPanel.setBorder(new LineBorder(Color.BLACK, 5));
-        rightPanel.setBackground(new java.awt.Color(211, 212, 250));
-        rightPanel.setLayout(new FlowLayout(5));
-
-        JPanel gridPanel = new JPanel();
-        gridPanel.setLayout(new GridLayout(6, 1, 5, 5));
-        gridPanel.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        gridPanel.add(button53);
-        gridPanel.add(button54);
-        gridPanel.add(button55);
-        gridPanel.add(button56);
-        gridPanel.add(button57);
-        gridPanel.add(button58);
-
-        rightPanel.add(gridPanel);
-        mainContainer.add(rightPanel, BorderLayout.WEST);
-        
-//-----------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
         JPanel gridPanel5 = new JPanel();
         gridPanel5.setLayout(new GridLayout(2,1, 1, 5));
         gridPanel5.setBorder(new LineBorder(Color.BLACK, 3));
