@@ -172,20 +172,20 @@ public class Affecterenseignant extends JFrame {
         rightPanel.add(gridPanel);
         mainContainer.add(rightPanel, BorderLayout.WEST);
 //------------------------------------------------------------------------------
-        JPanel centerajoutseance = new JPanel();
-        centerajoutseance.setOpaque(true);        
-        centerajoutseance.setBorder(new LineBorder(Color.BLACK, 3));
-        centerajoutseance.setLayout(new FlowLayout(5));
-        centerajoutseance.setBackground(new java.awt.Color(211, 212, 250));
-        mainContainer.add(centerajoutseance, BorderLayout.CENTER);
+        JPanel Modifierseance = new JPanel();
+        Modifierseance.setOpaque(true);        
+        Modifierseance.setBorder(new LineBorder(Color.BLACK, 3));
+        Modifierseance.setLayout(new FlowLayout(5));
+        Modifierseance.setBackground(new java.awt.Color(211, 212, 250));
+        mainContainer.add(Modifierseance, BorderLayout.CENTER);
         
-        Font y = new Font("Times New Roman", Font.BOLD, 30);
+        Font y = new Font("Times New Roman", Font.BOLD, 20);
         UIManager.put("JLabel.font", y);
         
 
                 
         JPanel gridPanel3 = new JPanel();
-        gridPanel3.setLayout(new GridLayout(1, 1, 1, 5));
+        gridPanel3.setLayout(new GridLayout(5, 1, 30, 10));
         gridPanel3.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel3.setBackground(new java.awt.Color(145, 200, 100));
         
@@ -196,14 +196,44 @@ public class Affecterenseignant extends JFrame {
         
         JLabel titra = new JLabel("MODIFIER UNE SEANCE  ",icone, JLabel.CENTER);
         gridPanel3.add(titra);
-        Font t = new Font("Times New Roman", Font.BOLD, 30);
+        Font t = new Font("Times New Roman", Font.BOLD, 24);
         UIManager.put("JLabel.font", t);
         titra.setFont(t);
+        
+           //URL de l'image
+         String imgUrl2="img/order.png";
+         ImageIcon icone2 = new ImageIcon(imgUrl2);
+        
+        JLabel titra2 = new JLabel("SELECTIONER UNE SEANCE  ",icone2, JLabel.CENTER);
+        gridPanel3.add(titra2);        
+        titra2.setFont(t);
+        
+           //URL de l'image
+         String imgUrl3="img/order.png";
+         ImageIcon icone3 = new ImageIcon(imgUrl3);
+        
+        JLabel titra3 = new JLabel("AFFECTER  ",icone3, JLabel.CENTER);
+        gridPanel3.add(titra3);        
+        titra3.setFont(t);
+        
+         String imgUrl4="img/order.png";
+         ImageIcon icone4 = new ImageIcon(imgUrl4);
+        
+        JLabel titra4 = new JLabel("MODIFIER  ",icone4, JLabel.CENTER);
+        gridPanel3.add(titra4);        
+        titra4.setFont(t);
+        
+         String imgUrl5="img/order.png";
+         ImageIcon icone5 = new ImageIcon(imgUrl5);
+        
+        JLabel titra5 = new JLabel("ENLEVER  ",icone5, JLabel.CENTER);
+        gridPanel3.add(titra5);        
+        titra5.setFont(t);       
         
          
         
         JPanel gridPanel7 = new JPanel();
-        gridPanel7.setLayout(new GridLayout(8, 1, 1, 5));
+        gridPanel7.setLayout(new GridLayout(22, 1, 20, 5));
         gridPanel7.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel7.setBackground(new java.awt.Color(145, 200, 100));
         
@@ -260,8 +290,92 @@ public class Affecterenseignant extends JFrame {
         listeSelectionFiltregroupe.setFont(y);
         ense.setFont(t);
         fecha.setFont(t);
+                field.setFont(y);
+/////////////////////////////////////////////////////////////////////////////
+        JLabel titra6 = new JLabel("Seance selectioné  ");               
+        titra6.setFont(t);        
+        JTextField seance = new JTextField ();
+///////////////////////////////////////////////////////////////////////////////
+        JLabel ensevieux1 = new JLabel("Ajouter un enseignant ");
+        ensevieux1.setFont(t);
+        String[] selectionensegnatv = {" Segado", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique","Reseaux","Traitement du signal","Analyse de Fourier","Analyse Financiere","Japonais","Geopolitique","Electronique fondamentale","Anthropologie","Droit du travail"};
+        JComboBox listeSelectionensegnatv = new JComboBox(selectionensegnatv);
+        listeSelectionensegnatv.setFont(y);
+//---------------------------------------        
+        JLabel ensevieux = new JLabel("Enseignant à remplacer ");
+        ensevieux.setFont(t);
+        String[] selectionensegnatr = {" Segado", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique","Reseaux","Traitement du signal","Analyse de Fourier","Analyse Financiere","Japonais","Geopolitique","Electronique fondamentale","Anthropologie","Droit du travail"};
+        JComboBox listeSelectionensegnatr = new JComboBox(selectionensegnatr);
+        listeSelectionensegnatr.setFont(y);
+//---------------------------------------        
+        JLabel ensenouveau = new JLabel("Nouveau Enseignant");
+        ensenouveau.setFont(t);
+        String[] selectionensegnatn = {" Segado", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique","Reseaux","Traitement du signal","Analyse de Fourier","Analyse Financiere","Japonais","Geopolitique","Electronique fondamentale","Anthropologie","Droit du travail"};
+        JComboBox listeSelectionensegnatn = new JComboBox(selectionensegnatn);
+        listeSelectionensegnatn.setFont(y);
+//--------------------------------------------        
+        JLabel groupe = new JLabel("Ajouter un groupe");
+        groupe.setFont(t);
+        String[] selectionFiltregroupea = {"G01","G02","G03","G04","G05","G06","G07","G08","G09","G10","G11"};
+        JComboBox listeSelectionFiltregroupea = new JComboBox(selectionFiltregroupea);
+        listeSelectionFiltregroupea.setFont(y);
+//---------------------------------------------        
+        JLabel groupe2 = new JLabel("Affecter un groupe");
+        groupe2.setFont(t);
+        String[] selectionFiltregroupeaf = {"G01","G02","G03","G04","G05","G06","G07","G08","G09","G10","G11"};
+        JComboBox listeSelectionFiltregroupeaf = new JComboBox(selectionFiltregroupeaf);
+        listeSelectionFiltregroupeaf.setFont(y);
+//-----------------------------------------------        
+        JLabel cours = new JLabel("Modifier un cours par son nom");
+        cours.setFont(t);
+        String[] selectioncoursn = {" Anglais", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique","Reseaux","Traitement du signal","Analyse de Fourier","Analyse Financiere","Japonais","Geopolitique","Electronique fondamentale","Anthropologie","Droit du travail"};
+        JComboBox listeSelectioncoursn = new JComboBox(selectioncoursn);
+        listeSelectioncoursn.setFont(y);
+//----------------------------------------------        
+        JLabel cours1 = new JLabel("Modifier un cours par son type");
+        cours1.setFont(t);
+        String[] selectionFiltretypecoursa = {" TP", "TD", "Projet", "Soutien", "Magistral", "Interactif"};
+        JComboBox listeSelectionFiltretypecoursa = new JComboBox(selectionFiltretypecoursa);
+        listeSelectionFiltretypecoursa.setFont(y);
+//--------------------------------------------------        
+        JLabel salle = new JLabel("Modifier un salle par son site");
+        salle.setFont(t);
+        String[] selectionFiltre2f = {"Eiffel 1", "Eiffel 2", "Eiffel 3", "Eiffel 4", "Eiffel 5", "Cnam"};
+        JComboBox listeSelectionFiltre2f = new JComboBox(selectionFiltre2f);
+        listeSelectionFiltre2f.setFont(y);
+//-------------------------------------------------        
+        JLabel salle1 = new JLabel("Modifier une salle par son nom");
+        salle1.setFont(t);
+        String[] selectionensegnatnom = {" Segado", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique","Reseaux","Traitement du signal","Analyse de Fourier","Analyse Financiere","Japonais","Geopolitique","Electronique fondamentale","Anthropologie","Droit du travail"};
+        JComboBox listeSelectionensegnatnom = new JComboBox(selectionensegnatnom);
+        listeSelectionensegnatnom.setFont(y);
+//------------------------------------------------------        
+        JLabel heure = new JLabel("Modifier l'heure d'une séance");
+        heure.setFont(t);
+        String[] selectionFiltreheurede = {"8h30-10h00", "10h15-11h45", "12h00-13h30", "13h45-15h15", "15h30-17h00", "17h15-18h45", "19h00-20h30"};
+        JComboBox listeSelectionDureede = new JComboBox(selectionFiltreheurede);
+        listeSelectionDureede.setFont(y);
+//--------------------------------------------------------        
+        JLabel etat = new JLabel("Changer l'état d'une seance");
+        etat.setFont(t);
+        String[] selectionetat = {"Valide", "En cours de validation","Non, validé"};
+        JComboBox listeselectionetat = new JComboBox(selectionetat);
+        listeselectionetat.setFont(y);
+//--------------------------------------------------------          
+        JLabel enleverense = new JLabel("Enlever un enseignant d'une séance");
+        enleverense.setFont(t);
+        String[] selectionensegnaten = {" Segado", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique","Reseaux","Traitement du signal","Analyse de Fourier","Analyse Financiere","Japonais","Geopolitique","Electronique fondamentale","Anthropologie","Droit du travail"};
+        JComboBox listeSelectionensegnaten = new JComboBox(selectionensegnaten);
+        listeSelectionensegnaten.setFont(y);
+//--------------------------------------------------------          
+        JLabel etatgroupe = new JLabel("Enlever un groupe d'une séance");
+        etatgroupe.setFont(t);
+        String[] selectionFiltregroupeaenle = {"G01","G02","G03","G04","G05","G06","G07","G08","G09","G10","G11"};
+        JComboBox listeSelectionFiltregroupeaenle  = new JComboBox(selectionFiltregroupeaenle );
+        listeSelectionFiltregroupeaenle.setFont(y);
         
-        field.setFont(y);
+        
+//--------------------------------------------------------          
         
         gridPanel7.add(ense);
         gridPanel7.add(listeSelectionensegnat);
@@ -279,10 +393,77 @@ public class Affecterenseignant extends JFrame {
         gridPanel7.add(listeSelectionFiltretypecours);
         gridPanel7.add(labelgroupe);
         gridPanel7.add(listeSelectionFiltregroupe);
+        gridPanel7.add(titra6); 
+        gridPanel7.add(seance);
+        gridPanel7.add(ensevieux1);
+        gridPanel7.add(listeSelectionensegnatv);
+        gridPanel7.add(ensevieux);
+        gridPanel7.add(listeSelectionensegnatr);
+        gridPanel7.add(ensenouveau);
+        gridPanel7.add(listeSelectionensegnatn);
+        gridPanel7.add(groupe);
+        gridPanel7.add(listeSelectionFiltregroupea);
+        gridPanel7.add(groupe2);
+        gridPanel7.add(listeSelectionFiltregroupeaf);
+        gridPanel7.add(cours);
+        gridPanel7.add(listeSelectioncoursn);
+        gridPanel7.add(cours1);
+        gridPanel7.add(listeSelectionFiltretypecoursa);
+        gridPanel7.add(salle);
+        gridPanel7.add(listeSelectionFiltre2f);
+        gridPanel7.add(salle1);
+        gridPanel7.add(listeSelectionensegnatnom);
+        gridPanel7.add(etat);
+        gridPanel7.add(listeselectionetat);
+        gridPanel7.add(enleverense);
+        gridPanel7.add(listeSelectionensegnaten);
+        gridPanel7.add(etatgroupe);
+        gridPanel7.add(listeSelectionFiltregroupeaenle);
         
-       
-        centerajoutseance.add(gridPanel3, BorderLayout.NORTH);
-        centerajoutseance.add(gridPanel7, BorderLayout.WEST);
+        
+//-----------------------------------------------------------------------------        
+        JPanel gridPanel8 = new JPanel();
+        gridPanel8.setLayout(new GridLayout(4, 1, 25, 115));
+        gridPanel8.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel8.setBackground(new java.awt.Color(145, 200, 100));
+        
+        JButton valider = new JButton("Valider la séance");
+        valider.setFont(f);
+        valider.setIcon(new ImageIcon("img/check.png"));
+        valider.setBackground(new java.awt.Color(251, 231, 188));
+        
+        
+        JButton valider2 = new JButton("Valider la modification");
+        valider2.setFont(f);
+        valider2.setIcon(new ImageIcon("img/check.png"));
+        valider2.setBackground(new java.awt.Color(251, 231, 188));
+        
+        
+        JButton valider3 = new JButton("Valider le changement");
+        valider3.setFont(f);
+        valider3.setIcon(new ImageIcon("img/check.png"));
+        valider3.setBackground(new java.awt.Color(251, 231, 188));
+        
+        JButton valider4 = new JButton("Enlever");
+        valider4.setFont(f);
+        valider4.setIcon(new ImageIcon("img/check.png"));
+        valider4.setBackground(new java.awt.Color(251, 231, 188));
+        
+        gridPanel8.add(valider);
+        gridPanel8.add(valider2);
+        gridPanel8.add(valider3);
+        gridPanel8.add(valider4);
+////////////////////////////////////////////////////////////////////////////////
+        
+        
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////        
+        Modifierseance.add(gridPanel3, BorderLayout.NORTH);
+        Modifierseance.add(gridPanel7, BorderLayout.WEST);
+        Modifierseance.add(gridPanel8, BorderLayout.SOUTH);
         
         
         
@@ -290,12 +471,7 @@ public class Affecterenseignant extends JFrame {
 
 
 ////////////////////////////////////////////////////////////////////////////////        
-        JButton valider = new JButton("Valider l'affectation");
-        valider.setFont(f);
-        valider.setIcon(new ImageIcon("img/check.png"));
-        valider.setBackground(new java.awt.Color(251, 231, 188));
-        
-        centerajoutseance.add(valider);
+       
 ////////////////////////////////////////////////////////////////////////////////        
 
     }  
