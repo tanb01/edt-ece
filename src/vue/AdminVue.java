@@ -907,7 +907,7 @@ public class AdminVue extends JFrame {
 //                       AJOUT DU PANEL AJOUT SEANCE
 ///////////////////////////////////////////////////////////////////////////////
     public final void ajoutDeseances() {
-        JPanel centerajoutseance = new JPanel();
+        centerajoutseance = new JPanel();
         centerajoutseance.setOpaque(true);
         centerajoutseance.setBorder(new LineBorder(Color.BLACK, 3));
         centerajoutseance.setLayout(new FlowLayout(5));

@@ -3,6 +3,7 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import modele.Cours;
 import modele.Enseignant;
@@ -483,19 +484,25 @@ public class SeanceDAO extends DataAccessObject<Seance> {
             e.printStackTrace();
         }
     }
-    
-//    public void ajouterSalleASeance(int seanceId, int salleId) {
-//        try {
-//            int result = this.connect.createStatement().executeUpdate("INSERT INTO `seance_salles` (`seance_id`, `salle_id`) VALUES (" + seanceId + ", " + salleId + ")");
-//            if (result == 1) {
-//                System.out.println("Succcess");
-//            } else {
-//                System.out.println("Failed");
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+
+    public int ajouterSeance(int numeroSemaine, String dateSeance, String heureDebut, String heureFin, int etat, int coursId, int typeCoursId) {
+        int cleGeneree = 0;
+        try {
+            PreparedStatement st = this.connect.prepareStatement("INSERT INTO `seance` (`seance_id`, `numero_semaine`, `date_seance`, `heure_debut`, `heure_fin`, `etat_seance`, `cours_id`, `type_cours_id`) VALUES (NULL, " + numeroSemaine + ", " + dateSeance + ", '" + heureDebut + "', '" + heureFin + "', " + etat + ", " + coursId + ", " + typeCoursId + ")", Statement.RETURN_GENERATED_KEYS);
+            if (st.execute()) {
+                System.out.println("Success");
+            }
+            ResultSet rs = st.getGeneratedKeys();
+            if (rs.next()) {
+                cleGeneree = rs.getInt(1);
+            }
+            System.out.println("Seance ID: " + cleGeneree + " a ete ajoutee!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cleGeneree;
+    }
 
 //test
 //    public static void main(String[] args) {

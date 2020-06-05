@@ -218,7 +218,7 @@ public class Recapitulatif extends JFrame {
         JButton Montrerreca = new JButton("Montrer le recapitulatif");
         Montrerreca.setFont(f);  
         
-        gridPanela.add(Montrerreca);          
+        gridPanelare.add(Montrerreca);          
  
         centerReca.add(gridPanelare, BorderLayout.NORTH);
         

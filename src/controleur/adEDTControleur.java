@@ -406,9 +406,9 @@ public class adEDTControleur implements ActionListener, ItemListener {
         return tempArray;
     }
 
-    public ArrayList<String> getNomAdmins() {
+    public ArrayList<String> getNomEnseignants() {
         ArrayList<String> tempArray = new ArrayList<String>();
-        getListeEnseignants().forEach(admin -> tempArray.add(admin.getNom()));
+        getListeEnseignants().forEach(enseignant -> tempArray.add(enseignant.getNom()));
         List<String> tempArray2 = tempArray.stream().distinct().collect(Collectors.toList());
         ArrayList<String> tempArray3 = new ArrayList<String>();
         tempArray2.forEach(s -> tempArray3.add(s));
@@ -459,8 +459,12 @@ public class adEDTControleur implements ActionListener, ItemListener {
         seance.changerHeureDeSeance(seanceId, heure);
     }
 
-    public void ajouterSeance(String dateSeance, String heureDebut, String heureFin, int etat, int coursId, int typeCoursId) {
-
+    public void ajouterSeance(String dateSeance, String heureDebut, String heureFin, int etat, int coursId, int typeCoursId, int enseignantId, int groupeId, int salleId) {
+        int numeroSemaine = 0;
+        int seanceId = seance.ajouterSeance(numeroSemaine, dateSeance, heureDebut, heureFin, etat, coursId, typeCoursId);
+        seance.ajouterEnseignantASeance(seanceId, enseignantId);
+        seance.ajouterGroupeASeance(seanceId, groupeId);
+        seance.ajouterSalleASeance(seanceId, salleId);
     }
 
     public void ajouterEnseignantASeance(int seanceId, int enseignantId) {
@@ -490,7 +494,7 @@ public class adEDTControleur implements ActionListener, ItemListener {
         m = dao.chercher(1);
         AdminVue v = new AdminVue("Admin Vue");
         adEDTControleur controler = new adEDTControleur(m, v);
-//        controler.control();
+        controler.control();
 //controler.ajouterGroupeASeance(1, 32);
 //controler.enleverGroupeDeSeance(1, 32);
 //controler.modifierTypeCoursSeance(12, 2);
@@ -499,8 +503,11 @@ public class adEDTControleur implements ActionListener, ItemListener {
 
 //controler.affecterGroupeASeance(2, 31, 27);
 //controler.affecterSalleASeance(2, 28, 11);
-        LocalDate localDate = LocalDate.parse("2020-02-18");
-        int weekNumberOfDay = localDate.getDayOfYear();
-        System.out.println((52*weekNumberOfDay)/365);
+//        LocalDate localDate = LocalDate.parse("2020-04-10");
+//        int weekNumberOfDay = localDate.getDayOfYear();
+//        System.out.println(weekNumberOfDay);
+//
+//        System.out.println(((7.0 * weekNumberOfDay) / 48.0) - 7);
+//        System.out.println(Math.round((((7.0 * weekNumberOfDay) / 48.0) - 7)));
     }
 }
