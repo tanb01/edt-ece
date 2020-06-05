@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -224,7 +225,7 @@ public class SeanceDAO extends DataAccessObject<Seance> {
         return seances;
     }
 
-   /* public ArrayList<Seance> chercherSeancesParCoursIdEtPromotionId(int coursId, int promotionId) {
+    /* public ArrayList<Seance> chercherSeancesParCoursIdEtPromotionId(int coursId, int promotionId) {
         ArrayList<Seance> seances = new ArrayList<Seance>();
         Seance seance = new Seance();
 
@@ -267,7 +268,6 @@ public class SeanceDAO extends DataAccessObject<Seance> {
         }
         return seances;
     } */
-    
     public ArrayList<Seance> chercherSeancesParEnseignantId(int enseignantId) {
         ArrayList<Seance> seances = new ArrayList<Seance>();
         Seance seance = new Seance();
@@ -352,6 +352,71 @@ public class SeanceDAO extends DataAccessObject<Seance> {
             e.printStackTrace();
         }
         return seances;
+    }
+
+    public void changerHeureDeSeance(int seanceId, String heure) {
+        try {
+            int result = this.connect.createStatement().executeUpdate("UPDATE `seance` SET `heure_debut` = '" + heure + "' WHERE `seance`.`seance_id` =" + seanceId);
+            if (result == 1) {
+                System.out.println("Succcess");
+            } else {
+                System.out.println("Failed");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ajouterEnseignant(int seanceId, int enseignantId) {
+        try {
+            int result = this.connect.createStatement().executeUpdate("INSERT INTO `seance_enseignants` (`seance_id`, `enseignant_id`) VALUES (" + seanceId + ", " + enseignantId + ")");
+            if (result == 1) {
+                System.out.println("Succcess");
+            } else {
+                System.out.println("Failed");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ajouterGroupeASeance(int seanceId, int groupeId) {
+        try {
+            int result = this.connect.createStatement().executeUpdate("INSERT INTO `seance_groupes` (`seance_id`, `groupe_id`) VALUES (" + seanceId + ", " + groupeId + ")");
+            if (result == 1) {
+                System.out.println("Succcess");
+            } else {
+                System.out.println("Failed");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void changerEtatSeance(int seanceId, int etat) {
+        try {
+            int result = this.connect.createStatement().executeUpdate("UPDATE `seance` SET `etat_seance` = " + etat + " WHERE `seance`.`seance_id` =" + seanceId);
+            if (result == 1) {
+                System.out.println("Succcess");
+            } else {
+                System.out.println("Failed");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void enleverGroupeDeSeance(int seanceId, int groupeId) {
+        try {
+            PreparedStatement st = this.connect.prepareStatement("DELETE FROM `seance_groupes` WHERE `seance_groupes`.`seance_id` =  ? AND `seance_groupes`.`groupe_id` = ?");
+            st.setInt(1, seanceId);
+            st.setInt(2, groupeId);
+            if (st.execute()) {
+                System.out.println("Success");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 //test
