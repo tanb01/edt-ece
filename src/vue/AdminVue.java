@@ -28,23 +28,22 @@ public class AdminVue extends JFrame {
     private JTable tableSalles;
     private DefaultTableModel model;
     private JButton button53, button54, button55, button56, button57, button58;
-    private final JPanel center = null;
-    private final JPanel centersalleslibres = null;
+    private JPanel center = null;
+    private JPanel centersalleslibres = null;
     private JPanel MyPanel1;
     private JPanel sallesLibresPanel = null;
     private JPanel reportingPanel = null;
     private JScrollPane jscrollPanel;
     private JTable tableEnGrille;
     private JTable tableEnListe;
-    private final JComboBox listeSelectionVue = null;
-    private final JComboBox listeSelectionFiltre = null;
+    private JComboBox listeSelectionVue = null;
+    private JComboBox listeSelectionFiltre = null;
     private JComboBox listeSelectionChamp = null;
-   
-   
+
     private final JButton searchFiltre = null;
     private final JTextField searchFilterField = null;
-    
-     private JPanel gridPanelb;
+
+    private JPanel gridPanelb;
     private final JPanel filtrePanel = null;
     private JPanel semainesPanel = null;
     private ArrayList<JButton> boutons = null;
@@ -54,7 +53,7 @@ public class AdminVue extends JFrame {
      * @param title
      */
     public AdminVue(String title) {
-        
+
         // Affiche le titre en haut de la fenêtre
         super(title);
         // Taille de la fenêtre
@@ -64,12 +63,11 @@ public class AdminVue extends JFrame {
         // Fermeture et arrêt du programme dès qu'on ferme la fenêtre
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Déclaration de tous les boutons grâce à JButton
-       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         // Déclaration de tous les boutons grâce à JButton
         boutons = new ArrayList<JButton>();
         for (int i = 1; i < 53; i++) {
             boutons.add(new JButton(String.valueOf(i)));
-
         }
         button53 = new JButton("<html>Emploi du<br> temps<html>");
         button53.setPreferredSize(new Dimension(130, 100));
@@ -77,7 +75,7 @@ public class AdminVue extends JFrame {
 
         button54 = new JButton("<html> Salles <br>libres </html>");
         button54.setIcon(new ImageIcon("img/project.png"));
-        
+
         button55 = new JButton("<html> Ajouter une<br> seance</html>");
         button55.setIcon(new ImageIcon("img/modification.png"));
         button56 = new JButton("<html> Reporting </html>");
@@ -87,7 +85,6 @@ public class AdminVue extends JFrame {
         button58 = new JButton("<html> Historique de <br> modifications </html>");
         button58.setIcon(new ImageIcon("img/history.png"));
 
-       
         // Couleur et polices
         Font f = new Font("Times New Roman", Font.BOLD, 16);
         UIManager.put("JButton.font", f);
@@ -105,13 +102,6 @@ public class AdminVue extends JFrame {
         button57.setFont(f);
         button58.setBackground(new java.awt.Color(253, 121, 130));
         button58.setFont(f);
-
-        button54.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Ensemble des actions
-
-            }
-        });
 
         // Conteneur principal
         Container mainContainer = this.getContentPane();
@@ -217,7 +207,7 @@ public class AdminVue extends JFrame {
         mainContainer.add(rightPanel, BorderLayout.WEST);
 
         // Panel du centre
-        JPanel center = new JPanel();
+        center = new JPanel();
         center.setOpaque(true);
         center.setBorder(new LineBorder(Color.BLACK, 3));
         center.setLayout(new FlowLayout(5));
@@ -268,7 +258,7 @@ public class AdminVue extends JFrame {
         gridPanel5.add(listeSelectionFiltre);
 
         center.add(gridPanel5, BorderLayout.NORTH);
-         Font fG = new Font("Times New Roman", Font.BOLD, 12);
+        Font fG = new Font("Times New Roman", Font.BOLD, 12);
         UIManager.put("JButton.font", fG);
 
         for (JButton bouton : boutons) {
@@ -276,8 +266,7 @@ public class AdminVue extends JFrame {
             bouton.setPreferredSize(new Dimension(46, 25));
             bouton.setFont(fG);
             bouton.setBackground(new java.awt.Color(254, 254, 254));
-            
-                   
+
         }
 
         // Ajout de la grille de l'emploi du temps
@@ -392,6 +381,7 @@ public class AdminVue extends JFrame {
         reportingPanel.setLayout(new FlowLayout(5));
         reportingPanel.setBackground(new java.awt.Color(254, 254, 254));
         ajoutDuPanelReporting();
+        center.add(reportingPanel);
 //        center.add(reportingPanel, BorderLayout.CENTER);
 
         // On ajoute les 4 panels au content pane de la JFrame
@@ -452,11 +442,15 @@ public class AdminVue extends JFrame {
     }
 
     public JButton getBoutonReporting() {
+        return button56;
+    }
+
+    public JButton getBoutonModifier() {
         return button57;
     }
 
-    public JButton getBoutonModifier(){
-             return button55;
+    public JButton getBoutonAjouterSeance() {
+        return button55;
     }
 
     public void showEmploiDuTemps() {
@@ -475,15 +469,14 @@ public class AdminVue extends JFrame {
         center.repaint();
     }
 
-        public void showSallesLibres() {
+    public void showSallesLibres() {
         center.removeAll();
         center.add(sallesLibresPanel);
 
         tableSalles = new JTable();
 
         tableSalles.setModel(new DefaultTableModel(
-                new Object[][]{
-                },
+                new Object[][]{},
                 new String[]{
                     "Salles Libres"
                 }
@@ -866,20 +859,14 @@ public class AdminVue extends JFrame {
         demo.setVisible(true);
     }
 
-
     /**
      *
      * @return
      */
-    
 ////////////////////////////////////////////////////////////////////////////////
 //                MODIFICATION DE L'EMPLOIE DU TEMPS
 ////////////////////////////////////////////////////////////////////////////////    
-    
-        
-    
 ////////////////////////////////////////////////////////////////////////////  
-    
     public static void main(String[] args) {
         AdminVue mylayout = new AdminVue("Accueil");
         mylayout.setVisible(true);

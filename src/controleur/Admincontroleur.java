@@ -37,6 +37,7 @@ import vue.EnseignantVue;
 import vue.EtudiantVue;
 
 public class Admincontroleur implements ActionListener {
+
     private EtudiantDAO etuddao = null;
     private Etudiant e = null;
 
@@ -52,7 +53,7 @@ public class Admincontroleur implements ActionListener {
     private EnseignantVue ev = null;
     private EnseignantDAO enddao = null;
     private Enseignant en = null;
-    
+
     public Admincontroleur(User m, AdminVue v) {
         ve = new AdminVue("Admin vue");
         ve = v;
@@ -63,9 +64,9 @@ public class Admincontroleur implements ActionListener {
 
         e = etuddao.chercher(m.getUserId());
         listSeances = new ArrayList<Seance>();
-        listSeances = seance.chercherSeancesParGroupeId(e.getGroupeId());
+        //listSeances = seance.chercherSeancesParGroupeId(31);
         listSeancesSelectionnees = new ArrayList<Seance>();
-        listSeancesSelectionnees = seance.chercherSeancesParGroupeIdEtNumeroSemaine(e.getGroupeId(), numeroSemaineSelected);
+        listSeancesSelectionnees = seance.chercherSeancesParGroupeId(31);
 
         String[][] data = new String[7][100];
 
@@ -76,7 +77,7 @@ public class Admincontroleur implements ActionListener {
 
         int g = 0;
         int colinc = 1;
-        String jour = "null";
+        String jour = "Lundi";
         jour = getJourDeLaSemaine(listSeancesSelectionnees.get(0).getDate());
 
         // Vue en grille
@@ -105,58 +106,6 @@ public class Admincontroleur implements ActionListener {
 
     }
 
-//    public EDTControleur(User m, EnseignantVue v) {
-//        ev = new EnseignantVue("Enseignant vue");
-//        ev = v;
-//
-//        enddao = new EnseignantDAO();
-//        en = new Enseignant();
-//        seance = new SeanceDAO();
-//
-//        en = enddao.chercher(m.getUserId());
-//        listSeances = new ArrayList<Seance>();
-//        listSeances = seance.chercherSeancesParEnseignantId(en.getUserId());
-//        listSeancesSelectionnees = new ArrayList<Seance>();
-//        listSeancesSelectionnees = seance.chercherSeancesParEnseignantIdEtNumeroSemaine(en.getUserId(), numeroSemaineSelected);
-//        
-//
-//        String[][] data = new String[84][100];
-//
-//        String[] horairesPossibles = new String[]{"08:30-10:00", "10:15-11:45", "12:00-13:30", "13:45-15:15", "15:30-17:00", "17:15-18:45", "19:00-20:30"};
-//        for (int i = 0; i < 7; i++) {
-//            data[i][0] = horairesPossibles[i];
-//        }
-//
-//        int g = 0;
-//        int colinc = 1;
-//        String jour = "null";
-//        jour = getJourDeLaSemaine(listSeancesSelectionnees.get(0).getDate());
-//
-//        // Vue en grille
-//        while (g < listSeancesSelectionnees.size()) {
-//            //System.out.println("id: " + g);
-//            if (jour == getJourDeLaSemaine(listSeancesSelectionnees.get(g).getDate())) {
-//                for (int i = 0; i < 7; i++) {
-//                    if ((listSeancesSelectionnees.get(g).getDebutHeure() + "-" + listSeancesSelectionnees.get(g).getFinHeure()).equals(data[i][0])) {
-//                        data[i][colinc] = listSeancesSelectionnees.get(g).stringify();
-//                    }
-//                }
-//                g++;
-//            } else {
-//                colinc++;
-//                jour = getJourDeLaSemaine(listSeancesSelectionnees.get(g).getDate());
-//            }
-//        }
-//
-//        DefaultTableModel dtm = new DefaultTableModel(
-//                data,
-//                new String[]{
-//                    " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
-//                }
-//        );
-//        this.dtm = dtm;
-//
-//    }
     /**
      * Change les jours de la semaine de Anglais à Francais.
      *
@@ -193,15 +142,18 @@ public class Admincontroleur implements ActionListener {
         return jour;
     }
 
-     public void control() {
+    public void control() {
         ve.getBoutonEmploiDuTemps().addActionListener(this);
         ve.getBoutonsSemaine().forEach((bouton) -> {
             bouton.addActionListener(this);
         });
         ve.getBoutonSallesLibres().addActionListener(this);
-        ve.getBoutonReporting().addActionListener(this);        
-//        ve.getButtonSearchFiltre().addActionListener(this);
+        ve.getBoutonReporting().addActionListener(this);
+        ve.getBoutonModifier().addActionListener(this);
 
+        ve.getBoutonAjouterSeance().addActionListener(this);
+
+//        ve.getButtonSearchFiltre().addActionListener(this);
         ve.setTableEnGrille(dtm);
         ve.setVisible(true);
         System.out.println("Control");
@@ -214,21 +166,14 @@ public class Admincontroleur implements ActionListener {
         }
         if (ae.getSource() == ve.getBoutonSallesLibres()) {
             ve.showSallesLibres();
-//            String[][] data2 = new String[listSeancesSelectionnees.size()][1];
-//            for (int i = 0; i < listSeancesSelectionnees.size(); i++) {
-//                data2[i][0] = getJourDeLaSemaine(listSeancesSelectionnees.get(i).getDate()) + "     " + listSeancesSelectionnees.get(i).stringify();
-//            }
-//
-//            DefaultTableModel dtm2 = new DefaultTableModel(
-//                    data2,
-//                    new String[]{
-//                        " "
-//                    }
-//            );
-//            ve.changeAVueEnListe(dtm2);
-//            ve.setVisible(true);
         }
         if (ae.getSource() == ve.getBoutonReporting()) {
+            ve.showReporting();
+        }
+        if (ae.getSource() == ve.getBoutonModifier()) {
+            ve.showReporting();
+        }
+        if (ae.getSource() == ve.getBoutonAjouterSeance()) {
             ve.showReporting();
         }
         for (JButton bouton : ve.getBoutonsSemaine()) {
@@ -262,7 +207,6 @@ public class Admincontroleur implements ActionListener {
         }
     }
 
-    
     public void itemStateChanged(ItemEvent ie) {
         if (ie.getStateChange() == ItemEvent.SELECTED) {
             switch (ve.getJComboBoxSelectionVue().getSelectedItem().toString()) {
@@ -323,8 +267,7 @@ public class Admincontroleur implements ActionListener {
 
         int g = 0;
         int colinc = 1;
-        String jour = "null";
-        jour = "Lundi";
+        String jour = "Lundi";
 
         // Vue en grille
         while (g < listSeancesSelectionnees.size()) {
@@ -442,7 +385,7 @@ public class Admincontroleur implements ActionListener {
         return tempArray3;
     }
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
         //test etudiant
         EtudiantDAO dao = new EtudiantDAO();
         Etudiant m = new Etudiant();
