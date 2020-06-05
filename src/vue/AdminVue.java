@@ -12,6 +12,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.event.*;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.table.TableColumn;
 
 public class AdminVue extends JFrame {
@@ -23,16 +26,33 @@ public class AdminVue extends JFrame {
     private JScrollPane scroll;
     private DefaultTableModel model;
     private JButton button53, button54, button55, button56, button57;
-    private JPanel center = null;
-    private JPanel centersalleslibres = null;
+    private final JPanel center = null;
+    private final JPanel centersalleslibres = null;
     private JPanel MyPanel1;
+    private JPanel sallesLibresPanel = null;
+    private JPanel reportingPanel = null;
+    private JScrollPane jscrollPanel;
+    private JTable tableEnGrille;
+    private JTable tableEnListe;
+    private final JComboBox listeSelectionVue = null;
+    private final JComboBox listeSelectionFiltre = null;
+    private JComboBox listeSelectionChamp = null;
+   
+    private final JButton button60 = null;  
+    private final JButton searchFiltre = null;
+    private final JTextField searchFilterField = null;
+    
+     private JPanel gridPanelb;
+    private final JPanel filtrePanel = null;
+    private JPanel semainesPanel = null;
+    private ArrayList<JButton> boutons = null;
 
     /**
      *
      * @param title
      */
     public AdminVue(String title) {
-
+        
         // Affiche le titre en haut de la fenêtre
         super(title);
         // Taille de la fenêtre
@@ -42,79 +62,34 @@ public class AdminVue extends JFrame {
         // Fermeture et arrêt du programme dès qu'on ferme la fenêtre
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // Déclaration de tous les boutons grâce à JButton
-        JButton button1 = new JButton("1");
-        JButton button2 = new JButton("2");
-        JButton button3 = new JButton("3");
-        JButton button4 = new JButton("4");
-        JButton button5 = new JButton("5");
-        JButton button6 = new JButton("6");
-        JButton button7 = new JButton("7");
-        JButton button8 = new JButton("8");
-        JButton button9 = new JButton("9");
-        JButton button10 = new JButton("10");
-        JButton button11 = new JButton("11");
-        JButton button12 = new JButton("12");
-        JButton button13 = new JButton("13");
-        JButton button14 = new JButton("14");
-        JButton button15 = new JButton("15");
-        JButton button16 = new JButton("16");
-        JButton button17 = new JButton("17");
-        JButton button18 = new JButton("18");
-        JButton button19 = new JButton("19");
-        JButton button20 = new JButton("20");
-        JButton button21 = new JButton("21");
-        JButton button22 = new JButton("22");
-        JButton button23 = new JButton("23");
-        JButton button24 = new JButton("24");
-        JButton button25 = new JButton("25");
-        JButton button26 = new JButton("26");
-        JButton button27 = new JButton("27");
-        JButton button28 = new JButton("28");
-        JButton button29 = new JButton("29");
-        JButton button30 = new JButton("30");
-        JButton button31 = new JButton("31");
-        JButton button32 = new JButton("32");
-        JButton button33 = new JButton("33");
-        JButton button34 = new JButton("34");
-        JButton button35 = new JButton("35");
-        JButton button36 = new JButton("36");
-        JButton button37 = new JButton("37");
-        JButton button38 = new JButton("38");
-        JButton button39 = new JButton("39");
-        JButton button40 = new JButton("40");
-        JButton button41 = new JButton("41");
-        JButton button42 = new JButton("42");
-        JButton button43 = new JButton("43");
-        JButton button44 = new JButton("44");
-        JButton button45 = new JButton("45");
-        JButton button46 = new JButton("46");
-        JButton button47 = new JButton("47");
-        JButton button48 = new JButton("48");
-        JButton button49 = new JButton("49");
-        JButton button50 = new JButton("50");
-        JButton button51 = new JButton("51");
-        JButton button52 = new JButton("52");
-        JButton button53 = new JButton("<html> Emploi du <br> temps<html> ");
+       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // Déclaration de tous les boutons grâce à JButton
+        boutons = new ArrayList<JButton>();
+        for (int i = 1; i < 53; i++) {
+            boutons.add(new JButton(String.valueOf(i)));
 
-        button53.setPreferredSize(new Dimension(265, 120));
+        }
+        button53 = new JButton("<html>Emploi du<br> temps<html>");
+        button53.setPreferredSize(new Dimension(130, 100));
         button53.setIcon(new ImageIcon("img/school.png"));
 
-        JButton button54 = new JButton("<html> Salles <br>"
-                + " libres <br> </html>");
+        button54 = new JButton("<html> Salles <br>libres </html>");
         button54.setIcon(new ImageIcon("img/salles.png"));
-        JButton button55 = new JButton("<html> Modifier l'emploie<br> du temps<br> </html>");
+        
+        button55 = new JButton("<html> Modifier l'emploie<br> du temps<br> </html>");
         button55.setIcon(new ImageIcon("img/modification.png"));
-        JButton button56 = new JButton("<html> Reporting </html>");
+        button56 = new JButton("<html> Reporting </html>");
         button56.setIcon(new ImageIcon("img/result.png"));
 
-        // Police Times New Roman
-        Font f = new Font("Times New Roman", Font.BOLD, 30);
+       
+        // Couleur et polices
+        Font f = new Font("Times New Roman", Font.BOLD, 16);
         UIManager.put("JButton.font", f);
 
         // Couleur et polices
-        button53.setBackground(new java.awt.Color(147, 212, 250));
+        button53.setBackground(new java.awt.Color(255, 255, 0));
         button53.setFont(f);
-        button54.setBackground(new java.awt.Color(252, 222, 1));
+        button54.setBackground(new java.awt.Color(182, 213, 56));
         button54.setFont(f);
         button55.setBackground(new java.awt.Color(252, 108, 1));
         button55.setFont(f);
@@ -237,7 +212,9 @@ public class AdminVue extends JFrame {
         center.setBackground(new java.awt.Color(211, 212, 250));
         mainContainer.add(center, BorderLayout.CENTER);
 
-        JPanel MyPanel1 = new JPanel();
+        semainesPanel = new JPanel();
+        semainesPanel.setLayout(new GridLayout(2, 1, 1, 1));
+        semainesPanel.setBorder(new LineBorder(Color.BLACK, 2));
 
         // Grille
         JPanel gridPanel3 = new JPanel();
@@ -245,7 +222,7 @@ public class AdminVue extends JFrame {
         gridPanel3.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel3.setBackground(new java.awt.Color(145, 200, 100));
 
-        gridPanel3.add(MyPanel1);
+        gridPanel3.add(semainesPanel);
         center.add(gridPanel3, BorderLayout.NORTH);
 
         JPanel topIPanel = new JPanel();
@@ -279,68 +256,27 @@ public class AdminVue extends JFrame {
         gridPanel5.add(listeSelectionFiltre);
 
         center.add(gridPanel5, BorderLayout.NORTH);
+         Font fG = new Font("Times New Roman", Font.BOLD, 12);
+        UIManager.put("JButton.font", fG);
 
-        MyPanel1.add(button1);
-        MyPanel1.add(button2);
-        MyPanel1.add(button3);
-        MyPanel1.add(button4);
-        MyPanel1.add(button5);
-        MyPanel1.add(button6);
-        MyPanel1.add(button7);
-        MyPanel1.add(button8);
-        MyPanel1.add(button9);
-        MyPanel1.add(button10);
-        MyPanel1.add(button11);
-        MyPanel1.add(button12);
-        MyPanel1.add(button13);
-        MyPanel1.add(button14);
-        MyPanel1.add(button15);
-        MyPanel1.add(button16);
-        MyPanel1.add(button17);
-        MyPanel1.add(button18);
-        MyPanel1.add(button19);
-        MyPanel1.add(button20);
-        MyPanel1.add(button21);
-        MyPanel1.add(button22);
-        MyPanel1.add(button23);
-        MyPanel1.add(button24);
-        MyPanel1.add(button25);
-        MyPanel1.add(button26);
-        MyPanel1.add(button27);
-        MyPanel1.add(button28);
-        MyPanel1.add(button29);
-        MyPanel1.add(button30);
-        MyPanel1.add(button31);
-        MyPanel1.add(button32);
-        MyPanel1.add(button33);
-        MyPanel1.add(button34);
-        MyPanel1.add(button35);
-        MyPanel1.add(button36);
-        MyPanel1.add(button37);
-        MyPanel1.add(button38);
-        MyPanel1.add(button39);
-        MyPanel1.add(button40);
-        MyPanel1.add(button41);
-        MyPanel1.add(button42);
-        MyPanel1.add(button43);
-        MyPanel1.add(button44);
-        MyPanel1.add(button45);
-        MyPanel1.add(button46);
-        MyPanel1.add(button47);
-        MyPanel1.add(button48);
-        MyPanel1.add(button49);
-        MyPanel1.add(button50);
-        MyPanel1.add(button51);
-        MyPanel1.add(button52);
+        for (JButton bouton : boutons) {
+            semainesPanel.add(bouton);
+            bouton.setPreferredSize(new Dimension(46, 25));
+            bouton.setFont(fG);
+            bouton.setBackground(new java.awt.Color(254, 254, 254));
+            
+                   
+        }
 
         // Ajout de la grille de l'emploi du temps
         //innerContainer.add(semaineEDT, BorderLayout.WEST);
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jscrollPanel = new JScrollPane();
+        tableEnGrille = new JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        // Ajout de la grille de l'emploi du temps
+        tableEnGrille.setModel(new DefaultTableModel(
                 new Object[][]{
                     {"8h30-10h00", null, null, null, null, null, null, null},
                     {"10h15-11h45", null, null, null, null, null, null, null},
@@ -354,27 +290,28 @@ public class AdminVue extends JFrame {
                     " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
                 }
         ));
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.setPreferredScrollableViewportSize(new Dimension(2500, 1000));
-        jTable1.setRowHeight(143);
-        TableColumn col = jTable1.getColumnModel().getColumn(0);
-        col.setPreferredWidth(100);
-        col = jTable1.getColumnModel().getColumn(1);
+        jscrollPanel.setViewportView(tableEnGrille);
+        tableEnGrille.setPreferredScrollableViewportSize(new Dimension(1610, 740));//2500, 1460
+        tableEnGrille.setRowHeight(105);
+        TableColumn col = tableEnGrille.getColumnModel().getColumn(0);
+        col.setPreferredWidth(125);
+        col = tableEnGrille.getColumnModel().getColumn(1);
         col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(2);
+        col = tableEnGrille.getColumnModel().getColumn(2);
         col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(3);
+        col = tableEnGrille.getColumnModel().getColumn(3);
         col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(4);
+        col = tableEnGrille.getColumnModel().getColumn(4);
         col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(5);
+        col = tableEnGrille.getColumnModel().getColumn(5);
         col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(6);
+        col = tableEnGrille.getColumnModel().getColumn(6);
         col.setPreferredWidth(300);
-        col = jTable1.getColumnModel().getColumn(7);
+        col = tableEnGrille.getColumnModel().getColumn(7);
         col.setPreferredWidth(300);
 
-        center.add(jScrollPane1, BorderLayout.CENTER);
+        // Panel
+        center.add(jscrollPanel, BorderLayout.SOUTH);
 //-----------------------------------------------------------------------------
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout());
@@ -420,111 +357,486 @@ public class AdminVue extends JFrame {
 
 //------------------------------------------------------------------------------
 //                           PANEL DE SALLES LIBRES
-//------------------------------------------------------------------------------    
-        JPanel centersalleslibres = new JPanel();
-        centersalleslibres.setOpaque(true);
-        centersalleslibres.setBorder(new LineBorder(Color.BLACK, 3));
-        centersalleslibres.setLayout(new FlowLayout(5));
-        centersalleslibres.setBackground(new java.awt.Color(211, 212, 250));
-        // mainContainer.add(centersalleslibres, BorderLayout.CENTER);
-
-        JPanel gridPanel3salles = new JPanel();
-        gridPanel3salles.setLayout(new GridLayout(1, 1, 1, 5));
-        gridPanel3salles.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanel3salles.setBackground(new java.awt.Color(145, 200, 100));
-
-        JLabel titrasalles = new JLabel("  Salles libres    ");
-        gridPanel3salles.add(titrasalles);
-        Font tsalles = new Font("Times New Roman", Font.BOLD, 24);
-        UIManager.put("JLabel.font", tsalles);
-        titrasalles.setFont(tsalles);
-
-        JPanel gridPanel7salles = new JPanel();
-        gridPanel7salles.setLayout(new GridLayout(1, 2, 1, 5));
-        gridPanel7salles.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanel7salles.setBackground(new java.awt.Color(145, 200, 100));
-
-        TextField enseignantsalles = new java.awt.TextField();
-        enseignantsalles.setText("                 ");
-        Font ysalles = new Font("Times New Roman", Font.BOLD, 20);
-        UIManager.put("JLabel.font", ysalles);
-
-        JLabel ensesalles = new JLabel(" Capacité maximal  ");
-        ensesalles.setFont(tsalles);
-        enseignantsalles.setFont(ysalles);
-
-        gridPanel7salles.add(ensesalles);
-        gridPanel7salles.add(enseignantsalles);
-
-        centersalleslibres.add(gridPanel3salles, BorderLayout.NORTH);
-        centersalleslibres.add(gridPanel7salles, BorderLayout.WEST);
-
-//-----------------------------------------------------------
-        JPanel gridPanel5salles = new JPanel();
-        gridPanel5salles.setLayout(new GridLayout(1, 2, 1, 5));
-        gridPanel5salles.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanel5salles.setBackground(new java.awt.Color(145, 200, 100));
-
-        JLabel labelFiltresalles = new JLabel("   Durée   ");
-        labelFiltresalles.setFont(tsalles);
-        String[] selectionFiltresalles = {"15mn ", "30mn", "45mn", "1h00", "1h15", "1h30", "1h45", "2h00", "2h15", "2h30", "2h45", "3h00", "3h15", "3h30", "3h45", "3h00", "3h15", "3h30", "3h45", "4h00", "4h15", "4h30", "4h45", "5h00", "5h15", "5h30", "5h45", "6h00", "6h15", "6h30", "6h45", "7h00", "7h15", "7h30", "7h45", "6h00"};
-        JComboBox listeSelectionFiltresalles = new JComboBox(selectionFiltresalles);
-        listeSelectionFiltresalles.setFont(ysalles);
-
-        gridPanel5salles.add(labelFiltresalles);
-        gridPanel5salles.add(listeSelectionFiltresalles);
-
-        centersalleslibres.add(gridPanel5, BorderLayout.NORTH);
-
-//------------------------------------------------------------------
-        JPanel gridPanel8salles = new JPanel();
-        gridPanel8salles.setLayout(new GridLayout(1, 2, 1, 5));
-        gridPanel8salles.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanel8salles.setBackground(new java.awt.Color(145, 200, 100));
-
-        JLabel labelFiltre2salles = new JLabel(" Site  ");
-        labelFiltre2salles.setFont(tsalles);
-        String[] selectionFiltre2salles = {" Eiffel 1", "Eiffel 2", "Eiffel 3", "Eiffel 4", "Eiffel 5", "Cnam"};
-        JComboBox listeSelectionFiltre2salles = new JComboBox(selectionFiltre2salles);
-        listeSelectionFiltre2salles.setFont(ysalles);
-
-        gridPanel8salles.add(labelFiltre2salles);
-        gridPanel8salles.add(listeSelectionFiltre2salles);
-
-        centersalleslibres.add(gridPanel8salles, BorderLayout.NORTH);
-//------------------------------------------------------------------
-        JPanel gridPanel9salles = new JPanel();
-        gridPanel9salles.setLayout(new GridLayout(1, 1, 1, 5));
-        gridPanel9salles.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanel9salles.setBackground(new java.awt.Color(145, 200, 100));
-
-        JCheckBox cb1salles = new JCheckBox("Ignorer les salles ayant des demandes de réservation en cours");
-        Font wsalles = new Font("Times New Roman", Font.BOLD, 20);
-        UIManager.put("JCheckBox.font", wsalles);
-        cb1salles.setFont(wsalles);
-
-        JPanel gridPanelasalles = new JPanel();
-        gridPanelasalles.setLayout(new GridLayout(1, 2, 10, 5));
-        gridPanelasalles.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanelasalles.setBackground(new java.awt.Color(145, 200, 100));
-
-        JButton Montrer2salles = new JButton("Valider l'affectation");
-        Montrer2salles.setFont(f);
-
-        gridPanelasalles.add(Montrer2salles);
-        gridPanel9salles.add(cb1salles);
-
-        centersalleslibres.add(gridPanel9salles, BorderLayout.NORTH);
-
 //------------------------------------------------------------------------------
-//                         FIN DU PANEL SALLES LIBRES    
-//------------------------------------------------------------------------------    
-////////////////////////////////////////////////////////////////////////////
+
+        this.setLayout(new BorderLayout());
+        sallesLibresPanel = new JPanel();
+        sallesLibresPanel.setOpaque(true);
+        sallesLibresPanel.setBorder(new LineBorder(Color.BLACK, 3));
+        sallesLibresPanel.setLayout(new FlowLayout(5));
+        sallesLibresPanel.setBackground(Color.blue);
+        ajoutDuPanelSallesLibres();
+//        center.add(sallesLibresPanel, BorderLayout.CENTER);
+
+//        JLabel label15 = new JLabel();
+//        mainContainer.add(label15, BorderLayout.CENTER);
+//        sallesLibresPanel.add(label15);
+//        label15.setFont(new java.awt.Font("Tahoma", 0, 36));
+//        label15.setText("Salles Libres");
+        this.setLayout(new BorderLayout());
+
+        reportingPanel = new JPanel();
+        reportingPanel.setOpaque(true);
+        reportingPanel.setBorder(new LineBorder(Color.BLACK, 3));
+        reportingPanel.setLayout(new FlowLayout(5));
+        reportingPanel.setBackground(new java.awt.Color(254, 254, 254));
+        ajoutDuPanelReporting();
+//        center.add(reportingPanel, BorderLayout.CENTER);
+
+        
+
         // On ajoute les 4 panels au content pane de la JFrame
         // Au centre
-      
-////////////////////////////////////////////////////////////////////////////  
+        this.getContentPane().add(center, BorderLayout.CENTER);
+        // En haut
+        this.getContentPane().add(topPanel, BorderLayout.NORTH);
+        // À droite
+        this.getContentPane().add(rightPanel, BorderLayout.WEST);
+        // En bas
+
     }
+
+    /**
+     * Mise à jour de la vue (en Liste ou en Grille)
+     *
+     * @param m
+     */
+////////////////////////////////////////////////////////////////////////////////    
+    public void selectSemaine(int index) {
+        //boutons.get(index).setText("X");
+        center.revalidate();
+        center.repaint();
+    }
+
+    public JButton getButtonSearchFiltre() {
+        return searchFiltre;
+    }
+
+    public String getFiltreField() {
+        return searchFilterField.getText();
+    }
+
+    public JTextField getFiltre() {
+        return searchFilterField;
+    }
+
+    public ArrayList<JButton> getBoutonsSemaine() {
+        return boutons;
+    }
+
+    public JButton getBoutonSemaine(int i) {
+        JButton boutonRecherche = new JButton();
+        for (JButton bouton : boutons) {
+            if (bouton.getText().equals(String.valueOf(i))) {
+                boutonRecherche = bouton;
+            }
+        }
+        return boutonRecherche;
+    }
+
+    public JButton getBoutonEmploiDuTemps() {
+        return button53;
+    }
+
+    public JButton getBoutonSallesLibres() {
+        return button54;
+    }
+
+    public JButton getBoutonReporting() {
+        return button60;
+    }
+    public JButton getBoutonModifier() {
+        return button55;
+    }
+
+    public void showEmploiDuTemps() {
+        center.removeAll();
+        center.add(semainesPanel);
+        semainesPanel.setVisible(true);
+        center.add(filtrePanel);
+        filtrePanel.setVisible(true);
+        center.add(jscrollPanel);
+        center.revalidate();
+        center.repaint();
+    }
+
+    public void showSallesLibres() {
+        center.removeAll();
+        center.add(sallesLibresPanel);
+        cleanTableEnGrille();
+        center.add(jscrollPanel);
+        center.revalidate();
+        center.repaint();
+    }
+
+    public void showReporting() {
+        center.removeAll();
+        center.add(reportingPanel);
+        center.revalidate();
+        center.repaint();
+    }
+
+    public void cleanTableEnGrille() {
+        tableEnGrille.setModel(new DefaultTableModel(
+                new Object[][]{
+                    {"8h30-10h00", null, null, null, null, null, null, null},
+                    {"10h15-11h45", null, null, null, null, null, null, null},
+                    {"12h00-13h30", null, null, null, null, null, null, null},
+                    {"13h45-15h00", null, null, null, null, null, null, null},
+                    {"15h15-16h45", null, null, null, null, null, null, null},
+                    {"17h00-18h45", null, null, null, null, null, null, null},
+                    {"19h00-20h30", null, null, null, null, null, null, null}
+                },
+                new String[]{
+                    " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
+                }
+        ));
+    }
+
+    public void setTableEnGrille(TableModel m) {
+        tableEnGrille.setModel(m);
+    }
+
+//    public void updateVue2(TableModel m) {
+//        //jTable1.setModel(m);
+//        jTable2.setModel(m);
+//    }
+    public void changeToEDT() {
+        center.removeAll();
+        //center.add(panNouveaPanel);
+        center.revalidate();
+        center.repaint();
+        center.setVisible(true);
+    }
+
+    public void changeAVueEnGrille(TableModel m) {
+        tableEnGrille.setModel(m);
+        jscrollPanel.setViewportView(tableEnGrille);
+        tableEnGrille.setPreferredScrollableViewportSize(new Dimension(1590, 720));//2860,1450
+        tableEnGrille.setRowHeight(100);
+        Font j = new Font("Times New Roman", Font.BOLD, 30);
+        UIManager.put("JTable.font", j);
+    }
+
+    public void changeAVueEnListe(TableModel m) {
+        /// jTable2 : Vue en liste
+        tableEnListe = new JTable();
+
+        tableEnListe.setModel(new DefaultTableModel(
+                new Object[][]{
+                    {"8h30-10h00", null, null, null, null, null, null},
+                    {"10h15-11h45", null, null, null, null, null, null},
+                    {"12h00-13h30", null, null, null, null, null, null},
+                    {"13h45-15h00", null, null, null, null, null, null},
+                    {"15h15-16h45", null, null, null, null, null, null},
+                    {"17h00-18h45", null, null, null, null, null, null},
+                    {"19h00-20h30", null, null, null, null, null, null}
+                },
+                new String[]{
+                    " "
+                }
+        ));
+        jscrollPanel.setViewportView(tableEnListe);
+        tableEnListe.setPreferredScrollableViewportSize(new Dimension(1590, 720));//2860,1450
+        tableEnListe.setRowHeight(100);
+        Font j = new Font("Times New Roman", Font.BOLD, 30);
+        UIManager.put("JTable.font", j);
+
+        TableColumn col2 = tableEnListe.getColumnModel().getColumn(0);
+        col2.setPreferredWidth(100);
+        tableEnListe.setModel(m);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public JComboBox getJComboBoxSelectionVue() {
+        return listeSelectionVue;
+    }
+
+    public JComboBox getJComboBoxFilterSelection() {
+        return listeSelectionFiltre;
+    }
+
+    public JComboBox getJComboBoxFilterSelectionEx() {
+        return listeSelectionChamp;
+    }
+
+    /**
+     *
+     * @param j
+     */
+    public void setJComboBoxSelectionVue(int j) {
+        listeSelectionVue.setSelectedIndex(j);
+    }
+
+    public void setJComboBoxFilterSelection(int j) {
+        listeSelectionFiltre.setSelectedIndex(j);
+    }
+
+    public void setJComboBoxFilterSelectionEx(int j) {
+        listeSelectionChamp.setSelectedIndex(j);
+    }
+
+    public void setJComboBoxFilterSelectionText(String[] j) {
+        listeSelectionChamp.removeAllItems();
+        filtrePanel.remove(listeSelectionChamp);
+        listeSelectionChamp = new JComboBox(j);
+        filtrePanel.add(listeSelectionChamp);
+//        DefaultComboBoxModel model = new DefaultComboBoxModel(j);
+//        listeSelectionChamp.setModel(model);
+        listeSelectionChamp.setSelectedIndex(1);
+        listeSelectionChamp.revalidate();
+        listeSelectionChamp.repaint();
+        filtrePanel.revalidate();
+        filtrePanel.repaint();
+        center.revalidate();
+        center.repaint();
+    }
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////    
+    public void ajoutDuPanelSallesLibres() {
+        Font f = new Font("Times New Roman", Font.BOLD, 18);
+        //UIManager.put("JButton.font", f);
+
+        JPanel gridPanel3 = new JPanel();
+        gridPanel3.setLayout(new GridLayout(1, 1, 1, 5));
+        gridPanel3.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel3.setBackground(new java.awt.Color(236, 251, 134));
+
+        
+        Font t = new Font("Times New Roman", Font.BOLD, 18);
+        UIManager.put("JLabel.font", t);
+        
+
+        JPanel gridPanel7 = new JPanel();
+        gridPanel7.setLayout(new GridLayout(1, 2, 1, 5));
+        gridPanel7.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel7.setBackground(new java.awt.Color(236, 251, 134));
+
+        TextField enseignant = new java.awt.TextField();
+        enseignant.setText(" ");
+        enseignant.setBackground(new java.awt.Color(255, 172, 220));
+        Font y = new Font("Times New Roman", Font.BOLD, 16);
+        UIManager.put("JLabel.font", y);
+
+        JLabel ense = new JLabel(" Capacité maximal  ");
+        ense.setFont(t);
+        enseignant.setFont(y);
+
+        gridPanel7.add(ense);
+        gridPanel7.add(enseignant);
+
+        //////////////////////////////////////////////////////////
+        JPanel gridPanel5 = new JPanel();
+        gridPanel5.setLayout(new GridLayout(1, 2, 1, 5));
+        gridPanel5.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel5.setBackground(new java.awt.Color(236, 251, 134));
+
+        JLabel labelFiltre = new JLabel("   Heure ");
+        labelFiltre.setFont(t);
+        String[] selectionFiltre = {"8h30-10h00","10h15-11h45","12h00-13h30","13h45-15h15","15h30-17h00","17h15-18h45","19h00-20h30"};
+        JComboBox listeSelectionDuree = new JComboBox(selectionFiltre);
+        listeSelectionDuree.setFont(y);
+        listeSelectionDuree.setBackground(new java.awt.Color(255, 172, 220));
+
+        gridPanel5.add(labelFiltre);
+        gridPanel5.add(listeSelectionDuree);
+        
+        JPanel gridPanel5f = new JPanel();
+        gridPanel5f.setLayout(new GridLayout(1, 2, 1, 5));
+        gridPanel5f.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel5f.setBackground(new java.awt.Color(236, 251, 134));
+        
+        JLabel fecha = new JLabel();
+        fecha.setText(" Date ");
+        Font ygg = new Font("Times New Roman", Font.BOLD, 16);
+        UIManager.put("JLabel.font", ygg);
+        fecha.setFont(ygg);
+        
+        DateFormat dateFormat = DateFormat.getInstance();
+        JFormattedTextField field = new JFormattedTextField(dateFormat);
+        field.setValue(new Date());
+        Font yg = new Font("Times New Roman", Font.BOLD, 16);
+        UIManager.put("JFormattedTextField.font", yg);
+        field.setFont(yg);
+        field.setBackground(new java.awt.Color(255, 172, 220));
+        field.setFocusLostBehavior(JFormattedTextField.REVERT);
+        gridPanel5f.add(fecha);
+        gridPanel5f.add(field);
+        
+        //////////////////////////////////////////////////////////////
+        JPanel gridPanel8 = new JPanel();
+        gridPanel8.setLayout(new GridLayout(1, 2, 1, 5));
+        gridPanel8.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel8.setBackground(new java.awt.Color(236, 251, 134));
+
+        JLabel labelFiltre2 = new JLabel(" Site  ");
+        labelFiltre2.setFont(t);
+        String[] selectionFiltre2 = {" Eiffel 1", "Eiffel 2", "Eiffel 3", "Eiffel 4", "Eiffel 5", "Cnam"};
+        JComboBox listeSelectionFiltre2 = new JComboBox(selectionFiltre2);
+        listeSelectionFiltre2.setFont(y);
+        listeSelectionFiltre2.setBackground(new java.awt.Color(255, 172, 220));
+
+        gridPanel8.add(labelFiltre2);
+        gridPanel8.add(listeSelectionFiltre2);
+
+        //////////////////////////////////////////////////////////////
+        JPanel gridPanel9 = new JPanel();
+        gridPanel9.setLayout(new GridLayout(1, 1, 1, 5));
+        gridPanel9.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel9.setBackground(new java.awt.Color(145, 200, 100));
+
+        JCheckBox cb1 = new JCheckBox("Ignorer les salles ayant des demandes de réservation en cours");
+        Font w = new Font("Times New Roman", Font.BOLD, 20);
+        UIManager.put("JCheckBox.font", w);
+        cb1.setFont(w);
+
+        JPanel gridPanela = new JPanel();
+        gridPanela.setLayout(new GridLayout(1, 2, 10, 5));
+        gridPanela.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanela.setBackground(new java.awt.Color(145, 200, 100));
+
+        JButton Montrer2 = new JButton("Valider l'affectation");
+        Montrer2.setFont(f);
+        Montrer2.setIcon(new ImageIcon("img/check.png"));
+        Montrer2.setBackground(new java.awt.Color(251, 231, 188));
+
+       
+        gridPanel9.add(cb1);
+
+        sallesLibresPanel.add(gridPanel3);
+        sallesLibresPanel.add(gridPanel7);
+        sallesLibresPanel.add(enseignant);
+        sallesLibresPanel.add(gridPanel5);
+         sallesLibresPanel.add(gridPanel5f);
+        sallesLibresPanel.add(gridPanel8);
+        sallesLibresPanel.add(gridPanel9);
+        sallesLibresPanel.add(Montrer2);
+    }
+    
+///////////////////////////////////////////////////////////////////////////////
+    public void ajoutDuPanelReporting() { 
+                
+        JPanel gridPanela = new JPanel();
+        gridPanela.setLayout(new GridLayout(1, 1, 10, 5));
+        gridPanela.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanela.setBackground(new java.awt.Color(145, 200, 100));
+        
+        JPanel gridPanelb = new JPanel();
+        gridPanelb.setLayout(new GridLayout(2,2, 5, 5));
+        gridPanelb.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanelb.setBackground(new java.awt.Color(145, 200, 100));
+        
+        Font f = new Font("Times New Roman", Font.BOLD, 30);
+        UIManager.put("JButton.font", f);
+        
+        
+        JButton Montrer2 = new JButton("<html>Capacité des salles <br> pour un site</html>");
+        Montrer2.setFont(f);
+        Montrer2.setIcon(new ImageIcon("img/a4.png"));
+        Montrer2.setBackground(new java.awt.Color(163, 255, 0));
+        Montrer2.setFont(f);
+        gridPanelb.add(Montrer2);
+        Montrer2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Montrer2MouseClicked(evt);
+            }
+        });
+        
+        
+        JButton Montrer3 = new JButton("<html>Taux d'occupation <br> dessalles sur une <br> période donnée</html>");
+        Montrer3.setFont(f);
+        Montrer3.setIcon(new ImageIcon("img/a2.png"));
+        Montrer3.setBackground(new java.awt.Color(163, 150, 253));
+        Montrer3.setFont(f);        
+        gridPanelb.add(Montrer3);
+        Montrer3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Montrer3MouseClicked(evt);
+            }
+        });
+        
+        JButton Montrer4 = new JButton("<html>Nombre d'heures de <br> séance par an</html>");
+        Montrer4.setFont(f);
+        Montrer4.setIcon(new ImageIcon("img/a3.png"));
+        Montrer4.setBackground(new java.awt.Color(255, 153, 5));
+        Montrer4.setFont(f);        
+        gridPanelb.add(Montrer4);
+        Montrer4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Montrer4MouseClicked(evt);
+            }
+        });
+        
+        JButton Montrer5 = new JButton("<html>Nombre d'heures de <br>séance par TD</html>");
+        Montrer5.setFont(f);
+        Montrer5.setIcon(new ImageIcon("img/a1.png"));
+        Montrer5.setBackground(new java.awt.Color(255,255,0));
+        Montrer5.setFont(f);
+        Montrer5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Montrer5MouseClicked(evt);
+            }
+        });
+        
+        
+        Montrer2.setPreferredSize(new Dimension(870, 485));
+        Montrer3.setPreferredSize(new Dimension(870, 485));
+        Montrer4.setPreferredSize(new Dimension(870, 485));
+        Montrer5.setPreferredSize(new Dimension(870, 485));        
+        gridPanelb.add(Montrer5);
+        
+        
+//        center.add(reportingPanel, BorderLayout.CENTER);
+
+        JLabel label16 = new JLabel();
+        reportingPanel.add(label16);
+        label16.setFont(new java.awt.Font("Tahoma", 0, 36));
+        
+        reportingPanel.add(gridPanelb);
+        
+
+        
+        
+    }
+    private void Montrer2MouseClicked(java.awt.event.MouseEvent evt) {                                      
+        SallesReporting g=new  SallesReporting("Effectif des groupes", "Nombres d'élèves par groupes");
+        g.setVisible(true);
+        
+    } 
+    private void Montrer3MouseClicked(java.awt.event.MouseEvent evt) {                                      
+         EffectifGroupeReporting demo = new EffectifGroupeReporting("Effectif des groupes", "Nombres d'élèves par groupes");
+         demo.setVisible(true);
+        
+    } 
+    private void Montrer4MouseClicked(java.awt.event.MouseEvent evt) {                                      
+        SallesReporting g=new  SallesReporting("Effectif des groupes", "Nombres d'élèves par groupes");
+        g.setVisible(true);
+        
+    } 
+    private void Montrer5MouseClicked(java.awt.event.MouseEvent evt) {                                      
+        HeuresReporting demo = new HeuresReporting("Heures de cours", "Nombres d'heures par cours :");
+        demo.setVisible(true);
+        
+    } 
+    /**
+     *
+     * @return
+     */
+    public JTable getJTable() {
+        return tableEnGrille;
+    }
+
+////////////////////////////////////////////////////////////////////////////////
+//                MODIFICATION DE L'EMPLOIE DU TEMPS
+////////////////////////////////////////////////////////////////////////////////    
+    
+        
+    
+////////////////////////////////////////////////////////////////////////////  
+    
     public static void main(String[] args) {
         AdminVue mylayout = new AdminVue("Accueil");
         mylayout.setVisible(true);

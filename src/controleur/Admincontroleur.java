@@ -1,6 +1,9 @@
 package controleur;
 
-import dao.EnseignantDAO;
+/**
+ *
+ * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
+ */
 import dao.EtudiantDAO;
 import dao.SeanceDAO;
 import java.awt.Color;
@@ -14,30 +17,25 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
-import java.util.Set;
-import java.util.stream.Collectors;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import modele.Cours;
 import modele.Enseignant;
 import modele.Etudiant;
-import modele.Groupe;
 import modele.Seance;
 import modele.User;
+import vue.AdminVue;
+import controleur.EDTControleur;
+import dao.EnseignantDAO;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import vue.EnseignantVue;
 import vue.EtudiantVue;
 
-/**
- *
- * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
- */
-public class EDTControleur implements ActionListener, ItemListener {
-
+public class Admincontroleur {
     private EtudiantDAO etuddao = null;
     private Etudiant e = null;
 
@@ -46,21 +44,16 @@ public class EDTControleur implements ActionListener, ItemListener {
     private ArrayList<Seance> listSeancesSelectionnees = null;
     private int numeroSemaineSelected = 1;
 
-    private EtudiantVue ve = null;
+    private AdminVue ve = null;
 
     private DefaultTableModel dtm;
 
     private EnseignantVue ev = null;
     private EnseignantDAO enddao = null;
     private Enseignant en = null;
-
-    /**
-     *
-     * @param m
-     * @param v
-     */
-    public EDTControleur(User m, EtudiantVue v) {
-        ve = new EtudiantVue("Etudiant vue");
+    
+    public Admincontroleur(User m, AdminVue v) {
+        ve = new AdminVue("Admin vue");
         ve = v;
 
         etuddao = new EtudiantDAO();
@@ -71,9 +64,9 @@ public class EDTControleur implements ActionListener, ItemListener {
         listSeances = new ArrayList<Seance>();
         listSeances = seance.chercherSeancesParGroupeId(e.getGroupeId());
         listSeancesSelectionnees = new ArrayList<Seance>();
-        listSeancesSelectionnees = getSeancesParGroupeIdEtNumeroSemaine(e.getGroupeId(), numeroSemaineSelected);
-        //listSeancesSelectionnees = seance.chercherSeancesParGroupeIdEtNumeroSemaine(e.getGroupeId(), numeroSemaineSelected);
-        String[][] data = new String[84][100];
+        listSeancesSelectionnees = seance.chercherSeancesParGroupeIdEtNumeroSemaine(e.getGroupeId(), numeroSemaineSelected);
+
+        String[][] data = new String[7][100];
 
         String[] horairesPossibles = new String[]{"08:30-10:00", "10:15-11:45", "12:00-13:30", "13:45-15:15", "15:30-17:00", "17:15-18:45", "19:00-20:30"};
         for (int i = 0; i < 7; i++) {
@@ -82,7 +75,8 @@ public class EDTControleur implements ActionListener, ItemListener {
 
         int g = 0;
         int colinc = 1;
-        String jour = "Lundi";
+        String jour = "null";
+        jour = getJourDeLaSemaine(listSeancesSelectionnees.get(0).getDate());
 
         // Vue en grille
         while (g < listSeancesSelectionnees.size()) {
@@ -134,7 +128,8 @@ public class EDTControleur implements ActionListener, ItemListener {
 //
 //        int g = 0;
 //        int colinc = 1;
-//        String jour = "Lundi";
+//        String jour = "null";
+//        jour = getJourDeLaSemaine(listSeancesSelectionnees.get(0).getDate());
 //
 //        // Vue en grille
 //        while (g < listSeancesSelectionnees.size()) {
@@ -199,24 +194,24 @@ public class EDTControleur implements ActionListener, ItemListener {
 
     public void control() {
         ve.getBoutonEmploiDuTemps().addActionListener(this);
-        for (JButton bouton : ve.getBoutonsSemaine()) {
+        ve.getBoutonsSemaine().forEach((bouton) -> {
             bouton.addActionListener(this);
-        }
+        });
         ve.getBoutonSallesLibres().addActionListener(this);
         ve.getBoutonReporting().addActionListener(this);
-        ve.getJComboBoxSelectionVue().addItemListener(this);
+        ve.getBoutonModifier().addActionListener((ActionListener) this);
+        ve.getJComboBoxSelectionVue().addItemListener((ItemListener) this);
 
-        ve.getJComboBoxFilterSelection().addItemListener(this);
+        ve.getJComboBoxFilterSelection().addItemListener((ItemListener) this);
 
 //        ve.getJComboBoxFilterSelectionEx().addItemListener(this);
-        ve.getButtonSearchFiltre().addActionListener(this);
+        ve.getButtonSearchFiltre().addActionListener((ActionListener) this);
 
         ve.setTableEnGrille(dtm);
         ve.setVisible(true);
         System.out.println("Control");
     }
 
-    @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == ve.getBoutonEmploiDuTemps()) {
             ve.showEmploiDuTemps();
@@ -258,7 +253,6 @@ public class EDTControleur implements ActionListener, ItemListener {
         }
     }
 
-    @Override
     public void itemStateChanged(ItemEvent ie) {
         if (ie.getStateChange() == ItemEvent.SELECTED) {
             switch (ve.getJComboBoxSelectionVue().getSelectedItem().toString()) {
@@ -279,20 +273,6 @@ public class EDTControleur implements ActionListener, ItemListener {
                     break;
             }
         }
-    }
-
-    public ArrayList<Seance> getSeancesParGroupeIdEtNumeroSemaine(int groupeId, int numeroSemaine) {
-        ArrayList<Seance> tempArray = new ArrayList<Seance>();
-        for (Seance s : listSeances) {
-            if (s.getNumeroSemaine() == numeroSemaine) {
-                for (Groupe g : s.getListeGroupes()) {
-                    if (groupeId == g.getGroupeId()) {
-                        tempArray.add(s);
-                    }
-                }
-            }
-        }
-        return tempArray;
     }
 
     public void affecterSeancesDeSemaine() {
@@ -439,13 +419,13 @@ public class EDTControleur implements ActionListener, ItemListener {
         return tempArray3;
     }
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
         //test etudiant
         EtudiantDAO dao = new EtudiantDAO();
         Etudiant m = new Etudiant();
         m = dao.chercher(525);
-        EtudiantVue v = new EtudiantVue("Etudiant Vue");
-        EDTControleur controler = new EDTControleur(m, v);
+        AdminVue v = new AdminVue("Admin Vue");
+        Admincontroleur controler = new Admincontroleur(m, v);
         controler.control();
 
         //test enseignant
