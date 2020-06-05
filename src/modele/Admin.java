@@ -19,4 +19,8 @@ public class Admin extends User {
     public Admin(int id, String email, String nom, String prenom, int droit) {
         super(id, email, nom, prenom, droit);
     }
+
+    public Admin() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

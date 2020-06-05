@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.event.*;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.table.TableColumn;
@@ -33,6 +34,7 @@ public class AdminVue extends JFrame {
     private JPanel MyPanel1;
     private JPanel sallesLibresPanel = null;
     private JPanel reportingPanel = null;
+    private JPanel centerajoutseance;
     private JScrollPane jscrollPanel;
     private JTable tableEnGrille;
     private JTable tableEnListe;
@@ -393,6 +395,14 @@ public class AdminVue extends JFrame {
         reportingPanel.setBackground(new java.awt.Color(254, 254, 254));
         ajoutDuPanelReporting();
 //        center.add(reportingPanel, BorderLayout.CENTER);
+        
+        centerajoutseance = new JPanel();
+        centerajoutseance.setOpaque(true);
+        centerajoutseance.setBorder(new LineBorder(Color.BLACK, 3));
+        centerajoutseance.setLayout(new FlowLayout(5));
+        centerajoutseance.setBackground(new java.awt.Color(254, 254, 254));
+        ajoutDeseances();
+        
 
         // On ajoute les 4 panels au content pane de la JFrame
         // Au centre
@@ -866,7 +876,133 @@ public class AdminVue extends JFrame {
         demo.setVisible(true);
     }
 
+///////////////////////////////////////////////////////////////////////////////
+//                       AJOUT DU PANEL AJOUT SEANCE
+///////////////////////////////////////////////////////////////////////////////
+        public final void ajoutDeseances() {
+        JPanel centerajoutseance = new JPanel();
+        centerajoutseance.setOpaque(true);        
+        centerajoutseance.setBorder(new LineBorder(Color.BLACK, 3));
+        centerajoutseance.setLayout(new FlowLayout(5));
+        centerajoutseance.setBackground(new java.awt.Color(211, 212, 250));
+        //mainContainer.add(centerajoutseance, BorderLayout.CENTER);
+        
+        Font y = new Font("Times New Roman", Font.BOLD, 30);
+        UIManager.put("JLabel.font", y);
+        
 
+                
+        JPanel gridPanel3 = new JPanel();
+        gridPanel3.setLayout(new GridLayout(1, 1, 1, 5));
+        gridPanel3.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel3.setBackground(new java.awt.Color(145, 200, 100));
+        
+           //URL de l'image
+         String imgUrl="img/depla.png";
+         ImageIcon icone = new ImageIcon(imgUrl);
+        
+        
+        JLabel titra = new JLabel("  AJOUTER UNE SEANCE  ",icone, JLabel.CENTER);
+        gridPanel3.add(titra);
+        Font t = new Font("Times New Roman", Font.BOLD, 30);
+        UIManager.put("JLabel.font", t);
+        titra.setFont(t);
+        
+         
+        
+        JPanel gridPanel7 = new JPanel();
+        gridPanel7.setLayout(new GridLayout(8, 1, 1, 5));
+        gridPanel7.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanel7.setBackground(new java.awt.Color(145, 200, 100));
+        
+        String[] selectionensegnat = {" Segado", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique","Reseaux","Traitement du signal","Analyse de Fourier","Analyse Financiere","Japonais","Geopolitique","Electronique fondamentale","Anthropologie","Droit du travail"};
+        JComboBox listeSelectionensegnat = new JComboBox(selectionensegnat);
+        listeSelectionensegnat.setFont(y);
+//----------------------------------------------------
+        JLabel fecha = new JLabel();
+        fecha.setText(" Date ");
+        
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        JFormattedTextField field = new JFormattedTextField(dateFormat);
+        field.setValue(new Date());
+        
+        
+        JLabel ense = new JLabel("Enseignant");
+///////////////////////////////////////////////////////////////
+        JLabel labelcours = new JLabel("Cours   ");
+        labelcours.setFont(t);
+        String[] selectioncours = {" Anglais", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique","Reseaux","Traitement du signal","Analyse de Fourier","Analyse Financiere","Japonais","Geopolitique","Electronique fondamentale","Anthropologie","Droit du travail"};
+        JComboBox listeSelectioncours = new JComboBox(selectioncours);
+        listeSelectioncours.setFont(y);
+///////////////////////////////////////////////////////////////////
+
+        JLabel labelpromo = new JLabel("Promo");
+        labelpromo.setFont(t);
+        String[] selectionpromo = {"Prepac", "Ing1", "Ing2", "Ing3", "Ing4", "Ing5"};
+        JComboBox listeSelectionpromo = new JComboBox(selectionpromo);
+        listeSelectionpromo.setFont(y);
+//////////////////////////////////////////////////////////////////////
+        
+        JLabel labelheured = new JLabel("Début d'heure ");
+        labelheured.setFont(t);
+        String[] selectionFiltreheured = {"8h30-10h00", "10h15-11h45", "12h00-13h30", "13h45-15h15", "15h30-17h00", "17h15-18h45", "19h00-20h30"};
+        JComboBox listeSelectionDureed = new JComboBox(selectionFiltreheured);
+        listeSelectionDureed.setFont(y);
+///////////////////////////////////////////////////////////////////////
+        JLabel labelheuref = new JLabel("Fin d'heure ");
+        labelheuref.setFont(t);
+        String[] selectionFiltreheuref = {"8h30-10h00", "10h15-11h45", "12h00-13h30", "13h45-15h15", "15h30-17h00", "17h15-18h45", "19h00-20h30"};
+        JComboBox listeSelectionDureef = new JComboBox(selectionFiltreheuref);
+        listeSelectionDureef.setFont(y);
+///////////////////////////////////////////////////////////////////////
+        JLabel labeltypecours = new JLabel(" Type de cours   ");
+        labeltypecours.setFont(t);
+        String[] selectionFiltretypecours = {" TP", "TD", "Projet", "Soutien", "Magistral", "Interactif"};
+        JComboBox listeSelectionFiltretypecours = new JComboBox(selectionFiltretypecours);
+        listeSelectionFiltretypecours.setFont(y);
+/////////////////////////////////////////////////////////////////////////
+        JLabel labelgroupe = new JLabel("Groupe   ");
+        labelgroupe.setFont(t);
+        String[] selectionFiltregroupe = {"G01","G02","G03","G04","G05","G06","G07","G08","G09","G10","G11"};
+        JComboBox listeSelectionFiltregroupe = new JComboBox(selectionFiltregroupe);
+        listeSelectionFiltregroupe.setFont(y);
+        ense.setFont(t);
+        fecha.setFont(t);
+        
+        field.setFont(y);
+        
+        gridPanel7.add(ense);
+        gridPanel7.add(listeSelectionensegnat);
+        gridPanel7.add(fecha);
+        gridPanel7.add(field);
+        gridPanel7.add(labelcours);
+        gridPanel7.add(listeSelectioncours);
+        gridPanel7.add(labelpromo);
+        gridPanel7.add(listeSelectionpromo);
+        gridPanel7.add(labelheured);
+        gridPanel7.add(listeSelectionDureed);
+        gridPanel7.add(labelheuref);
+        gridPanel7.add(listeSelectionDureef);
+        gridPanel7.add(labeltypecours);
+        gridPanel7.add(listeSelectionFiltretypecours);
+        gridPanel7.add(labelgroupe);
+        gridPanel7.add(listeSelectionFiltregroupe);
+        
+       
+        centerajoutseance.add(gridPanel3, BorderLayout.NORTH);
+        centerajoutseance.add(gridPanel7, BorderLayout.WEST);
+        
+ 
+////////////////////////////////////////////////////////////////////////////////        
+        JButton valider = new JButton("Valider l'affectation");
+        Font h = new Font("Times New Roman", Font.BOLD, 30);
+        UIManager.put("JButton.font", h);
+        valider.setFont(h);
+        valider.setIcon(new ImageIcon("img/check.png"));
+        valider.setBackground(new java.awt.Color(251, 231, 188));
+        
+        centerajoutseance.add(valider);
+        }
     /**
      *
      * @return
