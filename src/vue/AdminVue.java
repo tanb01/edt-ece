@@ -25,7 +25,7 @@ public class AdminVue extends JFrame {
     private javax.swing.JTable jTable1;
     private JScrollPane scroll;
     private DefaultTableModel model;
-    private JButton button53, button54, button55, button56, button57;
+    private JButton button53, button54, button55, button56, button57, button58;
     private final JPanel center = null;
     private final JPanel centersalleslibres = null;
     private JPanel MyPanel1;
@@ -74,12 +74,16 @@ public class AdminVue extends JFrame {
         button53.setIcon(new ImageIcon("img/school.png"));
 
         button54 = new JButton("<html> Salles <br>libres </html>");
-        button54.setIcon(new ImageIcon("img/salles.png"));
+        button54.setIcon(new ImageIcon("img/project.png"));
         
-        button55 = new JButton("<html> Modifier l'emploie<br> du temps<br> </html>");
+        button55 = new JButton("<html> Ajouter une<br> seance</html>");
         button55.setIcon(new ImageIcon("img/modification.png"));
         button56 = new JButton("<html> Reporting </html>");
         button56.setIcon(new ImageIcon("img/result.png"));
+        button57 = new JButton("<html> Modifier une <br> séance </html>");
+        button57.setIcon(new ImageIcon("img/notepad.png"));
+        button58 = new JButton("<html> Historique de <br> modifications </html>");
+        button58.setIcon(new ImageIcon("img/history.png"));
 
        
         // Couleur et polices
@@ -95,6 +99,10 @@ public class AdminVue extends JFrame {
         button55.setFont(f);
         button56.setBackground(new java.awt.Color(243, 151, 150));
         button56.setFont(f);
+        button57.setBackground(new java.awt.Color(143, 151, 150));
+        button57.setFont(f);
+        button58.setBackground(new java.awt.Color(253, 121, 130));
+        button58.setFont(f);
 
         button54.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -200,6 +208,8 @@ public class AdminVue extends JFrame {
         gridPanel.add(button54);
         gridPanel.add(button55);
         gridPanel.add(button56);
+        gridPanel.add(button57);
+        gridPanel.add(button58);
 
         rightPanel.add(gridPanel);
         mainContainer.add(rightPanel, BorderLayout.WEST);
