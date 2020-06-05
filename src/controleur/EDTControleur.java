@@ -26,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
 import modele.Cours;
 import modele.Enseignant;
 import modele.Etudiant;
+import modele.Groupe;
 import modele.Seance;
 import modele.User;
 import vue.EnseignantVue;
@@ -70,8 +71,8 @@ public class EDTControleur implements ActionListener, ItemListener {
         listSeances = new ArrayList<Seance>();
         listSeances = seance.chercherSeancesParGroupeId(e.getGroupeId());
         listSeancesSelectionnees = new ArrayList<Seance>();
-        listSeancesSelectionnees = seance.chercherSeancesParGroupeIdEtNumeroSemaine(e.getGroupeId(), numeroSemaineSelected);
-
+        listSeancesSelectionnees = getSeancesParGroupeIdEtNumeroSemaine(e.getGroupeId(), numeroSemaineSelected);
+        //listSeancesSelectionnees = seance.chercherSeancesParGroupeIdEtNumeroSemaine(e.getGroupeId(), numeroSemaineSelected);
         String[][] data = new String[84][100];
 
         String[] horairesPossibles = new String[]{"08:30-10:00", "10:15-11:45", "12:00-13:30", "13:45-15:15", "15:30-17:00", "17:15-18:45", "19:00-20:30"};
@@ -81,8 +82,7 @@ public class EDTControleur implements ActionListener, ItemListener {
 
         int g = 0;
         int colinc = 1;
-        String jour = "null";
-        jour = getJourDeLaSemaine(listSeancesSelectionnees.get(0).getDate());
+        String jour = "Lundi";
 
         // Vue en grille
         while (g < listSeancesSelectionnees.size()) {
@@ -134,8 +134,7 @@ public class EDTControleur implements ActionListener, ItemListener {
 //
 //        int g = 0;
 //        int colinc = 1;
-//        String jour = "null";
-//        jour = getJourDeLaSemaine(listSeancesSelectionnees.get(0).getDate());
+//        String jour = "Lundi";
 //
 //        // Vue en grille
 //        while (g < listSeancesSelectionnees.size()) {
@@ -280,6 +279,20 @@ public class EDTControleur implements ActionListener, ItemListener {
                     break;
             }
         }
+    }
+
+    public ArrayList<Seance> getSeancesParGroupeIdEtNumeroSemaine(int groupeId, int numeroSemaine) {
+        ArrayList<Seance> tempArray = new ArrayList<Seance>();
+        for (Seance s : listSeances) {
+            if (s.getNumeroSemaine() == numeroSemaine) {
+                for (Groupe g : s.getListeGroupes()) {
+                    if (groupeId == g.getGroupeId()) {
+                        tempArray.add(s);
+                    }
+                }
+            }
+        }
+        return tempArray;
     }
 
     public void affecterSeancesDeSemaine() {

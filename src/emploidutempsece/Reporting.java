@@ -28,16 +28,20 @@ public class Reporting extends JFrame {
 
     /**
      * Module Reporting pour l'effectif des groupes
-     * 
+     *
      * @param applicationTitle
      * @param chartTitle
      */
-    public Reporting(String applicationTitle, String chartTitle) {
+    public Reporting(String applicationTitle) {
         super(applicationTitle);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    }
+
+    public void reportingEffectifGroupesParPromo() {
         // On crée la dataset pour l'effectif
         PieDataset dataset = creationEffectifReportingDataset(); // Pour diagramme
         // On crée la chart grâce à la dataset
-        JFreeChart chart = creationDiag3D(dataset, chartTitle); // Pour un diagramme 3D
+        JFreeChart chart = creationDiag3D(dataset, "Effectifs par groupe par promo"); // Pour un diagramme 3D
         // On met la chart dans un panel
         ChartPanel chartPanel = new ChartPanel(chart);
         // Taille par défaut
@@ -46,50 +50,48 @@ public class Reporting extends JFrame {
         setContentPane(chartPanel);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }
-    
+
 //    /**
 //     * Module Reporting pour les heures de cours
 //     * 
 //     * @param applicationTitle
 //     * @param chartTitle
 //     */
-//    public Reporting(String applicationTitle, String chartTitle) {
-//        super(applicationTitle);
-//        // On crée la dataset pour les heures de cours
-//        PieDataset dataset = creationHeuresReportingDataset(); // Pour diagramme
-//        // On crée la chart grâce à la dataset
-//        JFreeChart chart = creationDiag3D(dataset, chartTitle); // Pour un diagramme 3D
-//        // On met la chart dans un panel
-//        ChartPanel chartPanel = new ChartPanel(chart);
-//        // Taille par défaut
-//        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-//        // On ajoute à l'application
-//        setContentPane(chartPanel);
-//        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-//    }
-
+    public void reportingHeuresDeSeancesParCours() {
+        // On crée la dataset pour les heures de cours
+        PieDataset dataset = creationHeuresReportingDataset(); // Pour diagramme
+        // On crée la chart grâce à la dataset
+        JFreeChart chart = creationDiag3D(dataset, "Nombres d'heures de seances par cours"); // Pour un diagramme 3D
+        // On met la chart dans un panel
+        ChartPanel chartPanel = new ChartPanel(chart);
+        // Taille par défaut
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        // On ajoute à l'application
+        setContentPane(chartPanel);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    }
 //    /**
 //     * Module Reporting pour la capacité des salles par sites
 //     * 
 //     * @param applicationTitle
 //     * @param chartTitle 
 //     */
-//    public Reporting(String applicationTitle, String chartTitle) {
-//        super(applicationTitle);
-//        // On crée la dataset pour la SALLE
-//        DefaultCategoryDataset dataset = creationSallesReportingHistoDataset(); // Pour histogramme
-//        // On crée la chart grâce à la dataset
-//        JFreeChart chart = creationHisto(dataset, chartTitle); // Pour un histogramme
-//        // On met la chart dans un panel
-//        ChartPanel chartPanel = new ChartPanel(chart);
-//        // Taille par défaut
-//        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-//        // On ajoute à l'application
-//        setContentPane(chartPanel);
-//          setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-//
-//    }
-    
+
+    public void reportingCapaciteSallesParSiteHisto() {
+        // On crée la dataset pour la SALLE
+        DefaultCategoryDataset dataset = creationSallesReportingHistoDataset(); // Pour histogramme
+        // On crée la chart grâce à la dataset
+        JFreeChart chart = creationHisto(dataset, "Capacite "); // Pour un histogramme
+        // On met la chart dans un panel
+        ChartPanel chartPanel = new ChartPanel(chart);
+        // Taille par défaut
+        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        // On ajoute à l'application
+        setContentPane(chartPanel);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+    }
+
     /**
      * Dataset du diagramme 2D et 3D pour les SALLES
      *
@@ -165,7 +167,7 @@ public class Reporting extends JFrame {
         }
         return result;
     }
-    
+
     /**
      * Dataset du diagramme 2D et 3D pour les Heures
      *
@@ -181,7 +183,7 @@ public class Reporting extends JFrame {
         for (Groupe groupe : promos.get(2).getGroupes()) {
             dataset.setValue(groupe.getNomGroupe(), groupe.getEffectifGroupe());
         }
-        
+
         return dataset;
     }
 
@@ -257,9 +259,11 @@ public class Reporting extends JFrame {
 //        Reporting demo = new Reporting("Heures de cours", "Nombres d'heures par cours :");
 //        demo.pack();
 //        demo.setVisible(true);
-
         // Main pour les effectifs des groupes
-        Reporting demo = new Reporting("Effectif des groupes", "Nombres d'élèves par groupes");
+        Reporting demo = new Reporting("Reporting");
+        demo.reportingEffectifGroupesParPromo();
+        //demo.reportingCapaciteSallesParSiteHisto();
+        //demo.reportingHeuresDeSeancesParCours();
         demo.pack();
         demo.setVisible(true);
     }

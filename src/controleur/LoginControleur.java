@@ -4,6 +4,7 @@ import dao.UserDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import modele.User;
+import vue.EtudiantVue;
 import vue.LoginVue;
 import vue.UserVue;
 
@@ -20,8 +21,7 @@ public class LoginControleur implements ActionListener {
     private boolean alreadyLoggedIn;
 
     /**
-     * Constructeur
-     * Personne de connecté
+     * Constructeur Personne de connecté
      */
     public LoginControleur() {
         isConnected = false;
@@ -29,7 +29,7 @@ public class LoginControleur implements ActionListener {
     }
 
     /**
-     * 
+     *
      */
     public void control() {
         vue.getBoutonConnexion().addActionListener(this);
@@ -38,8 +38,8 @@ public class LoginControleur implements ActionListener {
 
     /**
      * Vérifie si l'utilisateur est connecté
-     * 
-     * @return 
+     *
+     * @return
      */
     public boolean getIsConnected() {
         return isConnected;
@@ -47,8 +47,8 @@ public class LoginControleur implements ActionListener {
 
     /**
      * Connexion de l'utilisateur
-     * 
-     * @param connection 
+     *
+     * @param connection
      */
     public void setIsConnected(boolean connection) {
         isConnected = connection;
@@ -60,14 +60,14 @@ public class LoginControleur implements ActionListener {
     public void logOut() {
         isConnected = false;
     }
-    
+
     /**
-     * Fonction qui vérifie :
-     * - Si l'utilisateur est déjà connecté
-     * - Si l'email ou le mot de passe de l'utilisateur est incorrect
-     * Si l'utilisateur n'est pas connecté + son email et son mot de passe sont corrects
-     * Alors il se connecte.
-     * @param ae 
+     * Fonction qui vérifie : - Si l'utilisateur est déjà connecté - Si l'email
+     * ou le mot de passe de l'utilisateur est incorrect Si l'utilisateur n'est
+     * pas connecté + son email et son mot de passe sont corrects Alors il se
+     * connecte.
+     *
+     * @param ae
      */
     @Override
     public void actionPerformed(ActionEvent ae) {
@@ -85,8 +85,19 @@ public class LoginControleur implements ActionListener {
             vue.setVisible(false);
             UserDAO userInfo = new UserDAO();
             User user = userInfo.chercherUserParEmailMotDePasse(vue.getEmail(), vue.getPassword());
-            UserVue userVue = new UserVue();
-            UserControleur controleur = new UserControleur(user, userVue);
+            switch (user.getDroit()) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    EtudiantVue etudiantVue = new EtudiantVue("Welcome " + user.getPrenom() + " " + user.getNom());
+                    EDTControleur controleur = new EDTControleur(user, etudiantVue);
+                    controleur.control();
+                    break;
+            }
         }
     }
 }

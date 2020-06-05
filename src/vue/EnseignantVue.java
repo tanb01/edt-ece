@@ -64,6 +64,7 @@ public class EnseignantVue extends JFrame {
         this.setLocation(100, 100);
         // Fermeture et arrêt du programme dès qu'on ferme la fenêtre
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         // Déclaration de tous les boutons grâce à JButton
         boutons = new ArrayList<JButton>();
         for (int i = 1; i < 53; i++) {
