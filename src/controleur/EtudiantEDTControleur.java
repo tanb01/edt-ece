@@ -1,9 +1,6 @@
 package controleur;
 
-/**
- *
- * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
- */
+import dao.EnseignantDAO;
 import dao.EtudiantDAO;
 import dao.SeanceDAO;
 import java.awt.Color;
@@ -17,43 +14,54 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
+
+import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import modele.Cours;
 import modele.Enseignant;
 import modele.Etudiant;
+import modele.Groupe;
+import modele.Salle;
 import modele.Seance;
 import modele.User;
-import vue.AdminVue;
-//import controleur.EDTControleur;
-import dao.EnseignantDAO;
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 import vue.EnseignantVue;
 import vue.EtudiantVue;
 
-public class Admincontroleur implements ActionListener {
+/**
+ *
+ * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
+ */
+public class EtudiantEDTControleur implements ActionListener, ItemListener {
+
     private EtudiantDAO etuddao = null;
     private Etudiant e = null;
 
     private SeanceDAO seance = null;
     private ArrayList<Seance> listSeances = null;
     private ArrayList<Seance> listSeancesSelectionnees = null;
+    private ArrayList<Salle> listSalles = null;
+    private ArrayList<Salle> listSallesLibresSelectionnees = null;
     private int numeroSemaineSelected = 1;
 
-    private AdminVue ve = null;
+    private EtudiantVue ve = null;
 
-    private DefaultTableModel dtm;
+    private DefaultTableModel dtm = null;
 
-    private EnseignantVue ev = null;
-    private EnseignantDAO enddao = null;
-    private Enseignant en = null;
-    
-    public Admincontroleur(User m, AdminVue v) {
-        ve = new AdminVue("Admin vue");
+    /**
+     *
+     * @param m
+     * @param v
+     */
+    public EtudiantEDTControleur(User m, EtudiantVue v) {
+        this.listSallesLibresSelectionnees = null;
+        ve = new EtudiantVue("Etudiant vue");
         ve = v;
 
         etuddao = new EtudiantDAO();
@@ -64,9 +72,8 @@ public class Admincontroleur implements ActionListener {
         listSeances = new ArrayList<Seance>();
         listSeances = seance.chercherSeancesParGroupeId(e.getGroupeId());
         listSeancesSelectionnees = new ArrayList<Seance>();
-        listSeancesSelectionnees = seance.chercherSeancesParGroupeIdEtNumeroSemaine(e.getGroupeId(), numeroSemaineSelected);
-
-        String[][] data = new String[7][100];
+        listSeancesSelectionnees = getSeancesParGroupeIdEtNumeroSemaine(e.getGroupeId(), numeroSemaineSelected);
+        String[][] data = new String[84][100];
 
         String[] horairesPossibles = new String[]{"08:30-10:00", "10:15-11:45", "12:00-13:30", "13:45-15:15", "15:30-17:00", "17:15-18:45", "19:00-20:30"};
         for (int i = 0; i < 7; i++) {
@@ -75,8 +82,7 @@ public class Admincontroleur implements ActionListener {
 
         int g = 0;
         int colinc = 1;
-        String jour = "null";
-        jour = getJourDeLaSemaine(listSeancesSelectionnees.get(0).getDate());
+        String jour = "Lundi";
 
         // Vue en grille
         while (g < listSeancesSelectionnees.size()) {
@@ -101,61 +107,8 @@ public class Admincontroleur implements ActionListener {
                 }
         );
         this.dtm = dtm;
-
     }
 
-//    public EDTControleur(User m, EnseignantVue v) {
-//        ev = new EnseignantVue("Enseignant vue");
-//        ev = v;
-//
-//        enddao = new EnseignantDAO();
-//        en = new Enseignant();
-//        seance = new SeanceDAO();
-//
-//        en = enddao.chercher(m.getUserId());
-//        listSeances = new ArrayList<Seance>();
-//        listSeances = seance.chercherSeancesParEnseignantId(en.getUserId());
-//        listSeancesSelectionnees = new ArrayList<Seance>();
-//        listSeancesSelectionnees = seance.chercherSeancesParEnseignantIdEtNumeroSemaine(en.getUserId(), numeroSemaineSelected);
-//        
-//
-//        String[][] data = new String[84][100];
-//
-//        String[] horairesPossibles = new String[]{"08:30-10:00", "10:15-11:45", "12:00-13:30", "13:45-15:15", "15:30-17:00", "17:15-18:45", "19:00-20:30"};
-//        for (int i = 0; i < 7; i++) {
-//            data[i][0] = horairesPossibles[i];
-//        }
-//
-//        int g = 0;
-//        int colinc = 1;
-//        String jour = "null";
-//        jour = getJourDeLaSemaine(listSeancesSelectionnees.get(0).getDate());
-//
-//        // Vue en grille
-//        while (g < listSeancesSelectionnees.size()) {
-//            //System.out.println("id: " + g);
-//            if (jour == getJourDeLaSemaine(listSeancesSelectionnees.get(g).getDate())) {
-//                for (int i = 0; i < 7; i++) {
-//                    if ((listSeancesSelectionnees.get(g).getDebutHeure() + "-" + listSeancesSelectionnees.get(g).getFinHeure()).equals(data[i][0])) {
-//                        data[i][colinc] = listSeancesSelectionnees.get(g).stringify();
-//                    }
-//                }
-//                g++;
-//            } else {
-//                colinc++;
-//                jour = getJourDeLaSemaine(listSeancesSelectionnees.get(g).getDate());
-//            }
-//        }
-//
-//        DefaultTableModel dtm = new DefaultTableModel(
-//                data,
-//                new String[]{
-//                    " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
-//                }
-//        );
-//        this.dtm = dtm;
-//
-//    }
     /**
      * Change les jours de la semaine de Anglais à Francais.
      *
@@ -194,30 +147,42 @@ public class Admincontroleur implements ActionListener {
 
     public void control() {
         ve.getBoutonEmploiDuTemps().addActionListener(this);
-        ve.getBoutonsSemaine().forEach((bouton) -> {
+        for (JButton bouton : ve.getBoutonsSemaine()) {
             bouton.addActionListener(this);
-        });
+        }
         ve.getBoutonSallesLibres().addActionListener(this);
-//        ve.getBoutonReporting().addActionListener(this);
-        ve.getBoutonModifier().addActionListener((ActionListener) this);
-//        ve.getJComboBoxSelectionVue().addItemListener((ItemListener) this);
+        ve.getBoutonReporting().addActionListener(this);
+        ve.getJComboBoxSelectionVue().addItemListener(this);
 
-//        ve.getJComboBoxFilterSelection().addItemListener((ItemListener) this);
+        ve.getJComboBoxFilterSelection().addItemListener(this);
 
-//        ve.getJComboBoxFilterSelectionEx().addItemListener(this);
-//        ve.getButtonSearchFiltre().addActionListener((ActionListener) this);
+        ve.getButtonSearchFiltre().addActionListener(this);
 
         ve.setTableEnGrille(dtm);
         ve.setVisible(true);
         System.out.println("Control");
     }
 
+    @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == ve.getBoutonEmploiDuTemps()) {
             ve.showEmploiDuTemps();
         }
         if (ae.getSource() == ve.getBoutonSallesLibres()) {
             ve.showSallesLibres();
+//            String[][] data2 = new String[listSeancesSelectionnees.size()][1];
+//            for (int i = 0; i < listSeancesSelectionnees.size(); i++) {
+//                data2[i][0] = getJourDeLaSemaine(listSeancesSelectionnees.get(i).getDate()) + "     " + listSeancesSelectionnees.get(i).stringify();
+//            }
+//
+//            DefaultTableModel dtm2 = new DefaultTableModel(
+//                    data2,
+//                    new String[]{
+//                        " "
+//                    }
+//            );
+//            ve.changeAVueEnListe(dtm2);
+//            ve.setVisible(true);
         }
         if (ae.getSource() == ve.getBoutonReporting()) {
             ve.showReporting();
@@ -253,6 +218,7 @@ public class Admincontroleur implements ActionListener {
         }
     }
 
+    @Override
     public void itemStateChanged(ItemEvent ie) {
         if (ie.getStateChange() == ItemEvent.SELECTED) {
             switch (ve.getJComboBoxSelectionVue().getSelectedItem().toString()) {
@@ -273,6 +239,20 @@ public class Admincontroleur implements ActionListener {
                     break;
             }
         }
+    }
+
+    public ArrayList<Seance> getSeancesParGroupeIdEtNumeroSemaine(int groupeId, int numeroSemaine) {
+        ArrayList<Seance> tempArray = new ArrayList<Seance>();
+        for (Seance s : listSeances) {
+            if (s.getNumeroSemaine() == numeroSemaine) {
+                for (Groupe g : s.getListeGroupes()) {
+                    if (groupeId == g.getGroupeId()) {
+                        tempArray.add(s);
+                    }
+                }
+            }
+        }
+        return tempArray;
     }
 
     public void affecterSeancesDeSemaine() {
@@ -309,7 +289,6 @@ public class Admincontroleur implements ActionListener {
                 for (int i = 0; i < 7; i++) {
                     if ((listSeancesSelectionnees.get(g).getDebutHeure() + "-" + listSeancesSelectionnees.get(g).getFinHeure()).equals(data[i][0])) {
                         data[i][colinc] = listSeancesSelectionnees.get(g).stringify();
-                        
                     }
                 }
                 g++;
@@ -418,22 +397,16 @@ public class Admincontroleur implements ActionListener {
         tempArray2.forEach(s -> tempArray3.add(s));
         return tempArray3;
     }
+    
+//    public void 
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
         //test etudiant
         EtudiantDAO dao = new EtudiantDAO();
         Etudiant m = new Etudiant();
         m = dao.chercher(525);
-        AdminVue v = new AdminVue("Admin Vue");
-        Admincontroleur controler = new Admincontroleur(m, v);
+        EtudiantVue v = new EtudiantVue("Etudiant Vue");
+        EtudiantEDTControleur controler = new EtudiantEDTControleur(m, v);
         controler.control();
-
-        //test enseignant
-//        EnseignantDAO dao = new EnseignantDAO();
-//        Enseignant m = new Enseignant();
-//        m = dao.chercher(175);
-//        EnseignantVue v = new EnseignantVue("Enseignant Vue");
-//        EDTControleur controler = new EDTControleur(m, v);
-//        controler.control();
     }
 }

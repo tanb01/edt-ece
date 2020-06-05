@@ -15,7 +15,7 @@
 //import dao.TypeCoursDAO;
 //import dao.UserDAO;
 //
-//public class AdminControleur {
+//public class AdminEDTControleur {
 //
 //    private CoursDAO cours = null;
 //    private EnseignantDAO enseignant = null;
@@ -28,7 +28,7 @@
 //    private TypeCoursDAO typeCours = null;
 //    private UserDAO user = null;
 //
-//    public AdminControleur() {
+//    public AdminEDTControleur() {
 //    private CoursDAO cours = new CoursDAO();
 //    private EnseignantDAO enseignant = new EnseignantDAO();
 //    private EtudiantDAO etudiant = new EtudiantDAO();

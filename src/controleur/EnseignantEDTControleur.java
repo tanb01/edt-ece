@@ -1,7 +1,7 @@
 package controleur;
 
 import dao.EnseignantDAO;
-import dao.EtudiantDAO;
+import dao.EnseignantDAO;
 import dao.SeanceDAO;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -14,6 +14,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -25,54 +26,49 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import modele.Cours;
 import modele.Enseignant;
-import modele.Etudiant;
+import modele.Enseignant;
 import modele.Groupe;
 import modele.Seance;
 import modele.User;
 import vue.EnseignantVue;
-import vue.EtudiantVue;
+import vue.EnseignantVue;
 
 /**
  *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
-public class EDTControleur implements ActionListener, ItemListener {
+public class EnseignantEDTControleur implements ActionListener, ItemListener {
 
-    private EtudiantDAO etuddao = null;
-    private Etudiant e = null;
+    private EnseignantDAO etuddao = null;
+    private Enseignant e = null;
 
     private SeanceDAO seance = null;
     private ArrayList<Seance> listSeances = null;
     private ArrayList<Seance> listSeancesSelectionnees = null;
     private int numeroSemaineSelected = 1;
 
-    private EtudiantVue ve = null;
+    private EnseignantVue ve = null;
 
-    private DefaultTableModel dtm;
-
-    private EnseignantVue ev = null;
-    private EnseignantDAO enddao = null;
-    private Enseignant en = null;
+    private DefaultTableModel dtm = null;
 
     /**
      *
      * @param m
      * @param v
      */
-    public EDTControleur(User m, EtudiantVue v) {
-        ve = new EtudiantVue("Etudiant vue");
+    public EnseignantEDTControleur(User m, EnseignantVue v) {
+        ve = new EnseignantVue("Enseignant vue");
         ve = v;
 
-        etuddao = new EtudiantDAO();
-        e = new Etudiant();
+        etuddao = new EnseignantDAO();
+        e = new Enseignant();
         seance = new SeanceDAO();
 
         e = etuddao.chercher(m.getUserId());
         listSeances = new ArrayList<Seance>();
-        listSeances = seance.chercherSeancesParGroupeId(e.getGroupeId());
+        listSeances = seance.chercherSeancesParEnseignantId(e.getUserId());
         listSeancesSelectionnees = new ArrayList<Seance>();
-        listSeancesSelectionnees = getSeancesParGroupeIdEtNumeroSemaine(e.getGroupeId(), numeroSemaineSelected);
-        //listSeancesSelectionnees = seance.chercherSeancesParGroupeIdEtNumeroSemaine(e.getGroupeId(), numeroSemaineSelected);
+        listSeancesSelectionnees = getSeancesParEnseignantIdEtNumeroSemaine(e.getUserId(), numeroSemaineSelected);
         String[][] data = new String[84][100];
 
         String[] horairesPossibles = new String[]{"08:30-10:00", "10:15-11:45", "12:00-13:30", "13:45-15:15", "15:30-17:00", "17:15-18:45", "19:00-20:30"};
@@ -110,57 +106,6 @@ public class EDTControleur implements ActionListener, ItemListener {
 
     }
 
-//    public EDTControleur(User m, EnseignantVue v) {
-//        ev = new EnseignantVue("Enseignant vue");
-//        ev = v;
-//
-//        enddao = new EnseignantDAO();
-//        en = new Enseignant();
-//        seance = new SeanceDAO();
-//
-//        en = enddao.chercher(m.getUserId());
-//        listSeances = new ArrayList<Seance>();
-//        listSeances = seance.chercherSeancesParEnseignantId(en.getUserId());
-//        listSeancesSelectionnees = new ArrayList<Seance>();
-//        listSeancesSelectionnees = seance.chercherSeancesParEnseignantIdEtNumeroSemaine(en.getUserId(), numeroSemaineSelected);
-//        
-//
-//        String[][] data = new String[84][100];
-//
-//        String[] horairesPossibles = new String[]{"08:30-10:00", "10:15-11:45", "12:00-13:30", "13:45-15:15", "15:30-17:00", "17:15-18:45", "19:00-20:30"};
-//        for (int i = 0; i < 7; i++) {
-//            data[i][0] = horairesPossibles[i];
-//        }
-//
-//        int g = 0;
-//        int colinc = 1;
-//        String jour = "Lundi";
-//
-//        // Vue en grille
-//        while (g < listSeancesSelectionnees.size()) {
-//            //System.out.println("id: " + g);
-//            if (jour == getJourDeLaSemaine(listSeancesSelectionnees.get(g).getDate())) {
-//                for (int i = 0; i < 7; i++) {
-//                    if ((listSeancesSelectionnees.get(g).getDebutHeure() + "-" + listSeancesSelectionnees.get(g).getFinHeure()).equals(data[i][0])) {
-//                        data[i][colinc] = listSeancesSelectionnees.get(g).stringify();
-//                    }
-//                }
-//                g++;
-//            } else {
-//                colinc++;
-//                jour = getJourDeLaSemaine(listSeancesSelectionnees.get(g).getDate());
-//            }
-//        }
-//
-//        DefaultTableModel dtm = new DefaultTableModel(
-//                data,
-//                new String[]{
-//                    " ", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"
-//                }
-//        );
-//        this.dtm = dtm;
-//
-//    }
     /**
      * Change les jours de la semaine de Anglais à Francais.
      *
@@ -208,7 +153,6 @@ public class EDTControleur implements ActionListener, ItemListener {
 
         ve.getJComboBoxFilterSelection().addItemListener(this);
 
-//        ve.getJComboBoxFilterSelectionEx().addItemListener(this);
         ve.getButtonSearchFiltre().addActionListener(this);
 
         ve.setTableEnGrille(dtm);
@@ -281,6 +225,21 @@ public class EDTControleur implements ActionListener, ItemListener {
         }
     }
 
+    public ArrayList<Seance> getSeancesParEnseignantIdEtNumeroSemaine(int enseignantId, int numeroSemaine) {
+        ArrayList<Seance> tempArray = new ArrayList<Seance>();
+        for (Seance s : listSeances) {
+            if (s.getNumeroSemaine() == numeroSemaine) {
+                for (Enseignant e : s.getListeEnseignants()) {
+                    if (enseignantId == e.getUserId()) {
+                        tempArray.add(s);
+                    }
+                }
+
+            }
+        }
+        return tempArray;
+    }
+
     public ArrayList<Seance> getSeancesParGroupeIdEtNumeroSemaine(int groupeId, int numeroSemaine) {
         ArrayList<Seance> tempArray = new ArrayList<Seance>();
         for (Seance s : listSeances) {
@@ -329,7 +288,7 @@ public class EDTControleur implements ActionListener, ItemListener {
                 for (int i = 0; i < 7; i++) {
                     if ((listSeancesSelectionnees.get(g).getDebutHeure() + "-" + listSeancesSelectionnees.get(g).getFinHeure()).equals(data[i][0])) {
                         data[i][colinc] = listSeancesSelectionnees.get(g).stringify();
-                        
+
                     }
                 }
                 g++;
@@ -440,20 +399,12 @@ public class EDTControleur implements ActionListener, ItemListener {
     }
 
     public static void main(String[] args) {
-        //test etudiant
-        EtudiantDAO dao = new EtudiantDAO();
-        Etudiant m = new Etudiant();
-        m = dao.chercher(525);
-        EtudiantVue v = new EtudiantVue("Etudiant Vue");
-        EDTControleur controler = new EDTControleur(m, v);
-        controler.control();
-
         //test enseignant
-//        EnseignantDAO dao = new EnseignantDAO();
-//        Enseignant m = new Enseignant();
-//        m = dao.chercher(175);
-//        EnseignantVue v = new EnseignantVue("Enseignant Vue");
-//        EDTControleur controler = new EDTControleur(m, v);
-//        controler.control();
+        EnseignantDAO dao = new EnseignantDAO();
+        Enseignant m = new Enseignant();
+        m = dao.chercher(175);
+        EnseignantVue v = new EnseignantVue("Enseignant Vue");
+        EnseignantEDTControleur controler = new EnseignantEDTControleur(m, v);
+        controler.control();
     }
 }

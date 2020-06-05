@@ -4,6 +4,7 @@ import dao.UserDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import modele.User;
+import vue.EnseignantVue;
 import vue.EtudiantVue;
 import vue.LoginVue;
 import vue.UserVue;
@@ -91,11 +92,14 @@ public class LoginControleur implements ActionListener {
                 case 2:
                     break;
                 case 3:
+                    EnseignantVue enseignantVue = new EnseignantVue("Welcome " + user.getPrenom() + " " + user.getNom());
+                    EnseignantEDTControleur enseignantControleur = new EnseignantEDTControleur(user, enseignantVue);
+                    enseignantControleur.control();
                     break;
                 case 4:
                     EtudiantVue etudiantVue = new EtudiantVue("Welcome " + user.getPrenom() + " " + user.getNom());
-                    EDTControleur controleur = new EDTControleur(user, etudiantVue);
-                    controleur.control();
+                    EtudiantEDTControleur etudiantControleur = new EtudiantEDTControleur(user, etudiantVue);
+                    etudiantControleur.control();
                     break;
             }
         }
