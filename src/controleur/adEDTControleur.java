@@ -424,36 +424,47 @@ public class adEDTControleur implements ActionListener, ItemListener {
         return tempArray3;
     }
 
-    //    public void affecterEnseignantASeance() {
-//
-//    }
-//
-//    public void affecterGroupeASeance() {
-//
-//    }
-//
-//    public void modifierNomCoursSeance() {
-//
-//    }
-//
-    public void modifierTypeCoursSeance(int seanceId, int t) {
-
+    public void affecterEnseignantASeance(int seanceId, int oldEnseignantId, int newEnseignantId) {
+        seance.enleverEnseignantASeance(seanceId, oldEnseignantId);
+        seance.ajouterEnseignantASeance(seanceId, newEnseignantId);
     }
-//
-//    affecterSalleASeance() {
-//
-//    }
-//
+
+    public void affecterGroupeASeance(int seanceId, int oldGroupeId, int newGroupeId) {
+        seance.enleverGroupeDeSeance(seanceId, oldGroupeId);
+        seance.ajouterGroupeASeance(seanceId, newGroupeId);
+    }
+
+    public void modifierCoursSeance(int seanceId, int coursId) {
+        seance.modifierCoursSeance(seanceId, coursId);
+    }
+
+    public void modifierTypeCoursSeance(int seanceId, int typeCoursId) {
+        seance.modifierTypeCoursSeance(seanceId, typeCoursId);
+    }
+
+    public void affecterSalleASeance(int seanceId, int oldSalleId, int newSalleId) {
+        seance.enleverSalleDeSeance(seanceId, oldSalleId);
+        seance.ajouterSalleASeance(seanceId, newSalleId);
+    }
+
+    public void ajouterSalleASeance(int seanceId, int salleId) {
+        seance.ajouterSalleASeance(seanceId, salleId);
+    }
+
+    public void enleverSalleDeSeance(int seanceId, int salleId) {
+        seance.enleverSalleDeSeance(seanceId, salleId);
+    }
+
     public void changerHeureSeance(int seanceId, String heure) {
         seance.changerHeureDeSeance(seanceId, heure);
     }
 
-//    public void ajouterSeance() {
-//        
-//
-//    }
-    public void ajouterEnseignant(int seanceId, int enseignantId) {
-        seance.ajouterEnseignant(seanceId, enseignantId);
+    public void ajouterSeance(String dateSeance, String heureDebut, String heureFin, int etat, int coursId, int typeCoursId) {
+
+    }
+
+    public void ajouterEnseignantASeance(int seanceId, int enseignantId) {
+        seance.ajouterEnseignantASeance(seanceId, enseignantId);
     }
 
     public void ajouterGroupeASeance(int seanceId, int groupeId) {
@@ -463,10 +474,10 @@ public class adEDTControleur implements ActionListener, ItemListener {
     public void changerEtatSeance(int seanceId, int etat) {
         seance.changerEtatSeance(seanceId, etat);
     }
-//
-//    remplacerEnseignantASeance(){
-//}
-//
+
+    public void enleverEnseignantASeance(int seanceId, int enseignantId) {
+        seance.enleverEnseignantASeance(seanceId, enseignantId);
+    }
 
     public void enleverGroupeDeSeance(int seanceId, int groupeId) {
         seance.enleverGroupeDeSeance(seanceId, groupeId);
@@ -482,6 +493,14 @@ public class adEDTControleur implements ActionListener, ItemListener {
 //        controler.control();
 //controler.ajouterGroupeASeance(1, 32);
 //controler.enleverGroupeDeSeance(1, 32);
+//controler.modifierTypeCoursSeance(12, 2);
+//controler.modifierCoursSeance(12, 2);
+//controler.affecterEnseignantASeance(2, 31, 27);
 
+//controler.affecterGroupeASeance(2, 31, 27);
+//controler.affecterSalleASeance(2, 28, 11);
+        LocalDate localDate = LocalDate.parse("2020-02-18");
+        int weekNumberOfDay = localDate.getDayOfYear();
+        System.out.println((52*weekNumberOfDay)/365);
     }
 }
