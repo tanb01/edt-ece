@@ -146,12 +146,12 @@ public class Recapitulatif extends JFrame {
 //------------------------------------------------------------------------------
   
 //------------------------------------------------------------------------------
-        JPanel center = new JPanel();
-        center.setOpaque(true);        
-        center.setBorder(new LineBorder(Color.BLACK, 3));
-        center.setLayout(new FlowLayout(5));
-        center.setBackground(new java.awt.Color(211, 212, 250));
-        mainContainer.add(center, BorderLayout.CENTER);
+        JPanel centerReca = new JPanel();
+        centerReca.setOpaque(true);        
+        centerReca.setBorder(new LineBorder(Color.BLACK, 3));
+        centerReca.setLayout(new FlowLayout(5));
+        centerReca.setBackground(new java.awt.Color(211, 212, 250));
+        mainContainer.add(centerReca, BorderLayout.CENTER);
 
                 
         JPanel gridPanel3 = new JPanel();
@@ -170,46 +170,24 @@ public class Recapitulatif extends JFrame {
         gridPanel7.setLayout(new GridLayout(2, 1, 1, 5));
         gridPanel7.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel7.setBackground(new java.awt.Color(145, 200, 100));
-        
-        TextField enseignant = new java.awt.TextField();
-        enseignant.setText("Veuillez renseignar un nom ");
         Font y = new Font("Times New Roman", Font.BOLD, 20);
         UIManager.put("JLabel.font", y);
         
+        String[] selectionensegnat = {" Segado", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique","Reseaux","Traitement du signal","Analyse de Fourier","Analyse Financiere","Japonais","Geopolitique","Electronique fondamentale","Anthropologie","Droit du travail"};
+        JComboBox listeSelectionensegnat = new JComboBox(selectionensegnat);
+        listeSelectionensegnat.setFont(y);
+        
+        
         JLabel ense = new JLabel("     Nom ");
         ense.setFont(t);
-        enseignant.setFont(y);
+        listeSelectionensegnat.setFont(y);
         
         gridPanel7.add(ense);
-        gridPanel7.add(enseignant);             
+        gridPanel7.add(listeSelectionensegnat);             
        
-        center.add(gridPanel3, BorderLayout.NORTH);
-        center.add(gridPanel7, BorderLayout.WEST);
-        
-        
-        
- //----------------------------------------       
-         JPanel rightPanel = new JPanel();
-        rightPanel.setBorder(new LineBorder(Color.BLACK, 5));
-        rightPanel.setBackground(new java.awt.Color(211, 212, 250));
-        rightPanel.setLayout(new FlowLayout(5));
-
-        JPanel gridPanel = new JPanel();
-        gridPanel.setLayout(new GridLayout(6, 1, 5, 5));
-        gridPanel.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanel.setBackground(new java.awt.Color(255, 255, 255));
-
-        gridPanel.add(button53);
-        gridPanel.add(button54);
-        gridPanel.add(button55);
-        gridPanel.add(button56);
-        gridPanel.add(button57);
-        gridPanel.add(button58);
-
-        rightPanel.add(gridPanel);
-        mainContainer.add(rightPanel, BorderLayout.WEST);
-        
-//-----------------------------------------------------------
+        centerReca.add(gridPanel3, BorderLayout.NORTH);
+        centerReca.add(gridPanel7, BorderLayout.WEST);
+////////////////////////////////////////////////////////////////////////////////
         JPanel gridPanel5 = new JPanel();
         gridPanel5.setLayout(new GridLayout(2,1, 1, 5));
         gridPanel5.setBorder(new LineBorder(Color.BLACK, 3));
@@ -219,30 +197,30 @@ public class Recapitulatif extends JFrame {
 
         JLabel labelFiltre = new JLabel(" Type de cours   ");
         labelFiltre.setFont(t);
-        String[] selectionFiltre = {" Tous", " TP", "TD", "Projet", "Soutien", "Magistral", "Interactif"};
-        JComboBox listeSelectionFiltre = new JComboBox(selectionFiltre);
-        listeSelectionFiltre.setFont(y);
+        String[] selectionFiltrerecatype = {" Tous", " TP", "TD", "Projet", "Soutien", "Magistral", "Interactif"};
+        JComboBox listeselectionFiltrerecatype = new JComboBox(selectionFiltrerecatype);
+        listeselectionFiltrerecatype.setFont(y);
 
         gridPanel5.add(labelFiltre);
-        gridPanel5.add(listeSelectionFiltre);
+        gridPanel5.add(listeselectionFiltrerecatype);
  
-        center.add(gridPanel5, BorderLayout.NORTH);
+        centerReca.add(gridPanel5, BorderLayout.NORTH);
 
 //------------------------------------------------------------------
         
 
 //--------------------------------------------------------------------
-         JPanel gridPanela = new JPanel();
-        gridPanela.setLayout(new GridLayout(1,2, 10, 5));
-        gridPanela.setBorder(new LineBorder(Color.BLACK, 3));
-        gridPanela.setBackground(new java.awt.Color(145, 200, 100));
+         JPanel gridPanelare = new JPanel();
+        gridPanelare.setLayout(new GridLayout(1,2, 10, 5));
+        gridPanelare.setBorder(new LineBorder(Color.BLACK, 3));
+        gridPanelare.setBackground(new java.awt.Color(145, 200, 100));
 
-        JButton Montrer = new JButton("Montrer le recapitulatif");
-        Montrer.setFont(f);        
+        JButton Montrerreca = new JButton("Montrer le recapitulatif");
+        Montrerreca.setFont(f);  
         
-        gridPanela.add(Montrer);          
+        gridPanela.add(Montrerreca);          
  
-        center.add(gridPanela, BorderLayout.NORTH);
+        centerReca.add(gridPanelare, BorderLayout.NORTH);
         
         
         
@@ -270,21 +248,21 @@ public class Recapitulatif extends JFrame {
                 }
         ));
         jScrollPane1.setViewportView(jTable1);
-        jTable1.setPreferredScrollableViewportSize(new Dimension(2700, 1450));
+        jTable1.setPreferredScrollableViewportSize(new Dimension(1585, 800));
         jTable1.setRowHeight(130);
         TableColumn col = jTable1.getColumnModel().getColumn(0);
-        col.setPreferredWidth(100);
+        col.setPreferredWidth(490);
         col = jTable1.getColumnModel().getColumn(1);
-        col.setPreferredWidth(200);
+        col.setPreferredWidth(490);
         col = jTable1.getColumnModel().getColumn(2);
-        col.setPreferredWidth(200);
+        col.setPreferredWidth(390);
         col = jTable1.getColumnModel().getColumn(3);
-        col.setPreferredWidth(200);
+        col.setPreferredWidth(50);
         col = jTable1.getColumnModel().getColumn(4);
-        col.setPreferredWidth(300);
+        col.setPreferredWidth(30);
        
 
-        center.add(jScrollPane1, BorderLayout.CENTER);
+        centerReca.add(jScrollPane1, BorderLayout.CENTER);
 //----------------------------------------------------------------------
 
 //------------------------------------------------------------------
