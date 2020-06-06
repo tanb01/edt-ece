@@ -53,6 +53,9 @@ public class AdminVue extends JFrame {
     private JPanel semainesPanel = null;
     private ArrayList<JButton> boutons = null;
 
+    private JComboBox listeSelectionEnseignantAjouterSeance = null;
+    private JButton validerAjoutSeance = null;
+
     /**
      *
      * @param title
@@ -398,7 +401,7 @@ public class AdminVue extends JFrame {
         centerajoutseance.setBorder(new LineBorder(Color.BLACK, 3));
         centerajoutseance.setLayout(new FlowLayout(5));
         centerajoutseance.setBackground(new java.awt.Color(254, 254, 254));
-        ajoutDeseances();
+        ajoutDeSeances();
 
         Modifierseance = new JPanel();
         Modifierseance.setOpaque(true);
@@ -411,9 +414,9 @@ public class AdminVue extends JFrame {
         centerReca.setOpaque(true);
         centerReca.setBorder(new LineBorder(Color.BLACK, 3));
         centerReca.setLayout(new FlowLayout(5));
-       centerReca.setBackground(new java.awt.Color(254, 254, 254));
+        centerReca.setBackground(new java.awt.Color(254, 254, 254));
         ModifierRecapitulatif();
-        
+
         // On ajoute les 4 panels au content pane de la JFrame
         // Au centre
         this.getContentPane().add(center, BorderLayout.CENTER);
@@ -524,20 +527,28 @@ public class AdminVue extends JFrame {
         center.repaint();
     }
 
+    public void showMenuAjouterSeance() {
+        center.removeAll();
+        ajoutDeSeances();
+        center.add(centerajoutseance);
+        center.revalidate();
+        center.repaint();
+    }
+
     public void showReporting() {
         center.removeAll();
         center.add(reportingPanel);
         center.revalidate();
         center.repaint();
     }
-    
-     public void showModifierseance() {
+
+    public void showMenuModifierSeance() {
         center.removeAll();
         center.add(Modifierseance);
         center.revalidate();
         center.repaint();
     }
-    
+
     public void showRecapitulatif() {
         center.removeAll();
         center.add(centerReca);
@@ -629,6 +640,21 @@ public class AdminVue extends JFrame {
         return listeSelectionVue;
     }
 
+    public JComboBox getJComboBoxlisteSelectionEnseignantAjouterSeance() {
+        return listeSelectionEnseignantAjouterSeance;
+    }
+
+    public void setJComboBoxlisteSelectionEnseignantAjouterSeance(String[] s) {
+        DefaultComboBoxModel m = new DefaultComboBoxModel(s);
+        listeSelectionEnseignantAjouterSeance.setModel(m);
+        listeSelectionEnseignantAjouterSeance.revalidate();
+        listeSelectionEnseignantAjouterSeance.repaint();
+    }
+    
+    public JButton getBoutonValiderAjoutSeance() {
+        return validerAjoutSeance;
+    }
+
     public JComboBox getJComboBoxFilterSelection() {
         return listeSelectionFiltre;
     }
@@ -679,7 +705,7 @@ public class AdminVue extends JFrame {
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////    
 
-    public final void ajoutDuPanelSallesLibres() {
+    public void ajoutDuPanelSallesLibres() {
         Font f = new Font("Times New Roman", Font.BOLD, 18);
         //UIManager.put("JButton.font", f);
 
@@ -797,7 +823,7 @@ public class AdminVue extends JFrame {
     }
 
 ///////////////////////////////////////////////////////////////////////////////
-    public final void ajoutDuPanelReporting() {
+    public void ajoutDuPanelReporting() {
 
         JPanel gridPanela = new JPanel();
         gridPanela.setLayout(new GridLayout(1, 1, 10, 5));
@@ -906,7 +932,7 @@ public class AdminVue extends JFrame {
 ///////////////////////////////////////////////////////////////////////////////
 //                       AJOUT DU PANEL AJOUT SEANCE
 ///////////////////////////////////////////////////////////////////////////////
-    public final void ajoutDeseances() {
+    public void ajoutDeSeances() {
         centerajoutseance = new JPanel();
         centerajoutseance.setOpaque(true);
         centerajoutseance.setBorder(new LineBorder(Color.BLACK, 3));
@@ -938,11 +964,11 @@ public class AdminVue extends JFrame {
         gridPanel7.setBackground(new java.awt.Color(145, 200, 100));
 
         String[] selectionensegnat = {" Segado", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique", "Reseaux", "Traitement du signal", "Analyse de Fourier", "Analyse Financiere", "Japonais", "Geopolitique", "Electronique fondamentale", "Anthropologie", "Droit du travail"};
-        JComboBox listeSelectionensegnat = new JComboBox(selectionensegnat);
-        listeSelectionensegnat.setFont(y);
+        listeSelectionEnseignantAjouterSeance = new JComboBox(selectionensegnat);
+        listeSelectionEnseignantAjouterSeance.setFont(y);
 //----------------------------------------------------
         JLabel fecha = new JLabel();
-        fecha.setText(" Date ");
+        fecha.setText("Date");
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         JFormattedTextField field = new JFormattedTextField(dateFormat);
@@ -952,7 +978,7 @@ public class AdminVue extends JFrame {
 ///////////////////////////////////////////////////////////////
         JLabel labelcours = new JLabel("Cours   ");
         labelcours.setFont(t);
-        String[] selectioncours = {" Anglais", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique", "Reseaux", "Traitement du signal", "Analyse de Fourier", "Analyse Financiere", "Japonais", "Geopolitique", "Electronique fondamentale", "Anthropologie", "Droit du travail"};
+        String[] selectioncours = {"Anglais", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique", "Reseaux", "Traitement du signal", "Analyse de Fourier", "Analyse Financiere", "Japonais", "Geopolitique", "Electronique fondamentale", "Anthropologie", "Droit du travail"};
         JComboBox listeSelectioncours = new JComboBox(selectioncours);
         listeSelectioncours.setFont(y);
 ///////////////////////////////////////////////////////////////////
@@ -966,25 +992,25 @@ public class AdminVue extends JFrame {
 
         JLabel labelheured = new JLabel("Début d'heure ");
         labelheured.setFont(t);
-        String[] selectionFiltreheured = {"8h30-10h00", "10h15-11h45", "12h00-13h30", "13h45-15h15", "15h30-17h00", "17h15-18h45", "19h00-20h30"};
+        String[] selectionFiltreheured = {"8:30", "10:15", "12:00", "13:45", "15:30", "17:15", "19:00"};
         JComboBox listeSelectionDureed = new JComboBox(selectionFiltreheured);
         listeSelectionDureed.setFont(y);
 ///////////////////////////////////////////////////////////////////////
         JLabel labelheuref = new JLabel("Fin d'heure ");
         labelheuref.setFont(t);
-        String[] selectionFiltreheuref = {"8h30-10h00", "10h15-11h45", "12h00-13h30", "13h45-15h15", "15h30-17h00", "17h15-18h45", "19h00-20h30"};
+        String[] selectionFiltreheuref = {"10:00", "11:45", "13:30", "15:15", "17:00", "18:45", "20:30"};
         JComboBox listeSelectionDureef = new JComboBox(selectionFiltreheuref);
         listeSelectionDureef.setFont(y);
 ///////////////////////////////////////////////////////////////////////
-        JLabel labeltypecours = new JLabel(" Type de cours   ");
+        JLabel labeltypecours = new JLabel("Type de cours   ");
         labeltypecours.setFont(t);
-        String[] selectionFiltretypecours = {" TP", "TD", "Projet", "Soutien", "Magistral", "Interactif"};
+        String[] selectionFiltretypecours = {"TP", "TD", "Projet", "Soutien", "Magistral", "Interactif"};
         JComboBox listeSelectionFiltretypecours = new JComboBox(selectionFiltretypecours);
         listeSelectionFiltretypecours.setFont(y);
 /////////////////////////////////////////////////////////////////////////
         JLabel labelgroupe = new JLabel("Groupe   ");
         labelgroupe.setFont(t);
-        String[] selectionFiltregroupe = {"G01", "G02", "G03", "G04", "G05", "G06", "G07", "G08", "G09", "G10", "G11"};
+        String[] selectionFiltregroupe = {"Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
         JComboBox listeSelectionFiltregroupe = new JComboBox(selectionFiltregroupe);
         listeSelectionFiltregroupe.setFont(y);
         ense.setFont(t);
@@ -993,7 +1019,7 @@ public class AdminVue extends JFrame {
         field.setFont(y);
 
         gridPanel7.add(ense);
-        gridPanel7.add(listeSelectionensegnat);
+        gridPanel7.add(listeSelectionEnseignantAjouterSeance);
         gridPanel7.add(fecha);
         gridPanel7.add(field);
         gridPanel7.add(labelcours);
@@ -1013,14 +1039,14 @@ public class AdminVue extends JFrame {
         centerajoutseance.add(gridPanel7, BorderLayout.WEST);
 
 ////////////////////////////////////////////////////////////////////////////////        
-        JButton valider = new JButton("Valider l'affectation");
+        validerAjoutSeance = new JButton("Valider l'affectation");
         Font h = new Font("Times New Roman", Font.BOLD, 30);
         UIManager.put("JButton.font", h);
-        valider.setFont(h);
-        valider.setIcon(new ImageIcon("img/check.png"));
-        valider.setBackground(new java.awt.Color(251, 231, 188));
+        validerAjoutSeance.setFont(h);
+        validerAjoutSeance.setIcon(new ImageIcon("img/check.png"));
+        validerAjoutSeance.setBackground(new java.awt.Color(251, 231, 188));
 
-        centerajoutseance.add(valider);
+        centerajoutseance.add(validerAjoutSeance);
     }
 
     /**
@@ -1030,8 +1056,8 @@ public class AdminVue extends JFrame {
 ////////////////////////////////////////////////////////////////////////////////
 //                MODIFICATION DE L'EMPLOIE DU TEMPS
 ////////////////////////////////////////////////////////////////////////////////
-    public final void Modifierseance() {
-        JPanel Modifierseance = new JPanel();
+    public void Modifierseance() {
+        Modifierseance = new JPanel();
         Modifierseance.setOpaque(true);
         Modifierseance.setBorder(new LineBorder(Color.BLACK, 3));
         Modifierseance.setLayout(new FlowLayout(5));
@@ -1179,7 +1205,7 @@ public class AdminVue extends JFrame {
 //----------------------------------------------- 
         JLabel groupe3 = new JLabel("Groupe à remplacer");
         groupe3.setFont(t);
-        String[] selectionFiltregroupeaf3 = {"G01","G02","G03","G04","G05","G06","G07","G08","G09","G10","G11"};
+        String[] selectionFiltregroupeaf3 = {"G01", "G02", "G03", "G04", "G05", "G06", "G07", "G08", "G09", "G10", "G11"};
         JComboBox listeSelectionFiltregroupeaf3 = new JComboBox(selectionFiltregroupeaf3);
         listeSelectionFiltregroupeaf3.setFont(y);
 //----------------------------------------------- 
@@ -1290,13 +1316,12 @@ public class AdminVue extends JFrame {
         validerm.setFont(f);
         validerm.setIcon(new ImageIcon("img/check.png"));
         validerm.setBackground(new java.awt.Color(251, 231, 188));
-        
+
         JButton valider1m = new JButton("Sélectionner séance");
         valider1m.setFont(f);
         valider1m.setIcon(new ImageIcon("img/check.png"));
         valider1m.setBackground(new java.awt.Color(251, 231, 188));
-        
-        
+
         JButton valider2m = new JButton("Valider la modification");
         valider2m.setFont(f);
         valider2m.setIcon(new ImageIcon("img/check.png"));
@@ -1311,7 +1336,7 @@ public class AdminVue extends JFrame {
         valider4m.setFont(f);
         valider4m.setIcon(new ImageIcon("img/check.png"));
         valider4m.setBackground(new java.awt.Color(251, 231, 188));
-        
+
         gridPanel8.add(valider1m);
         gridPanel8.add(validerm);
         gridPanel8.add(valider2m);
@@ -1322,59 +1347,54 @@ public class AdminVue extends JFrame {
         Modifierseance.add(gridPanel3, BorderLayout.NORTH);
         Modifierseance.add(gridPanel7, BorderLayout.WEST);
         Modifierseance.add(gridPanel8, BorderLayout.SOUTH);
-        }
+    }
 //////////////////////////////////////////////////////////////////////////// 
 //                          CENTRER RECAPITULATIF        
 ////////////////////////////////////////////////////////////////////////////
-        public final void ModifierRecapitulatif(){    
+
+    public final void ModifierRecapitulatif() {
         JPanel centerReca = new JPanel();
-        centerReca.setOpaque(true);        
+        centerReca.setOpaque(true);
         centerReca.setBorder(new LineBorder(Color.BLACK, 3));
         centerReca.setLayout(new FlowLayout(5));
         centerReca.setBackground(new java.awt.Color(211, 212, 250));
-       
 
-                
         JPanel gridPanel3 = new JPanel();
         gridPanel3.setLayout(new GridLayout(1, 1, 1, 5));
         gridPanel3.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel3.setBackground(new java.awt.Color(145, 200, 100));
-        
-        
+
         JLabel titra = new JLabel("  Recapitulatif de cours  entre le 1 septembre et le 30 Juin  ");
         gridPanel3.add(titra);
         Font t = new Font("Times New Roman", Font.BOLD, 24);
         UIManager.put("JLabel.font", t);
         titra.setFont(t);
-        
+
         JPanel gridPanel7 = new JPanel();
         gridPanel7.setLayout(new GridLayout(2, 1, 1, 5));
         gridPanel7.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel7.setBackground(new java.awt.Color(145, 200, 100));
         Font y = new Font("Times New Roman", Font.BOLD, 20);
         UIManager.put("JLabel.font", y);
-        
-        String[] selectionensegnat = {" Segado", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique","Reseaux","Traitement du signal","Analyse de Fourier","Analyse Financiere","Japonais","Geopolitique","Electronique fondamentale","Anthropologie","Droit du travail"};
+
+        String[] selectionensegnat = {" Segado", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique", "Reseaux", "Traitement du signal", "Analyse de Fourier", "Analyse Financiere", "Japonais", "Geopolitique", "Electronique fondamentale", "Anthropologie", "Droit du travail"};
         JComboBox listeSelectionensegnat = new JComboBox(selectionensegnat);
         listeSelectionensegnat.setFont(y);
-        
-        
+
         JLabel ense = new JLabel("     Nom ");
         ense.setFont(t);
         listeSelectionensegnat.setFont(y);
-        
+
         gridPanel7.add(ense);
-        gridPanel7.add(listeSelectionensegnat);             
-       
+        gridPanel7.add(listeSelectionensegnat);
+
         centerReca.add(gridPanel3, BorderLayout.NORTH);
         centerReca.add(gridPanel7, BorderLayout.WEST);
 ////////////////////////////////////////////////////////////////////////////////
         JPanel gridPanel5 = new JPanel();
-        gridPanel5.setLayout(new GridLayout(2,1, 1, 5));
+        gridPanel5.setLayout(new GridLayout(2, 1, 1, 5));
         gridPanel5.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel5.setBackground(new java.awt.Color(145, 200, 100));
-
-        
 
         JLabel labelFiltre = new JLabel(" Type de cours   ");
         labelFiltre.setFont(t);
@@ -1384,19 +1404,18 @@ public class AdminVue extends JFrame {
 
         gridPanel5.add(labelFiltre);
         gridPanel5.add(listeselectionFiltrerecatype);
- 
+
         centerReca.add(gridPanel5, BorderLayout.NORTH);
 //--------------------------------------------------------------------
-          Font f = new Font("Times New Roman", Font.BOLD, 24);
+        Font f = new Font("Times New Roman", Font.BOLD, 24);
         UIManager.put("JLabel.font", f);
         JButton Montrerreca = new JButton("Montrer le recapitulatif");
-        Montrerreca.setFont(f);     
-      
+        Montrerreca.setFont(f);
+
         centerReca.add(Montrerreca, BorderLayout.NORTH);
-        
+
 //------------------------------------------------------------------
         //innerContainer.add(semaineEDT, BorderLayout.WEST);
-
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -1429,11 +1448,11 @@ public class AdminVue extends JFrame {
         col.setPreferredWidth(50);
         col = jTable1.getColumnModel().getColumn(4);
         col.setPreferredWidth(30);
-       
 
         centerReca.add(jScrollPane1, BorderLayout.CENTER);
 
-        }    
+    }
+
     public static void main(String[] args) {
         AdminVue mylayout = new AdminVue("Accueil");
         mylayout.setVisible(true);

@@ -286,9 +286,9 @@ public class Reporting extends JFrame {
 //        demo.setVisible(true);
         // Main pour les effectifs des groupes
         Reporting demo = new Reporting("Reporting");
-        demo.reportingEffectifGroupesParPromo();
+        //demo.reportingEffectifGroupesParPromo();
         //demo.reportingCapaciteSallesParSiteHisto();
-        //demo.reportingHeuresDeSeancesParCours();
+        demo.reportingHeuresDeSeancesParCours();
         demo.pack();
         demo.setVisible(true);
     }
