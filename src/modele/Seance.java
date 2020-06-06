@@ -245,6 +245,28 @@ public class Seance {
                 + " Type cours : " + this.typeCoursSeance.getNomTypeCours();
     }
 
+    public String stringEssentiel() {
+        String salles = new String();
+        for (Salle s : listeSalles) {
+            salles = salles.concat(s.getNomSalle());
+        }
+
+        String enseignants = new String();
+        for (Enseignant s : listeEnseignants) {
+            enseignants = enseignants.concat(s.getNom());
+        }
+
+        String groupes = new String();
+        for (Groupe s : listeGroupes) {
+            groupes = groupes.concat(s.getNomGroupe());
+        }
+        return "Id : " + this.seanceId
+                + " Cours : " + this.coursSeance.getNomCours()
+                + " Salle(s) : " + salles.toString()
+                + " Enseignant(s) : " + enseignants.toString()
+                + " Groupe(s) : " + groupes.toString();
+    }
+
     /**
      * Affiche les informations de la séance.
      */
@@ -253,10 +275,10 @@ public class Seance {
         System.out.println(toString());
     }
 
-//        public static void main(String[] args) {
-//        SeanceDAO et = new SeanceDAO();
-//        Seance un = new Seance();
-//        un = et.chercher(1);
-//       System.out.println(un.toString());
-//    }
+        public static void main(String[] args) {
+        SeanceDAO et = new SeanceDAO();
+        Seance un = new Seance();
+        un = et.chercher(1);
+       System.out.println(un.toString());
+    }
 }

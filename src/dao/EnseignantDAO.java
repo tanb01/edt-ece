@@ -84,7 +84,23 @@ public class EnseignantDAO extends DataAccessObject<Enseignant> {
             e.printStackTrace();
         }
         return enseignants;
+    }
 
+    public ArrayList<Enseignant> chercherEnseignantsParSeanceId(int seanceId) {
+        ArrayList<Enseignant> enseignants = new ArrayList<Enseignant>();
+        Enseignant enseignant = new Enseignant();
+        try {
+            ResultSet result = this.connect.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT user.user_id, email, nom, prenom FROM user INNER JOIN seance_enseignants ON user.user_id=seance_enseignants.enseignant_id WHERE user.droit = 3 AND seance_enseignants.seance_id =" + seanceId);
+            while (result.next()) {
+                enseignant = new Enseignant(result.getInt("user.user_id"), result.getString("email"), result.getString("nom"), result.getString("prenom"), 3);
+                enseignants.add(enseignant);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return enseignants;
     }
 
     /**

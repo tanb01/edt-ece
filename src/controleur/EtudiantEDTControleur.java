@@ -3,6 +3,7 @@ package controleur;
 import dao.EnseignantDAO;
 import dao.EtudiantDAO;
 import dao.SeanceDAO;
+import dao.SiteDAO;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,6 +31,7 @@ import modele.Etudiant;
 import modele.Groupe;
 import modele.Salle;
 import modele.Seance;
+import modele.Site;
 import modele.User;
 import vue.EnseignantVue;
 import vue.EtudiantVue;
@@ -44,6 +46,8 @@ public class EtudiantEDTControleur implements ActionListener, ItemListener {
     private Etudiant e = null;
 
     private SeanceDAO seance = null;
+    private SiteDAO site = null;
+
     private ArrayList<Seance> listSeances = null;
     private ArrayList<Seance> listSeancesSelectionnees = null;
     private ArrayList<Salle> listSalles = null;
@@ -53,6 +57,8 @@ public class EtudiantEDTControleur implements ActionListener, ItemListener {
     private EtudiantVue ve = null;
 
     private DefaultTableModel dtm = null;
+
+    private ArrayList<Site> listSites = null;
 
     /**
      *
@@ -67,12 +73,16 @@ public class EtudiantEDTControleur implements ActionListener, ItemListener {
         etuddao = new EtudiantDAO();
         e = new Etudiant();
         seance = new SeanceDAO();
+        site = new SiteDAO();
 
         e = etuddao.chercher(m.getUserId());
         listSeances = new ArrayList<Seance>();
         listSeances = seance.chercherSeancesParGroupeId(e.getGroupeId());
         listSeancesSelectionnees = new ArrayList<Seance>();
         listSeancesSelectionnees = getSeancesParGroupeIdEtNumeroSemaine(e.getGroupeId(), numeroSemaineSelected);
+        listSites = new ArrayList<Site>();
+        listSites = site.chercherTousLesSites();
+
         String[][] data = new String[84][100];
 
         String[] horairesPossibles = new String[]{"08:30-10:00", "10:15-11:45", "12:00-13:30", "13:45-15:15", "15:30-17:00", "17:15-18:45", "19:00-20:30"};
@@ -151,6 +161,7 @@ public class EtudiantEDTControleur implements ActionListener, ItemListener {
             bouton.addActionListener(this);
         });
         ve.getBoutonSallesLibres().addActionListener(this);
+        ve.getBoutonValiderRechercheSalleLibre().addActionListener(this);
         ve.getBoutonReporting().addActionListener(this);
         ve.getJComboBoxSelectionVue().addItemListener(this);
 
@@ -170,19 +181,20 @@ public class EtudiantEDTControleur implements ActionListener, ItemListener {
         }
         if (ae.getSource() == ve.getBoutonSallesLibres()) {
             ve.showSallesLibres();
-//            String[][] data2 = new String[listSeancesSelectionnees.size()][1];
-//            for (int i = 0; i < listSeancesSelectionnees.size(); i++) {
-//                data2[i][0] = getJourDeLaSemaine(listSeancesSelectionnees.get(i).getDate()) + "     " + listSeancesSelectionnees.get(i).stringify();
-//            }
-//
-//            DefaultTableModel dtm2 = new DefaultTableModel(
-//                    data2,
-//                    new String[]{
-//                        " "
-//                    }
-//            );
-//            ve.changeAVueEnListe(dtm2);
-//            ve.setVisible(true);
+        }
+        if (ae.getSource() == ve.getBoutonValiderRechercheSalleLibre()) {
+            //===> Verifier si int
+            int capacite = Integer.parseInt(ve.getTextFieldCapaciteMaximaleSalleLibre().getText());
+            String heure = ve.getListeSelectionHeureSalleLibre().getSelectedItem().toString();
+            StringBuilder builder = new StringBuilder(heure);
+            builder.replace(4, 10, "");
+            heure = builder.toString().concat(":00");
+//            System.out.println(heure);
+            String date = ve.getDateFieldSalleLibre().getText().toString();
+            String nomSite = ve.getListeSelectionSiteSalleLibre().getSelectedItem().toString();
+            ArrayList<Salle> sallesDisponibles = new ArrayList<Salle>();
+            sallesDisponibles = getToutesSallesDisponibles(capacite, heure, date, nomSite);
+            montrerSallesLibres(sallesDisponibles);
         }
         if (ae.getSource() == ve.getBoutonReporting()) {
             ve.showReporting();
@@ -397,9 +409,55 @@ public class EtudiantEDTControleur implements ActionListener, ItemListener {
         tempArray2.forEach(s -> tempArray3.add(s));
         return tempArray3;
     }
-    
-//    public void 
 
+    public ArrayList<Salle> getToutesSallesDisponibles(int capacite, String heureDisponible, String date, String nomSite) {
+        ArrayList<Salle> sallesDisponibles = new ArrayList<Salle>();
+        for (Site site : listSites) {
+            if (site.getNomSite().equals(nomSite)) {
+                for (Salle salle : site.getSalles()) {
+                    if (salle.getCapacite() <= capacite) {
+                        for (Seance seance : listSeances) {
+                            for (Salle seanceSalle : seance.getListeSalles()) {
+                                if (seanceSalle.getSalleId() == salle.getSalleId() && seance.getDate().equals(date) && seance.getDebutHeure().equals(heureDisponible)) {
+
+                                } else {
+                                    sallesDisponibles.add(salle);
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+        sallesDisponibles = getDistincteSalles(sallesDisponibles);
+        return sallesDisponibles;
+    }
+
+    public ArrayList<Salle> getDistincteSalles(ArrayList<Salle> tempArray) {
+        List<Salle> tempArray2 = tempArray.stream().distinct().collect(Collectors.toList());
+        ArrayList<Salle> tempArray3 = new ArrayList<Salle>();
+        tempArray2.forEach(s -> tempArray3.add(s));
+        return tempArray3;
+    }
+
+    public void montrerSallesLibres(ArrayList<Salle> sallesDisponibles) {
+        String[][] data3 = new String[sallesDisponibles.size()][1];
+        for (int i = 0; i < sallesDisponibles.size(); i++) {
+            data3[i][0] = "Nom salle : " + sallesDisponibles.get(i).getNomSalle() + "   - Capacite : " + sallesDisponibles.get(i).getCapacite();
+        }
+
+        DefaultTableModel dtm3 = new DefaultTableModel(
+                data3,
+                new String[]{
+                    "Salles Disponibles"
+                }
+        );
+        ve.changeAVueSallesLibres(dtm3);
+        ve.setVisible(true);
+    }
+
+//    public void 
     public static void main(String[] args) {
         //test etudiant
         EtudiantDAO dao = new EtudiantDAO();

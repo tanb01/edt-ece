@@ -4,9 +4,11 @@ import dao.UserDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import modele.User;
+import vue.AdminVue;
 import vue.EnseignantVue;
 import vue.EtudiantVue;
 import vue.LoginVue;
+import vue.ReferentPedagogiqueVue;
 //import vue.UserVue;
 
 /**
@@ -88,16 +90,22 @@ public class LoginControleur implements ActionListener {
             User user = userInfo.chercherUserParEmailMotDePasse(vue.getEmail(), vue.getPassword());
             switch (user.getDroit()) {
                 case 1:
+                    AdminVue adminVue = new AdminVue("Welcome Admin: " + user.getPrenom() + " " + user.getNom());
+                    AdminEDTControleur adminControleur = new AdminEDTControleur(user, adminVue);
+                    adminControleur.control();
                     break;
                 case 2:
+//                    ReferentPedagogiqueVue referentPedagogiqueVue = new AdminVue("Welcome Admin: " + user.getPrenom() + " " + user.getNom());
+//                    ReferentPedagogiqueEDTControleur referentPedagogiqueControleur = new ReferentPedagogiqueEDTControleur(user, referentPedagogiqueVue);
+//                    adminControleur.control();
                     break;
                 case 3:
-                    EnseignantVue enseignantVue = new EnseignantVue("Welcome " + user.getPrenom() + " " + user.getNom());
+                    EnseignantVue enseignantVue = new EnseignantVue("Welcome Enseignant: " + user.getPrenom() + " " + user.getNom());
                     EnseignantEDTControleur enseignantControleur = new EnseignantEDTControleur(user, enseignantVue);
                     enseignantControleur.control();
                     break;
                 case 4:
-                    EtudiantVue etudiantVue = new EtudiantVue("Welcome " + user.getPrenom() + " " + user.getNom());
+                    EtudiantVue etudiantVue = new EtudiantVue("Welcome Etudiant: " + user.getPrenom() + " " + user.getNom());
                     EtudiantEDTControleur etudiantControleur = new EtudiantEDTControleur(user, etudiantVue);
                     etudiantControleur.control();
                     break;

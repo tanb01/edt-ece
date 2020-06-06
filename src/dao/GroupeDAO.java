@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import modele.Groupe;
 
 /**
@@ -82,6 +83,32 @@ public class GroupeDAO extends DataAccessObject<Groupe> {
             e.printStackTrace();
         }
         return groupe;
+    }
+
+    public ArrayList<Groupe> chercherGroupesParSeanceId(int seanceId) {
+        ArrayList<Groupe> groupes = new ArrayList<Groupe>();
+        Groupe groupe = new Groupe();
+        try {
+            ResultSet result = this.connect.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT groupe.groupe_id, groupe.nom_groupe FROM groupe INNER JOIN seance_groupes ON groupe.groupe_id=seance_groupes.groupe_id WHERE seance_groupes.seance_id=" + seanceId);
+
+            while (result.next()) {
+                ResultSet result2 = this.connect.createStatement(
+                        ResultSet.TYPE_SCROLL_INSENSITIVE,
+                        ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT COUNT(user_id) as effectif FROM etudiant WHERE groupe_id =" + result.getInt("groupe.groupe_id"));
+                if (result2.first()) {
+                    groupe = new Groupe(
+                            result.getInt("groupe.groupe_id"),
+                            result.getString("nom_groupe"),
+                            result2.getInt("effectif"));
+                    groupes.add(groupe);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return groupes;
     }
 //test
 

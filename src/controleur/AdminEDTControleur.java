@@ -34,6 +34,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.SwingUtilities;
@@ -43,6 +44,7 @@ import modele.Admin;
 import modele.Admin;
 import modele.Enseignant;
 import modele.Groupe;
+import modele.Promotion;
 import modele.Salle;
 import modele.Seance;
 import modele.Site;
@@ -82,6 +84,9 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
     private ArrayList<Enseignant> listEnseignants = null;
     private ArrayList<Salle> listSalles = null;
     private ArrayList<Site> listSites = null;
+    private ArrayList<Promotion> listPromo = null;
+
+    private Seance seanceSelectionneePourModifier = null;
 
     /**
      *
@@ -106,6 +111,8 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
 
         seance = new SeanceDAO();
 
+        seanceSelectionneePourModifier = new Seance();
+
         listSeances = new ArrayList<Seance>();
         listSeances = seance.chercherSeancesParGroupeId(31);
         listSeancesSelectionnees = new ArrayList<Seance>();
@@ -120,6 +127,8 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
 //        listSalles = salle.chercherToutesLesSalles();
         listSites = new ArrayList<Site>();
         listSites = site.chercherTousLesSites();
+        listPromo = new ArrayList<Promotion>();
+        listPromo = promotion.chercherToutesLesPromos();
 
         String[][] data = new String[84][100];
 
@@ -204,7 +213,14 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
 
         ve.getBoutonAjouterSeance().addActionListener(this);
         ve.getBoutonReporting().addActionListener(this);
+
         ve.getBoutonModifier().addActionListener(this);
+        ve.getDateFieldToSelectSeance().addActionListener(this);
+        for (JComboBox j : ve.getJComboBoxModifierSeance()) {
+            j.addItemListener(this);
+        }
+        ve.getBoutonSelectionnerSeance().addActionListener(this);
+        ve.getBoutonValiderModificationSeance().addActionListener(this);
 
         ve.getJComboBoxSelectionVue().addItemListener(this);
 
@@ -251,7 +267,54 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         }
         if (ae.getSource() == ve.getBoutonModifier()) {
             ve.showMenuModifierSeance();
+            ve.getJComboBoxModifierSeance().get(0).setModel(new DefaultComboBoxModel(getNomEnseignantsEnArray()));
+            ve.getJComboBoxModifierSeance().get(1).setModel(new DefaultComboBoxModel(getNomCoursEnArray()));
+            ve.getJComboBoxModifierSeance().get(2).setModel(new DefaultComboBoxModel(getPromoNomEnArray()));
+
+            ve.getJComboBoxModifierSeance().get(5).setModel(new DefaultComboBoxModel(getNomEnseignantsEnArray()));
+            ve.getJComboBoxModifierSeance().get(6).setModel(new DefaultComboBoxModel(getNomEnseignantsEnArray()));
+            ve.getJComboBoxModifierSeance().get(7).setModel(new DefaultComboBoxModel(getNomEnseignantsEnArray()));
+            ve.getJComboBoxModifierSeance().get(11).setModel(new DefaultComboBoxModel(getNomEnseignantsEnArray()));
+
+//groupe
+//groupe
+//groupe
+            //typecours
+            //salle
+            //sallenom ve.getJComboBoxModifierSeance().get(15).setM
+            //ve.getJComboBoxModifierSeance().get(16).setModel(new DefaultComboBoxModel(getNomEnseignantsEnArray()));
+            ve.getJComboBoxModifierSeance().get(17).setModel(new DefaultComboBoxModel(getNomEnseignantsEnArray()));
+
+            for (int i = 0; i < ve.getJComboBoxModifierSeance().size(); i++) {
+                ve.getJComboBoxModifierSeance().get(i).revalidate();
+                ve.getJComboBoxModifierSeance().get(i).repaint();
+            }
+
         }
+        if (ae.getSource() == ve.getBoutonSelectionnerSeance()) {
+
+            String nomEnseignant = ve.getJComboBoxModifierSeance().get(0).getSelectedItem().toString();
+            String dateSeance = ve.getDateFieldToSelectSeance().getText();
+            String nomCours = ve.getJComboBoxModifierSeance().get(1).getSelectedItem().toString();
+            String nomPromo = ve.getJComboBoxModifierSeance().get(2).getSelectedItem().toString();
+            String heureDebut = ve.getJComboBoxModifierSeance().get(3).getSelectedItem().toString();
+            String nomGroupe = ve.getJComboBoxModifierSeance().get(4).getSelectedItem().toString();
+            if (verifySeance(nomEnseignant, dateSeance, nomCours, nomPromo, heureDebut, nomGroupe)) {
+                seanceSelectionneePourModifier = findSeance(nomEnseignant, dateSeance, nomCours, nomPromo, heureDebut, nomGroupe);
+                ve.setSeanceSelectionneeField("Seance Id: " + seanceSelectionneePourModifier.getSeanceId() + ", Prof: " + seanceSelectionneePourModifier.getListeEnseignants().get(0).getNom());
+                System.out.println("Coucou");
+                System.out.println(seanceSelectionneePourModifier.toString());
+            }
+        }
+        if (ae.getSource() == ve.getBoutonValiderModificationSeance()) {
+            if (!ve.getJComboBoxModifierSeance().get(5).getSelectedItem().toString().equals(" ")) {
+                //verify if not already added
+                int enseignantId = getEnseignantIdParNom(ve.getJComboBoxModifierSeance().get(5).getSelectedItem().toString());
+                ajouterEnseignantASeance(seanceSelectionneePourModifier.getSeanceId(), enseignantId);
+                System.out.println("Enseignant " + enseignantId + " a ete ajoute a la seance id: " + seanceSelectionneePourModifier.getSeanceId());
+            }
+        }
+
         if (ae.getSource() == ve.getBoutonValiderAjoutSeance()) {
             String date = LocalDate.parse(ve.getDateFieldAjouterSeance().getText()).toString();
             String heureDebut = ve.getJComboBoxlisteSelectionHeureDebutAjouterSeance().getSelectedItem().toString();
@@ -332,6 +395,7 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
                     montrerEDT();
                     break;
             }
+            //
         }
     }
 
@@ -556,7 +620,7 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         ArrayList<String> names = new ArrayList();
         names = getNomEnseignants();
 
-        String[] tempArray = new String[names.size()];
+        String[] tempArray = new String[names.size()+1];
         tempArray[0] = " ";
         for (int i = 1; i < names.size(); i++) {
             tempArray[i] = names.get(i - 1);
@@ -571,9 +635,9 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         return tempArray3;
     }
 
-    public ArrayList<String> getNomCours() {
+    public ArrayList<String> getNomCours(ArrayList<Cours> listeCours) {
         ArrayList<String> tempArray = new ArrayList<String>();
-        getListeCours().forEach(cours -> tempArray.add(cours.getNomCours()));
+        listeCours.forEach(cours -> tempArray.add(cours.getNomCours()));
         List<String> tempArray2 = tempArray.stream().distinct().collect(Collectors.toList());
         ArrayList<String> tempArray3 = new ArrayList<String>();
         tempArray2.forEach(s -> tempArray3.add(s));
@@ -582,13 +646,30 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
 
     public String[] getNomCoursEnArray() {
         ArrayList<String> names = new ArrayList();
-        names = getNomCours();
+        names = getNomCours(listCours);
 
-        String[] tempArray = new String[names.size()];
+        String[] tempArray = new String[names.size() + 1];
         tempArray[0] = " ";
-        for (int i = 1; i < names.size(); i++) {
+        for (int i = 1; i < names.size() + 1; i++) {
             tempArray[i] = names.get(i - 1);
         }
+        return tempArray;
+    }
+
+    public String[] getPromoNomEnArray() {
+        ArrayList<String> names = new ArrayList();
+        for (Promotion p : listPromo) {
+            names.add(p.getNomPromo());
+            System.out.println(p.getNomPromo());
+        }
+        String[] tempArray = new String[names.size() + 1];
+        tempArray[0] = " ";
+        int i = 1;
+        for (String s : names) {
+            tempArray[i] = s;
+            i++;
+        }
+
         return tempArray;
     }
 
@@ -639,8 +720,45 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         sort(listSeancesSelectionnees, new SortByDateTime());
     }
 
+    public Seance findSeance(String nomEnseignant, String dateSeance, String nomCours, String nomPromo, String heureDebut, String nomGroupe) {
+        Seance seance = new Seance();
+        int enseignantId = getEnseignantIdParNom(nomEnseignant);
+        int coursId = getCoursIdParNom(nomCours);
+        int groupeId = getGroupeIdParGroupeNomEtPromoNom(nomPromo, nomGroupe);
+        heureDebut = heureDebut.concat(":00");
+        seance = this.seance.chercherSeanceParInfo(enseignantId, dateSeance, coursId, heureDebut, groupeId);
+        return seance;
+    }
+
+    public boolean verifySeance(String nomEnseignant, String dateSeance, String nomCours, String nomPromo, String heureDebut, String nomGroupe) {
+        boolean isExiste = false;
+        int enseignantId = getEnseignantIdParNom(nomEnseignant);
+        int coursId = getCoursIdParNom(nomCours);
+        int groupeId = getGroupeIdParGroupeNomEtPromoNom(nomPromo, nomGroupe);
+        heureDebut = heureDebut.concat(":00");
+        isExiste = this.seance.verifierSiSeanceExiste(enseignantId, dateSeance, coursId, heureDebut, groupeId);
+        return isExiste;
+    }
+
+    public int getGroupeIdParGroupeNomEtPromoNom(String nomPromo, String nomGroupe) {
+        int groupeId = 0;
+        for (Promotion p : listPromo) {
+            for (Groupe g : p.getGroupes()) {
+                if (nomPromo.equalsIgnoreCase(p.getNomPromo()) && g.getNomGroupe().equalsIgnoreCase(nomGroupe)) {
+                    groupeId = g.getGroupeId();
+                }
+            }
+        }
+        return groupeId;
+    }
+
     public void ajouterEnseignantASeance(int seanceId, int enseignantId) {
         seance.ajouterEnseignantASeance(seanceId, enseignantId);
+        for (Seance s : listSeances) {
+            if (s.getSeanceId() == seanceId) {
+                s = seance.chercher(seanceId);
+            }
+        }
     }
 
     public void ajouterGroupeASeance(int seanceId, int groupeId) {

@@ -94,7 +94,7 @@ public class PromotionDAO extends DataAccessObject<Promotion> {
         try {
             ResultSet result = this.connect.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT promo_id FROM promotion;");
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT promo_id FROM promotion");
             while (result.next()) {
                 promo = chercher(result.getInt("promo_id"));
                 promos.add(promo);
