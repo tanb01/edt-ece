@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import modele.Cours;
 
 /**
@@ -67,6 +68,23 @@ public class CoursDAO extends DataAccessObject<Cours> {
         }
         return Cours;
     }
+    
+    public ArrayList<Cours> chercherTousLesCours() {
+        ArrayList<Cours> courss = new ArrayList<Cours>();
+        Cours cours = new Cours();
+        try {
+            ResultSet result = this.connect.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT cours_id, nom_cours FROM `cours`  ORDER BY cours_id");
+            while (result.next()) {
+                cours = new Cours(result.getInt("cours_id"), result.getString("nom_cours"));
+                courss.add(cours);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return courss;
+    }
 //test
 
 //    public static void main(String[] args) {
@@ -74,4 +92,9 @@ public class CoursDAO extends DataAccessObject<Cours> {
 //        Cours un = sa.chercher(3);
 //        un.afficher();
 //    }
+    
+
+//        for (Cours t : listCours) {
+//            System.out.println(t.getNomCours());
+//        }
 }

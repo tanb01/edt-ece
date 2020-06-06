@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import modele.Enseignant;
 
 /**
@@ -19,7 +20,7 @@ public class EnseignantDAO extends DataAccessObject<Enseignant> {
 
     /**
      * Fonction pour créer.
-     * 
+     *
      * @param objet
      * @return
      */
@@ -29,7 +30,7 @@ public class EnseignantDAO extends DataAccessObject<Enseignant> {
 
     /**
      * Fonction pour effacer.
-     * 
+     *
      * @param objet
      * @return
      */
@@ -39,7 +40,7 @@ public class EnseignantDAO extends DataAccessObject<Enseignant> {
 
     /**
      * Fonction de mise à jour.
-     * 
+     *
      * @param objet
      * @return
      */
@@ -49,7 +50,7 @@ public class EnseignantDAO extends DataAccessObject<Enseignant> {
 
     /**
      * Fonction qui permet de chercher un enseignant dans la BDD grâce à son Id.
-     * 
+     *
      * @param id
      * @return
      */
@@ -67,18 +68,30 @@ public class EnseignantDAO extends DataAccessObject<Enseignant> {
         }
         return enseignant;
     }
-//test
 
-//    public static void main(String[] args) {
-//        EnseignantDAO sa = new EnseignantDAO();
-//        Enseignant un = sa.chercher(43);
-//        un.afficher();
-//    }
-    
+    public ArrayList<Enseignant> chercherTousLesEnseignants() {
+        ArrayList<Enseignant> enseignants = new ArrayList<Enseignant>();
+        Enseignant enseignant = new Enseignant();
+        try {
+            ResultSet result = this.connect.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT user.user_id, email, nom, prenom FROM user INNER JOIN enseignant ON user.user_id=enseignant.user_id WHERE user.droit = 3");
+            while (result.next()) {
+                enseignant = new Enseignant(result.getInt("user.user_id"), result.getString("email"), result.getString("nom"), result.getString("prenom"), 3);
+                enseignants.add(enseignant);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return enseignants;
+
+    }
+
     /**
      * Fonction qui permet l'affichage du nom d'un enseignant.
+     *
      * @param id
-     * @return 
+     * @return
      */
     public Enseignant Afficher_nom(int id) {
         Enseignant enseignant = new Enseignant();
@@ -94,4 +107,14 @@ public class EnseignantDAO extends DataAccessObject<Enseignant> {
         }
         return enseignant;
     }
+//test
+
+//    public static void main(String[] args) {
+//        EnseignantDAO sa = new EnseignantDAO();
+//        Enseignant un = sa.chercher(43);
+//        un.afficher();
+//            for (Enseignant e : listEnseignants) {
+//            System.out.println(e.getNom());
+//        }
+//    }
 }
