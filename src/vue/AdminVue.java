@@ -1466,7 +1466,7 @@ public class AdminVue extends JFrame {
 
 //-----------------------------------------------------------------------------        
         JPanel gridPanel8 = new JPanel();
-        gridPanel8.setLayout(new GridLayout(4, 1, 25, 115));
+        gridPanel8.setLayout(new GridLayout(5, 1, 25, 115));
         gridPanel8.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel8.setBackground(new java.awt.Color(145, 200, 100));
 
