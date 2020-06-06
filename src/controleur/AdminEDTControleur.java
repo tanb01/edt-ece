@@ -43,7 +43,9 @@ import modele.Admin;
 import modele.Admin;
 import modele.Enseignant;
 import modele.Groupe;
+import modele.Salle;
 import modele.Seance;
+import modele.Site;
 import modele.TypeCours;
 import modele.User;
 import vue.AdminVue;
@@ -78,6 +80,8 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
     private ArrayList<Cours> listCours = null;
     private ArrayList<TypeCours> listTypeCours = null;
     private ArrayList<Enseignant> listEnseignants = null;
+    private ArrayList<Salle> listSalles = null;
+    private ArrayList<Site> listSites = null;
 
     /**
      *
@@ -112,6 +116,10 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         listTypeCours = typeCours.chercherTousLesTypeCours();
         listEnseignants = new ArrayList<Enseignant>();
         listEnseignants = enseignant.chercherTousLesEnseignants();
+//        listSalles = new ArrayList<Salle>();
+//        listSalles = salle.chercherToutesLesSalles();
+        listSites = new ArrayList<Site>();
+        listSites = site.chercherTousLesSites();
 
         String[][] data = new String[84][100];
 
@@ -192,6 +200,8 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
             bouton.addActionListener(this);
         }
         ve.getBoutonSallesLibres().addActionListener(this);
+        ve.getBoutonValiderRechercheSalleLibre().addActionListener(this);
+
         ve.getBoutonAjouterSeance().addActionListener(this);
         ve.getBoutonReporting().addActionListener(this);
         ve.getBoutonModifier().addActionListener(this);
@@ -217,6 +227,20 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         }
         if (ae.getSource() == ve.getBoutonSallesLibres()) {
             ve.showSallesLibres();
+        }
+        if (ae.getSource() == ve.getBoutonValiderRechercheSalleLibre()) {
+            //===> Verifier si int
+            int capacite = Integer.parseInt(ve.getTextFieldCapaciteMaximaleSalleLibre().getText());
+            String heure = ve.getListeSelectionHeureSalleLibre().getSelectedItem().toString();
+            StringBuilder builder = new StringBuilder(heure);
+            builder.replace(4, 10, "");
+            heure = builder.toString().concat(":00");
+//            System.out.println(heure);
+            String date = ve.getDateFieldSalleLibre().getText().toString();
+            String nomSite = ve.getListeSelectionSiteSalleLibre().getSelectedItem().toString();
+            ArrayList<Salle> sallesDisponibles = new ArrayList<Salle>();
+            sallesDisponibles = getToutesSallesDisponibles(capacite, heure, date, nomSite);
+            montrerSallesLibres(sallesDisponibles);
         }
         if (ae.getSource() == ve.getBoutonAjouterSeance()) {
             ve.showMenuAjouterSeance();
@@ -370,6 +394,13 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         return enseignantId;
     }
 
+    public int getNumeroSemaineParDate(String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        int nombreDuJour = localDate.getDayOfYear();
+        nombreDuJour = Math.round((nombreDuJour - 48) / 7) + 1;
+        return nombreDuJour;
+    }
+
     public void affecterSeancesDeSemaine() {
         ArrayList<Seance> tempArray = new ArrayList<Seance>();
         listSeancesSelectionnees = new ArrayList<Seance>();
@@ -438,6 +469,22 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
                 }
         );
         ve.changeAVueEnListe(dtm2);
+        ve.setVisible(true);
+    }
+
+    public void montrerSallesLibres(ArrayList<Salle> sallesDisponibles) {
+        String[][] data3 = new String[sallesDisponibles.size()][1];
+        for (int i = 0; i < sallesDisponibles.size(); i++) {
+            data3[i][0] = "Nom salle : " + sallesDisponibles.get(i).getNomSalle() + "   - Capacite : " + sallesDisponibles.get(i).getCapacite();
+        }
+
+        DefaultTableModel dtm3 = new DefaultTableModel(
+                data3,
+                new String[]{
+                    "Salles Disponibles"
+                }
+        );
+        ve.changeAVueSallesLibres(dtm3);
         ve.setVisible(true);
     }
 
@@ -517,6 +564,13 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         return tempArray;
     }
 
+    public ArrayList<Salle> getDistincteSalles(ArrayList<Salle> tempArray) {
+        List<Salle> tempArray2 = tempArray.stream().distinct().collect(Collectors.toList());
+        ArrayList<Salle> tempArray3 = new ArrayList<Salle>();
+        tempArray2.forEach(s -> tempArray3.add(s));
+        return tempArray3;
+    }
+
     public ArrayList<String> getNomCours() {
         ArrayList<String> tempArray = new ArrayList<String>();
         getListeCours().forEach(cours -> tempArray.add(cours.getNomCours()));
@@ -574,15 +628,15 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
     }
 
     public void ajouterSeance(String dateSeance, String heureDebut, String heureFin, int etat, int coursId, int typeCoursId, int enseignantId, int groupeId, int salleId) {
-        int numeroSemaine = 1;
+        int numeroSemaine = getNumeroSemaineParDate(dateSeance);
         int seanceId = seance.ajouterSeance(numeroSemaine, dateSeance, heureDebut, heureFin, etat, coursId, typeCoursId);
         seance.ajouterEnseignantASeance(seanceId, enseignantId);
         seance.ajouterGroupeASeance(seanceId, groupeId);
         seance.ajouterSalleASeance(seanceId, salleId);
         System.out.println("Id de seance ajoute: " + seanceId);
         listSeances.add(seance.chercher(seanceId));
-        sort(listSeances,new SortByDateTime());
-        sort(listSeancesSelectionnees,new SortByDateTime());
+        sort(listSeances, new SortByDateTime());
+        sort(listSeancesSelectionnees, new SortByDateTime());
     }
 
     public void ajouterEnseignantASeance(int seanceId, int enseignantId) {
@@ -605,6 +659,30 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         seance.enleverGroupeDeSeance(seanceId, groupeId);
     }
 
+    public ArrayList<Salle> getToutesSallesDisponibles(int capacite, String heureDisponible, String date, String nomSite) {
+        ArrayList<Salle> sallesDisponibles = new ArrayList<Salle>();
+        for (Site site : listSites) {
+            if (site.getNomSite().equals(nomSite)) {
+                for (Salle salle : site.getSalles()) {
+                    if (salle.getCapacite() <= capacite) {
+                        for (Seance seance : listSeances) {
+                            for (Salle seanceSalle : seance.getListeSalles()) {
+                                if (seanceSalle.getSalleId() == salle.getSalleId() && seance.getDate().equals(date) && seance.getDebutHeure().equals(heureDisponible)) {
+
+                                } else {
+                                    sallesDisponibles.add(salle);
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+        sallesDisponibles = getDistincteSalles(sallesDisponibles);
+        return sallesDisponibles;
+    }
+
     public static void main(String[] args) {
         //test admin
         UserDAO dao = new UserDAO();
@@ -621,11 +699,7 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
 
 //controler.affecterGroupeASeance(2, 31, 27);
 //controler.affecterSalleASeance(2, 28, 11);
-//        LocalDate localDate = LocalDate.parse("2020-04-10");
-//        int weekNumberOfDay = localDate.getDayOfYear();
-//        System.out.println(weekNumberOfDay);
-//
-//        System.out.println(((7.0 * weekNumberOfDay) / 48.0) - 7);
+//        System.out.println(controler.calculerNumeroSemaine("2020-03-10"));
 //        System.out.println(Math.round((((7.0 * weekNumberOfDay) / 48.0) - 7)));
 //controler.ajouterSeance("2020-02-17", "08:30:00", "10:00:00", 0, 1, 1, 175, 31, 1);
     }

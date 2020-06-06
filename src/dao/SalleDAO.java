@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import modele.Salle;
 
 /**
@@ -67,6 +68,24 @@ public class SalleDAO extends DataAccessObject<Salle> {
             e.printStackTrace();
         }
         return salle;
+    }
+
+    public ArrayList<Salle> chercherToutesLesSalles() {
+        ArrayList<Salle> salles = new ArrayList<Salle>();
+        Salle salle = new Salle();
+        try {
+            ResultSet result = this.connect.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT salle_id, capacite_salle, nom_salle, site_id FROM salle");
+            while (result.next()) {
+                salle = new Salle(result.getInt("salle_id"), result.getString("nom_salle"),
+                        result.getInt("capacite_salle"));
+                salles.add(salle);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return salles;
     }
 //test
 
