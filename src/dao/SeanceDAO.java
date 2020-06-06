@@ -488,7 +488,7 @@ public class SeanceDAO extends DataAccessObject<Seance> {
     public int ajouterSeance(int numeroSemaine, String dateSeance, String heureDebut, String heureFin, int etat, int coursId, int typeCoursId) {
         int cleGeneree = 0;
         try {
-            PreparedStatement st = this.connect.prepareStatement("INSERT INTO `seance` (`seance_id`, `numero_semaine`, `date_seance`, `heure_debut`, `heure_fin`, `etat_seance`, `cours_id`, `type_cours_id`) VALUES (NULL, " + numeroSemaine + ", " + dateSeance + ", '" + heureDebut + "', '" + heureFin + "', " + etat + ", " + coursId + ", " + typeCoursId + ")", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement st = this.connect.prepareStatement("INSERT INTO `seance` (`seance_id`, `numero_semaine`, `date_seance`, `heure_debut`, `heure_fin`, `etat_seance`, `cours_id`, `type_cours_id`) VALUES (NULL, " + numeroSemaine + ", '" + dateSeance + "', '" + heureDebut + "', '" + heureFin + "', " + etat + ", " + coursId + ", " + typeCoursId + ")", Statement.RETURN_GENERATED_KEYS);
             if (st.execute()) {
                 System.out.println("Success");
             }

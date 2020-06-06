@@ -16,16 +16,23 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.Date;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
+import static java.util.Collections.sort;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -37,6 +44,7 @@ import modele.Admin;
 import modele.Enseignant;
 import modele.Groupe;
 import modele.Seance;
+import modele.TypeCours;
 import modele.User;
 import vue.AdminVue;
 import vue.AdminVue;
@@ -67,6 +75,10 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
 
     private DefaultTableModel dtm = null;
 
+    private ArrayList<Cours> listCours = null;
+    private ArrayList<TypeCours> listTypeCours = null;
+    private ArrayList<Enseignant> listEnseignants = null;
+
     /**
      *
      * @param m
@@ -94,6 +106,13 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         listSeances = seance.chercherSeancesParGroupeId(31);
         listSeancesSelectionnees = new ArrayList<Seance>();
         listSeancesSelectionnees = getSeancesParGroupeIdEtNumeroSemaine(31, numeroSemaineSelected);
+        listCours = new ArrayList<Cours>();
+        listCours = cours.chercherTousLesCours();
+        listTypeCours = new ArrayList<TypeCours>();
+        listTypeCours = typeCours.chercherTousLesTypeCours();
+        listEnseignants = new ArrayList<Enseignant>();
+        listEnseignants = enseignant.chercherTousLesEnseignants();
+
         String[][] data = new String[84][100];
 
         String[] horairesPossibles = new String[]{"08:30-10:00", "10:15-11:45", "12:00-13:30", "13:45-15:15", "15:30-17:00", "17:15-18:45", "19:00-20:30"};
@@ -209,8 +228,28 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         if (ae.getSource() == ve.getBoutonModifier()) {
             ve.showMenuModifierSeance();
         }
-        if (ae.getSource()==ve.getBoutonValiderAjoutSeance()) {
-//            ajouterSeance(dateSeance, heureDebut, heureFin, numeroSemaineSelected, numeroSemaineSelected, numeroSemaineSelected, numeroSemaineSelected, numeroSemaineSelected, numeroSemaineSelected);
+        if (ae.getSource() == ve.getBoutonValiderAjoutSeance()) {
+            String date = LocalDate.parse(ve.getDateFieldAjouterSeance().getText()).toString();
+            String heureDebut = ve.getJComboBoxlisteSelectionHeureDebutAjouterSeance().getSelectedItem().toString();
+            heureDebut = heureDebut.concat(":00");
+            System.out.println(heureDebut);
+            Time myTime = java.sql.Time.valueOf(heureDebut);
+            LocalTime localtime = myTime.toLocalTime();
+            localtime = localtime.plusMinutes(90);
+            String output = localtime.toString();
+            output = output.concat(":00");
+            System.out.println(output);
+            String heureFin = ve.getJComboBoxlisteSelectionHeureFinAjouterSeance().getSelectedItem().toString();
+            int etat = 0;
+            int coursId = getCoursIdParNom(ve.getJComboBoxlisteSelectionCoursAjouterSeance().getSelectedItem().toString());
+            System.out.println(coursId);
+            int typeCoursId = getTypeCoursIdParNom(ve.getJComboBoxlisteSelectionTypeCoursAjouterSeance().getSelectedItem().toString());
+            System.out.println(typeCoursId);
+            int enseignantId = getEnseignantIdParNom(ve.getJComboBoxlisteSelectionEnseignantAjouterSeance().getSelectedItem().toString());
+            System.out.println(enseignantId);
+            int groupeId = 31;
+            int salleId = 1;
+            ajouterSeance(date, heureDebut, output, etat, coursId, typeCoursId, enseignantId, groupeId, salleId);
         }
 
         for (JButton bouton : ve.getBoutonsSemaine()) {
@@ -301,6 +340,36 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         return tempArray;
     }
 
+    public int getCoursIdParNom(String s) {
+        int coursId = 0;
+        for (Cours c : listCours) {
+            if (c.getNomCours().equals(s)) {
+                coursId = c.getCoursId();
+            }
+        }
+        return coursId;
+    }
+
+    public int getTypeCoursIdParNom(String s) {
+        int typeCoursId = 0;
+        for (TypeCours tc : listTypeCours) {
+            if (tc.getNomTypeCours().equals(s)) {
+                typeCoursId = tc.getTypeCoursId();
+            }
+        }
+        return typeCoursId;
+    }
+
+    public int getEnseignantIdParNom(String s) {
+        int enseignantId = 0;
+        for (Enseignant e : listEnseignants) {
+            if (e.getNom().equals(s)) {
+                enseignantId = e.getUserId();
+            }
+        }
+        return enseignantId;
+    }
+
     public void affecterSeancesDeSemaine() {
         ArrayList<Seance> tempArray = new ArrayList<Seance>();
         listSeancesSelectionnees = new ArrayList<Seance>();
@@ -315,6 +384,9 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         }
     }
 
+//    public Time convertStringToSQLTime() {
+//        
+//    }
     public void montrerVueEnGrille() {
         System.out.println("grille");
         String[][] data = new String[84][100];
@@ -502,11 +574,15 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
     }
 
     public void ajouterSeance(String dateSeance, String heureDebut, String heureFin, int etat, int coursId, int typeCoursId, int enseignantId, int groupeId, int salleId) {
-        int numeroSemaine = 0;
+        int numeroSemaine = 1;
         int seanceId = seance.ajouterSeance(numeroSemaine, dateSeance, heureDebut, heureFin, etat, coursId, typeCoursId);
         seance.ajouterEnseignantASeance(seanceId, enseignantId);
         seance.ajouterGroupeASeance(seanceId, groupeId);
         seance.ajouterSalleASeance(seanceId, salleId);
+        System.out.println("Id de seance ajoute: " + seanceId);
+        listSeances.add(seance.chercher(seanceId));
+        sort(listSeances,new SortByDateTime());
+        sort(listSeancesSelectionnees,new SortByDateTime());
     }
 
     public void ajouterEnseignantASeance(int seanceId, int enseignantId) {
@@ -551,5 +627,6 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
 //
 //        System.out.println(((7.0 * weekNumberOfDay) / 48.0) - 7);
 //        System.out.println(Math.round((((7.0 * weekNumberOfDay) / 48.0) - 7)));
+//controler.ajouterSeance("2020-02-17", "08:30:00", "10:00:00", 0, 1, 1, 175, 31, 1);
     }
 }

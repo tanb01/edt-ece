@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import modele.TypeCours;
 
 /**
@@ -67,6 +68,24 @@ public class TypeCoursDAO extends DataAccessObject<TypeCours> {
         }
         return typeCours;
     }
+    
+        public ArrayList<TypeCours> chercherTousLesTypeCours() {
+        ArrayList<TypeCours> typeCourss = new ArrayList<TypeCours>();
+        TypeCours typeCours = new TypeCours();
+        try {
+            ResultSet result = this.connect.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT type_cours_id, nom_type_cours FROM `type_cours`  ORDER BY type_cours_id");
+            while (result.next()) {
+                typeCours = new TypeCours(result.getInt("type_cours_id"), result.getString("nom_type_cours"));
+                typeCourss.add(typeCours);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return typeCourss;
+    }
+    
 
 //test
 //    public static void main(String[] args) {
@@ -74,4 +93,8 @@ public class TypeCoursDAO extends DataAccessObject<TypeCours> {
 //        TypeCours un = sa.chercher(1);
 //        un.afficher();
 //    }
+        
+//                    for (TypeCours t : listTypeCours) {
+//            System.out.println(t.getNomTypeCours());
+//        }
 }
