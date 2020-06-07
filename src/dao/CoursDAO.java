@@ -85,7 +85,7 @@ public class CoursDAO extends DataAccessObject<Cours> {
         }
         return courss;
     }
-    
+
 //test
     public static void main(String[] args) {
         CoursDAO sa = new CoursDAO();

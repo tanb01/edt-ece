@@ -7,7 +7,6 @@ package vue;
  *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
-import controleur.Reporting;
 import javax.swing.*;
 import java.awt.*;
 import java.text.DateFormat;
@@ -122,7 +121,6 @@ public class EnseignantVue extends JFrame {
         // Nouvelle police (autre taille de police)
         Font g = new Font("Times New Roman", Font.BOLD, 14);
         UIManager.put("JMenu.font", g);
-        //menu.setFont(g);
         menu1.setFont(g);
 
         // Déclaration des items du menu
@@ -142,8 +140,6 @@ public class EnseignantVue extends JFrame {
         mi3.setFont(h);
 
         // Ajout des items du menu sur la fenêtre déclarés ci-dessus
-        //menu.add(m1);
-        //menu.add(m2);
         menu1.add(mi2);
         menu1.add(mi3);
 
@@ -237,7 +233,6 @@ public class EnseignantVue extends JFrame {
 
         }
 
-        //innerContainer.add(semaineEDT, BorderLayout.WEST);
         jscrollPanel = new JScrollPane();
         tableEnGrille = new JTable();
 
@@ -291,13 +286,7 @@ public class EnseignantVue extends JFrame {
         sallesLibresPanel.setLayout(new FlowLayout(5));
         sallesLibresPanel.setBackground(Color.blue);
         ajoutDuPanelSallesLibres();
-//        center.add(sallesLibresPanel, BorderLayout.CENTER);
 
-//        JLabel label15 = new JLabel();
-//        mainContainer.add(label15, BorderLayout.CENTER);
-//        sallesLibresPanel.add(label15);
-//        label15.setFont(new java.awt.Font("Tahoma", 0, 36));
-//        label15.setText("Salles Libres");
         this.setLayout(new BorderLayout());
 
         reportingPanel = new JPanel();
@@ -306,7 +295,6 @@ public class EnseignantVue extends JFrame {
         reportingPanel.setLayout(new FlowLayout(5));
         reportingPanel.setBackground(new java.awt.Color(254, 254, 254));
         ajoutDuPanelReporting();
-//        center.add(reportingPanel, BorderLayout.CENTER);
 
         // On ajoute les 4 panels au content pane de la JFrame
         // Au centre
@@ -453,10 +441,6 @@ public class EnseignantVue extends JFrame {
         tableEnGrille.setModel(m);
     }
 
-//    public void updateVue2(TableModel m) {
-//        //jTable1.setModel(m);
-//        jTable2.setModel(m);
-//    }
     public void changeToEDT() {
         center.removeAll();
         //center.add(panNouveaPanel);
@@ -733,7 +717,7 @@ public void ajoutDuPanelReporting() {
         buttonTauxDoccupationDesSalles.setFont(f);
         gridPanelb.add(buttonTauxDoccupationDesSalles);
 
-        buttonNombresHeuresSeancesDansAnnee = new JButton("<html>Effectifs des groupes de <br> par Promotion</html>");
+        buttonNombresHeuresSeancesDansAnnee = new JButton("<html>Effectifs des groupes <br> par Promotion</html>");
         buttonNombresHeuresSeancesDansAnnee.setFont(f);
         buttonNombresHeuresSeancesDansAnnee.setIcon(new ImageIcon("img/a3.png"));
         buttonNombresHeuresSeancesDansAnnee.setBackground(new java.awt.Color(255, 153, 5));

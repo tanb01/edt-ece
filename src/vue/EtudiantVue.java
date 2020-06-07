@@ -559,8 +559,6 @@ public class EtudiantVue extends JFrame {
         filtrePanel.remove(listeSelectionChamp);
         listeSelectionChamp = new JComboBox(j);
         filtrePanel.add(listeSelectionChamp);
-//        DefaultComboBoxModel model = new DefaultComboBoxModel(j);
-//        listeSelectionChamp.setModel(model);
         listeSelectionChamp.setSelectedIndex(1);
         listeSelectionChamp.revalidate();
         listeSelectionChamp.repaint();
@@ -725,7 +723,7 @@ public class EtudiantVue extends JFrame {
         buttonTauxDoccupationDesSalles.setFont(f);
         gridPanelb.add(buttonTauxDoccupationDesSalles);
 
-        buttonNombresHeuresSeancesDansAnnee = new JButton("<html>Effectifs des groupes de <br> par Promotion</html>");
+        buttonNombresHeuresSeancesDansAnnee = new JButton("<html>Effectifs des groupes <br> par Promotion</html>");
         buttonNombresHeuresSeancesDansAnnee.setFont(f);
         buttonNombresHeuresSeancesDansAnnee.setIcon(new ImageIcon("img/a3.png"));
         buttonNombresHeuresSeancesDansAnnee.setBackground(new java.awt.Color(255, 153, 5));

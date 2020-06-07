@@ -19,9 +19,9 @@ public class EtudiantDAO extends DataAccessObject<Etudiant> {
 
     /**
      * Fonction pour créer.
-     * 
+     *
      * @param objet
-     * @return 
+     * @return
      */
     @Override
     public boolean creer(Etudiant objet) {
@@ -30,9 +30,9 @@ public class EtudiantDAO extends DataAccessObject<Etudiant> {
 
     /**
      * Fonction pour effacer.
-     * 
+     *
      * @param objet
-     * @return 
+     * @return
      */
     @Override
     public boolean effacer(Etudiant objet) {
@@ -41,9 +41,9 @@ public class EtudiantDAO extends DataAccessObject<Etudiant> {
 
     /**
      * Fonction de mise à jour.
-     * 
+     *
      * @param objet
-     * @return 
+     * @return
      */
     @Override
     public boolean mettreAJour(Etudiant objet) {
@@ -52,9 +52,9 @@ public class EtudiantDAO extends DataAccessObject<Etudiant> {
 
     /**
      * Fonction qui permet de chercher un étudiant dans la BDD grâce à son Id.
-     * 
+     *
      * @param id
-     * @return 
+     * @return
      */
     @Override
     public Etudiant chercher(int id) {

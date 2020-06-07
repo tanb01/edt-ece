@@ -174,13 +174,12 @@ public class EtudiantEDTControleur implements ActionListener, ItemListener {
             ve.showSallesLibres();
         }
         if (ae.getSource() == ve.getBoutonValiderRechercheSalleLibre()) {
-            //===> Verifier si int
+            //Verifier si int
             int capacite = Integer.parseInt(ve.getTextFieldCapaciteMaximaleSalleLibre().getText());
             String heure = ve.getListeSelectionHeureSalleLibre().getSelectedItem().toString();
             StringBuilder builder = new StringBuilder(heure);
             builder.replace(4, 10, "");
             heure = builder.toString().concat(":00");
-//            System.out.println(heure);
             String date = ve.getDateFieldSalleLibre().getText().toString();
             String nomSite = ve.getListeSelectionSiteSalleLibre().getSelectedItem().toString();
             ArrayList<Salle> sallesDisponibles = new ArrayList<Salle>();
@@ -192,25 +191,25 @@ public class EtudiantEDTControleur implements ActionListener, ItemListener {
         }
         if (ae.getSource() == ve.getBoutonReportingCapaciteSalles()) {
             //Capacite des salles par site
-            Reporting demo = new Reporting("Reporting");
+            ReportingControleur demo = new ReportingControleur("Reporting");
             demo.reportingCapaciteSallesParSiteHisto();
             demo.setVisible(true);
         }
         if (ae.getSource() == ve.getBoutonTauxOccupationSalles()) {
-//        //taux d'occupation des salles par site
-            Reporting demo = new Reporting("Reporting");
+        //taux d'occupation des salles par site
+            ReportingControleur demo = new ReportingControleur("Reporting");
             demo.reportingTauxOccupationSallesHisto();
             demo.setVisible(true);
         }
         if (ae.getSource() == ve.getBoutonReportingEffectifGroupe()) {
             //nombre effectif par groupe dans l'annee
-            Reporting demo = new Reporting("Reporting");
+            ReportingControleur demo = new ReportingControleur("Reporting");
             demo.reportingEffectifGroupesParPromo();
             demo.setVisible(true);
         }
         if (ae.getSource() == ve.getBoutonReportingSeancesParCours()) {
             //Nombre d'heures de seances par cours
-            Reporting demo = new Reporting("Reporting");
+            ReportingControleur demo = new ReportingControleur("Reporting");
             demo.reportingHeuresDeSeancesParCours();
             demo.setVisible(true);
         }
@@ -371,9 +370,6 @@ public class EtudiantEDTControleur implements ActionListener, ItemListener {
                 }
             }
         }
-//        if (!tempArray.isEmpty()) {
-//            listSeancesSelectionnees = tempArray;
-//        }
         return tempArray;
     }
 
@@ -472,7 +468,6 @@ public class EtudiantEDTControleur implements ActionListener, ItemListener {
         ve.setVisible(true);
     }
 
-//    public void 
     public static void main(String[] args) {
         //test etudiant
         EtudiantDAO dao = new EtudiantDAO();

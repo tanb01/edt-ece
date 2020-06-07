@@ -14,7 +14,6 @@ public class LoginVue extends JFrame {
     private JTextField emailField;
     private JPasswordField mdpField;
     private JButton connexion;
-//    private boolean isConnected;
 
     public LoginVue() {
         super();
@@ -102,30 +101,6 @@ public class LoginVue extends JFrame {
         return connexion;
     }
 
-//    /**
-//     * Vérifie que l'utilisateur est connecté
-//     * 
-//     * @return 
-//     */
-//    public boolean getIsConnected() {
-//        return isConnected;
-//    }
-//
-//    /**
-//     * Connexion de l'utilisateur
-//     * 
-//     * @param connection 
-//     */
-//    public void setIsConnected(boolean connection) {
-//        isConnected = connection;
-//    }
-//
-//    /**
-//     * Déconnexion
-//     */
-//    public void logOut() {
-//        isConnected = false;
-//    }
     /**
      *
      * @param args

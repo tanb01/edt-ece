@@ -10,7 +10,6 @@ import vue.EnseignantVue;
 import vue.EtudiantVue;
 import vue.LoginVue;
 import vue.ReferentPedagogiqueVue;
-//import vue.UserVue;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
@@ -124,7 +123,7 @@ public class LoginControleur implements ActionListener {
                     etudiantControleur.control();
                     break;
             }
-            
+
         }
     }
 }

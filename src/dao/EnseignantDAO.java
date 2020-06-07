@@ -123,7 +123,7 @@ public class EnseignantDAO extends DataAccessObject<Enseignant> {
         }
         return enseignant;
     }
-    
+
 //test
     public static void main(String[] args) {
         EnseignantDAO sa = new EnseignantDAO();

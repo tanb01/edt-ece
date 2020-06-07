@@ -28,8 +28,8 @@ public class SortByTime implements Comparator<Seance> {
             return 0;
         }
     }
+    
 //test sort
-
     public static void main(String[] args) {
         SeanceDAO dao = new SeanceDAO();
         ArrayList<Seance> s = new ArrayList<Seance>();

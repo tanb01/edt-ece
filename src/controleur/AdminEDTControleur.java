@@ -2,10 +2,8 @@ package controleur;
 
 import dao.CoursDAO;
 import dao.EnseignantDAO;
-import dao.EtudiantDAO;
 import dao.GroupeDAO;
 import dao.PromotionDAO;
-import dao.SalleDAO;
 import dao.SeanceDAO;
 import dao.SiteDAO;
 import dao.TypeCoursDAO;
@@ -45,10 +43,8 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
 
     private CoursDAO cours = null;
     private EnseignantDAO enseignant = null;
-    private EtudiantDAO etudiant = null;
     private GroupeDAO groupe = null;
     private PromotionDAO promotion = null;
-    private SalleDAO salle = null;
     private SeanceDAO seance = null;
     private SiteDAO site = null;
     private TypeCoursDAO typeCours = null;
@@ -67,7 +63,6 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
     private ArrayList<Enseignant> listEnseignants = null;
     private ArrayList<Salle> listSalles = null;
     private ArrayList<Site> listSites = null;
-//    private ArrayList<Promotion> listPromo = null;
 
     private Seance seanceSelectionneePourModifier = null;
     private ArrayList<String> listNomPromo = null;
@@ -84,10 +79,8 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
 
         cours = new CoursDAO();
         enseignant = new EnseignantDAO();
-        etudiant = new EtudiantDAO();
         groupe = new GroupeDAO();
         promotion = new PromotionDAO();
-        salle = new SalleDAO();
         seance = new SeanceDAO();
         site = new SiteDAO();
         typeCours = new TypeCoursDAO();
@@ -109,8 +102,6 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         listEnseignants = enseignant.chercherTousLesEnseignants();
         listSites = new ArrayList<Site>();
         listSites = site.chercherTousLesSites();
-//        listPromo = new ArrayList<Promotion>();
-//        listPromo = promotion.chercherToutesLesPromos();
         listNomPromo = new ArrayList<String>();
         listNomPromo = promotion.chercherTousNomPromos();
 
@@ -214,13 +205,11 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         ve.getJComboBoxSelectionVue().addItemListener(this);
 
         ve.getJComboBoxFilterSelection().addItemListener(this);
-        
+
         ve.getButtonSearchGroupe().addActionListener(this);
 
         ve.getJComboBoxlisteSelectionEnseignantAjouterSeance().addItemListener(this);
-//        ve.getJComboBoxlisteSelectionCoursAjouterSeance().addItemListener(this);
 
-        //ve.getButtonSearchFiltre().addActionListener(this);
         ve.getBoutonValiderAjoutSeance().addActionListener(this);
         ve.setTableEnGrille(dtm);
         ve.setVisible(true);
@@ -253,13 +242,12 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
             ve.showSallesLibres();
         }
         if (ae.getSource() == ve.getBoutonValiderRechercheSalleLibre()) {
-            //===> Verifier si int
+            //Verifier si int
             int capacite = Integer.parseInt(ve.getTextFieldCapaciteMaximaleSalleLibre().getText());
             String heure = ve.getListeSelectionHeureSalleLibre().getSelectedItem().toString();
             StringBuilder builder = new StringBuilder(heure);
             builder.replace(4, 10, "");
             heure = builder.toString().concat(":00");
-//            System.out.println(heure);
             String date = ve.getDateFieldSalleLibre().getText().toString();
             String nomSite = ve.getListeSelectionSiteSalleLibre().getSelectedItem().toString();
             ArrayList<Salle> sallesDisponibles = new ArrayList<Salle>();
@@ -275,26 +263,26 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         }
         if (ae.getSource() == ve.getBoutonReportingCapaciteSalles()) {
             //Capacite des salles par site
-            Reporting demo = new Reporting("Reporting");
+            ReportingControleur demo = new ReportingControleur("Reporting");
             demo.reportingCapaciteSallesParSiteHisto();
             demo.setVisible(true);
 
         }
         if (ae.getSource() == ve.getBoutonTauxOccupationSalles()) {
-//        //taux d'occupation des salles par site
-            Reporting demo = new Reporting("Reporting");
+            //taux d'occupation des salles par site
+            ReportingControleur demo = new ReportingControleur("Reporting");
             demo.reportingTauxOccupationSallesHisto();
             demo.setVisible(true);
         }
         if (ae.getSource() == ve.getBoutonReportingEffectifGroupe()) {
             //nombre effectif par groupe dans l'annee
-            Reporting demo = new Reporting("Reporting");
+            ReportingControleur demo = new ReportingControleur("Reporting");
             demo.reportingEffectifGroupesParPromo();
             demo.setVisible(true);
         }
         if (ae.getSource() == ve.getBoutonReportingSeancesParCours()) {
             //Nombre d'heures de seances par cours
-            Reporting demo = new Reporting("Reporting");
+            ReportingControleur demo = new ReportingControleur("Reporting");
             demo.reportingHeuresDeSeancesParCours();
             demo.setVisible(true);
         }
@@ -309,7 +297,7 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
             ve.getJComboBoxModifierSeance().get(7).setModel(new DefaultComboBoxModel(getNomEnseignantsEnArray()));
             ve.getJComboBoxModifierSeance().get(11).setModel(new DefaultComboBoxModel(getNomCoursEnArray()));
             ve.getJComboBoxModifierSeance().get(12).setModel(new DefaultComboBoxModel(getTypeCoursEnArray()));
-//Champs site et salle
+            //Champs site et salle
             ve.getJComboBoxModifierSeance().get(13).setModel(new DefaultComboBoxModel(getSiteNomEnArray()));
             ve.getJComboBoxModifierSeance().get(14).setModel(new DefaultComboBoxModel(getSalleNomEnArray(1)));
 
@@ -579,18 +567,6 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
                     montrerEDT();
                     break;
             }
-//            if (ve.getJComboBoxModifierSeance().get(13).getSelectedItem().toString().equals(" ")) {
-//                String array[] ={""};
-//                ve.getJComboBoxModifierSeance().get(14).setModel(new DefaultComboBoxModel(array));
-//            }
-//            if (!ve.getJComboBoxModifierSeance().get(13).getSelectedItem().toString().equals(" ")) {
-//                int siteId = getSiteIdParNom(ve.getJComboBoxModifierSeance().get(13).getSelectedItem().toString());
-//                ve.getJComboBoxModifierSeance().get(14).setModel(new DefaultComboBoxModel(getSalleNomEnArray(siteId)));
-//            }
-//            switch (ve.getJComboBoxModifierSeance().get(13).getSelectedItem().toString()) {
-//                
-//            }
-            //
         }
     }
 
@@ -698,9 +674,6 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         }
     }
 
-//    public Time convertStringToSQLTime() {
-//        
-//    }
     public void montrerVueEnGrille() {
         System.out.println("grille");
         String[][] data = new String[84][100];
@@ -790,9 +763,6 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
                 }
             }
         }
-//        if (!tempArray.isEmpty()) {
-//            listSeancesSelectionnees = tempArray;
-//        }
         return tempArray;
     }
 
@@ -1143,16 +1113,16 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         AdminVue v = new AdminVue("Admin Vue");
         AdminEDTControleur controler = new AdminEDTControleur(m, v);
         controler.control();
-//controler.ajouterGroupeASeance(1, 32);
-//controler.enleverGroupeDeSeance(1, 32);
-//controler.modifierTypeCoursSeance(12, 2);
-//controler.modifierCoursSeance(12, 2);
-//controler.affecterEnseignantASeance(2, 31, 27);
+        //controler.ajouterGroupeASeance(1, 32);
+        //controler.enleverGroupeDeSeance(1, 32);
+        //controler.modifierTypeCoursSeance(12, 2);
+        //controler.modifierCoursSeance(12, 2);
+        //controler.affecterEnseignantASeance(2, 31, 27);
 
-//controler.affecterGroupeASeance(2, 31, 27);
-//controler.affecterSalleASeance(2, 28, 11);
-//        System.out.println(controler.calculerNumeroSemaine("2020-03-10"));
-//        System.out.println(Math.round((((7.0 * weekNumberOfDay) / 48.0) - 7)));
-//controler.ajouterSeance("2020-02-17", "08:30:00", "10:00:00", 0, 1, 1, 175, 31, 1);
+        //controler.affecterGroupeASeance(2, 31, 27);
+        //controler.affecterSalleASeance(2, 28, 11);
+        //        System.out.println(controler.calculerNumeroSemaine("2020-03-10"));
+        //        System.out.println(Math.round((((7.0 * weekNumberOfDay) / 48.0) - 7)));
+        //controler.ajouterSeance("2020-02-17", "08:30:00", "10:00:00", 0, 1, 1, 175, 31, 1);
     }
 }

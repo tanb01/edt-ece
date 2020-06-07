@@ -6,14 +6,12 @@ package vue;
  *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
-import controleur.Reporting;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.text.DateFormat;
-import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -73,26 +71,10 @@ public class AdminVue extends JFrame {
     private JComboBox listeSelectionSiteSalleLibre = null;
     private JButton boutonValiderRechercheSalleLibre = null;
 
-//    private JComboBox listeSelectionEnseignantToSelectSeance = null;
     private JFormattedTextField dateFieldToSelectSeance = null;
-//    private JComboBox listeCoursToSelectSeance = null;
-//    private JComboBox listeSelectionPromoToSelectSeance = null;
-//    private JComboBox listeSelectionHeureDebutToSelectSeance = null;
-//    private JComboBox listeSelectionGroupeToSelectSeance = null;
+
     private JTextField seanceSelectionnee = null;
-//    private JComboBox listeSelectionAjouterEnseignant = null;
-//    private JComboBox listeSelectionEnseignantARemplacer = null;
-//    private JComboBox listeSelectionNouveauEnseignant = null;
-//    private JComboBox listeSelectionAjouterGroupe = null;
-//    private JComboBox listeSelectionGroupeARemplacer = null;
-//    private JComboBox listeSelectionNouveauGroupe = null;
-//    private JComboBox listeSelectionModifierCoursParNom = null;
-//    private JComboBox listeSelectionModifierCoursParTypeCours = null;
-//    private JComboBox listeSelectionSalleSiteAModifier = null;
-//    private JComboBox listeSelectionSalleModifierSeance = null;
-//    private JComboBox listeSelectionHeureModifierSeance = null;
-//    private JComboBox listeSelectionEtatModifierSeance = null;
-//    private JComboBox listeSelectionEnleverEnseigantModifierSeance = null;
+
     private ArrayList<JComboBox> comboModifierSeance = null;
     private JButton boutonValiderModificationSeance = null;
     private JButton boutonSelectionnerSeance = null;
@@ -432,13 +414,7 @@ public class AdminVue extends JFrame {
         sallesLibresPanel.setLayout(new FlowLayout(5));
         sallesLibresPanel.setBackground(Color.blue);
         ajoutDuPanelSallesLibres();
-//        center.add(sallesLibresPanel, BorderLayout.CENTER);
 
-//        JLabel label15 = new JLabel();
-//        mainContainer.add(label15, BorderLayout.CENTER);
-//        sallesLibresPanel.add(label15);
-//        label15.setFont(new java.awt.Font("Tahoma", 0, 36));
-//        label15.setText("Salles Libres");
         this.setLayout(new BorderLayout());
 
         reportingPanel = new JPanel();
@@ -447,8 +423,6 @@ public class AdminVue extends JFrame {
         reportingPanel.setLayout(new FlowLayout(5));
         reportingPanel.setBackground(new java.awt.Color(254, 254, 254));
         ajoutDuPanelReporting();
-//        center.add(reportingPanel);
-//        center.add(reportingPanel, BorderLayout.CENTER);
 
         centerAjoutSeance = new JPanel();
         centerAjoutSeance.setOpaque(true);
@@ -837,8 +811,6 @@ public class AdminVue extends JFrame {
         filtrePanel.remove(listeSelectionChamp);
         listeSelectionChamp = new JComboBox(j);
         filtrePanel.add(listeSelectionChamp);
-//        DefaultComboBoxModel model = new DefaultComboBoxModel(j);
-//        listeSelectionChamp.setModel(model);
         listeSelectionChamp.setSelectedIndex(1);
         listeSelectionChamp.revalidate();
         listeSelectionChamp.repaint();
@@ -1005,7 +977,7 @@ public class AdminVue extends JFrame {
         buttonTauxDoccupationDesSalles.setFont(f);
         gridPanelb.add(buttonTauxDoccupationDesSalles);
 
-        buttonNombresHeuresSeancesDansAnnee = new JButton("<html>Effectifs des groupes de <br> par Promotion</html>");
+        buttonNombresHeuresSeancesDansAnnee = new JButton("<html>Effectifs des groupes <br> par Promotion</html>");
         buttonNombresHeuresSeancesDansAnnee.setFont(f);
         buttonNombresHeuresSeancesDansAnnee.setIcon(new ImageIcon("img/a3.png"));
         buttonNombresHeuresSeancesDansAnnee.setBackground(new java.awt.Color(255, 153, 5));
@@ -1119,9 +1091,7 @@ public class AdminVue extends JFrame {
         fecha.setFont(t);
 
         dateFieldAjouterSeance.setFont(y);
-//                textDeAjouterSeance.add(imgUrl)
 
-//        textDeAjouterSeance = new ArrayList<String>();
         ajouterSeanceSubPanel.add(ense);
         ajouterSeanceSubPanel.add(listeSelectionEnseignantAjouterSeance);
 
@@ -1462,10 +1432,6 @@ public class AdminVue extends JFrame {
         Font f = new Font("Times New Roman", Font.BOLD, 30);
         UIManager.put("JButton.font", f);
 
-//        JButton validerm = new JButton("Valider la séance");
-//        validerm.setFont(f);
-//        validerm.setIcon(new ImageIcon("img/check.png"));
-//        validerm.setBackground(new java.awt.Color(251, 231, 188));
         boutonSelectionnerSeance = new JButton("Sélectionner séance");
         boutonSelectionnerSeance.setFont(f);
         boutonSelectionnerSeance.setIcon(new ImageIcon("img/check.png"));
@@ -1476,20 +1442,8 @@ public class AdminVue extends JFrame {
         boutonValiderModificationSeance.setIcon(new ImageIcon("img/check.png"));
         boutonValiderModificationSeance.setBackground(new java.awt.Color(251, 231, 188));
 
-//        JButton valider3m = new JButton("Valider le changement");
-//        valider3m.setFont(f);
-//        valider3m.setIcon(new ImageIcon("img/check.png"));
-//        valider3m.setBackground(new java.awt.Color(251, 231, 188));
-//
-//        JButton valider4m = new JButton("Enlever");
-//        valider4m.setFont(f);
-//        valider4m.setIcon(new ImageIcon("img/check.png"));
-//        valider4m.setBackground(new java.awt.Color(251, 231, 188));
         gridPanel8.add(boutonSelectionnerSeance);
-        //gridPanel8.add(validerm);
         gridPanel8.add(boutonValiderModificationSeance);
-        //gridPanel8.add(valider3m);
-        //gridPanel8.add(valider4m);
 
 ////////////////////////////////////////////////////////////////////////////////        
         modifierSeancePanel.add(gridPanel3, BorderLayout.NORTH);

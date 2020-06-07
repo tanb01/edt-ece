@@ -191,26 +191,26 @@ public class EnseignantEDTControleur implements ActionListener, ItemListener {
         }
         if (ae.getSource() == ve.getBoutonReportingCapaciteSalles()) {
             //Capacite des salles par site
-            Reporting demo = new Reporting("Reporting");
+            ReportingControleur demo = new ReportingControleur("Reporting");
             demo.reportingCapaciteSallesParSiteHisto();
             demo.setVisible(true);
 
         }
         if (ae.getSource() == ve.getBoutonTauxOccupationSalles()) {
 //        //taux d'occupation des salles par site
-            Reporting demo = new Reporting("Reporting");
+            ReportingControleur demo = new ReportingControleur("Reporting");
             demo.reportingTauxOccupationSallesHisto();
             demo.setVisible(true);
         }
         if (ae.getSource() == ve.getBoutonReportingEffectifGroupe()) {
             //nombre effectif par groupe dans l'annee
-            Reporting demo = new Reporting("Reporting");
+            ReportingControleur demo = new ReportingControleur("Reporting");
             demo.reportingEffectifGroupesParPromo();
             demo.setVisible(true);
         }
         if (ae.getSource() == ve.getBoutonReportingSeancesParCours()) {
             //Nombre d'heures de seances par cours
-            Reporting demo = new Reporting("Reporting");
+            ReportingControleur demo = new ReportingControleur("Reporting");
             demo.reportingHeuresDeSeancesParCours();
             demo.setVisible(true);
         }
@@ -387,9 +387,6 @@ public class EnseignantEDTControleur implements ActionListener, ItemListener {
                 }
             }
         }
-//        if (!tempArray.isEmpty()) {
-//            listSeancesSelectionnees = tempArray;
-//        }
         return tempArray;
     }
 

@@ -160,10 +160,6 @@ public class SeanceDAO extends DataAccessObject<Seance> {
         Seance seance = new Seance();
 
         try {
-//            ResultSet result = this.connect.createStatement(
-//                    ResultSet.TYPE_SCROLL_INSENSITIVE,
-//                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT seance.seance_id, numero_semaine, date_seance, heure_debut, heure_fin, etat_seance, cours_id, type_cours_id, enseignant_id, groupe_id, salle_id FROM seance INNER JOIN seance_enseignants\n"
-//                            + "ON seance.seance_id=seance_enseignants.seance_id INNER JOIN seance_groupes ON seance.seance_id=seance_groupes.seance_id INNER JOIN seance_salles ON seance.seance_id=seance_salles.seance_id WHERE groupe_id=" + groupeId + " ORDER BY numero_semaine, date_seance, heure_debut");
             ResultSet result = this.connect.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT seance.seance_id, numero_semaine, date_seance, heure_debut, heure_fin, etat_seance, cours_id, type_cours_id, groupe_id FROM seance INNER JOIN seance_groupes ON seance.seance_id=seance_groupes.seance_id WHERE groupe_id= " + groupeId + " ORDER BY numero_semaine, date_seance, heure_debut");

@@ -21,7 +21,7 @@ import org.jfree.util.Rotation;
  *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
-public class Reporting extends JFrame {
+public class ReportingControleur extends JFrame {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,7 +31,7 @@ public class Reporting extends JFrame {
      * @param applicationTitle
      * @param chartTitle
      */
-    public Reporting(String applicationTitle) {
+    public ReportingControleur(String applicationTitle) {
         super(applicationTitle);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
@@ -141,16 +141,13 @@ public class Reporting extends JFrame {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         SiteDAO si = new SiteDAO();
         ArrayList<Site> sites = new ArrayList<Site>();
-        
+
         sites = si.chercherTousLesSites();
         for (Site s : sites) {
             for (Salle salle : s.getSalles()) {
                 dataset.addValue(salle.getCapacite(), s.getNomSite(), salle.getNomSalle());
             }
         }
-//        for (Salle salle : sites.get(3).getSalles()) {
-//            dataset.addValue(salle.getCapacite(), sites.get(3).getNomSite(), salle.getNomSalle());
-//        }
         return dataset;
     }
 
@@ -281,7 +278,7 @@ public class Reporting extends JFrame {
 //        demo.pack();
 //        demo.setVisible(true);
         // Main pour les effectifs des groupes
-        Reporting demo = new Reporting("Reporting");
+        ReportingControleur demo = new ReportingControleur("Reporting");
         //demo.reportingEffectifGroupesParPromo();
         //demo.reportingCapaciteSallesParSiteHisto();
         demo.reportingHeuresDeSeancesParCours();
