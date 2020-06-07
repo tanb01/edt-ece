@@ -487,16 +487,8 @@ public class AdminVue extends JFrame {
      * @param index
      */
 ////////////////////////////////////////////////////////////////////////////////    
-    private void printActionPerformed(java.awt.event.ActionEvent evt) {
-        MessageFormat header = new MessageFormat("emploie du temps");
-        MessageFormat footer = new MessageFormat("page{0,number,integer}");
-        try {
-            tableEnGrille.print(JTable.PrintMode.NORMAL, header, footer);
-        } catch (java.awt.print.PrinterException e) {
-            System.err.format("Erreur d'impression", e.getMessage());
-        }
-    }
-
+    
+    
     public void selectSemaine(int index) {
         //boutons.get(index).setText("X");
         center.revalidate();
