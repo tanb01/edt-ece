@@ -78,7 +78,7 @@ public class Reporting extends JFrame {
         // On crée la dataset pour la SALLE
         DefaultCategoryDataset dataset = creationSallesReportingHistoDataset(); // Pour histogramme
         // On crée la chart grâce à la dataset
-        JFreeChart chart = creationHisto(dataset, "Capacite "); // Pour un histogramme
+        JFreeChart chart = creationHisto(dataset, "Capacite"); // Pour un histogramme
         // On met la chart dans un panel
         ChartPanel chartPanel = new ChartPanel(chart);
         // Taille par défaut
@@ -141,8 +141,8 @@ public class Reporting extends JFrame {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         SiteDAO si = new SiteDAO();
         ArrayList<Site> sites = new ArrayList<Site>();
+        
         sites = si.chercherTousLesSites();
-
         for (Site s : sites) {
             for (Salle salle : s.getSalles()) {
                 dataset.addValue(salle.getCapacite(), s.getNomSite(), salle.getNomSalle());
@@ -163,12 +163,9 @@ public class Reporting extends JFrame {
         DefaultPieDataset result = new DefaultPieDataset();
 
         SeanceDAO se = new SeanceDAO();
-        ArrayList<Seance> seances = new ArrayList<Seance>();
-        seances = se.chercherSeancesParGroupeId(31);
-
-        ArrayList<String> tempArray = new ArrayList<String>();
-        seances.forEach(seance -> tempArray.add(seance.getCoursSeance().getNomCours()));
-        List<String> tempArray2 = tempArray.stream().distinct().collect(Collectors.toList());
+        ArrayList<String> seances = new ArrayList<String>();
+        seances = se.chercherNomsDesCoursDesSeancesParGroupeId(31);//Pour le groupe 31 Gr09 Ing3
+        List<String> tempArray2 = seances.stream().distinct().collect(Collectors.toList());
         ArrayList<String> tempArray3 = new ArrayList<String>();
         tempArray2.forEach(s -> tempArray3.add(s));
 
@@ -180,7 +177,7 @@ public class Reporting extends JFrame {
         for (int i = 0; i < tempArray3.size(); i++) {
             timeCounter = 0;
             for (int j = 0; j < seances.size(); j++) {
-                if (tempArray3.get(i).equals(seances.get(j).getCoursSeance().getNomCours())) {
+                if (tempArray3.get(i).equals(seances.get(j))) {
                     timeCounter++;
                 }
             }
@@ -202,9 +199,9 @@ public class Reporting extends JFrame {
 
         PromotionDAO pr = new PromotionDAO();
         ArrayList<Promotion> promos = new ArrayList<Promotion>();
-        promos = pr.chercherToutesLesPromos();
+        promos.add(pr.chercher(3));
 
-        for (Groupe groupe : promos.get(2).getGroupes()) {
+        for (Groupe groupe : promos.get(0).getGroupes()) {
             dataset.setValue(groupe.getNomGroupe(), groupe.getEffectifGroupe());
         }
 

@@ -105,9 +105,9 @@ public class LoginControleur implements ActionListener {
                     break;
                 case 2:
                     showMessageDialog(null, "Connexion reussite!\n" + "Bienvenue Referent Pedagogique: " + user.getPrenom() + " " + user.getNom());
-//                    ReferentPedagogiqueVue referentPedagogiqueVue = new AdminVue("Welcome Admin: " + user.getPrenom() + " " + user.getNom());
-//                    ReferentPedagogiqueEDTControleur referentPedagogiqueControleur = new ReferentPedagogiqueEDTControleur(user, referentPedagogiqueVue);
-//                    adminControleur.control();
+                    ReferentPedagogiqueVue referentPedagogiqueVue = new ReferentPedagogiqueVue("Welcome Admin: " + user.getPrenom() + " " + user.getNom());
+                    ReferentPedagogiqueEDTControleur referentPedagogiqueControleur = new ReferentPedagogiqueEDTControleur(user, referentPedagogiqueVue);
+                    referentPedagogiqueControleur.control();
                     break;
                 case 3:
                     showMessageDialog(null, "Connexion reussite!\n" + "Bienvenue Enseignant: " + user.getPrenom() + " " + user.getNom());
@@ -124,6 +124,7 @@ public class LoginControleur implements ActionListener {
                     etudiantControleur.control();
                     break;
             }
+            
         }
     }
 }

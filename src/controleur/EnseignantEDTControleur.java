@@ -148,6 +148,11 @@ public class EnseignantEDTControleur implements ActionListener, ItemListener {
         ve.getBoutonValiderRechercheSalleLibre().addActionListener(this);
 
         ve.getBoutonReporting().addActionListener(this);
+        ve.getBoutonReportingCapaciteSalles().addActionListener(this);
+        ve.getBoutonTauxOccupationSalles().addActionListener(this);
+        ve.getBoutonReportingEffectifGroupe().addActionListener(this);
+        ve.getBoutonReportingSeancesParCours().addActionListener(this);
+
         ve.getJComboBoxSelectionVue().addItemListener(this);
 
         ve.getJComboBoxFilterSelection().addItemListener(this);
@@ -183,6 +188,31 @@ public class EnseignantEDTControleur implements ActionListener, ItemListener {
         }
         if (ae.getSource() == ve.getBoutonReporting()) {
             ve.showReporting();
+        }
+        if (ae.getSource() == ve.getBoutonReportingCapaciteSalles()) {
+            //Capacite des salles par site
+            Reporting demo = new Reporting("Reporting");
+            demo.reportingCapaciteSallesParSiteHisto();
+            demo.setVisible(true);
+
+        }
+        if (ae.getSource() == ve.getBoutonTauxOccupationSalles()) {
+//        //taux d'occupation des salles par site
+            Reporting demo = new Reporting("Reporting");
+            demo.reportingTauxOccupationSallesHisto();
+            demo.setVisible(true);
+        }
+        if (ae.getSource() == ve.getBoutonReportingEffectifGroupe()) {
+            //nombre effectif par groupe dans l'annee
+            Reporting demo = new Reporting("Reporting");
+            demo.reportingEffectifGroupesParPromo();
+            demo.setVisible(true);
+        }
+        if (ae.getSource() == ve.getBoutonReportingSeancesParCours()) {
+            //Nombre d'heures de seances par cours
+            Reporting demo = new Reporting("Reporting");
+            demo.reportingHeuresDeSeancesParCours();
+            demo.setVisible(true);
         }
         for (JButton bouton : ve.getBoutonsSemaine()) {
             if (ae.getSource() == bouton) {

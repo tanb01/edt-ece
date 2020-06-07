@@ -22,9 +22,7 @@ import java.util.ArrayList;
 import static java.util.Collections.sort;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import modele.Cours;
 import modele.Enseignant;
@@ -34,7 +32,6 @@ import modele.Seance;
 import modele.Site;
 import modele.TypeCours;
 import modele.User;
-import vue.AdminVue;
 import static javax.swing.JOptionPane.showMessageDialog;
 import vue.ReferentPedagogiqueVue;
 
@@ -206,14 +203,12 @@ public class ReferentPedagogiqueEDTControleur implements ActionListener, ItemLis
 //        }
 //        ve.getBoutonSelectionnerSeance().addActionListener(this);
 //        ve.getBoutonValiderModificationSeance().addActionListener(this);
-
         ve.getJComboBoxSelectionVue().addItemListener(this);
 
         ve.getJComboBoxFilterSelection().addItemListener(this);
 
 //        ve.getJComboBoxlisteSelectionEnseignantAjouterSeance().addItemListener(this);
 //        ve.getJComboBoxlisteSelectionCoursAjouterSeance().addItemListener(this);
-
         //ve.getButtonSearchFiltre().addActionListener(this);
 //        ve.getBoutonValiderAjoutSeance().addActionListener(this);
         ve.setTableEnGrille(dtm);

@@ -297,7 +297,7 @@ public class AdminVue extends JFrame {
         filtrePanel.add(listeSelectionVue);
 
         JLabel labelFiltre = new JLabel("  PROMO ");
-        String[] selectionFiltre = {" Prepac", "Ing1", "Ing2", "Ing3", "Ing4", "Ing5"};
+        String[] selectionFiltre = {" ", "Prepac", "Ing1", "Ing2", "Ing3", "Ing4", "Ing5"};
         listeSelectionFiltre = new JComboBox(selectionFiltre);
 
         filtrePanel.add(labelFiltre);

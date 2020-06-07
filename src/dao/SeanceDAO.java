@@ -350,6 +350,23 @@ public class SeanceDAO extends DataAccessObject<Seance> {
         return seances;
     }
 
+    public ArrayList<String> chercherNomsDesCoursDesSeancesParGroupeId(int groupeId) {
+        ArrayList<String> nomsDesCoursDesSeances = new ArrayList<String>();
+        try {
+            ResultSet result = this.connect.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT cours.nom_cours FROM seance INNER JOIN cours ON cours.cours_id = seance.cours_id INNER JOIN seance_groupes ON seance.seance_id = seance_groupes.seance_id WHERE seance_groupes.groupe_id = " + groupeId);
+
+            while (result.next()) {
+                String nomCours = result.getString("cours.nom_cours");
+                nomsDesCoursDesSeances.add(nomCours);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nomsDesCoursDesSeances;
+    }
+
     public void changerHeureDeSeance(int seanceId, String heure) {
         try {
             int result = this.connect.createStatement().executeUpdate("UPDATE `seance` SET `heure_debut` = '" + heure + "' WHERE `seance`.`seance_id` =" + seanceId);
