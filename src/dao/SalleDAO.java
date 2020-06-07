@@ -94,7 +94,7 @@ public class SalleDAO extends DataAccessObject<Salle> {
         try {
             ResultSet result = this.connect.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT salle.salle_id, capacite_salle, nom_salle, site_id FROM salle INNER JOIN seance_salles ON seance_salles.salle_id=salle.salle_id WHERE seance_salles.seance_id=1" + seanceId);
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT salle.salle_id, capacite_salle, nom_salle, site_id FROM salle INNER JOIN seance_salles ON seance_salles.salle_id=salle.salle_id WHERE seance_salles.seance_id=" + seanceId);
 
             while (result.next()) {
                 salle = new Salle(

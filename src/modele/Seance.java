@@ -38,14 +38,15 @@ public class Seance {
      * @param groupes
      */
     public Seance(int id, int numeroSemaine, String date, String debutHeure,
-            String finHeure, Cours cours, TypeCours typeCours,
+            String finHeure, int etat, Cours cours, TypeCours typeCours,
             ArrayList<Salle> salles, ArrayList<Enseignant> enseignants,
             ArrayList<Groupe> groupes) {
         seanceId = id;
         this.numeroSemaine = numeroSemaine;
         this.date = date;
         this.debutHeure = debutHeure.substring(0, debutHeure.length() - 3);
-        this.finHeure = finHeure.substring(0, finHeure.length() - 3);;
+        this.finHeure = finHeure.substring(0, finHeure.length() - 3);
+        this.etatSeance = etat;
         coursSeance = cours.copy();
         typeCoursSeance = typeCours.copy();
 
@@ -302,7 +303,7 @@ public class Seance {
     public static void main(String[] args) {
         SeanceDAO et = new SeanceDAO();
         Seance un = new Seance();
-        un = et.chercher(34);
+        un = et.chercher(44);
         System.out.println(un.toString());
         System.out.println();
         System.out.println(un.stringifyHorizontal());

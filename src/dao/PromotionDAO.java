@@ -112,8 +112,8 @@ public class PromotionDAO extends DataAccessObject<Promotion> {
 //        un.afficher();
     //
     // Test ARRAYLIST toutes les promos
-        PromotionDAO et = new PromotionDAO();
-        ArrayList<Promotion> un = et.chercherToutesLesPromos();
-        un.get(2).afficher();
+//        PromotionDAO et = new PromotionDAO();
+//        ArrayList<Promotion> un = et.chercherToutesLesPromos();
+//        un.get(2).afficher();
     }
 }

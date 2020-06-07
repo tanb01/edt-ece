@@ -303,7 +303,7 @@ public class AdminVue extends JFrame {
         filtrePanel.add(listeSelectionFiltre);
 
         JLabel labelGroupe = new JLabel("  GROUPE ");
-        String[] selectionGroupe = {"Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
+        String[] selectionGroupe = {" ", "Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
 
         listeSelectionGroupe = new JComboBox(selectionGroupe);
 
@@ -1126,7 +1126,7 @@ public class AdminVue extends JFrame {
 /////////////////////////////////////////////////////////////////////////
         JLabel labelgroupe = new JLabel("Groupe   ");
         labelgroupe.setFont(t);
-        String[] selectionFiltregroupe = {"Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
+        String[] selectionFiltregroupe = {" ", "Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
         listeSelectionGroupeAjouterSeance = new JComboBox(selectionFiltregroupe);
         listeSelectionGroupeAjouterSeance.setFont(y);
         ense.setFont(t);
@@ -1295,7 +1295,7 @@ public class AdminVue extends JFrame {
 /////////////////////////////////////////////////////////////////////////
         JLabel labelgroupe = new JLabel("Groupe   ");
         labelgroupe.setFont(t);
-        String[] selectionFiltregroupe = {"Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
+        String[] selectionFiltregroupe = {" ", "Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
         JComboBox listeSelectionGroupeToSelectSeance = new JComboBox(selectionFiltregroupe);
         listeSelectionGroupeToSelectSeance.setFont(y);
         comboModifierSeance.add(listeSelectionGroupeToSelectSeance);
@@ -1333,7 +1333,7 @@ public class AdminVue extends JFrame {
 //--------------------------------------------        
         JLabel groupe = new JLabel("Ajouter un groupe");
         groupe.setFont(t);
-        String[] selectionFiltregroupea = {"Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
+        String[] selectionFiltregroupea = {" ", "Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
         JComboBox listeSelectionAjouterGroupe = new JComboBox(selectionFiltregroupea);
         listeSelectionAjouterGroupe.setFont(y);
         comboModifierSeance.add(listeSelectionAjouterGroupe);
@@ -1341,7 +1341,7 @@ public class AdminVue extends JFrame {
 //---------------------------------------------
         JLabel groupe3 = new JLabel("Groupe à remplacer");
         groupe3.setFont(t);
-        String[] selectionFiltregroupeaf3 = {"Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
+        String[] selectionFiltregroupeaf3 = {" ", "Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
         JComboBox listeSelectionGroupeARemplacer = new JComboBox(selectionFiltregroupeaf3);
         listeSelectionGroupeARemplacer.setFont(y);
         comboModifierSeance.add(listeSelectionGroupeARemplacer);
@@ -1349,7 +1349,7 @@ public class AdminVue extends JFrame {
 //----------------------------------------------- 
         JLabel groupe2 = new JLabel("Nouveau Groupe");
         groupe2.setFont(t);
-        String[] selectionFiltregroupeaf = {"Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
+        String[] selectionFiltregroupeaf = {" ", "Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
         JComboBox listeSelectionNouveauGroupe = new JComboBox(selectionFiltregroupeaf);
         listeSelectionNouveauGroupe.setFont(y);
         comboModifierSeance.add(listeSelectionNouveauGroupe);
@@ -1365,7 +1365,7 @@ public class AdminVue extends JFrame {
 //----------------------------------------------        
         JLabel cours1 = new JLabel("Modifier un cours par son type");
         cours1.setFont(t);
-        String[] selectionFiltretypecoursa = {"TP", "TD", "Projet", "Soutien", "Magistral", "Interactif"};
+        String[] selectionFiltretypecoursa = {" ", "TP", "TD", "Projet", "Soutien", "Magistral", "Interactif"};
         JComboBox listeSelectionModifierCoursParTypeCours = new JComboBox(selectionFiltretypecoursa);
         listeSelectionModifierCoursParTypeCours.setFont(y);
         comboModifierSeance.add(listeSelectionModifierCoursParTypeCours);
@@ -1397,7 +1397,7 @@ public class AdminVue extends JFrame {
 //--------------------------------------------------------        
         JLabel etat = new JLabel("Changer l'état d'une seance");
         etat.setFont(t);
-        String[] selectionetat = {"En cours de validation", "Valider", "Annuler"};
+        String[] selectionetat = {" ", "En cours de validation", "Valider", "Annuler"};
         JComboBox listeSelectionEtatModifierSeance = new JComboBox(selectionetat);
         listeSelectionEtatModifierSeance.setFont(y);
         comboModifierSeance.add(listeSelectionEtatModifierSeance);
@@ -1413,7 +1413,7 @@ public class AdminVue extends JFrame {
 //--------------------------------------------------------          
         JLabel etatgroupe = new JLabel("Enlever un groupe d'une séance");
         etatgroupe.setFont(t);
-        String[] selectionFiltregroupeaenle = {"Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
+        String[] selectionFiltregroupeaenle = {" ", "Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
         JComboBox listeSelectionEnleverGroupeModifierSeance = new JComboBox(selectionFiltregroupeaenle);
         listeSelectionEnleverGroupeModifierSeance.setFont(y);
         comboModifierSeance.add(listeSelectionEnleverGroupeModifierSeance);
@@ -1445,10 +1445,13 @@ public class AdminVue extends JFrame {
         modifierSeanceSubPanel.add(listeSelectionNouveauEnseignant);
         modifierSeanceSubPanel.add(groupe);
         modifierSeanceSubPanel.add(listeSelectionAjouterGroupe);
-        modifierSeanceSubPanel.add(groupe2);
-        modifierSeanceSubPanel.add(listeSelectionNouveauGroupe);
+
         modifierSeanceSubPanel.add(groupe3);
         modifierSeanceSubPanel.add(listeSelectionGroupeARemplacer);
+
+        modifierSeanceSubPanel.add(groupe2);
+        modifierSeanceSubPanel.add(listeSelectionNouveauGroupe);
+
         modifierSeanceSubPanel.add(cours);
         modifierSeanceSubPanel.add(listeSelectionModifierCoursParNom);
         modifierSeanceSubPanel.add(cours1);

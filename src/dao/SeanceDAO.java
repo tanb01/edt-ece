@@ -85,6 +85,7 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 String date = result.getString("date_seance");
                 String debutHeure = result.getString("heure_debut");
                 String finHeure = result.getString("heure_fin");
+                int etat = result.getInt("etat_seance");
                 String Newligne = System.getProperty("line.separator");
                 String resultat;
                 resultat = Newligne + date + debutHeure + finHeure;
@@ -106,7 +107,7 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 ArrayList<Groupe> groupes = new ArrayList<Groupe>();
                 groupes = g.chercherGroupesParSeanceId(id);
 
-                seance = new Seance(id, numeroSemaine, date, debutHeure, finHeure, cours, typeCours, salles, enseignants, groupes);
+                seance = new Seance(id, numeroSemaine, date, debutHeure, finHeure, etat, cours, typeCours, salles, enseignants, groupes);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -173,6 +174,7 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 String date = result.getString("date_seance");
                 String debutHeure = result.getString("heure_debut");
                 String finHeure = result.getString("heure_fin");
+                int etat = result.getInt("etat_seance");
 
                 CoursDAO c = new CoursDAO();
                 Cours cours = c.chercher(result.getInt("cours_id"));
@@ -192,7 +194,7 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 ArrayList<Groupe> groupes = new ArrayList<Groupe>();
                 groupes = g.chercherGroupesParSeanceId(result.getInt("seance.seance_id"));
 
-                seance = new Seance(seanceId, numeroSemaine, date, debutHeure, finHeure, cours, typeCours, salles, enseignants, groupes);
+                seance = new Seance(seanceId, numeroSemaine, date, debutHeure, finHeure, etat, cours, typeCours, salles, enseignants, groupes);
                 //seance = chercher(result.getInt("seance.seance_id"));
                 seances.add(seance);
             }
@@ -233,6 +235,7 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 String date = result.getString("date_seance");
                 String debutHeure = result.getString("heure_debut");
                 String finHeure = result.getString("heure_fin");
+                int etat = result.getInt("etat_seance");
 
                 CoursDAO c = new CoursDAO();
                 Cours cours = c.chercher(result.getInt("cours_id"));
@@ -252,7 +255,7 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 ArrayList<Groupe> groupes = new ArrayList<Groupe>();
                 groupes = g.chercherGroupesParSeanceId(result.getInt("seance.seance_id"));
 
-                seance = new Seance(seanceId, numeroSemaine, date, debutHeure, finHeure, cours, typeCours, salles, enseignants, groupes);
+                seance = new Seance(seanceId, numeroSemaine, date, debutHeure, finHeure, etat, cours, typeCours, salles, enseignants, groupes);
                 seances.add(seance);
             }
         } catch (SQLException e) {
@@ -275,6 +278,7 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 String date = result.getString("date_seance");
                 String debutHeure = result.getString("heure_debut");
                 String finHeure = result.getString("heure_fin");
+                int etat = result.getInt("etat_seance");
 
                 CoursDAO c = new CoursDAO();
                 Cours cours = c.chercher(result.getInt("cours_id"));
@@ -285,7 +289,7 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 SalleDAO s = new SalleDAO();
                 ArrayList<Salle> salles = new ArrayList<Salle>();
                 salles = s.chercherSallesParSeanceId(result.getInt("seance.seance_id"));
-                             
+
                 EnseignantDAO e = new EnseignantDAO();
                 ArrayList<Enseignant> enseignants = new ArrayList<Enseignant>();
                 enseignants = e.chercherEnseignantsParSeanceId(result.getInt("seance.seance_id"));
@@ -294,7 +298,7 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 ArrayList<Groupe> groupes = new ArrayList<Groupe>();
                 groupes = g.chercherGroupesParSeanceId(result.getInt("seance.seance_id"));
 
-                seance = new Seance(seanceId, numeroSemaine, date, debutHeure, finHeure, cours, typeCours, salles, enseignants, groupes);
+                seance = new Seance(seanceId, numeroSemaine, date, debutHeure, finHeure, etat, cours, typeCours, salles, enseignants, groupes);
                 seances.add(seance);
             }
         } catch (SQLException e) {
@@ -317,6 +321,7 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 String date = result.getString("date_seance");
                 String debutHeure = result.getString("heure_debut");
                 String finHeure = result.getString("heure_fin");
+                int etat = result.getInt("etat_seance");
 
                 CoursDAO c = new CoursDAO();
                 Cours cours = c.chercher(result.getInt("cours_id"));
@@ -336,7 +341,7 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 ArrayList<Groupe> groupes = new ArrayList<Groupe>();
                 groupes = g.chercherGroupesParSeanceId(result.getInt("seance.seance_id"));
 
-                seance = new Seance(seanceId, numeroSemaine, date, debutHeure, finHeure, cours, typeCours, salles, enseignants, groupes);
+                seance = new Seance(seanceId, numeroSemaine, date, debutHeure, finHeure, etat, cours, typeCours, salles, enseignants, groupes);
                 seances.add(seance);
             }
         } catch (SQLException e) {
@@ -497,13 +502,13 @@ public class SeanceDAO extends DataAccessObject<Seance> {
 //test
     public static void main(String[] args) {
         SeanceDAO et = new SeanceDAO();
-//        Seance un = et.chercher(1);
-//        un.afficher();
+        Seance un = et.chercher(44);
+        un.afficher();
 
-        ArrayList<Seance> seances = new ArrayList<Seance>();
-        seances = et.chercherSeancesParGroupeId(31);
-        for (Seance s : seances) {
-            System.out.println(s.stringifyVertical());
-        }
+//        ArrayList<Seance> seances = new ArrayList<Seance>();
+//        seances = et.chercherSeancesParGroupeId(31);
+//        for (Seance s : seances) {
+//            System.out.println(s.stringifyVertical());
+//        }
     }
 }
