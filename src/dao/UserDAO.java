@@ -51,7 +51,8 @@ public class UserDAO extends DataAccessObject<User> {
     }
 
     /**
-     * Fonction qui permet de chercher un utilisateur dans la BDD grâce à son Id.
+     * Fonction qui permet de chercher un utilisateur dans la BDD grâce à son
+     * Id.
      *
      * @param id
      * @return
@@ -131,13 +132,15 @@ public class UserDAO extends DataAccessObject<User> {
 
 ////test
     public static void main(String[] args) {
-//        UserDAO us = new UserDAO();
+        UserDAO us = new UserDAO();
+        User usBool = us.chercher(213);
+        System.out.println("Numero User: " + usBool.toString());
+        System.out.println("Prenom User: " + usBool.getPrenom());
+
 //        System.out.println(us.isUser("bt@edu.ece.fr", "bt"));
-//        System.out.println("Numero User: " + usBool.getNumeroEtudiant());
-//        System.out.println("Prenom Etudiant: " + usBool.getPrenom());
-//        
+
 //        UserDAO sa = new UserDAO();
-//      User un = sa.chercher(1);
-//      un.afficher();
+//        User un = sa.chercher(1);
+//        un.afficher();
     }
 }

@@ -309,6 +309,5 @@ public class Seance {
         System.out.println(un.stringifyHorizontal());
         System.out.println();
         System.out.println(un.stringifyVertical());
-
     }
 }

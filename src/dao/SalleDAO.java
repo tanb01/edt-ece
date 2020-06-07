@@ -108,11 +108,11 @@ public class SalleDAO extends DataAccessObject<Salle> {
         }
         return salles;
     }
-//test
 
-//    public static void main(String[] args) {
-//        SalleDAO sa = new SalleDAO();
-//        Salle un = sa.chercher(3);
-//        un.afficher();
-//    }
+//test
+    public static void main(String[] args) {
+        SalleDAO sa = new SalleDAO();
+        Salle un = sa.chercher(3);
+        un.afficher();
+    }
 }

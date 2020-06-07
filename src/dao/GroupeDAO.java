@@ -110,8 +110,24 @@ public class GroupeDAO extends DataAccessObject<Groupe> {
         }
         return groupes;
     }
-//test
 
+    public int chercherGroupeIdParGroupeNomEtPromoNom(String nomPromo, String nomGroupe) {
+        int groupeId = 0;
+        try {
+            ResultSet result = this.connect.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT groupe.groupe_id, groupe.nom_groupe, promotion.nom_promo FROM groupe INNER JOIN promotion ON groupe.promo_id= promotion.promo_id WHERE groupe.nom_groupe = " + nomGroupe + " AND promotion.nom_promo = " + nomPromo);
+
+            if (result.first()) {
+                groupeId = result.getInt("groupe.groupe_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return groupeId;
+    }
+
+//test
     public static void main(String[] args) {
         GroupeDAO gr = new GroupeDAO();
         Groupe un = gr.chercher(31);

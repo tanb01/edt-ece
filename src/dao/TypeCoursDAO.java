@@ -49,7 +49,8 @@ public class TypeCoursDAO extends DataAccessObject<TypeCours> {
     }
 
     /**
-     * Fonction qui permet de chercher un Type de cours dans la BDD grâce à son Id.
+     * Fonction qui permet de chercher un Type de cours dans la BDD grâce à son
+     * Id.
      *
      * @param id
      * @return
@@ -68,8 +69,8 @@ public class TypeCoursDAO extends DataAccessObject<TypeCours> {
         }
         return typeCours;
     }
-    
-        public ArrayList<TypeCours> chercherTousLesTypeCours() {
+
+    public ArrayList<TypeCours> chercherTousLesTypeCours() {
         ArrayList<TypeCours> typeCourss = new ArrayList<TypeCours>();
         TypeCours typeCours = new TypeCours();
         try {
@@ -85,16 +86,16 @@ public class TypeCoursDAO extends DataAccessObject<TypeCours> {
         }
         return typeCourss;
     }
-    
 
 //test
-//    public static void main(String[] args) {
-//        TypeCoursDAO sa = new TypeCoursDAO();
-//        TypeCours un = sa.chercher(1);
-//        un.afficher();
-//    }
-        
-//                    for (TypeCours t : listTypeCours) {
+    public static void main(String[] args) {
+        TypeCoursDAO sa = new TypeCoursDAO();
+        TypeCours un = sa.chercher(1);
+        un.afficher();
+
+//        for (TypeCours t : listTypeCours) {
 //            System.out.println(t.getNomTypeCours());
 //        }
+    }
+
 }

@@ -68,7 +68,7 @@ public class CoursDAO extends DataAccessObject<Cours> {
         }
         return Cours;
     }
-    
+
     public ArrayList<Cours> chercherTousLesCours() {
         ArrayList<Cours> courss = new ArrayList<Cours>();
         Cours cours = new Cours();
@@ -85,16 +85,16 @@ public class CoursDAO extends DataAccessObject<Cours> {
         }
         return courss;
     }
-//test
-
-//    public static void main(String[] args) {
-//        CoursDAO sa = new CoursDAO();
-//        Cours un = sa.chercher(3);
-//        un.afficher();
-//    }
     
+//test
+    public static void main(String[] args) {
+        CoursDAO sa = new CoursDAO();
+        Cours un = sa.chercher(3);
+        un.afficher();
 
 //        for (Cours t : listCours) {
 //            System.out.println(t.getNomCours());
 //        }
+    }
+
 }

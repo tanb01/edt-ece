@@ -1,36 +1,23 @@
 package controleur;
 
 import dao.EnseignantDAO;
-import dao.EnseignantDAO;
 import dao.SeanceDAO;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
-
-import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
-import java.util.Set;
 import java.util.stream.Collectors;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import modele.Cours;
-import modele.Enseignant;
 import modele.Enseignant;
 import modele.Groupe;
 import modele.Seance;
 import modele.User;
-import vue.EnseignantVue;
 import vue.EnseignantVue;
 
 /**

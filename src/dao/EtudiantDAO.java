@@ -84,9 +84,9 @@ public class EtudiantDAO extends DataAccessObject<Etudiant> {
     }
 
 //test
-//    public static void main(String[] args) {
-//        EtudiantDAO et = new EtudiantDAO();
-//        Etudiant un = et.chercher(307);
-//        un.afficher();
-//    }
+    public static void main(String[] args) {
+        EtudiantDAO et = new EtudiantDAO();
+        Etudiant un = et.chercher(307);
+        un.afficher();
+    }
 }

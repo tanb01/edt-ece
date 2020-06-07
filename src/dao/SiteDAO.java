@@ -95,10 +95,11 @@ public class SiteDAO extends DataAccessObject<Site> {
 
     public static void main(String[] args) {
 
-//        SiteDAO sa = new SiteDAO();
-//        Site un = sa.chercher(3);
-//        System.out.println("00 Site : " + un.getNomSite());
-//        System.out.println("Id : " + un.getSiteId());
+        SiteDAO sa = new SiteDAO();
+        Site un = sa.chercher(3);
+        System.out.println("Site : " + un.getNomSite());
+        System.out.println("Id : " + un.getSiteId());
+        
 //        for (Salle g : un.getSalles()) {
 //            System.out.println("Salle Id: " + g.getSalleId());
 //            System.out.println("Salle Nom: " + g.getNomSalle() + "\n");

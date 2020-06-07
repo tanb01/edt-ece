@@ -87,7 +87,7 @@ public class PromotionDAO extends DataAccessObject<Promotion> {
         }
         return promotion;
     }
-    
+
     public ArrayList<Promotion> chercherToutesLesPromos() {
         ArrayList<Promotion> promos = new ArrayList<Promotion>();
         Promotion promo = new Promotion();
@@ -104,15 +104,31 @@ public class PromotionDAO extends DataAccessObject<Promotion> {
         }
         return promos;
     }
-    
+
+    public ArrayList<String> chercherTousNomPromos() {
+        ArrayList<String> promos = new ArrayList<String>();
+        String promo = new String();
+        try {
+            ResultSet result = this.connect.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT nom_promo FROM promotion");
+            while (result.next()) {
+                promo = result.getString("nom_promo");
+                promos.add(promo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return promos;
+    }
+
 //test
     public static void main(String[] args) {
-//        PromotionDAO et = new PromotionDAO();
-//        Promotion un = et.chercher(2);
-//        un.afficher();
-    //
-    // Test ARRAYLIST toutes les promos
-//        PromotionDAO et = new PromotionDAO();
+        PromotionDAO et = new PromotionDAO();
+        Promotion un = et.chercher(2);
+        un.afficher();
+        
+//        Test ARRAYLIST toutes les promos PromotionDAO et = new PromotionDAO();
 //        ArrayList<Promotion> un = et.chercherToutesLesPromos();
 //        un.get(2).afficher();
     }

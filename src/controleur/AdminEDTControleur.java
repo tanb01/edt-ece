@@ -10,48 +10,30 @@ import dao.SeanceDAO;
 import dao.SiteDAO;
 import dao.TypeCoursDAO;
 import dao.UserDAO;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.sql.Date;
 import java.sql.Time;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
 import static java.util.Collections.sort;
-
-import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import modele.Cours;
-import modele.Admin;
-import modele.Admin;
 import modele.Enseignant;
 import modele.Groupe;
-import modele.Promotion;
 import modele.Salle;
 import modele.Seance;
 import modele.Site;
 import modele.TypeCours;
 import modele.User;
-import vue.AdminVue;
-import vue.AdminVue;
 import vue.AdminVue;
 import static javax.swing.JOptionPane.showMessageDialog;
 
@@ -85,9 +67,10 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
     private ArrayList<Enseignant> listEnseignants = null;
     private ArrayList<Salle> listSalles = null;
     private ArrayList<Site> listSites = null;
-    private ArrayList<Promotion> listPromo = null;
+//    private ArrayList<Promotion> listPromo = null;
 
     private Seance seanceSelectionneePourModifier = null;
+    private ArrayList<String> listNomPromo = null;
 
     /**
      *
@@ -126,8 +109,10 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         listEnseignants = enseignant.chercherTousLesEnseignants();
         listSites = new ArrayList<Site>();
         listSites = site.chercherTousLesSites();
-        listPromo = new ArrayList<Promotion>();
-        listPromo = promotion.chercherToutesLesPromos();
+//        listPromo = new ArrayList<Promotion>();
+//        listPromo = promotion.chercherToutesLesPromos();
+        listNomPromo = new ArrayList<String>();
+        listNomPromo = promotion.chercherTousNomPromos();
 
         String[][] data = new String[84][100];
 
@@ -333,7 +318,7 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
             //Ajouter un groupe
             if (!ve.getJComboBoxModifierSeance().get(8).getSelectedItem().toString().equals(" ")) {
                 //verify if not already added
-                int groupeId = getGroupeIdParGroupeNomEtPromoNom("Ing3", ve.getJComboBoxModifierSeance().get(8).getSelectedItem().toString());
+                int groupeId = groupe.chercherGroupeIdParGroupeNomEtPromoNom("Ing3", ve.getJComboBoxModifierSeance().get(8).getSelectedItem().toString());
                 ajouterGroupeASeance(seanceSelectionneePourModifier.getSeanceId(), groupeId);
                 System.out.println("Groupe " + groupeId + " a ete ajoute a la seance id: " + seanceSelectionneePourModifier.getSeanceId());
                 showMessageDialog(null, "Enseignant " + groupeId + " a ete ajoute a la seance id: " + seanceSelectionneePourModifier.getSeanceId());
@@ -345,8 +330,8 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
                 }
                 //verify if not already added
                 if (!ve.getJComboBoxModifierSeance().get(9).getSelectedItem().toString().equals(ve.getJComboBoxModifierSeance().get(10).getSelectedItem().toString())) {
-                    int groupeIdOld = getGroupeIdParGroupeNomEtPromoNom("Ing3", ve.getJComboBoxModifierSeance().get(9).getSelectedItem().toString());
-                    int groupeIdNew = getGroupeIdParGroupeNomEtPromoNom("Ing3", ve.getJComboBoxModifierSeance().get(10).getSelectedItem().toString());
+                    int groupeIdOld = groupe.chercherGroupeIdParGroupeNomEtPromoNom("Ing3", ve.getJComboBoxModifierSeance().get(9).getSelectedItem().toString());
+                    int groupeIdNew = groupe.chercherGroupeIdParGroupeNomEtPromoNom("Ing3", ve.getJComboBoxModifierSeance().get(10).getSelectedItem().toString());
                     affecterGroupeASeance(seanceSelectionneePourModifier.getSeanceId(), groupeIdOld, groupeIdNew);
                     System.out.println("Groupe " + groupeIdOld + " a ete remplace par " + groupeIdNew + " dans la seance Id : " + seanceSelectionneePourModifier.getSeanceId());
                     showMessageDialog(null, "Enseignant " + groupeIdOld + " a ete remplace par " + groupeIdNew + " dans la seance Id : " + seanceSelectionneePourModifier.getSeanceId());
@@ -449,7 +434,7 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
                 }
             }
             if (!ve.getJComboBoxModifierSeance().get(18).getSelectedItem().toString().equals(" ")) {
-                int groupeAEnleverId = getGroupeIdParGroupeNomEtPromoNom("Ing3", ve.getJComboBoxModifierSeance().get(18).getSelectedItem().toString());
+                int groupeAEnleverId = groupe.chercherGroupeIdParGroupeNomEtPromoNom("Ing3", ve.getJComboBoxModifierSeance().get(18).getSelectedItem().toString());
                 if (seanceSelectionneePourModifier.getListeGroupes().size() > 1) {
                     for (Groupe g : seanceSelectionneePourModifier.getListeGroupes()) {
                         if (groupeAEnleverId == g.getGroupeId()) {
@@ -895,11 +880,26 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         return tempArray;
     }
 
+//    public String[] getPromoNomEnArray() {
+//        ArrayList<String> names = new ArrayList();
+//        for (Promotion p : listPromo) {
+//            names.add(p.getNomPromo());
+//            System.out.println(p.getNomPromo());
+//        }
+//        String[] tempArray = new String[names.size() + 1];
+//        tempArray[0] = " ";
+//        int i = 1;
+//        for (String s : names) {
+//            tempArray[i] = s;
+//            i++;
+//        }
+//        return tempArray;
+//    }
     public String[] getPromoNomEnArray() {
         ArrayList<String> names = new ArrayList();
-        for (Promotion p : listPromo) {
-            names.add(p.getNomPromo());
-            System.out.println(p.getNomPromo());
+        for (String p : listNomPromo) {
+            names.add(p);
+            System.out.println(p);
         }
         String[] tempArray = new String[names.size() + 1];
         tempArray[0] = " ";
@@ -990,7 +990,7 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         Seance seance = new Seance();
         int enseignantId = getEnseignantIdParNom(nomEnseignant);
         int coursId = getCoursIdParNom(nomCours);
-        int groupeId = getGroupeIdParGroupeNomEtPromoNom(nomPromo, nomGroupe);
+        int groupeId = groupe.chercherGroupeIdParGroupeNomEtPromoNom(nomPromo, nomGroupe);
         heureDebut = heureDebut.concat(":00");
         seance = this.seance.chercherSeanceParInfo(enseignantId, dateSeance, coursId, heureDebut, groupeId);
         return seance;
@@ -1000,24 +1000,23 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         boolean isExiste = false;
         int enseignantId = getEnseignantIdParNom(nomEnseignant);
         int coursId = getCoursIdParNom(nomCours);
-        int groupeId = getGroupeIdParGroupeNomEtPromoNom(nomPromo, nomGroupe);
+        int groupeId = groupe.chercherGroupeIdParGroupeNomEtPromoNom(nomPromo, nomGroupe);
         heureDebut = heureDebut.concat(":00");
         isExiste = this.seance.verifierSiSeanceExiste(enseignantId, dateSeance, coursId, heureDebut, groupeId);
         return isExiste;
     }
 
-    public int getGroupeIdParGroupeNomEtPromoNom(String nomPromo, String nomGroupe) {
-        int groupeId = 0;
-        for (Promotion p : listPromo) {
-            for (Groupe g : p.getGroupes()) {
-                if (nomPromo.equalsIgnoreCase(p.getNomPromo()) && g.getNomGroupe().equalsIgnoreCase(nomGroupe)) {
-                    groupeId = g.getGroupeId();
-                }
-            }
-        }
-        return groupeId;
-    }
-
+//    public int getGroupeIdParGroupeNomEtPromoNom(String nomPromo, String nomGroupe) {
+//        int groupeId = 0;
+//        for (Promotion p : listPromo) {
+//            for (Groupe g : p.getGroupes()) {
+//                if (nomPromo.equalsIgnoreCase(p.getNomPromo()) && g.getNomGroupe().equalsIgnoreCase(nomGroupe)) {
+//                    groupeId = g.getGroupeId();
+//                }
+//            }
+//        }
+//        return groupeId;
+//    }
     public void ajouterEnseignantASeance(int seanceId, int enseignantId) {
         seance.ajouterEnseignantASeance(seanceId, enseignantId);
 

@@ -123,14 +123,15 @@ public class EnseignantDAO extends DataAccessObject<Enseignant> {
         }
         return enseignant;
     }
+    
 //test
+    public static void main(String[] args) {
+        EnseignantDAO sa = new EnseignantDAO();
+        Enseignant un = sa.chercher(43);
+        un.afficher();
 
-//    public static void main(String[] args) {
-//        EnseignantDAO sa = new EnseignantDAO();
-//        Enseignant un = sa.chercher(43);
-//        un.afficher();
-//            for (Enseignant e : listEnseignants) {
+//        for (Enseignant e : listEnseignants) {
 //            System.out.println(e.getNom());
 //        }
-//    }
+    }
 }
