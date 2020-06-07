@@ -1,8 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 /**
  *
@@ -10,33 +8,43 @@ import java.sql.SQLException;
  */
 public abstract class DataAccessObject<T> {
 
-    public static final String nomBaseDeDonnees = "edt_ece";
-    public static final String endPointSSL = "?autoReconnect=true&useSSL=false";
-    public static final String url = "jdbc:mysql://localhost:3306/" + nomBaseDeDonnees + endPointSSL;
-    public static final String user = "root";
-    public static final String motDePasse = "";
-
+    // Variable de connexion à la BDD
     protected Connection connect = null;
 
+    // On se connecte à la BDD
     public DataAccessObject() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Il y a eu un problème avec le chargement du Driver!");
-        }
-        try {
-            connect = DriverManager.getConnection(url, user, motDePasse);
-        } catch (SQLException e) {
-            throw new RuntimeException("Erreur de connexion a la base de données", e);
-        }
-        System.out.println("CONNEXION!!!");
+        connect = Connector.getConnection();
     }
 
+    /**
+     * Classe abstraite pour créer.
+     *
+     * @param objet
+     * @return
+     */
     public abstract boolean creer(T objet);
 
+    /**
+     * Classe abstraite pour effacer.
+     *
+     * @param objet
+     * @return
+     */
     public abstract boolean effacer(T objet);
 
+    /**
+     * Classe abstraite pour mettre à jour.
+     *
+     * @param objet
+     * @return
+     */
     public abstract boolean mettreAJour(T objet);
 
+    /**
+     * Classe abstraire pour chercher à partir de l'Id.
+     *
+     * @param id
+     * @return
+     */
     public abstract T chercher(int id);
 }

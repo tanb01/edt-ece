@@ -10,25 +10,52 @@ import modele.Etudiant;
  */
 public class EtudiantDAO extends DataAccessObject<Etudiant> {
 
+    /**
+     * Constructeur
+     */
     public EtudiantDAO() {
         super();
     }
 
+    /**
+     * Fonction pour créer.
+     *
+     * @param objet
+     * @return
+     */
     @Override
     public boolean creer(Etudiant objet) {
         return false;
     }
 
+    /**
+     * Fonction pour effacer.
+     *
+     * @param objet
+     * @return
+     */
     @Override
     public boolean effacer(Etudiant objet) {
         return false;
     }
 
+    /**
+     * Fonction de mise à jour.
+     *
+     * @param objet
+     * @return
+     */
     @Override
     public boolean mettreAJour(Etudiant objet) {
         return false;
     }
 
+    /**
+     * Fonction qui permet de chercher un étudiant dans la BDD grâce à son Id.
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Etudiant chercher(int id) {
         Etudiant etudiant = new Etudiant();
@@ -55,12 +82,11 @@ public class EtudiantDAO extends DataAccessObject<Etudiant> {
         }
         return etudiant;
     }
-//test
 
+//test
     public static void main(String[] args) {
         EtudiantDAO et = new EtudiantDAO();
-        Etudiant un = et.chercher(213);
-        System.out.println("Numero Etudiant: " + un.getNumeroEtudiant());
-        System.out.println("Prenom Etudiant: " + un.getPrenom());
+        Etudiant un = et.chercher(307);
+        un.afficher();
     }
 }
