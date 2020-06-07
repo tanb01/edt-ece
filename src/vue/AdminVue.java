@@ -98,6 +98,11 @@ public class AdminVue extends JFrame {
     private JButton boutonSelectionnerSeance = null;
     private javax.swing.JButton print;
 
+    private JButton buttonCapaciteDesSallesParSite = null;
+    private JButton buttonTauxDoccupationDesSalles = null;
+    private JButton buttonNombresHeuresSeancesDansAnnee = null;
+    private JButton buttonNombresHeuresSeancesParCours = null;
+
     /**
      *
      * @param title
@@ -536,6 +541,22 @@ public class AdminVue extends JFrame {
         return button56;
     }
 
+    public JButton getBoutonReportingCapaciteSalles() {
+        return buttonCapaciteDesSallesParSite;
+    }
+
+    public JButton getBoutonTauxOccupationSalles() {
+        return buttonTauxDoccupationDesSalles;
+    }
+
+    public JButton getBoutonReportingEffectifGroupe() {
+        return buttonNombresHeuresSeancesDansAnnee;
+    }
+
+    public JButton getBoutonReportingSeancesParCours() {
+        return buttonNombresHeuresSeancesParCours;
+    }
+
     public JButton getBoutonModifier() {
         return button57;
     }
@@ -971,100 +992,49 @@ public class AdminVue extends JFrame {
         Font f = new Font("Times New Roman", Font.BOLD, 30);
         UIManager.put("JButton.font", f);
 
-        JButton Montrer2 = new JButton("<html>Capacité des salles <br> par site</html>");
-        Montrer2.setFont(f);
-        Montrer2.setIcon(new ImageIcon("img/a4.png"));
-        Montrer2.setBackground(new java.awt.Color(163, 255, 0));
-        Montrer2.setFont(f);
-        gridPanelb.add(Montrer2);
-        Montrer2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Montrer2MouseClicked(evt);
-            }
-        });
+        buttonCapaciteDesSallesParSite = new JButton("<html>Capacité des salles <br> par site</html>");
+        buttonCapaciteDesSallesParSite.setFont(f);
+        buttonCapaciteDesSallesParSite.setIcon(new ImageIcon("img/a4.png"));
+        buttonCapaciteDesSallesParSite.setBackground(new java.awt.Color(163, 255, 0));
+        buttonCapaciteDesSallesParSite.setFont(f);
+        gridPanelb.add(buttonCapaciteDesSallesParSite);
 
-        JButton Montrer3 = new JButton("<html>Taux d'occupation <br> des salles sur une <br> période donnée</html>");
-        Montrer3.setFont(f);
-        Montrer3.setIcon(new ImageIcon("img/a2.png"));
-        Montrer3.setBackground(new java.awt.Color(163, 150, 253));
-        Montrer3.setFont(f);
-        gridPanelb.add(Montrer3);
-        Montrer3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Montrer3MouseClicked(evt);
-            }
-        });
+        buttonTauxDoccupationDesSalles = new JButton("<html>Taux d'occupation <br> des salles sur une <br> période donnée</html>");
+        buttonTauxDoccupationDesSalles.setFont(f);
+        buttonTauxDoccupationDesSalles.setIcon(new ImageIcon("img/a2.png"));
+        buttonTauxDoccupationDesSalles.setBackground(new java.awt.Color(163, 150, 253));
+        buttonTauxDoccupationDesSalles.setFont(f);
+        gridPanelb.add(buttonTauxDoccupationDesSalles);
 
-        JButton Montrer4 = new JButton("<html>Nombre d'heures de <br> séances dans l'annee</html>");
-        Montrer4.setFont(f);
-        Montrer4.setIcon(new ImageIcon("img/a3.png"));
-        Montrer4.setBackground(new java.awt.Color(255, 153, 5));
-        Montrer4.setFont(f);
-        gridPanelb.add(Montrer4);
-        Montrer4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Montrer4MouseClicked(evt);
-            }
-        });
+        buttonNombresHeuresSeancesDansAnnee = new JButton("<html>Effectifs des groupes de <br> par Promotion</html>");
+        buttonNombresHeuresSeancesDansAnnee.setFont(f);
+        buttonNombresHeuresSeancesDansAnnee.setIcon(new ImageIcon("img/a3.png"));
+        buttonNombresHeuresSeancesDansAnnee.setBackground(new java.awt.Color(255, 153, 5));
+        buttonNombresHeuresSeancesDansAnnee.setFont(f);
+        gridPanelb.add(buttonNombresHeuresSeancesDansAnnee);
 
-        JButton Montrer5 = new JButton("<html>Nombre d'heures de <br>séances par cours</html>");
-        Montrer5.setFont(f);
-        Montrer5.setIcon(new ImageIcon("img/a1.png"));
-        Montrer5.setBackground(new java.awt.Color(255, 255, 0));
-        Montrer5.setFont(f);
-        Montrer5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Montrer5MouseClicked(evt);
-            }
-        });
+        buttonNombresHeuresSeancesParCours = new JButton("<html>Nombre d'heures de <br>séances par cours</html>");
+        buttonNombresHeuresSeancesParCours.setFont(f);
+        buttonNombresHeuresSeancesParCours.setIcon(new ImageIcon("img/a1.png"));
+        buttonNombresHeuresSeancesParCours.setBackground(new java.awt.Color(255, 255, 0));
+        buttonNombresHeuresSeancesParCours.setFont(f);
 
-        Montrer2.setPreferredSize(new Dimension(870, 485));
-        Montrer3.setPreferredSize(new Dimension(870, 485));
-        Montrer4.setPreferredSize(new Dimension(870, 485));
-        Montrer5.setPreferredSize(new Dimension(870, 485));
-        gridPanelb.add(Montrer5);
+        buttonCapaciteDesSallesParSite.setPreferredSize(new Dimension(870, 485));
+        buttonTauxDoccupationDesSalles.setPreferredSize(new Dimension(870, 485));
+        buttonNombresHeuresSeancesDansAnnee.setPreferredSize(new Dimension(870, 485));
+        buttonNombresHeuresSeancesParCours.setPreferredSize(new Dimension(870, 485));
+        gridPanelb.add(buttonNombresHeuresSeancesParCours);
 
-//        center.add(reportingPanel, BorderLayout.CENTER);
         JLabel label16 = new JLabel();
         reportingPanel.add(label16);
         label16.setFont(new java.awt.Font("Tahoma", 0, 36));
 
         reportingPanel.add(gridPanelb);
-
     }
-
-    private void Montrer2MouseClicked(java.awt.event.MouseEvent evt) {
-        Reporting demo = new Reporting("Reporting");
-        demo.reportingCapaciteSallesParSiteHisto();
-        demo.setVisible(true);
-
-    }
-
-    private void Montrer3MouseClicked(java.awt.event.MouseEvent evt) {
-        //taux d'occupation des salles
-        Reporting demo = new Reporting("Reporting");
-        demo.reportingTauxOccupationSallesHisto();
-        demo.setVisible(true);
-
-    }
-
-    private void Montrer4MouseClicked(java.awt.event.MouseEvent evt) {
-        //nombre de seances dans l'annee
-        Reporting demo = new Reporting("Reporting");
-        demo.reportingEffectifGroupesParPromo();
-        demo.setVisible(true);
-
-    }
-
-    private void Montrer5MouseClicked(java.awt.event.MouseEvent evt) {
-        Reporting demo = new Reporting("Reporting");
-        demo.reportingHeuresDeSeancesParCours();
-        demo.setVisible(true);
-    }
-
 ///////////////////////////////////////////////////////////////////////////////
 //                       AJOUT DU PANEL AJOUT SEANCE
 ///////////////////////////////////////////////////////////////////////////////
+
     public void ajoutDeSeances() {
         centerAjoutSeance = new JPanel();
         centerAjoutSeance.setOpaque(true);
