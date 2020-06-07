@@ -116,7 +116,7 @@ public class GroupeDAO extends DataAccessObject<Groupe> {
         try {
             ResultSet result = this.connect.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT groupe.groupe_id, groupe.nom_groupe, promotion.nom_promo FROM groupe INNER JOIN promotion ON groupe.promo_id= promotion.promo_id WHERE groupe.nom_groupe = " + nomGroupe + " AND promotion.nom_promo = " + nomPromo);
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT groupe.groupe_id, groupe.nom_groupe, promotion.nom_promo FROM groupe INNER JOIN promotion ON groupe.promo_id= promotion.promo_id WHERE groupe.nom_groupe = '" + nomGroupe + "' AND promotion.nom_promo = '" + nomPromo + "'");
 
             if (result.first()) {
                 groupeId = result.getInt("groupe.groupe_id");

@@ -196,13 +196,13 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         ve.getBoutonValiderRechercheSalleLibre().addActionListener(this);
 
         ve.getBoutonAjouterSeance().addActionListener(this);
-        
+
         ve.getBoutonReporting().addActionListener(this);
         ve.getBoutonReportingCapaciteSalles().addActionListener(this);
         ve.getBoutonTauxOccupationSalles().addActionListener(this);
         ve.getBoutonReportingEffectifGroupe().addActionListener(this);
         ve.getBoutonReportingSeancesParCours().addActionListener(this);
-        
+
         ve.getBoutonModifier().addActionListener(this);
         ve.getDateFieldToSelectSeance().addActionListener(this);
         for (JComboBox j : ve.getJComboBoxModifierSeance()) {
@@ -214,6 +214,8 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         ve.getJComboBoxSelectionVue().addItemListener(this);
 
         ve.getJComboBoxFilterSelection().addItemListener(this);
+        
+        ve.getButtonSearchGroupe().addActionListener(this);
 
         ve.getJComboBoxlisteSelectionEnseignantAjouterSeance().addItemListener(this);
 //        ve.getJComboBoxlisteSelectionCoursAjouterSeance().addItemListener(this);
@@ -231,6 +233,21 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
             affecterSeancesDeSemaine();
             montrerEDT();
             ve.showEmploiDuTemps();
+        }
+        if (ae.getSource() == ve.getButtonSearchGroupe()) {
+            if (!ve.getJComboBoxFilterSelection().getSelectedItem().toString().equals(" ") && !ve.getJComboBoxFilterGroupeSelection().getSelectedItem().toString().equals(" ")) {
+                int groupeId = groupe.chercherGroupeIdParGroupeNomEtPromoNom(ve.getJComboBoxFilterSelection().getSelectedItem().toString(), ve.getJComboBoxFilterGroupeSelection().getSelectedItem().toString());
+                if (groupeId == 0) {
+                    System.out.println("Ce groupe n'existe pas dans cette promo");
+                    showMessageDialog(null, "Ce groupe n'existe pas dans cette promotion");
+                } else {
+                    listSeances = seance.chercherSeancesParGroupeId(groupeId);
+                    sort(listSeances, new SortByDate().thenComparing(new SortByTime()));
+                    listSeancesSelectionnees = getSeancesParGroupeIdEtNumeroSemaine(groupeId, numeroSemaineSelected);
+                    affecterSeancesDeSemaine();
+                    montrerEDT();
+                }
+            }
         }
         if (ae.getSource() == ve.getBoutonSallesLibres()) {
             ve.showSallesLibres();

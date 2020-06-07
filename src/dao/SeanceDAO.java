@@ -195,7 +195,6 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 groupes = g.chercherGroupesParSeanceId(result.getInt("seance.seance_id"));
 
                 seance = new Seance(seanceId, numeroSemaine, date, debutHeure, finHeure, etat, cours, typeCours, salles, enseignants, groupes);
-                //seance = chercher(result.getInt("seance.seance_id"));
                 seances.add(seance);
             }
         } catch (SQLException e) {

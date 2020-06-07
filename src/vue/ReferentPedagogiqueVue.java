@@ -84,6 +84,8 @@ public class ReferentPedagogiqueVue extends JFrame {
     private JButton boutonValiderModificationSeance = null;
     private JButton boutonSelectionnerSeance = null;
 
+    private JButton searchGroupe = null;
+
     /**
      *
      * @param title
@@ -283,19 +285,22 @@ public class ReferentPedagogiqueVue extends JFrame {
         filtrePanel.add(listeSelectionVue);
 
         JLabel labelFiltre = new JLabel("  PROMO ");
-        String[] selectionFiltre = {" Prepac", "Ing1", "Ing2", "Ing3", "Ing4", "Ing5"};
+        String[] selectionFiltre = {" ", "Prepac", "Ing1", "Ing2", "Ing3", "Ing4", "Ing5"};
         listeSelectionFiltre = new JComboBox(selectionFiltre);
 
         filtrePanel.add(labelFiltre);
         filtrePanel.add(listeSelectionFiltre);
 
         JLabel labelGroupe = new JLabel("  GROUPE ");
-        String[] selectionGroupe = {"Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
+        String[] selectionGroupe = {" ", "Gr01", "Gr02", "Gr03", "Gr04", "Gr05", "Gr06", "Gr07", "Gr08", "Gr09", "Gr10", "Gr11"};
 
         listeSelectionGroupe = new JComboBox(selectionGroupe);
 
         filtrePanel.add(labelGroupe);
         filtrePanel.add(listeSelectionGroupe);
+
+        searchGroupe = new JButton("Chercher");
+        filtrePanel.add(searchGroupe);
 
         center.add(filtrePanel, BorderLayout.NORTH);
         Font fG = new Font("Times New Roman", Font.BOLD, 12);
@@ -476,6 +481,10 @@ public class ReferentPedagogiqueVue extends JFrame {
 
     public JTextField getFiltre() {
         return searchFilterField;
+    }
+
+    public JButton getButtonSearchGroupe() {
+        return searchGroupe;
     }
 
     public ArrayList<JButton> getBoutonsSemaine() {
@@ -788,6 +797,10 @@ public class ReferentPedagogiqueVue extends JFrame {
 
     public void setJComboBoxFilterSelection(int j) {
         listeSelectionFiltre.setSelectedIndex(j);
+    }
+
+    public JComboBox getJComboBoxFilterGroupeSelection() {
+        return listeSelectionGroupe;
     }
 
     public void setJComboBoxFilterSelectionEx(int j) {

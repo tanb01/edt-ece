@@ -103,6 +103,8 @@ public class AdminVue extends JFrame {
     private JButton buttonNombresHeuresSeancesDansAnnee = null;
     private JButton buttonNombresHeuresSeancesParCours = null;
 
+    private JButton searchGroupe = null;
+
     /**
      *
      * @param title
@@ -316,13 +318,12 @@ public class AdminVue extends JFrame {
         filtrePanel.add(labelGroupe);
         filtrePanel.add(listeSelectionGroupe);
 
+        searchGroupe = new JButton("Chercher");
+        filtrePanel.add(searchGroupe);
+
         center.add(filtrePanel, BorderLayout.NORTH);
         Font fG = new Font("Times New Roman", Font.BOLD, 12);
         UIManager.put("JButton.font", fG);
-
-        JButton print = new JButton("Imprimer");
-        print.setIcon(new ImageIcon("img/imprimer.png"));
-        center.add(print);
 
         for (JButton bouton : boutons) {
             semainesPanel.add(bouton);
@@ -487,8 +488,6 @@ public class AdminVue extends JFrame {
      * @param index
      */
 ////////////////////////////////////////////////////////////////////////////////    
-    
-    
     public void selectSemaine(int index) {
         //boutons.get(index).setText("X");
         center.revalidate();
@@ -505,6 +504,10 @@ public class AdminVue extends JFrame {
 
     public JTextField getFiltre() {
         return searchFilterField;
+    }
+
+    public JButton getButtonSearchGroupe() {
+        return searchGroupe;
     }
 
     public ArrayList<JButton> getBoutonsSemaine() {
@@ -797,6 +800,10 @@ public class AdminVue extends JFrame {
 
     public JComboBox getJComboBoxFilterSelection() {
         return listeSelectionFiltre;
+    }
+
+    public JComboBox getJComboBoxFilterGroupeSelection() {
+        return listeSelectionGroupe;
     }
 
     public JComboBox getJComboBoxFilterSelectionEx() {
