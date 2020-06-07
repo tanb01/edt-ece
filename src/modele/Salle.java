@@ -13,22 +13,22 @@ public class Salle {
 
     /**
      * Constructeur
-     * 
+     *
      * @param id
      * @param nom
-     * @param capacite 
+     * @param capacite
      */
     public Salle(int id, String nom, int capacite) {
         this.salleId = id;
         nomSalle = nom;
         this.capacite = capacite;
     }
-    
+
     /**
      * Constructeur
-     * 
+     *
      * @param id
-     * @param capacite 
+     * @param capacite
      */
     public Salle(int id, int capacite) {
         this.salleId = id;
@@ -45,10 +45,9 @@ public class Salle {
     }
 
     /**
-     * Getters
-     * Pour l'Id de la salle.
-     * 
-     * @return 
+     * Getters Pour l'Id de la salle.
+     *
+     * @return
      */
     public int getSalleId() {
         return salleId;
@@ -56,8 +55,8 @@ public class Salle {
 
     /**
      * Pour le nom de la salle.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getNomSalle() {
         return nomSalle;
@@ -65,8 +64,8 @@ public class Salle {
 
     /**
      * Pour la capacité de la salle.
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getCapacite() {
         return capacite;
@@ -76,11 +75,11 @@ public class Salle {
         Salle copySalle = new Salle(salleId, nomSalle, capacite);
         return copySalle;
     }
-    
+
     /**
      * Override de toString pour afficher les infos de la salle.
-     * 
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString() {
@@ -88,7 +87,7 @@ public class Salle {
                 + "\nNom de la salle : " + this.nomSalle
                 + "\nCapacité : " + this.capacite;
     }
-    
+
     /**
      * Affiche les informations de la salle.
      */

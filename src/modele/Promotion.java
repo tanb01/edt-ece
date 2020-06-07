@@ -15,10 +15,10 @@ public class Promotion {
 
     /**
      * Constructeur
-     * 
+     *
      * @param id
      * @param nom
-     * @param groupes 
+     * @param groupes
      */
     public Promotion(int id, String nom, ArrayList<Groupe> groupes) {
         this.promoId = id;
@@ -38,10 +38,9 @@ public class Promotion {
     }
 
     /**
-     * Getters
-     * Pour l'Id de la promotion.
-     * 
-     * @return 
+     * Getters Pour l'Id de la promotion.
+     *
+     * @return
      */
     public int getPromoId() {
         return promoId;
@@ -49,8 +48,8 @@ public class Promotion {
 
     /**
      * Pour le nom de la promo.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getNomPromo() {
         return nomPromo;
@@ -58,8 +57,8 @@ public class Promotion {
 
     /**
      * Pour la liste des groupes appartenant à la promotion
-     * 
-     * @return 
+     *
+     * @return
      */
     public ArrayList<Groupe> getGroupes() {
         ArrayList<Groupe> copyGroupes = new ArrayList<Groupe>();
@@ -68,11 +67,11 @@ public class Promotion {
         }
         return copyGroupes;
     }
-    
+
     /**
      * Override de toString pour afficher les infos de la promotion.
-     * 
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString() {
@@ -80,7 +79,7 @@ public class Promotion {
                 + "\nNom de la promo : " + this.nomPromo
                 + "\nGroupes : " + this.groupes;
     }
-    
+
     /**
      * Affiche les informations de la promotion.
      */

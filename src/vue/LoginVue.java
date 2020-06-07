@@ -1,13 +1,11 @@
 package vue;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
  * Fenêtre de connexion avec Email + Mot de passe et ensuite validation
- * 
+ *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
 public class LoginVue extends JFrame {
@@ -78,10 +76,9 @@ public class LoginVue extends JFrame {
     }
 
     /**
-     * Getter
-     * Pour l'email saisi
-     * 
-     * @return 
+     * Getter Pour l'email saisi
+     *
+     * @return
      */
     public String getEmail() {
         return emailField.getText();
@@ -89,8 +86,8 @@ public class LoginVue extends JFrame {
 
     /**
      * Pour le mot de passe saisi
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getPassword() {
         return String.valueOf(mdpField.getPassword());
@@ -98,8 +95,8 @@ public class LoginVue extends JFrame {
 
     /**
      * Pour la validation de la connexion
-     * 
-     * @return 
+     *
+     * @return
      */
     public JButton getBoutonConnexion() {
         return connexion;
@@ -129,10 +126,9 @@ public class LoginVue extends JFrame {
 //    public void logOut() {
 //        isConnected = false;
 //    }
-    
     /**
-     * 
-     * @param args 
+     *
+     * @param args
      */
     public static void main(String[] args) {
         LoginVue login = new LoginVue();

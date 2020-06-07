@@ -1,8 +1,9 @@
 package modele;
 
 /**
- * Classe Etudiant qui hérite de la classe User car un étudiant est un utilisateur.
- * 
+ * Classe Etudiant qui hérite de la classe User car un étudiant est un
+ * utilisateur.
+ *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
 public class Etudiant extends User {
@@ -13,14 +14,14 @@ public class Etudiant extends User {
 
     /**
      * Constructeur
-     * 
+     *
      * @param id
      * @param email
      * @param nom
      * @param prenom
      * @param droit
      * @param numeroEtudiant
-     * @param groupeId 
+     * @param groupeId
      */
     public Etudiant(int id, String email, String nom, String prenom, int droit, int numeroEtudiant, int groupeId) {
         super(id, email, nom, prenom, droit);
@@ -38,10 +39,9 @@ public class Etudiant extends User {
     }
 
     /**
-     * Getters
-     * Pour le numéro étudiant.
-     * 
-     * @return 
+     * Getters Pour le numéro étudiant.
+     *
+     * @return
      */
     public int getNumeroEtudiant() {
         return numeroEtudiant;
@@ -49,17 +49,17 @@ public class Etudiant extends User {
 
     /**
      * Pour l'Id du groupe.
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getGroupeId() {
         return groupeId;
     }
-    
+
     /**
      * Override de toString pour afficher les infos de l'étudiant.
-     * 
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString() {
@@ -71,7 +71,7 @@ public class Etudiant extends User {
                 + "\nNuméro étudiant : " + this.numeroEtudiant
                 + "\nGroupe Id : " + this.groupeId;
     }
-    
+
     /**
      * Affiche les informations de l'étudiant.
      */

@@ -1,6 +1,5 @@
 package vue;
 
-
 /**
  *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
@@ -9,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.event.*;
 import javax.swing.table.TableColumn;
 
@@ -32,21 +30,21 @@ public class Recapitulatif extends JFrame {
         JButton button53 = new JButton("Emploi du temps");
         button53.setPreferredSize(new Dimension(265, 120));
 
-        JButton button54 = new JButton("<html> Salles <br>" +
-                                            " libres <br> </html>");
-        JButton button55 = new JButton("<html> Modifier un<br>" +
-                                            " Cours<br> </html>");
-        JButton button56 = new JButton("<html> Modifier une<br>" +
-                                            " seance<br> </html>");
-        JButton button57 = new JButton("<html> Modifier un<br>" +
-                                            " groupe<br> </html>");
-        JButton button58 = new JButton("<html> Modifier un<br>" +
-                                            " enseignant<br> </html>");
+        JButton button54 = new JButton("<html> Salles <br>"
+                + " libres <br> </html>");
+        JButton button55 = new JButton("<html> Modifier un<br>"
+                + " Cours<br> </html>");
+        JButton button56 = new JButton("<html> Modifier une<br>"
+                + " seance<br> </html>");
+        JButton button57 = new JButton("<html> Modifier un<br>"
+                + " groupe<br> </html>");
+        JButton button58 = new JButton("<html> Modifier un<br>"
+                + " enseignant<br> </html>");
         JButton button59 = new JButton("Comment utiliser l'apllication?");
 
         Font f = new Font("Times New Roman", Font.BOLD, 30);
         UIManager.put("JButton.font", f);
-        
+
         button53.setBackground(new java.awt.Color(147, 212, 250));
         button53.setFont(f);
         button54.setBackground(new java.awt.Color(252, 222, 1));
@@ -57,10 +55,10 @@ public class Recapitulatif extends JFrame {
         button56.setFont(f);
         button57.setBackground(new java.awt.Color(250, 0, 28));
         button57.setFont(f);
-        button58.setBackground(new java.awt.Color(250, 0, 28)); 
+        button58.setBackground(new java.awt.Color(250, 0, 28));
         button58.setFont(f);
-        
-         button54.addActionListener(new ActionListener() {
+
+        button54.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //ensemble des action
 
@@ -84,7 +82,7 @@ public class Recapitulatif extends JFrame {
         JMenu menu2 = new JMenu("PROMOTIONS");
         JMenu menu3 = new JMenu("ENSEIGNANTS");
         JMenu menu4 = new JMenu("SALLES");
-        
+
         Font g = new Font("Times New Roman", Font.BOLD, 18);
         UIManager.put("JMenu.font", g);
         menu.setFont(g);
@@ -106,7 +104,7 @@ public class Recapitulatif extends JFrame {
         JMenuItem ms2 = new JMenuItem("Récapitulatifs des cours");
         JMenuItem ms3 = new JMenuItem("Cours annulés");
         JMenuItem ms4 = new JMenuItem("Liste et trombinoscope");
-        
+
         Font h = new Font("Times New Roman", Font.BOLD, 14);
         UIManager.put("JMenuItem.font", h);
         m.setFont(h);
@@ -144,56 +142,51 @@ public class Recapitulatif extends JFrame {
         topPanel.add(menuBar);
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
-  
+
 //------------------------------------------------------------------------------
         JPanel centerReca = new JPanel();
-        centerReca.setOpaque(true);        
+        centerReca.setOpaque(true);
         centerReca.setBorder(new LineBorder(Color.BLACK, 3));
         centerReca.setLayout(new FlowLayout(5));
         centerReca.setBackground(new java.awt.Color(211, 212, 250));
         mainContainer.add(centerReca, BorderLayout.CENTER);
 
-                
         JPanel gridPanel3 = new JPanel();
         gridPanel3.setLayout(new GridLayout(1, 1, 1, 5));
         gridPanel3.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel3.setBackground(new java.awt.Color(145, 200, 100));
-        
-        
+
         JLabel titra = new JLabel("  Recapitulatif de cours  entre le 1 septembre et le 30 Juin  ");
         gridPanel3.add(titra);
         Font t = new Font("Times New Roman", Font.BOLD, 24);
         UIManager.put("JLabel.font", t);
         titra.setFont(t);
-        
+
         JPanel gridPanel7 = new JPanel();
         gridPanel7.setLayout(new GridLayout(2, 1, 1, 5));
         gridPanel7.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel7.setBackground(new java.awt.Color(145, 200, 100));
         Font y = new Font("Times New Roman", Font.BOLD, 20);
         UIManager.put("JLabel.font", y);
-        
-        String[] selectionensegnat = {" Segado", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique","Reseaux","Traitement du signal","Analyse de Fourier","Analyse Financiere","Japonais","Geopolitique","Electronique fondamentale","Anthropologie","Droit du travail"};
+
+        String[] selectionensegnat = {" Segado", "Espagnol", "Java", "Web Dynamique", "Probabilites et statistiques", "Thermodynamique", "Reseaux", "Traitement du signal", "Analyse de Fourier", "Analyse Financiere", "Japonais", "Geopolitique", "Electronique fondamentale", "Anthropologie", "Droit du travail"};
         JComboBox listeSelectionensegnat = new JComboBox(selectionensegnat);
         listeSelectionensegnat.setFont(y);
-        
-        
+
         JLabel ense = new JLabel("     Nom ");
         ense.setFont(t);
         listeSelectionensegnat.setFont(y);
-        
+
         gridPanel7.add(ense);
-        gridPanel7.add(listeSelectionensegnat);             
-       
+        gridPanel7.add(listeSelectionensegnat);
+
         centerReca.add(gridPanel3, BorderLayout.NORTH);
         centerReca.add(gridPanel7, BorderLayout.WEST);
 ////////////////////////////////////////////////////////////////////////////////
         JPanel gridPanel5 = new JPanel();
-        gridPanel5.setLayout(new GridLayout(2,1, 1, 5));
+        gridPanel5.setLayout(new GridLayout(2, 1, 1, 5));
         gridPanel5.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel5.setBackground(new java.awt.Color(145, 200, 100));
-
-        
 
         JLabel labelFiltre = new JLabel(" Type de cours   ");
         labelFiltre.setFont(t);
@@ -203,31 +196,25 @@ public class Recapitulatif extends JFrame {
 
         gridPanel5.add(labelFiltre);
         gridPanel5.add(listeselectionFiltrerecatype);
- 
+
         centerReca.add(gridPanel5, BorderLayout.NORTH);
 
 //------------------------------------------------------------------
-        
-
 //--------------------------------------------------------------------
-         JPanel gridPanelare = new JPanel();
-        gridPanelare.setLayout(new GridLayout(1,2, 10, 5));
+        JPanel gridPanelare = new JPanel();
+        gridPanelare.setLayout(new GridLayout(1, 2, 10, 5));
         gridPanelare.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanelare.setBackground(new java.awt.Color(145, 200, 100));
 
         JButton Montrerreca = new JButton("Montrer le recapitulatif");
-        Montrerreca.setFont(f);  
-        
-        gridPanelare.add(Montrerreca);          
- 
+        Montrerreca.setFont(f);
+
+        gridPanelare.add(Montrerreca);
+
         centerReca.add(gridPanelare, BorderLayout.NORTH);
-        
-        
-        
-        
+
 //------------------------------------------------------------------
         //innerContainer.add(semaineEDT, BorderLayout.WEST);
-
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -260,16 +247,16 @@ public class Recapitulatif extends JFrame {
         col.setPreferredWidth(50);
         col = jTable1.getColumnModel().getColumn(4);
         col.setPreferredWidth(30);
-       
 
         centerReca.add(jScrollPane1, BorderLayout.CENTER);
 //----------------------------------------------------------------------
 
 //------------------------------------------------------------------
     }
+
     public static void main(String[] args) {
         Recapitulatif mylayout = new Recapitulatif("Accueil");
         mylayout.setVisible(true);
     }
 
-}          
+}

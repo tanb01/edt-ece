@@ -12,8 +12,6 @@ import java.awt.*;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import java.awt.event.*;
-import java.awt.print.PrinterException;
 import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
@@ -99,6 +97,7 @@ public class AdminVue extends JFrame {
     private JButton boutonValiderModificationSeance = null;
     private JButton boutonSelectionnerSeance = null;
     private javax.swing.JButton print;
+
     /**
      *
      * @param title
@@ -315,11 +314,10 @@ public class AdminVue extends JFrame {
         center.add(filtrePanel, BorderLayout.NORTH);
         Font fG = new Font("Times New Roman", Font.BOLD, 12);
         UIManager.put("JButton.font", fG);
-        
+
         JButton print = new JButton("Imprimer");
         print.setIcon(new ImageIcon("img/imprimer.png"));
         center.add(print);
-        
 
         for (JButton bouton : boutons) {
             semainesPanel.add(bouton);
@@ -374,8 +372,7 @@ public class AdminVue extends JFrame {
         // Panel
         center.add(jscrollPanel, BorderLayout.SOUTH);
         //____________________________________________
-        
-        
+
 //-----------------------------------------------------------------------------
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout());
@@ -485,16 +482,16 @@ public class AdminVue extends JFrame {
      * @param index
      */
 ////////////////////////////////////////////////////////////////////////////////    
-    private void printActionPerformed(java.awt.event.ActionEvent evt){ 
+    private void printActionPerformed(java.awt.event.ActionEvent evt) {
         MessageFormat header = new MessageFormat("emploie du temps");
         MessageFormat footer = new MessageFormat("page{0,number,integer}");
-        try{
-        tableEnGrille.print(JTable.PrintMode.NORMAL, header, footer);
-        }catch(java.awt.print.PrinterException e){
-            System.err.format("Erreur d'impression",e.getMessage());
+        try {
+            tableEnGrille.print(JTable.PrintMode.NORMAL, header, footer);
+        } catch (java.awt.print.PrinterException e) {
+            System.err.format("Erreur d'impression", e.getMessage());
         }
     }
-    
+
     public void selectSemaine(int index) {
         //boutons.get(index).setText("X");
         center.revalidate();

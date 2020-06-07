@@ -13,17 +13,17 @@ public class Groupe {
 
     /**
      * Constructeur
-     * 
+     *
      * @param id
      * @param nomGroupe
-     * @param effectif 
+     * @param effectif
      */
     public Groupe(int id, String nomGroupe, int effectif) {
         groupeId = id;
         this.nomGroupe = nomGroupe;
         effectifGroupe = effectif;
     }
-    
+
     /**
      * Constructeur
      */
@@ -32,12 +32,11 @@ public class Groupe {
         this.nomGroupe = "null";
         effectifGroupe = 0;
     }
-    
+
     /**
-     * Getters
-     * Pour l'Id du groupe.
-     * 
-     * @return 
+     * Getters Pour l'Id du groupe.
+     *
+     * @return
      */
     public int getGroupeId() {
         return groupeId;
@@ -45,8 +44,8 @@ public class Groupe {
 
     /**
      * Pour le nom du groupe.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getNomGroupe() {
         return nomGroupe;
@@ -54,8 +53,8 @@ public class Groupe {
 
     /**
      * Pour l'effectif du groupe.
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getEffectifGroupe() {
         return effectifGroupe;
@@ -65,11 +64,11 @@ public class Groupe {
         Groupe copyGroupe = new Groupe(groupeId, nomGroupe, effectifGroupe);
         return copyGroupe;
     }
-    
+
     /**
      * Override de toString pour afficher les infos du groupe.
-     * 
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString() {
@@ -77,7 +76,7 @@ public class Groupe {
                 + "\nNom du groupe : " + this.nomGroupe
                 + "\nEffectif : " + this.effectifGroupe;
     }
-    
+
     /**
      * Affiche les informations du groupe.
      */

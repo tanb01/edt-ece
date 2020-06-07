@@ -12,9 +12,9 @@ public class TypeCours {
 
     /**
      * Constructeur
-     * 
+     *
      * @param id
-     * @param nom 
+     * @param nom
      */
     public TypeCours(int id, String nom) {
         typeCoursId = id;
@@ -30,10 +30,9 @@ public class TypeCours {
     }
 
     /**
-     * Getters
-     * Pour l'Id du type de cours.
-     * 
-     * @return 
+     * Getters Pour l'Id du type de cours.
+     *
+     * @return
      */
     public int getTypeCoursId() {
         return typeCoursId;
@@ -41,8 +40,8 @@ public class TypeCours {
 
     /**
      * Pour le nom du type de cours.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getNomTypeCours() {
         return nomTypeCours;
@@ -55,8 +54,8 @@ public class TypeCours {
 
     /**
      * Override de toString pour afficher les infos du Type Cours.
-     * 
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString() {

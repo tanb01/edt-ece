@@ -38,8 +38,6 @@ public class EtudiantEDTControleur implements ActionListener, ItemListener {
 
     private ArrayList<Seance> listSeances = null;
     private ArrayList<Seance> listSeancesSelectionnees = null;
-    private ArrayList<Salle> listSalles = null;
-    private ArrayList<Salle> listSallesLibresSelectionnees = null;
     private int numeroSemaineSelected = 1;
 
     private EtudiantVue ve = null;
@@ -54,7 +52,6 @@ public class EtudiantEDTControleur implements ActionListener, ItemListener {
      * @param v
      */
     public EtudiantEDTControleur(User m, EtudiantVue v) {
-        this.listSallesLibresSelectionnees = null;
         ve = new EtudiantVue("Etudiant vue");
         ve = v;
 

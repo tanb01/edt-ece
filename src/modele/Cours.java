@@ -12,9 +12,9 @@ public class Cours {
 
     /**
      * Constructeur
-     * 
+     *
      * @param id
-     * @param nom 
+     * @param nom
      */
     public Cours(int id, String nom) {
         coursId = id;
@@ -30,10 +30,9 @@ public class Cours {
     }
 
     /**
-     * Getters
-     * Pour l'Id du cours.
-     * 
-     * @return 
+     * Getters Pour l'Id du cours.
+     *
+     * @return
      */
     public int getCoursId() {
         return coursId;
@@ -41,8 +40,8 @@ public class Cours {
 
     /**
      * Pour le nom du cours.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getNomCours() {
         return nomCours;
@@ -52,18 +51,18 @@ public class Cours {
         Cours copyCours = new Cours(coursId, nomCours);
         return copyCours;
     }
-    
+
     /**
      * Override de toString pour afficher les infos du cours.
-     * 
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString() {
         return "Id : " + this.coursId
                 + "\nNom du cours : " + this.nomCours;
     }
- 
+
     /**
      * Affiche les informations du cours.
      */

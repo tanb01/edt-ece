@@ -15,10 +15,10 @@ public class Site {
 
     /**
      * Constructeur
-     * 
+     *
      * @param id
      * @param nom
-     * @param salles 
+     * @param salles
      */
     public Site(int id, String nom, ArrayList<Salle> salles) {
         siteId = id;
@@ -39,10 +39,9 @@ public class Site {
     }
 
     /**
-     * Getters
-     * Pour l'Id du site.
-     * 
-     * @return 
+     * Getters Pour l'Id du site.
+     *
+     * @return
      */
     public int getSiteId() {
         return siteId;
@@ -50,8 +49,8 @@ public class Site {
 
     /**
      * Pour le nom du site.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getNomSite() {
         return nomSite;
@@ -59,8 +58,8 @@ public class Site {
 
     /**
      * Pour la liste des salles présentes dans le site.
-     * 
-     * @return 
+     *
+     * @return
      */
     public ArrayList<Salle> getSalles() {
         ArrayList<Salle> copySalles = new ArrayList<Salle>();
@@ -69,11 +68,11 @@ public class Site {
         }
         return copySalles;
     }
-    
+
     /**
      * Override de toString pour afficher les infos du site.
-     * 
-     * @return 
+     *
+     * @return
      */
     @Override
     public String toString() {
@@ -81,7 +80,7 @@ public class Site {
                 + "\nNom du site : " + this.nomSite
                 + "\nSalles : " + this.salles;
     }
-    
+
     /**
      * Affiche les informations du site.
      */

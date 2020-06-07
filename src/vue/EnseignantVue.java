@@ -11,6 +11,7 @@ import controleur.Reporting;
 import javax.swing.*;
 import java.awt.*;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -27,6 +28,7 @@ public class EnseignantVue extends JFrame {
     private JScrollPane jscrollPanel;
     private JTable tableEnGrille;
     private JTable tableEnListe;
+    private JTable tableSalles;
     private JComboBox listeSelectionVue = null;
     private JComboBox listeSelectionFiltre = null;
     private JComboBox listeSelectionChamp = null;
@@ -41,6 +43,12 @@ public class EnseignantVue extends JFrame {
     private JPanel filtrePanel = null;
     private JPanel semainesPanel = null;
     private ArrayList<JButton> boutons = null;
+
+    private TextField capaciteMaximaleSalleLibre = null;
+    private JComboBox listeSelectionHeureSalleLibre = null;
+    private JFormattedTextField dateFieldSalleLibre = null;
+    private JComboBox listeSelectionSiteSalleLibre = null;
+    private JButton boutonValiderRechercheSalleLibre = null;
 
     /**
      *
@@ -322,6 +330,10 @@ public class EnseignantVue extends JFrame {
         return searchFiltre;
     }
 
+    public JButton getBoutonValiderRechercheSalleLibre() {
+        return boutonValiderRechercheSalleLibre;
+    }
+
     public String getFiltreField() {
         return searchFilterField.getText();
     }
@@ -370,7 +382,23 @@ public class EnseignantVue extends JFrame {
     public void showSallesLibres() {
         center.removeAll();
         center.add(sallesLibresPanel);
-        cleanTableEnGrille();
+
+        tableSalles = new JTable();
+
+        tableSalles.setModel(new DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "Salles Libres"
+                }
+        ));
+        tableSalles.setPreferredScrollableViewportSize(new Dimension(1590, 720));//2860,1450
+        tableSalles.setRowHeight(100);
+        Font j = new Font("Times New Roman", Font.BOLD, 30);
+        UIManager.put("JTable.font", j);
+
+        TableColumn col2 = tableSalles.getColumnModel().getColumn(0);
+        col2.setPreferredWidth(100);
+        jscrollPanel.setViewportView(tableSalles);
         center.add(jscrollPanel);
         center.revalidate();
         center.repaint();
@@ -414,6 +442,15 @@ public class EnseignantVue extends JFrame {
         center.revalidate();
         center.repaint();
         center.setVisible(true);
+    }
+
+    public void changeAVueSallesLibres(TableModel m) {
+        tableSalles.setModel(m);
+        jscrollPanel.setViewportView(tableSalles);
+        tableSalles.setPreferredScrollableViewportSize(new Dimension(1590, 720));//2860,1450
+        tableSalles.setRowHeight(100);
+        Font j = new Font("Times New Roman", Font.BOLD, 30);
+        UIManager.put("JTable.font", j);
     }
 
     public void changeAVueEnGrille(TableModel m) {
@@ -468,6 +505,22 @@ public class EnseignantVue extends JFrame {
 
     public JComboBox getJComboBoxFilterSelectionEx() {
         return listeSelectionChamp;
+    }
+
+    public TextField getTextFieldCapaciteMaximaleSalleLibre() {
+        return capaciteMaximaleSalleLibre;
+    }
+
+    public JComboBox getListeSelectionHeureSalleLibre() {
+        return listeSelectionHeureSalleLibre;
+    }
+
+    public JFormattedTextField getDateFieldSalleLibre() {
+        return dateFieldSalleLibre;
+    }
+
+    public JComboBox getListeSelectionSiteSalleLibre() {
+        return listeSelectionSiteSalleLibre;
     }
 
     /**
@@ -529,18 +582,18 @@ public class EnseignantVue extends JFrame {
         gridPanel7.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanel7.setBackground(new java.awt.Color(236, 251, 134));
 
-        TextField enseignant = new java.awt.TextField();
-        enseignant.setText(" ");
-        enseignant.setBackground(new java.awt.Color(255, 172, 220));
+        capaciteMaximaleSalleLibre = new java.awt.TextField();
+        capaciteMaximaleSalleLibre.setText("");
+        capaciteMaximaleSalleLibre.setBackground(new java.awt.Color(255, 172, 220));
         Font y = new Font("Times New Roman", Font.BOLD, 16);
         UIManager.put("JLabel.font", y);
 
         JLabel ense = new JLabel(" Capacité maximal  ");
         ense.setFont(t);
-        enseignant.setFont(y);
+        capaciteMaximaleSalleLibre.setFont(y);
 
         gridPanel7.add(ense);
-        gridPanel7.add(enseignant);
+        gridPanel7.add(capaciteMaximaleSalleLibre);
 
         //////////////////////////////////////////////////////////
         JPanel gridPanel5 = new JPanel();
@@ -550,13 +603,13 @@ public class EnseignantVue extends JFrame {
 
         JLabel labelFiltre = new JLabel("   Heure ");
         labelFiltre.setFont(t);
-        String[] selectionFiltre = {"8h30-10h00", "10h15-11h45", "12h00-13h30", "13h45-15h15", "15h30-17h00", "17h15-18h45", "19h00-20h30"};
-        JComboBox listeSelectionDuree = new JComboBox(selectionFiltre);
-        listeSelectionDuree.setFont(y);
-        listeSelectionDuree.setBackground(new java.awt.Color(255, 172, 220));
+        String[] selectionFiltre = {"08:30-10:00", "10:15-11:45", "12:00-13:30", "13:45-15:15", "15:30-17:00", "17:15-18:45", "19:00-20:30"};
+        listeSelectionHeureSalleLibre = new JComboBox(selectionFiltre);
+        listeSelectionHeureSalleLibre.setFont(y);
+        listeSelectionHeureSalleLibre.setBackground(new java.awt.Color(255, 172, 220));
 
         gridPanel5.add(labelFiltre);
-        gridPanel5.add(listeSelectionDuree);
+        gridPanel5.add(listeSelectionHeureSalleLibre);
 
         JPanel gridPanel5f = new JPanel();
         gridPanel5f.setLayout(new GridLayout(1, 2, 1, 5));
@@ -569,16 +622,16 @@ public class EnseignantVue extends JFrame {
         UIManager.put("JLabel.font", ygg);
         fecha.setFont(ygg);
 
-        DateFormat dateFormat = DateFormat.getInstance();
-        JFormattedTextField field = new JFormattedTextField(dateFormat);
-        field.setValue(new Date());
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFieldSalleLibre = new JFormattedTextField(dateFormat);
+        dateFieldSalleLibre.setValue(new Date());
         Font yg = new Font("Times New Roman", Font.BOLD, 16);
         UIManager.put("JFormattedTextField.font", yg);
-        field.setFont(yg);
-        field.setBackground(new java.awt.Color(255, 172, 220));
-        field.setFocusLostBehavior(JFormattedTextField.REVERT);
+        dateFieldSalleLibre.setFont(yg);
+        dateFieldSalleLibre.setBackground(new java.awt.Color(255, 172, 220));
+        dateFieldSalleLibre.setFocusLostBehavior(JFormattedTextField.REVERT);
         gridPanel5f.add(fecha);
-        gridPanel5f.add(field);
+        gridPanel5f.add(dateFieldSalleLibre);
 
         //////////////////////////////////////////////////////////////
         JPanel gridPanel8 = new JPanel();
@@ -588,13 +641,13 @@ public class EnseignantVue extends JFrame {
 
         JLabel labelFiltre2 = new JLabel(" Site  ");
         labelFiltre2.setFont(t);
-        String[] selectionFiltre2 = {" Eiffel 1", "Eiffel 2", "Eiffel 3", "Eiffel 4", "Eiffel 5", "Cnam"};
-        JComboBox listeSelectionFiltre2 = new JComboBox(selectionFiltre2);
-        listeSelectionFiltre2.setFont(y);
-        listeSelectionFiltre2.setBackground(new java.awt.Color(255, 172, 220));
+        String[] selectionFiltre2 = {"Eiffel 1", "Eiffel 2", "Eiffel 3", "Eiffel 4", "Eiffel 5", "Cnam"};
+        listeSelectionSiteSalleLibre = new JComboBox(selectionFiltre2);
+        listeSelectionSiteSalleLibre.setFont(y);
+        listeSelectionSiteSalleLibre.setBackground(new java.awt.Color(255, 172, 220));
 
         gridPanel8.add(labelFiltre2);
-        gridPanel8.add(listeSelectionFiltre2);
+        gridPanel8.add(listeSelectionSiteSalleLibre);
 
         //////////////////////////////////////////////////////////////
         JPanel gridPanel9 = new JPanel();
@@ -612,25 +665,25 @@ public class EnseignantVue extends JFrame {
         gridPanela.setBorder(new LineBorder(Color.BLACK, 3));
         gridPanela.setBackground(new java.awt.Color(145, 200, 100));
 
-        JButton Montrer2 = new JButton("Valider l'affectation");
-        Montrer2.setFont(f);
-        Montrer2.setIcon(new ImageIcon("img/check.png"));
-        Montrer2.setBackground(new java.awt.Color(251, 231, 188));
+        boutonValiderRechercheSalleLibre = new JButton("Valider l'affectation");
+        boutonValiderRechercheSalleLibre.setFont(f);
+        boutonValiderRechercheSalleLibre.setIcon(new ImageIcon("img/check.png"));
+        boutonValiderRechercheSalleLibre.setBackground(new java.awt.Color(251, 231, 188));
 
         gridPanel9.add(cb1);
 
         sallesLibresPanel.add(gridPanel3);
         sallesLibresPanel.add(gridPanel7);
-        sallesLibresPanel.add(enseignant);
+        sallesLibresPanel.add(capaciteMaximaleSalleLibre);
         sallesLibresPanel.add(gridPanel5);
         sallesLibresPanel.add(gridPanel5f);
         sallesLibresPanel.add(gridPanel8);
         sallesLibresPanel.add(gridPanel9);
-        sallesLibresPanel.add(Montrer2);
+        sallesLibresPanel.add(boutonValiderRechercheSalleLibre);
     }
 
 ///////////////////////////////////////////////////////////////////////////////
-        public void ajoutDuPanelReporting() {
+    public void ajoutDuPanelReporting() {
 
         JPanel gridPanela = new JPanel();
         gridPanela.setLayout(new GridLayout(1, 1, 10, 5));
@@ -735,6 +788,7 @@ public class EnseignantVue extends JFrame {
         demo.reportingHeuresDeSeancesParCours();
         demo.setVisible(true);
     }
+
     /**
      *
      * @param args
