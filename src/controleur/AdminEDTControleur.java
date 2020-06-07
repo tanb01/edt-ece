@@ -399,6 +399,30 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
 
                 }
 
+                if (ve.getJComboBoxModifierSeance().get(16).getSelectedItem().toString().equals("Valider")) {
+                    etatNew = 1;
+                    System.out.println("valide");
+
+                }
+
+                if (ve.getJComboBoxModifierSeance().get(16).getSelectedItem().toString().equals("Annuler")) {
+                    etatNew = 2;
+                    System.out.println("annuler");
+                }
+
+                if (etatNew == seanceSelectionneePourModifier.getEtatSeance()) {
+                    System.out.println("L'etat de la seance est deja: " + seanceSelectionneePourModifier.getEtatSeance());
+                    showMessageDialog(null, "L'etat de la seance est deja: " + seanceSelectionneePourModifier.getEtatSeance());
+                }
+                if (etatNew != -1 && etatNew != seanceSelectionneePourModifier.getEtatSeance()) {
+                    int etatOld = seanceSelectionneePourModifier.getEtatSeance();
+                    changerEtatSeance(seanceSelectionneePourModifier.getSeanceId(), etatNew);
+                    switch (etatNew) {
+                        case 0:
+                            System.out.println("L'etat de la seance a ete modifie de " + etatOld + " a " + etatNew + ":\n La seance Id : " + seanceSelectionneePourModifier.getSeanceId() + " est en cours de validation.");
+                            showMessageDialog(null, "L'etat de la seance a ete modifie de " + etatOld + " a " + etatNew + ":\n La seance Id : " + seanceSelectionneePourModifier.getSeanceId() + " est en cours de validation.");
+                            break;
+                        case 1:
                             System.out.println("L'etat de la seance a ete modifie de " + etatOld + " a " + etatNew + ":\n La seance Id : " + seanceSelectionneePourModifier.getSeanceId() + " est valide");
                             showMessageDialog(null, "L'etat de la seance a ete modifie de " + etatOld + " a " + etatNew + ":\n La seance Id : " + seanceSelectionneePourModifier.getSeanceId() + " est valide");
                             break;
