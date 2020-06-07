@@ -53,6 +53,7 @@ import modele.User;
 import vue.AdminVue;
 import vue.AdminVue;
 import vue.AdminVue;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
@@ -123,8 +124,6 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         listTypeCours = typeCours.chercherTousLesTypeCours();
         listEnseignants = new ArrayList<Enseignant>();
         listEnseignants = enseignant.chercherTousLesEnseignants();
-//        listSalles = new ArrayList<Salle>();
-//        listSalles = salle.chercherToutesLesSalles();
         listSites = new ArrayList<Site>();
         listSites = site.chercherTousLesSites();
         listPromo = new ArrayList<Promotion>();
@@ -147,7 +146,7 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
             if (jour == getJourDeLaSemaine(listSeancesSelectionnees.get(g).getDate())) {
                 for (int i = 0; i < 7; i++) {
                     if ((listSeancesSelectionnees.get(g).getDebutHeure() + "-" + listSeancesSelectionnees.get(g).getFinHeure()).equals(data[i][0])) {
-                        data[i][colinc] = listSeancesSelectionnees.get(g).stringify();
+                        data[i][colinc] = listSeancesSelectionnees.get(g).stringifyHorizontal();
                     }
                 }
                 g++;
@@ -239,6 +238,8 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == ve.getBoutonEmploiDuTemps()) {
+            affecterSeancesDeSemaine();
+            montrerEDT();
             ve.showEmploiDuTemps();
         }
         if (ae.getSource() == ve.getBoutonSallesLibres()) {
@@ -292,7 +293,6 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
 
         }
         if (ae.getSource() == ve.getBoutonSelectionnerSeance()) {
-
             String nomEnseignant = ve.getJComboBoxModifierSeance().get(0).getSelectedItem().toString();
             String dateSeance = ve.getDateFieldToSelectSeance().getText();
             String nomCours = ve.getJComboBoxModifierSeance().get(1).getSelectedItem().toString();
@@ -302,8 +302,8 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
             if (verifySeance(nomEnseignant, dateSeance, nomCours, nomPromo, heureDebut, nomGroupe)) {
                 seanceSelectionneePourModifier = findSeance(nomEnseignant, dateSeance, nomCours, nomPromo, heureDebut, nomGroupe);
                 ve.setSeanceSelectionneeField("Seance Id: " + seanceSelectionneePourModifier.getSeanceId() + ", Prof: " + seanceSelectionneePourModifier.getListeEnseignants().get(0).getNom());
-                System.out.println("Coucou");
                 System.out.println(seanceSelectionneePourModifier.toString());
+                showMessageDialog(null, "Seance selectionnee : " + seanceSelectionneePourModifier.stringifyVertical());
             }
         }
         if (ae.getSource() == ve.getBoutonValiderModificationSeance()) {
@@ -312,6 +312,7 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
                 int enseignantId = getEnseignantIdParNom(ve.getJComboBoxModifierSeance().get(5).getSelectedItem().toString());
                 ajouterEnseignantASeance(seanceSelectionneePourModifier.getSeanceId(), enseignantId);
                 System.out.println("Enseignant " + enseignantId + " a ete ajoute a la seance id: " + seanceSelectionneePourModifier.getSeanceId());
+                showMessageDialog(null, "Enseignant " + enseignantId + " a ete ajoute a la seance id: " + seanceSelectionneePourModifier.getSeanceId());
             }
         }
 
@@ -500,7 +501,7 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
             if (jour.equals(getJourDeLaSemaine(listSeancesSelectionnees.get(g).getDate()))) {
                 for (int i = 0; i < 7; i++) {
                     if ((listSeancesSelectionnees.get(g).getDebutHeure() + "-" + listSeancesSelectionnees.get(g).getFinHeure()).equals(data[i][0])) {
-                        data[i][colinc] = listSeancesSelectionnees.get(g).stringify();
+                        data[i][colinc] = listSeancesSelectionnees.get(g).stringifyHorizontal();
                     }
                 }
                 g++;
@@ -523,7 +524,7 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
     public void montrerVueEnListe() {
         String[][] data2 = new String[listSeancesSelectionnees.size()][1];
         for (int i = 0; i < listSeancesSelectionnees.size(); i++) {
-            data2[i][0] = getJourDeLaSemaine(listSeancesSelectionnees.get(i).getDate()) + "     " + listSeancesSelectionnees.get(i).stringify();
+            data2[i][0] = getJourDeLaSemaine(listSeancesSelectionnees.get(i).getDate()) + "     " + listSeancesSelectionnees.get(i).stringifyHorizontal();
         }
 
         DefaultTableModel dtm2 = new DefaultTableModel(
@@ -620,7 +621,7 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
         ArrayList<String> names = new ArrayList();
         names = getNomEnseignants();
 
-        String[] tempArray = new String[names.size()+1];
+        String[] tempArray = new String[names.size() + 1];
         tempArray[0] = " ";
         for (int i = 1; i < names.size(); i++) {
             tempArray[i] = names.get(i - 1);
@@ -709,15 +710,18 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
     }
 
     public void ajouterSeance(String dateSeance, String heureDebut, String heureFin, int etat, int coursId, int typeCoursId, int enseignantId, int groupeId, int salleId) {
+        Seance s = new Seance();
         int numeroSemaine = getNumeroSemaineParDate(dateSeance);
         int seanceId = seance.ajouterSeance(numeroSemaine, dateSeance, heureDebut, heureFin, etat, coursId, typeCoursId);
         seance.ajouterEnseignantASeance(seanceId, enseignantId);
         seance.ajouterGroupeASeance(seanceId, groupeId);
         seance.ajouterSalleASeance(seanceId, salleId);
         System.out.println("Id de seance ajoute: " + seanceId);
-        listSeances.add(seance.chercher(seanceId));
-        sort(listSeances, new SortByDateTime());
-        sort(listSeancesSelectionnees, new SortByDateTime());
+        s = seance.chercher(seanceId);
+        listSeances.add(s);
+        sort(listSeances, new SortByDate().thenComparing(new SortByTime()));
+//        sort(listSeancesSelectionnees, new SortByDate());
+        showMessageDialog(null, "Seance a ete ajoutee : " + s.stringifyVertical());
     }
 
     public Seance findSeance(String nomEnseignant, String dateSeance, String nomCours, String nomPromo, String heureDebut, String nomGroupe) {
@@ -754,11 +758,13 @@ public class AdminEDTControleur implements ActionListener, ItemListener {
 
     public void ajouterEnseignantASeance(int seanceId, int enseignantId) {
         seance.ajouterEnseignantASeance(seanceId, enseignantId);
-        for (Seance s : listSeances) {
-            if (s.getSeanceId() == seanceId) {
-                s = seance.chercher(seanceId);
-            }
-        }
+        listSeances.removeIf(seance -> seance.getSeanceId() == seanceId);
+        listSeances.add(seance.chercher(seanceId));
+        sort(listSeances, new SortByDate().thenComparing(new SortByTime()));
+        //affecterSeancesDeSemaine();
+        listSeancesSelectionnees = getSeancesParGroupeIdEtNumeroSemaine(31, numeroSemaineSelected);
+
+//        sort(listSeancesSelectionnees, new SortByDate());
     }
 
     public void ajouterGroupeASeance(int seanceId, int groupeId) {

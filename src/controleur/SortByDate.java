@@ -3,9 +3,8 @@ package controleur;
 import dao.SeanceDAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import static java.util.Collections.sort;
 import java.util.Comparator;
 import java.util.Date;
@@ -17,7 +16,7 @@ import modele.Seance;
  *
  * @author Benjamin Tan, Quentin Bonnard, Diana Ortiz
  */
-public class SortByDateTime implements Comparator<Seance> {
+public class SortByDate implements Comparator<Seance> {
 
     @Override
     public int compare(Seance t, Seance t1) {
@@ -28,25 +27,27 @@ public class SortByDateTime implements Comparator<Seance> {
             d = sdformat.parse(t.getDate());
             d1 = sdformat.parse(t1.getDate());
         } catch (ParseException ex) {
-            Logger.getLogger(SortByDateTime.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SortByDate.class.getName()).log(Level.SEVERE, null, ex);
         }
-        LocalTime time = LocalTime.parse(t.getDebutHeure());
-        LocalTime timet1 = LocalTime.parse(t1.getDebutHeure());
 
-        if (d.compareTo(d1) > 0 && time.compareTo(timet1) > 0) {
+        if (d.compareTo(d1) > 0) {
             return 1;
-        } else if (d.compareTo(d1) < 0 && time.compareTo(timet1) < 0) {
+        } else if (d.compareTo(d1) < 0) {
             return -1;
         } else {
             return 0;
         }
     }
 //test sort
+
     public static void main(String[] args) {
         SeanceDAO dao = new SeanceDAO();
         ArrayList<Seance> s = new ArrayList<Seance>();
         s = dao.chercherToutesLesSeances();
-        sort(s, new SortByDateTime());
+        Collections.shuffle(s);
+        sort(s, new SortByDate());
+//        sort(s, new SortByDateTime().thenComparing(new SortByTime()));
+
         for (Seance d : s) {
             System.out.println(d.getNumeroSemaine());
             System.out.println(d.getDate());

@@ -10,6 +10,7 @@ import vue.EtudiantVue;
 import vue.LoginVue;
 import vue.ReferentPedagogiqueVue;
 //import vue.UserVue;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
@@ -76,12 +77,15 @@ public class LoginControleur implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (isConnected == true && alreadyLoggedIn == true) {
             System.out.println("Utilisateur " + vue.getEmail() + " est deja connecte");
+            showMessageDialog(null, "Utilisateur " + vue.getEmail() + " est deja connecte");
         }
         if (udao.isUser(vue.getEmail(), vue.getPassword()) && alreadyLoggedIn == false) {
             isConnected = true;
             System.out.println("Utilisateur " + vue.getEmail() + " est connecte");
-        } else if (!udao.isUser(vue.getEmail(), vue.getPassword()) && alreadyLoggedIn == false) {
+
+        } else if (!udao.isUser(vue.getEmail(), vue.getPassword()) && alreadyLoggedIn == false && isConnected == false) {
             System.out.println("Votre email ou mot de passe est incorrect");
+            showMessageDialog(null, "Votre email ou mot de passe est incorrect");
         }
         if (isConnected == true && alreadyLoggedIn == false) {
             alreadyLoggedIn = true;
@@ -90,21 +94,25 @@ public class LoginControleur implements ActionListener {
             User user = userInfo.chercherUserParEmailMotDePasse(vue.getEmail(), vue.getPassword());
             switch (user.getDroit()) {
                 case 1:
+                    showMessageDialog(null, "Connexion reussite!\n" + "Bienvenue Admin: " + user.getPrenom() + " " + user.getNom());
                     AdminVue adminVue = new AdminVue("Welcome Admin: " + user.getPrenom() + " " + user.getNom());
                     AdminEDTControleur adminControleur = new AdminEDTControleur(user, adminVue);
                     adminControleur.control();
                     break;
                 case 2:
+                    showMessageDialog(null, "Connexion reussite!\n" + "Bienvenue Referent Pedagogique: " + user.getPrenom() + " " + user.getNom());
 //                    ReferentPedagogiqueVue referentPedagogiqueVue = new AdminVue("Welcome Admin: " + user.getPrenom() + " " + user.getNom());
 //                    ReferentPedagogiqueEDTControleur referentPedagogiqueControleur = new ReferentPedagogiqueEDTControleur(user, referentPedagogiqueVue);
 //                    adminControleur.control();
                     break;
                 case 3:
+                    showMessageDialog(null, "Connexion reussite!\n" + "Bienvenue Enseignant: " + user.getPrenom() + " " + user.getNom());
                     EnseignantVue enseignantVue = new EnseignantVue("Welcome Enseignant: " + user.getPrenom() + " " + user.getNom());
                     EnseignantEDTControleur enseignantControleur = new EnseignantEDTControleur(user, enseignantVue);
                     enseignantControleur.control();
                     break;
                 case 4:
+                    showMessageDialog(null, "Connexion reussite!\n" + "Bienvenue Eudiant: " + user.getPrenom() + " " + user.getNom());
                     EtudiantVue etudiantVue = new EtudiantVue("Welcome Etudiant: " + user.getPrenom() + " " + user.getNom());
                     EtudiantEDTControleur etudiantControleur = new EtudiantEDTControleur(user, etudiantVue);
                     etudiantControleur.control();

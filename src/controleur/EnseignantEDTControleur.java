@@ -86,7 +86,7 @@ public class EnseignantEDTControleur implements ActionListener, ItemListener {
             if (jour == getJourDeLaSemaine(listSeancesSelectionnees.get(g).getDate())) {
                 for (int i = 0; i < 7; i++) {
                     if ((listSeancesSelectionnees.get(g).getDebutHeure() + "-" + listSeancesSelectionnees.get(g).getFinHeure()).equals(data[i][0])) {
-                        data[i][colinc] = listSeancesSelectionnees.get(g).stringify();
+                        data[i][colinc] = listSeancesSelectionnees.get(g).stringifyHorizontal();
                     }
                 }
                 g++;
@@ -287,7 +287,7 @@ public class EnseignantEDTControleur implements ActionListener, ItemListener {
             if (jour.equals(getJourDeLaSemaine(listSeancesSelectionnees.get(g).getDate()))) {
                 for (int i = 0; i < 7; i++) {
                     if ((listSeancesSelectionnees.get(g).getDebutHeure() + "-" + listSeancesSelectionnees.get(g).getFinHeure()).equals(data[i][0])) {
-                        data[i][colinc] = listSeancesSelectionnees.get(g).stringify();
+                        data[i][colinc] = listSeancesSelectionnees.get(g).stringifyHorizontal();
 
                     }
                 }
@@ -311,7 +311,7 @@ public class EnseignantEDTControleur implements ActionListener, ItemListener {
     public void montrerVueEnListe() {
         String[][] data2 = new String[listSeancesSelectionnees.size()][1];
         for (int i = 0; i < listSeancesSelectionnees.size(); i++) {
-            data2[i][0] = getJourDeLaSemaine(listSeancesSelectionnees.get(i).getDate()) + "     " + listSeancesSelectionnees.get(i).stringify();
+            data2[i][0] = getJourDeLaSemaine(listSeancesSelectionnees.get(i).getDate()) + "     " + listSeancesSelectionnees.get(i).stringifyHorizontal();
         }
 
         DefaultTableModel dtm2 = new DefaultTableModel(

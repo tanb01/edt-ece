@@ -15,12 +15,12 @@ public class User {
 
     /**
      * Constructeur
-     * 
+     *
      * @param id
      * @param email
      * @param nom
      * @param prenom
-     * @param droit 
+     * @param droit
      */
     public User(int id, String email, String nom, String prenom, int droit) {
         userId = id;
@@ -42,10 +42,9 @@ public class User {
     }
 
     /**
-     * Getters
-     * Pour l'Id de l'utilisateur.
-     * 
-     * @return 
+     * Getters Pour l'Id de l'utilisateur.
+     *
+     * @return
      */
     public int getUserId() {
         return userId;
@@ -53,8 +52,8 @@ public class User {
 
     /**
      * Pour l'email de l'utilisateur.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getEmail() {
         return email;
@@ -62,8 +61,8 @@ public class User {
 
     /**
      * Pour le nom de l'utilisateur.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getNom() {
         return nom;
@@ -71,31 +70,27 @@ public class User {
 
     /**
      * Pour le prénom de l'utilisateur.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getPrenom() {
         return prenom;
     }
 
     /**
-     * Pour le droit de l'utilisateur.
-     * (1- Admin 
-     * 2- Réferent pédagogique
-     * 3- Enseignant
-     * 4- Étudiant)
-     * 
-     * @return 
+     * Pour le droit de l'utilisateur. (1- Admin 2- Réferent pédagogique 3-
+     * Enseignant 4- Étudiant)
+     *
+     * @return
      */
     public int getDroit() {
         return droit;
     }
 
     /**
-     * Vérifie si l'utilisateur est un Administrateur.
-     * Droit = 1
-     * 
-     * @return 
+     * Vérifie si l'utilisateur est un Administrateur. Droit = 1
+     *
+     * @return
      */
     public boolean isAdmin() {
         boolean verifyUser = false;
@@ -106,10 +101,9 @@ public class User {
     }
 
     /**
-     * Vérifie si l'utilisateur est un Réferent Pédagogique.
-     * Droit = 2
-     * 
-     * @return 
+     * Vérifie si l'utilisateur est un Réferent Pédagogique. Droit = 2
+     *
+     * @return
      */
     public boolean isReferentPedagogique() {
         boolean verifyUser = false;
@@ -120,10 +114,9 @@ public class User {
     }
 
     /**
-     * Vérifie si l'utilisateur est un Enseignant.
-     * Droit = 3
-     * 
-     * @return 
+     * Vérifie si l'utilisateur est un Enseignant. Droit = 3
+     *
+     * @return
      */
     public boolean isEnseignant() {
         boolean verifyUser = false;
@@ -134,10 +127,9 @@ public class User {
     }
 
     /**
-     * Vérifie si l'utilisateur est un Étudiant.
-     * Droit = 4
-     * 
-     * @return 
+     * Vérifie si l'utilisateur est un Étudiant. Droit = 4
+     *
+     * @return
      */
     public boolean isEtudiant() {
         boolean verifyUser = false;
@@ -154,7 +146,7 @@ public class User {
      */
     @Override
     public String toString() {
-        return "Id : " + this.userId
+        return "\nId : " + this.userId
                 + "\nEmail : " + this.email
                 + "\nNom : " + this.nom
                 + "\nPrénom : " + this.prenom

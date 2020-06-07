@@ -2,6 +2,7 @@ package modele;
 
 import dao.SeanceDAO;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -199,7 +200,7 @@ public class Seance {
      */
     @Override
     public String toString() {
-        return "Id : " + this.seanceId
+        return "Seance Id : " + this.seanceId
                 + "\nNuméro semaine : " + this.numeroSemaine
                 + "\nDate : " + this.date
                 + "\nDébut heure : " + this.debutHeure
@@ -217,32 +218,55 @@ public class Seance {
      *
      * @return
      */
-    public String stringify() {
+    public String stringifyHorizontal() {
         String salles = new String();
         for (Salle s : listeSalles) {
-            salles = salles.concat(s.getNomSalle());
+            salles = salles.concat(s.getNomSalle() + ", ");
         }
 
         String enseignants = new String();
         for (Enseignant s : listeEnseignants) {
-            enseignants = enseignants.concat(s.getNom());
+            enseignants = enseignants.concat(s.getNom() + ", ");
         }
 
         String groupes = new String();
         for (Groupe s : listeGroupes) {
-            groupes = groupes.concat(s.getNomGroupe());
+            groupes = groupes.concat(s.getNomGroupe() + ", ");
         }
-        return "Id : " + this.seanceId
-                + " Numéro semaine : " + this.numeroSemaine
-                + " Date : " + this.date
-                + " Début heure : " + this.debutHeure
-                + " Fin heure : " + this.finHeure
-                + " État : " + this.etatSeance
-                + " Cours : " + this.coursSeance.getNomCours()
-                + " Salle(s) : " + salles.toString()
+        return "Seance Id : " + this.seanceId
+                + ", Numéro semaine : " + this.numeroSemaine
+                + ", Date : " + this.date
+                + ", Début heure : " + this.debutHeure
+                + ", Fin heure : " + this.finHeure
+                + ", État : " + this.etatSeance
+                + ", Cours : " + this.coursSeance.getNomCours()
+                + ", Salle(s) : " + salles.toString()
                 + " Enseignant(s) : " + enseignants.toString()
                 + " Groupe(s) : " + groupes.toString()
                 + " Type cours : " + this.typeCoursSeance.getNomTypeCours();
+    }
+
+    public String stringifyVertical() {
+        String salles = new String();
+        salles = listeSalles.stream().map(Object::toString).collect(Collectors.joining(", "));
+
+        String enseignants = new String();
+        enseignants = listeEnseignants.stream().map(Object::toString).collect(Collectors.joining(", "));
+
+        String groupes = new String();
+        groupes = listeGroupes.stream().map(Object::toString).collect(Collectors.joining(", "));
+
+        return "\nSeance Id : " + this.seanceId
+                + ",\nNuméro semaine : " + this.numeroSemaine
+                + ",\nDate : " + this.date
+                + ",\nDébut heure : " + this.debutHeure
+                + ",\nFin heure : " + this.finHeure
+                + ",\nÉtat : " + this.etatSeance
+                + ",\nCours : " + this.coursSeance.getNomCours()
+                + ",\n\nSalle(s) : " + salles
+                + ",\n\nEnseignant(s) : " + enseignants
+                + ",\n\nGroupe(s) : " + groupes
+                + ",\nType cours : " + this.typeCoursSeance.getNomTypeCours();
     }
 
     public String stringEssentiel() {
@@ -260,7 +284,7 @@ public class Seance {
         for (Groupe s : listeGroupes) {
             groupes = groupes.concat(s.getNomGroupe());
         }
-        return "Id : " + this.seanceId
+        return "Seance Id : " + this.seanceId
                 + " Cours : " + this.coursSeance.getNomCours()
                 + " Salle(s) : " + salles.toString()
                 + " Enseignant(s) : " + enseignants.toString()
@@ -275,10 +299,15 @@ public class Seance {
         System.out.println(toString());
     }
 
-        public static void main(String[] args) {
+    public static void main(String[] args) {
         SeanceDAO et = new SeanceDAO();
         Seance un = new Seance();
-        un = et.chercher(1);
-       System.out.println(un.toString());
+        un = et.chercher(34);
+        System.out.println(un.toString());
+        System.out.println();
+        System.out.println(un.stringifyHorizontal());
+        System.out.println();
+        System.out.println(un.stringifyVertical());
+
     }
 }

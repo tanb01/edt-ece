@@ -95,9 +95,8 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 TypeCours typeCours = t.chercher(result.getInt("type_cours_id"));
 
                 SalleDAO s = new SalleDAO();
-                Salle salle = s.chercher(result.getInt("salle_id"));
                 ArrayList<Salle> salles = new ArrayList<Salle>();
-                salles.add(salle);
+                salles = s.chercherSallesParSeanceId(id);
 
                 EnseignantDAO e = new EnseignantDAO();
                 ArrayList<Enseignant> enseignants = new ArrayList<Enseignant>();
@@ -160,10 +159,14 @@ public class SeanceDAO extends DataAccessObject<Seance> {
         Seance seance = new Seance();
 
         try {
+//            ResultSet result = this.connect.createStatement(
+//                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+//                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT seance.seance_id, numero_semaine, date_seance, heure_debut, heure_fin, etat_seance, cours_id, type_cours_id, enseignant_id, groupe_id, salle_id FROM seance INNER JOIN seance_enseignants\n"
+//                            + "ON seance.seance_id=seance_enseignants.seance_id INNER JOIN seance_groupes ON seance.seance_id=seance_groupes.seance_id INNER JOIN seance_salles ON seance.seance_id=seance_salles.seance_id WHERE groupe_id=" + groupeId + " ORDER BY numero_semaine, date_seance, heure_debut");
             ResultSet result = this.connect.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT seance.seance_id, numero_semaine, date_seance, heure_debut, heure_fin, etat_seance, cours_id, type_cours_id, enseignant_id, groupe_id, salle_id FROM seance INNER JOIN seance_enseignants\n"
-                            + "ON seance.seance_id=seance_enseignants.seance_id INNER JOIN seance_groupes ON seance.seance_id=seance_groupes.seance_id INNER JOIN seance_salles ON seance.seance_id=seance_salles.seance_id WHERE groupe_id=" + groupeId + " ORDER BY numero_semaine, date_seance, heure_debut");
+                    ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT seance.seance_id, numero_semaine, date_seance, heure_debut, heure_fin, etat_seance, cours_id, type_cours_id, groupe_id FROM seance INNER JOIN seance_groupes ON seance.seance_id=seance_groupes.seance_id WHERE groupe_id= " + groupeId + " ORDER BY numero_semaine, date_seance, heure_debut");
+
             while (result.next()) {
                 int seanceId = result.getInt("seance.seance_id");
                 int numeroSemaine = result.getInt("numero_semaine");
@@ -178,19 +181,19 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 TypeCours typeCours = t.chercher(result.getInt("type_cours_id"));
 
                 SalleDAO s = new SalleDAO();
-                Salle salle = s.chercher(result.getInt("salle_id"));
                 ArrayList<Salle> salles = new ArrayList<Salle>();
-                salles.add(salle);
+                salles = s.chercherSallesParSeanceId(result.getInt("seance.seance_id"));
 
                 EnseignantDAO e = new EnseignantDAO();
                 ArrayList<Enseignant> enseignants = new ArrayList<Enseignant>();
                 enseignants = e.chercherEnseignantsParSeanceId(result.getInt("seance.seance_id"));
-                
+
                 GroupeDAO g = new GroupeDAO();
                 ArrayList<Groupe> groupes = new ArrayList<Groupe>();
                 groupes = g.chercherGroupesParSeanceId(result.getInt("seance.seance_id"));
 
                 seance = new Seance(seanceId, numeroSemaine, date, debutHeure, finHeure, cours, typeCours, salles, enseignants, groupes);
+                //seance = chercher(result.getInt("seance.seance_id"));
                 seances.add(seance);
             }
         } catch (SQLException e) {
@@ -238,9 +241,8 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 TypeCours typeCours = t.chercher(result.getInt("type_cours_id"));
 
                 SalleDAO s = new SalleDAO();
-                Salle salle = s.chercher(result.getInt("salle_id"));
                 ArrayList<Salle> salles = new ArrayList<Salle>();
-                salles.add(salle);
+                salles = s.chercherSallesParSeanceId(result.getInt("seance.seance_id"));
 
                 EnseignantDAO e = new EnseignantDAO();
                 ArrayList<Enseignant> enseignants = new ArrayList<Enseignant>();
@@ -281,10 +283,9 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 TypeCours typeCours = t.chercher(result.getInt("type_cours_id"));
 
                 SalleDAO s = new SalleDAO();
-                Salle salle = s.chercher(result.getInt("salle_id"));
                 ArrayList<Salle> salles = new ArrayList<Salle>();
-                salles.add(salle);
-
+                salles = s.chercherSallesParSeanceId(result.getInt("seance.seance_id"));
+                             
                 EnseignantDAO e = new EnseignantDAO();
                 ArrayList<Enseignant> enseignants = new ArrayList<Enseignant>();
                 enseignants = e.chercherEnseignantsParSeanceId(result.getInt("seance.seance_id"));
@@ -324,9 +325,8 @@ public class SeanceDAO extends DataAccessObject<Seance> {
                 TypeCours typeCours = t.chercher(result.getInt("type_cours_id"));
 
                 SalleDAO s = new SalleDAO();
-                Salle salle = s.chercher(result.getInt("salle_id"));
                 ArrayList<Salle> salles = new ArrayList<Salle>();
-                salles.add(salle);
+                salles = s.chercherSallesParSeanceId(result.getInt("seance.seance_id"));
 
                 EnseignantDAO e = new EnseignantDAO();
                 ArrayList<Enseignant> enseignants = new ArrayList<Enseignant>();
@@ -497,7 +497,13 @@ public class SeanceDAO extends DataAccessObject<Seance> {
 //test
     public static void main(String[] args) {
         SeanceDAO et = new SeanceDAO();
-        Seance un = et.chercher(1);
-        un.afficher();
+//        Seance un = et.chercher(1);
+//        un.afficher();
+
+        ArrayList<Seance> seances = new ArrayList<Seance>();
+        seances = et.chercherSeancesParGroupeId(31);
+        for (Seance s : seances) {
+            System.out.println(s.stringifyVertical());
+        }
     }
 }

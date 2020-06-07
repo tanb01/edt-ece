@@ -73,7 +73,7 @@ public class Groupe {
      */
     @Override
     public String toString() {
-        return "Id : " + this.groupeId
+        return "\nGroupe Id : " + this.groupeId
                 + "\nNom du groupe : " + this.nomGroupe
                 + "\nEffectif : " + this.effectifGroupe;
     }
