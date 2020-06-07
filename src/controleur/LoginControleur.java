@@ -3,6 +3,8 @@ package controleur;
 import dao.UserDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import modele.User;
 import vue.AdminVue;
 import vue.EnseignantVue;
@@ -97,7 +99,10 @@ public class LoginControleur implements ActionListener {
                     showMessageDialog(null, "Connexion reussite!\n" + "Bienvenue Admin: " + user.getPrenom() + " " + user.getNom());
                     AdminVue adminVue = new AdminVue("Welcome Admin: " + user.getPrenom() + " " + user.getNom());
                     AdminEDTControleur adminControleur = new AdminEDTControleur(user, adminVue);
+                    
+                    JOptionPane.showMessageDialog(null, "Bienvenue Administrateur "  +   user.getPrenom() +   user.getNom());
                     adminControleur.control();
+                    
                     break;
                 case 2:
                     showMessageDialog(null, "Connexion reussite!\n" + "Bienvenue Referent Pedagogique: " + user.getPrenom() + " " + user.getNom());
@@ -109,12 +114,14 @@ public class LoginControleur implements ActionListener {
                     showMessageDialog(null, "Connexion reussite!\n" + "Bienvenue Enseignant: " + user.getPrenom() + " " + user.getNom());
                     EnseignantVue enseignantVue = new EnseignantVue("Welcome Enseignant: " + user.getPrenom() + " " + user.getNom());
                     EnseignantEDTControleur enseignantControleur = new EnseignantEDTControleur(user, enseignantVue);
+                    JOptionPane.showMessageDialog(null, "Bienvenue Enseignat "  +   user.getPrenom() +   user.getNom());
                     enseignantControleur.control();
                     break;
                 case 4:
                     showMessageDialog(null, "Connexion reussite!\n" + "Bienvenue Eudiant: " + user.getPrenom() + " " + user.getNom());
                     EtudiantVue etudiantVue = new EtudiantVue("Welcome Etudiant: " + user.getPrenom() + " " + user.getNom());
                     EtudiantEDTControleur etudiantControleur = new EtudiantEDTControleur(user, etudiantVue);
+                    JOptionPane.showMessageDialog(null, "Bienvenue etudiant "  +   user.getPrenom()  +   user.getNom());
                     etudiantControleur.control();
                     break;
             }
