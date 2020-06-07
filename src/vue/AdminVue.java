@@ -1034,8 +1034,8 @@ public class AdminVue extends JFrame {
     private void Montrer4MouseClicked(java.awt.event.MouseEvent evt) {
         //nombre de seances dans l'annee
         Reporting demo = new Reporting("Reporting");
-//        Reporting g = new Reporting("Effectif des groupes", "Nombres d'élèves par groupes");
-//        g.setVisible(true);
+        demo.reportingEffectifGroupesParPromo();
+        demo.setVisible(true);
 
     }
 

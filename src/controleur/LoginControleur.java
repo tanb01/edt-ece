@@ -3,6 +3,8 @@ package controleur;
 import dao.UserDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import modele.User;
 import vue.AdminVue;
 import vue.EnseignantVue;
@@ -75,13 +77,13 @@ public class LoginControleur implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (isConnected == true && alreadyLoggedIn == true) {
-            System.out.println("Utilisateur " + vue.getEmail() + " est deja connecte");
+            JOptionPane.showMessageDialog(null,"Utilisateur " + vue.getEmail() + " est deja connecte");
         }
         if (udao.isUser(vue.getEmail(), vue.getPassword()) && alreadyLoggedIn == false) {
             isConnected = true;
-            System.out.println("Utilisateur " + vue.getEmail() + " est connecte");
+            JOptionPane.showMessageDialog(null,"Utilisateur " + vue.getEmail() + " est connecte");
         } else if (!udao.isUser(vue.getEmail(), vue.getPassword()) && alreadyLoggedIn == false) {
-            System.out.println("Votre email ou mot de passe est incorrect");
+            JOptionPane.showMessageDialog(null,"Votre email ou mot de passe est incorrect");
         }
         if (isConnected == true && alreadyLoggedIn == false) {
             alreadyLoggedIn = true;
@@ -92,7 +94,10 @@ public class LoginControleur implements ActionListener {
                 case 1:
                     AdminVue adminVue = new AdminVue("Welcome Admin: " + user.getPrenom() + " " + user.getNom());
                     AdminEDTControleur adminControleur = new AdminEDTControleur(user, adminVue);
+                    
+                    JOptionPane.showMessageDialog(null, "Bienvenue Administrateur "  +   user.getPrenom() +   user.getNom());
                     adminControleur.control();
+                    
                     break;
                 case 2:
 //                    ReferentPedagogiqueVue referentPedagogiqueVue = new AdminVue("Welcome Admin: " + user.getPrenom() + " " + user.getNom());
@@ -102,11 +107,13 @@ public class LoginControleur implements ActionListener {
                 case 3:
                     EnseignantVue enseignantVue = new EnseignantVue("Welcome Enseignant: " + user.getPrenom() + " " + user.getNom());
                     EnseignantEDTControleur enseignantControleur = new EnseignantEDTControleur(user, enseignantVue);
+                    JOptionPane.showMessageDialog(null, "Bienvenue Enseignat "  +   user.getPrenom() +   user.getNom());
                     enseignantControleur.control();
                     break;
                 case 4:
                     EtudiantVue etudiantVue = new EtudiantVue("Welcome Etudiant: " + user.getPrenom() + " " + user.getNom());
                     EtudiantEDTControleur etudiantControleur = new EtudiantEDTControleur(user, etudiantVue);
+                    JOptionPane.showMessageDialog(null, "Bienvenue etudiant "  +   user.getPrenom()  +   user.getNom());
                     etudiantControleur.control();
                     break;
             }
